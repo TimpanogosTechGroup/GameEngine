@@ -25,7 +25,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		glewInit();
-		glClearColor(0, 0, 0, 1);
+		glClearColor(1, 0, 0, 1);
 		glViewport(0, 0, width, height);
 		
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
