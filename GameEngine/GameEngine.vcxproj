@@ -19,12 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="RenderEngine.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Verticies.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -78,12 +84,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Ben Brenkman\source\TimpTech\GameEngine\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Ben Brenkman\source\TimpTech\GameEngine\lib\GLEW;C:\Users\Ben Brenkman\source\TimpTech\GameEngine\lib\SDL\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\GLEW;..\lib\SDL\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\Users\Ben Brenkman\source\TimpTech\GameEngine\lib\SDL\x86;C:\Users\Ben Brenkman\source\TimpTech\GameEngine\lib\GLEW;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Ben Brenkman\source\TimpTech\GameEngine\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\SDL\x86;..\lib\GLEW;..\lib\assimp;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

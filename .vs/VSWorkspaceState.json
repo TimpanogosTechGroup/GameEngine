@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\GameEngine"
+    "\\GameEngine",
+    "\\include\\GLEW",
+    "\\lib"
   ],
-  "SelectedNode": "\\GameEngine\\Source.cpp",
+  "SelectedNode": "\\GameEngine.sln",
   "PreviewInSolutionExplorer": false
 }
