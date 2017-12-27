@@ -1,22 +1,22 @@
 /*
 Isaac Draper:
 This class does not include the actual texture information, perhaps it would be good to store the
-opengl texture ID here?
+opengl texture ID here? --> What do you think of this method? I added a new class that holds the ID info.
 
 */
 
 #pragma once
+#include "RenderItem.h"
 
-class Texture {
+class Texture : public RenderItem {
 public:
-	Texture() {
-		this->width = 0;
-		this->height = 0;
+
+	// We can set default values in the constructor, so we don't need to have two constructors
+	Texture(unsigned int widthPix = 0, unsigned int heightPix = 0) {
+		this->width = widthPix;
+		this->height = heightPix;
 	}
-	Texture(int w, int h) {
-		this->width = w;
-		this->height = h;
-	}
+
 	int GetWidth() { return this->width; }
 	int GetHeight() { return this->height; }
 	void SetWidth(int w) { this->width = w; }

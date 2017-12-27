@@ -20,15 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="RenderEngine.h" />
+    <ClInclude Include="RenderItem.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Verticies.h" />
   </ItemGroup>

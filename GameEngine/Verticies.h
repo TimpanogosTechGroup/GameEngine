@@ -13,10 +13,10 @@ public:
 		for (unsigned int i = 0; i < sizeof(vert) / sizeof(vert[0]); i++) {
 			values.push_back(vert[i]);
 		}
-	}
-	float[] GetValues() {
-		return this->values;
-	}
+	};
+
+	// You cannot return an array from a function, arrays are too large and so must be returned by pointer
+	float* GetValues() { return &values[0]; };
 
 private:
 	std::vector<float> values;
