@@ -11,8 +11,8 @@ FrameBuffer::FrameBuffer(unsigned int width, unsigned int height, unsigned int t
 
 bool FrameBuffer::Initialize() {
 	// Generate the id tags for the frambuffer
-	glGenFramebuffers(1, &ID);
-	glBindBuffer(type, ID);
+	glGenFramebuffers(1, &id);
+	glBindBuffer(type, id);
 
 	// Generate an empty texture buffer for the framebuffer to render to
 	glGenTextures(1, &colorTextureBuffer.GetID());
