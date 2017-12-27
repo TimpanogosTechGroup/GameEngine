@@ -1,5 +1,6 @@
 #pragma once
 
+// All things that are managed by opengl have an ID, so this class keeps that nicely handled.
 class RenderItem {
 public:
 	unsigned int &GetID() { return id; };

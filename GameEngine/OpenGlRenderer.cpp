@@ -1,3 +1,9 @@
+/*
+Author: Ben Brenkman
+Notes: This is the rendering class for OpenGl, all calls related to OpenGl should be located in here. But for now do what you can.
+		This class will help create windows, change frambuffers, bind textures, render objects, and do all that crazy rending stuff
+*/
+
 #include "OpenGlRenderer.h"
 #include <iostream>
 #include <GLEW\glew.h>
@@ -12,6 +18,7 @@ OpenGlRenderer::~OpenGlRenderer()
 {
 }
 
+// Creates a window
 void OpenGlRenderer::CreateWindow(int width, int height) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cout << "SDL could not initialize: " << std::endl;
@@ -42,6 +49,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 	}
 }
 
+// Swaps the render buffers so we can see the changes that we have rendered
 void OpenGlRenderer::UpdateScreen() {
 	// Updates the screen by swapping buffers
 	SDL_GL_SwapWindow(window);
@@ -49,7 +57,7 @@ void OpenGlRenderer::UpdateScreen() {
 
 // Binds a framebuffer so we can render to it
 void OpenGlRenderer::BindFramBuffer(FrameBuffer frame) {
-	glBindFramebuffer(frame.GetType, frame.GetID());
+	glBindFramebuffer(GL_FRAMEBUFFER, frame.GetID());
 }
 
 // Effectively unbinds the bound frame buffer setting it back to default render location.

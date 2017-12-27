@@ -1,3 +1,8 @@
+/*
+Author: Ben Brenkman
+
+This is the RenderEngine class, we will have different implementations of this class that will help us keep our code really clean and prevent breaking and a lot of heart ache when we expand and try and implement VR, DirectX or go mobile
+*/
 #pragma once
 
 class RenderEngine {

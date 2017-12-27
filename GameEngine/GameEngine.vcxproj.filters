@@ -29,9 +29,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RenderEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGlRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RenderItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

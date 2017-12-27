@@ -1,3 +1,9 @@
+/*
+Author: Ben Brenkman
+
+Our OpenGl implementation of the RenderEngine
+*/
+
 #pragma once
 #include "RenderEngine.h"
 #include <SDL\SDL.h>
