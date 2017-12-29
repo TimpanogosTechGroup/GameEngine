@@ -10,7 +10,6 @@ This file is not complete
 class Object {
 public:
 	Object(float vert[], float norms[]) {
-		float vert[5];
 		verticies.SetValues(vert);
 		normals.SetValues(norms);
 	}
