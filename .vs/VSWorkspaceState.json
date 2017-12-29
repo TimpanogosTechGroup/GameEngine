@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\GameEngine",
-    "\\include\\GLEW",
     "\\lib"
   ],
-  "SelectedNode": "\\GameEngine.sln",
+  "SelectedNode": "\\GameEngine\\GameEngine.vcxproj.user",
   "PreviewInSolutionExplorer": false
 }
