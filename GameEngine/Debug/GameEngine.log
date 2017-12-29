@@ -1,6 +1,1 @@
-﻿  Source.cpp
-  OpenGlRenderer.cpp
-  FrameBuffer.cpp
-  Camera.cpp
-c:\users\ben brenkman\source\timptech\gameengine\gameengine\material.h(12): fatal error C1083: Cannot open include file: 'Shader.h': No such file or directory
-  Generating Code...
+﻿  GameEngine.vcxproj -> C:\Users\isaac\source\repos\GameEngine3\Debug\GameEngine.exe
