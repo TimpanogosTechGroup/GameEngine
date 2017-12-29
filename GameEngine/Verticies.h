@@ -6,6 +6,7 @@ This file is not complete, simple storage class right now
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 class Verticies {
 public:
@@ -18,6 +19,12 @@ public:
 	// You cannot return an array from a function, arrays are too large and so must be returned by pointer
 	// This is a neat trick to get the array data from the vector wrapper &name[0] will return the array data
 	float* GetValues() { return &values[0]; };
+
+	// Adds a float to the vertecies vector
+	Verticies* AddFloat(float a);
+
+	// Debug function
+	void ToString();
 
 private:
 	std::vector<float> values;

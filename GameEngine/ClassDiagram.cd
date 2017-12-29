@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FrameBuffer" Collapsed="true">
-    <Position X="17" Y="2" Width="1.5" />
+    <Position X="15.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAIAAQAAAAAAABAAAAABAAEAAAAAAAAAAAA=</HashCode>
       <FileName>FrameBuffer.h</FileName>
@@ -43,14 +43,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="RenderItem" Collapsed="true">
-    <Position X="16" Y="0.75" Width="1.5" />
+    <Position X="14.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>RenderItem.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Texture" Collapsed="true">
-    <Position X="14.75" Y="2" Width="1.5" />
+    <Position X="13.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAAABAAAQAAAAAAAIAAEAAAAQ=</HashCode>
       <FileName>Texture.h</FileName>

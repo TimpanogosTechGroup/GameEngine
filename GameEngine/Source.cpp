@@ -1,6 +1,8 @@
 #include <iostream>
 #include "OpenGlRenderer.h"
 #include "AssetManager.h"
+#include "Object.h"
+#include "PrimitiveShape.h"
 
 using namespace std;
 
@@ -10,6 +12,8 @@ int main(int argc, char** argv) {
 	renderer.CreateWindow(640, 480);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
+
+	Object* test = PrimitiveShape::GenerateSquare(10, 10);
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
