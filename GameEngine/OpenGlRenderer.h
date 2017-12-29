@@ -20,6 +20,13 @@ public:
 	void UpdateScreen();
 	void BindFramBuffer(FrameBuffer frame);
 	void BindDefaultFrameBuffer();
+	void Clear();
+
+	// Graphics card calls
+	bool CompileObject(Object& object);
+	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
+	bool RenderObject(Object& object);
+	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 
 private:
 	SDL_Window* window = NULL;

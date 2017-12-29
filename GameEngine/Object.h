@@ -8,7 +8,7 @@ This file is not complete
 #include "Verticies.h"
 #include "Material.h"
 
-class Object {
+class Object : public RenderItem {
 public:
 	// Constructors
 	Object(float vert[], float norms[]) {
@@ -20,6 +20,9 @@ public:
 	void CreateBoundBox(); // not implemented
 
 	Verticies& GetVerticies() { return verticies; };
+	Material* GetMaterial() { return &material; };
+
+	void SetMaterial(Material mat);
 
 private:
 	Verticies verticies;

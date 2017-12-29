@@ -1,4 +1,8 @@
 ﻿  Source.cpp
-  PrimitiveShape.cpp
+c:\users\ben brenkman\source\timptech\gameengine\gameengine\material.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\ben brenkman\source\timptech\gameengine\gameengine\material.h(41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  OpenGlRenderer.cpp
+c:\users\ben brenkman\source\timptech\gameengine\gameengine\material.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\ben brenkman\source\timptech\gameengine\gameengine\material.h(41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Generating Code...
   GameEngine.vcxproj -> C:\Users\Ben Brenkman\source\TimpTech\GameEngine\Debug\GameEngine.exe

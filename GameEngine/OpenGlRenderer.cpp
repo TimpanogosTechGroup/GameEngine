@@ -64,3 +64,36 @@ void OpenGlRenderer::BindFramBuffer(FrameBuffer frame) {
 void OpenGlRenderer::BindDefaultFrameBuffer() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
+
+// Graphics card calls
+bool OpenGlRenderer::CompileObject(Object& object) {
+
+	glGenVertexArrays(1, &object.GetIDVAO());
+	glBindVertexArray(object.GetIDVAO());
+	glGenBuffers(1, &object.GetIDVBO());
+
+	glBindBuffer(GL_ARRAY_BUFFER, object.GetIDVBO());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * object.GetVerticies().Size(), object.GetVerticies().GetValues(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	return true;
+
+}
+//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
+bool OpenGlRenderer::RenderObject(Object& object) {
+	glBindVertexArray(object.GetIDVAO());
+	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
+	glBindVertexArray(0);
+
+	return true;
+}
+//bool RenderObject(Object& object, char attributes);
+
+void OpenGlRenderer::Clear() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
