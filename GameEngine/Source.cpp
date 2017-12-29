@@ -1,5 +1,6 @@
 #include <iostream>
 #include "OpenGlRenderer.h"
+#include "AssetManager.h"
 
 using namespace std;
 

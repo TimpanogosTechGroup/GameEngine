@@ -6,10 +6,7 @@ This is the header to manage loading assets to opengl.
 
 #pragma once
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <glm\stb_image.h>
 #include <GLEW\glew.h>
-
 
 #include <iostream>
 #include <fstream>

@@ -8,6 +8,9 @@ NOT COMPLETE
 
 #include "AssetManager.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <glm\stb_image.h>
+
 // ID is the id of the program the shader will be linked to - initial value will be changed
 void AssetManager::LoadShader(unsigned int& ID, const char* vertexPath, const char* fragmentPath) {
 	// 1. retrieve the vertex/fragment source code from filePath
