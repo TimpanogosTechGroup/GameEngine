@@ -22,9 +22,13 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
+    <ClCompile Include="PrimitiveShape.cpp" />
+    <ClCompile Include="Registry.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Verticies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
@@ -33,6 +37,8 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
+    <ClInclude Include="PrimitiveShape.h" />
+    <ClInclude Include="Registry.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="RenderItem.h" />
     <ClInclude Include="Shader.h" />
