@@ -6,6 +6,7 @@ This file is not complete
 #pragma once
 
 #include "Verticies.h"
+#include "Material.h"
 
 class Object {
 public:
@@ -20,4 +21,6 @@ private:
 	Verticies normals;
 	Verticies boundBox;
 	Verticies attachNodes; // not implemented
+
+	Material material;
 };

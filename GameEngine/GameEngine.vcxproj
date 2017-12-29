@@ -37,6 +37,9 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Verticies.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A916CF9D-738F-4600-89DA-8316B69C036C}</ProjectGuid>
