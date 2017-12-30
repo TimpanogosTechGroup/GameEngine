@@ -81,10 +81,9 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 		buffer.push_back(object.GetMaterial()->GetColor().r);
 		buffer.push_back(object.GetMaterial()->GetColor().g);
 		buffer.push_back(object.GetMaterial()->GetColor().b);
-	}
 
-	for (auto &i : buffer) {
-		std::cout << i;
+		buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0))]); // Need to cast it to int, because we need to use float for the calculation
+		buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0)) + 1]);
 	}
 
 	glGenVertexArrays(1, &object.GetID());
@@ -94,10 +93,13 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 	glBindBuffer(GL_ARRAY_BUFFER, object.VBO.GetID());
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) (3 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) (3 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -120,9 +122,14 @@ bool OpenGlRenderer::RenderObject(Object& object) {
 		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
 	}
 
+	if (object.GetMaterial()->GetTexture() != nullptr) {
+		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
+	}
+
 	glBindVertexArray(object.GetID());
 	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
 	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return true;
 }
