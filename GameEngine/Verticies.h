@@ -23,6 +23,8 @@ public:
 	// Adds a float to the vertecies vector
 	Verticies* AddFloat(float a);
 
+	int Size() { return values.size(); };
+
 	// Debug function
 	void ToString();
 

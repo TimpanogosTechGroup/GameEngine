@@ -4,7 +4,7 @@
 class PrimitiveShape
 {
 public:
-	static Object * GenerateSquare(float width, float height);
+	static Object * GenerateSquare(float width, float height, Material material);
 
 private:
 };

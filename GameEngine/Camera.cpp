@@ -78,7 +78,7 @@ void Camera::ProcessMouseScroll(float yoffset)
 void Camera::updateCameraVectors()
 {
 	if (mustLookAt == false || lookAtTarget == nullptr) {
-		mustLookAt == false;
+		mustLookAt = false;
 		// Calculate the new Front vector
 		glm::vec3 front;
 		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));

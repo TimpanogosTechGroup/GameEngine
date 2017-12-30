@@ -7,22 +7,27 @@ NOT COMPLETE
 */
 
 #include "AssetManager.h"
+#include "Shader.h"
+#include "Registry.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
 
-#include <assimp\Importer.hpp>
-#include <assimp\cimport.h>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
-
 // ID is the id of the program the shader will be linked to - initial value will be changed
-void AssetManager::LoadShader(unsigned int& ID, const char* vertexPath, const char* fragmentPath) {
+Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPath) {
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode;
 	std::string fragmentCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
+
+	std::ofstream output;
+
+	output.open("test.txt");
+	output << "Hello";
+	output.close();
+
+
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -50,25 +55,35 @@ void AssetManager::LoadShader(unsigned int& ID, const char* vertexPath, const ch
 	const char * fShaderCode = fragmentCode.c_str();
 	// 2. compile shaders
 	unsigned int vertex, fragment;
+
+	Shader* shader = new Shader();
+
+	Registry::GetRenderEngine()->CompileShader(SHADER_VERTEX, shader->vertex.GetID(), vShaderCode);
+	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
+	Registry::GetRenderEngine()->LinkShaderProgram(*shader);
+
 	// vertex shader
-	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, NULL);
-	glCompileShader(vertex);
-	CheckCompileErrors(vertex, "VERTEX");
+ //   vertex = glCreateShader(GL_VERTEX_SHADER);
+	//glShaderSource(vertex, 1, &vShaderCode, NULL);
+	//glCompileShader(vertex);
+	//CheckCompileErrors(vertex, "VERTEX");
 	// fragment Shader
-	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, NULL);
-	glCompileShader(fragment);
-	CheckCompileErrors(fragment, "FRAGMENT");
+	//fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	//glShaderSource(fragment, 1, &fShaderCode, NULL);
+	//glCompileShader(fragment);
+	//CheckCompileErrors(fragment, "FRAGMENT");
 	// shader Program
-	ID = glCreateProgram();
-	glAttachShader(ID, vertex);
-	glAttachShader(ID, fragment);
-	glLinkProgram(ID);
-	CheckCompileErrors(ID, "PROGRAM");
-	// delete the shaders as they're linked into our program now and no longer necessery
-	glDeleteShader(vertex);
-	glDeleteShader(fragment);
+	//ID = glCreateProgram();
+	//glAttachShader(ID, vertex);
+	//glAttachShader(ID, fragment);
+	//glLinkProgram(ID);
+	//CheckCompileErrors(ID, "PROGRAM");
+	//// delete the shaders as they're linked into our program now and no longer necessery
+	//glDeleteShader(vertex);
+	//glDeleteShader(fragment);
+
+	
+	return shader;
 }
 
 // basic version, eventually edit wrapping and filtering parameters
@@ -97,36 +112,8 @@ void AssetManager::LoadTexture(unsigned int& texture, const char* file) {
 	stbi_image_free(data);
 }
 
-void AssetManager::LoadModel(const char* pFile) {
-	// not finished
-
-	// Create an instance of the Importer class
-	Assimp::Importer importer;
-
-	// And have it read the given file with some example postprocessing
-	// Usually - if speed is not the most important aspect for you - you'll 
-	// propably request more postprocessing than we do in this example.
-	const aiScene* scene = importer.ReadFile(pFile,
-		aiProcess_CalcTangentSpace |
-		aiProcess_Triangulate |
-		aiProcess_JoinIdenticalVertices |
-		aiProcess_SortByPType);
-
-	// If the import failed, report it
-	if (!scene) {
-		std::cout << importer.GetErrorString() << std::endl;
-	}
-
-	// Now we can access the file's contents. 
-	ProcessScene(scene);
-
-	// Everything will be cleaned up by the importer destructor
-	return;
-}
-
-void AssetManager::ProcessScene(const aiScene* scene) {
-
-	return;
+void AssetManager::LoadModel() {
+	// working on assimp
 }
 
 void AssetManager::CheckCompileErrors(GLuint shader, std::string type)
