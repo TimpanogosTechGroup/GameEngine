@@ -15,12 +15,20 @@ int main(int argc, char** argv) {
 	renderer.SetStatus(RenderEngine::RUNNING);
 
 	Registry::SetRenderEngine(&renderer);
-	Registry::PrintClassName<OpenGlRenderer>();
+	//Registry::PrintClassName<OpenGlRenderer>();
 	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
 
 
-	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, NULL, shader, glm::vec3(1, 1, 0)));
+	Object test = *PrimitiveShape::GenerateSquare(2, 1, Material(1, 1, NULL, shader, glm::vec3(1, 1, 0)));
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, NULL, shader, glm::vec3(0, 1, 1)));
+
+	std::cout << ::endl;
+
+	test.CreateBoundBox();
+	tes1.CreateBoundBox();
+
+	test.GetBoundBox().ToString();
+	tes1.GetBoundBox().ToString();
 	
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);
