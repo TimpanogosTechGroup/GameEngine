@@ -21,14 +21,16 @@ public:
 
 	Verticies& GetVerticies() { return verticies; };
 	Material* GetMaterial() { return &material; };
+	glm::vec3 GetPostion() { return position; };
 
 	void SetMaterial(Material mat);
+	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
 
 private:
 	Verticies verticies;
 	Verticies normals;
 	Verticies boundBox;
 	Verticies attachNodes; // not implemented
-
+	glm::vec3 position; // FIXME TODO this will be removed and replaced with the bullet physics stuff
 	Material material;
 };

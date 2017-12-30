@@ -28,8 +28,16 @@ public:
 	bool RenderObject(Object& object);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 
+	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
+	// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
+	bool CompileShader(ShaderType type, unsigned int &ID, const char* source) override;
+	// Links all the shaders together
+	bool LinkShaderProgram(Shader& shader) override;
+
 private:
 	SDL_Window* window = NULL;
 	SDL_GLContext context;
+
+	bool CheckCompileErrors(GLuint shader, std::string type);
 };
 

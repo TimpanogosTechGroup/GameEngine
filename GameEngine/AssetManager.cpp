@@ -7,17 +7,27 @@ NOT COMPLETE
 */
 
 #include "AssetManager.h"
+#include "Shader.h"
+#include "Registry.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
 
 // ID is the id of the program the shader will be linked to - initial value will be changed
-void AssetManager::LoadShader(unsigned int& ID, const char* vertexPath, const char* fragmentPath) {
+Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPath) {
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode;
 	std::string fragmentCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
+
+	std::ofstream output;
+
+	output.open("test.txt");
+	output << "Hello";
+	output.close();
+
+
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -45,25 +55,35 @@ void AssetManager::LoadShader(unsigned int& ID, const char* vertexPath, const ch
 	const char * fShaderCode = fragmentCode.c_str();
 	// 2. compile shaders
 	unsigned int vertex, fragment;
+
+	Shader* shader = new Shader();
+
+	Registry::GetRenderEngine()->CompileShader(SHADER_VERTEX, shader->vertex.GetID(), vShaderCode);
+	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
+	Registry::GetRenderEngine()->LinkShaderProgram(*shader);
+
 	// vertex shader
-	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, NULL);
-	glCompileShader(vertex);
-	CheckCompileErrors(vertex, "VERTEX");
+ //   vertex = glCreateShader(GL_VERTEX_SHADER);
+	//glShaderSource(vertex, 1, &vShaderCode, NULL);
+	//glCompileShader(vertex);
+	//CheckCompileErrors(vertex, "VERTEX");
 	// fragment Shader
-	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, NULL);
-	glCompileShader(fragment);
-	CheckCompileErrors(fragment, "FRAGMENT");
+	//fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	//glShaderSource(fragment, 1, &fShaderCode, NULL);
+	//glCompileShader(fragment);
+	//CheckCompileErrors(fragment, "FRAGMENT");
 	// shader Program
-	ID = glCreateProgram();
-	glAttachShader(ID, vertex);
-	glAttachShader(ID, fragment);
-	glLinkProgram(ID);
-	CheckCompileErrors(ID, "PROGRAM");
-	// delete the shaders as they're linked into our program now and no longer necessery
-	glDeleteShader(vertex);
-	glDeleteShader(fragment);
+	//ID = glCreateProgram();
+	//glAttachShader(ID, vertex);
+	//glAttachShader(ID, fragment);
+	//glLinkProgram(ID);
+	//CheckCompileErrors(ID, "PROGRAM");
+	//// delete the shaders as they're linked into our program now and no longer necessery
+	//glDeleteShader(vertex);
+	//glDeleteShader(fragment);
+
+	
+	return shader;
 }
 
 // basic version, eventually edit wrapping and filtering parameters

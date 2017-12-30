@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\ben brenkman\source\timptech\gameengine\gameengine\</FILEPATH>
+      <FILENAME>verticies.h</FILENAME>
+      <LINE>14</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>6384</DEFECTCODE>
+    <DESCRIPTION>Dividing sizeof a pointer by another value.</DESCRIPTION>
+    <FUNCTION>Verticies::SetValues</FUNCTION>
+    <DECORATED>?SetValues@Verticies@@QAEXQAM@Z</DECORATED>
+    <FUNCLINE>13</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

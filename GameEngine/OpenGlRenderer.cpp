@@ -6,7 +6,9 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 
 #include "OpenGlRenderer.h"
 #include <iostream>
+#include <string>
 #include <GLEW\glew.h>
+#include <glm\gtc\matrix_transform.hpp>
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -86,6 +88,19 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 }
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Object& object) {
+
+	// Generate the model matrix
+	glm::mat4 model; // Create a indentity matrix
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Apply a translation to the matrix
+	//model = glm::rotate(model, 5.0f, glm::vec3(0.0, 0.0, 1.0)); // Rotate matrix
+	//model = glm::scale(model, glm::vec3(0.5, 0.5, 0.5)); // Scale Matrix
+
+	if (object.GetMaterial()->GetShader() != nullptr) {
+		glUseProgram(object.GetMaterial()->GetShader()->GetID());
+		//glUseProgram(3);
+		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+	}
+
 	glBindVertexArray(object.GetIDVAO());
 	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
 	glBindVertexArray(0);
@@ -96,4 +111,72 @@ bool OpenGlRenderer::RenderObject(Object& object) {
 
 void OpenGlRenderer::Clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
+// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
+bool OpenGlRenderer::CompileShader(ShaderType type, unsigned int &ID, const char* source) {
+	switch (type) {
+	case SHADER_VERTEX:
+		// vertex shader
+		ID = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(ID, 1, &source, NULL);
+		glCompileShader(ID);
+		return CheckCompileErrors(ID, "VERTEX");
+		break;
+	case SHADER_FRAGMENT:
+		// fragment Shader
+		ID = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(ID, 1, &source, NULL);
+		glCompileShader(ID);
+		return CheckCompileErrors(ID, "FRAGMENT");
+		break;
+	case SHADER_GEOMETRY:
+		// geometry Shader
+		ID = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(ID, 1, &source, NULL);
+		glCompileShader(ID);
+		return CheckCompileErrors(ID, "GEOMETRY");
+		break;
+	}
+	return true;
+}
+// Links all the shaders together
+bool OpenGlRenderer::LinkShaderProgram(Shader& shader) {
+	// shader Program
+	shader.GetID() = glCreateProgram();
+	std::cout << "Created Shader: " << shader.GetID() << std::endl;
+	glAttachShader(shader.GetID(), shader.vertex.GetID());
+	glAttachShader(shader.GetID(), shader.fragment.GetID());
+	glLinkProgram(shader.GetID());
+	CheckCompileErrors(shader.GetID(), "PROGRAM");
+	// delete the shaders as they're linked into our program now and no longer necessery
+	glDeleteShader(shader.vertex.GetID());
+	glDeleteShader(shader.fragment.GetID());
+	return true;
+}
+
+bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
+{
+	GLint success;
+	GLchar infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
+			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shaderID, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
+			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
+	return true;
 }

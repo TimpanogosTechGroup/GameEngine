@@ -24,28 +24,35 @@
   <Class Name="Material">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAgAAAAAAAAAQAAAAAIAACAAggAABAAABEBAAAA=</HashCode>
+      <HashCode>AEAAAAgAAAAAAAAAQAAAAAIAACAAggCABAgABEBAAAA=</HashCode>
       <FileName>Material.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Object">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAEBAgAAAQAAAAAAAAAAAAABAAAABAAAA=</HashCode>
+      <HashCode>AAAAAEAEAAAAEBAgAAAQIAAAAABAAgAEABQAAABAAAA=</HashCode>
       <FileName>Object.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="RenderEngine" Collapsed="true">
+  <Class Name="RenderEngine">
     <Position X="9.75" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="RenderEngine::Status" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RenderEngine.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQJAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQJAAAAAAAAAAAQAAAAAAAEQAQAAAAQAAAIAABAAAA=</HashCode>
       <FileName>RenderEngine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RenderItem" Collapsed="true">
     <Position X="14.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAYAAAAIAAAAAAAgAAAgAAAAAAAQAAAgAEAAgA=</HashCode>
       <FileName>RenderItem.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -57,16 +64,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Verticies">
-    <Position X="5.75" Y="3.25" Width="1.5" />
+    <Position X="5.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAIAAAggAEAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>Verticies.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OpenGlRenderer" Collapsed="true">
-    <Position X="9.75" Y="2" Width="1.5" />
+    <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAKQAAAAAACgAAAAAAAAAAAQAAAAAAIAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAKQAAAAAACgAAQAAAAAAAAQAQAAAAYABIIAABAAAA=</HashCode>
       <FileName>OpenGlRenderer.h</FileName>
     </TypeIdentifier>
   </Class>

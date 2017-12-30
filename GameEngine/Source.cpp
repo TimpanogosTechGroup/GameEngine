@@ -3,6 +3,7 @@
 #include "AssetManager.h"
 #include "Object.h"
 #include "PrimitiveShape.h"
+#include "Registry.h"
 
 using namespace std;
 
@@ -13,7 +14,9 @@ int main(int argc, char** argv) {
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 
-	Object test = *PrimitiveShape::GenerateSquare(10, 10, Material());
+	Registry::SetRenderEngine(&renderer);
+
+	Object test = *PrimitiveShape::GenerateSquare(10, 10, Material(1, 1, NULL, AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl")));
 	
 	renderer.CompileObject(test);
 

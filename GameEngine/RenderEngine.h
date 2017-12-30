@@ -10,7 +10,7 @@ class RenderEngine {
 public:
 	void CreateWindow(int width, int height);
 	void UpdateScreen();
-	enum Status {RUNNING, ERROR, SHUTDOWN};
+	enum Status { RUNNING, ERROR, SHUTDOWN };
 	Status GetStatus() { return status; };
 	void SetStatus(Status stat) { status = stat; };
 	void Clear();
@@ -20,6 +20,13 @@ public:
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 	bool RenderObject(Object& object);
 	//bool RenderObject(Object& object, char attributes);
+
+	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
+	// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
+	virtual bool CompileShader(ShaderType type, unsigned int &ID, const char* source) { return true; };
+	// Links all the shaders together
+	virtual bool LinkShaderProgram(Shader& shader) { return true; };
+
 
 private:
 	int window_height = 0;
