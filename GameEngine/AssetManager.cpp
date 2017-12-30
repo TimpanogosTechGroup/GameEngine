@@ -65,9 +65,12 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 }
 
 // basic version, eventually edit wrapping and filtering parameters
-void AssetManager::LoadTexture(unsigned int& texture, const char* file) {
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+Texture* AssetManager::LoadTexture(const char* file) {
+	Texture* texture = new Texture();
+	unsigned int id;
+	glGenTextures(1, &id);
+	texture->SetId(id);
+	glBindTexture(GL_TEXTURE_2D, texture->GetID());
 	// set the texture wrapping parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -82,12 +85,20 @@ void AssetManager::LoadTexture(unsigned int& texture, const char* file) {
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+
+		texture->SetWidth(width);
+		texture->SetHeight(height);
+
+		//std::cout << "Loaded texture: " << data << std::endl;
+		std::cout << "Texture: " << texture->GetID() << std::endl;
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		std::cout << "Failed to load texture" << std::endl; // replace this to a call from the logger
 	}
 	stbi_image_free(data);
+
+	return texture;
 }
 
 void AssetManager::LoadModel() {

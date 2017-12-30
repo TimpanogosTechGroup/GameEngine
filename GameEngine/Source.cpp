@@ -17,10 +17,11 @@ int main(int argc, char** argv) {
 	Registry::SetRenderEngine(&renderer);
 	Registry::PrintClassName<OpenGlRenderer>();
 	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
+	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
 
-	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, NULL, shader, glm::vec3(1, 1, 0)));
-	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, NULL, shader, glm::vec3(0, 1, 1)));
+	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
+	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
 	
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);
