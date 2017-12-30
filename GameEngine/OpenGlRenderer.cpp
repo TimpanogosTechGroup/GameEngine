@@ -6,6 +6,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 
 #include "OpenGlRenderer.h"
 #include <iostream>
+#include <vector>
 #include <string>
 #include <GLEW\glew.h>
 #include <glm\gtc\matrix_transform.hpp>
@@ -69,16 +70,34 @@ void OpenGlRenderer::BindDefaultFrameBuffer() {
 
 // Graphics card calls
 bool OpenGlRenderer::CompileObject(Object& object) {
+	// First we need to create the buffer to send off to the GPU
+	std::vector<float> buffer;
 
-	glGenVertexArrays(1, &object.GetIDVAO());
-	glBindVertexArray(object.GetIDVAO());
-	glGenBuffers(1, &object.GetIDVBO());
+	for (int i = 0; i < object.GetVerticies().Size(); i += 3) {
+		buffer.push_back(object.GetVerticies().GetValues()[i]);
+		buffer.push_back(object.GetVerticies().GetValues()[i + 1]);
+		buffer.push_back(object.GetVerticies().GetValues()[i + 2]);
 
-	glBindBuffer(GL_ARRAY_BUFFER, object.GetIDVBO());
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * object.GetVerticies().Size(), object.GetVerticies().GetValues(), GL_STATIC_DRAW);
+		buffer.push_back(object.GetMaterial()->GetColor().r);
+		buffer.push_back(object.GetMaterial()->GetColor().g);
+		buffer.push_back(object.GetMaterial()->GetColor().b);
+	}
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	for (auto &i : buffer) {
+		std::cout << i;
+	}
+
+	glGenVertexArrays(1, &object.GetID());
+	glBindVertexArray(object.GetID());
+	glGenBuffers(1, &object.VBO.GetID());
+
+	glBindBuffer(GL_ARRAY_BUFFER, object.VBO.GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) (3 * sizeof(float)));
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -101,7 +120,7 @@ bool OpenGlRenderer::RenderObject(Object& object) {
 		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
 	}
 
-	glBindVertexArray(object.GetIDVAO());
+	glBindVertexArray(object.GetID());
 	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
 	glBindVertexArray(0);
 

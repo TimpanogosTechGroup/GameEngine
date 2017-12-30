@@ -27,7 +27,7 @@ public:
 		this->shader = sh;
 		this->color = glm::vec3(1, 1, 1);
 	};
-	Material(float diff, float spec, Texture tex, Shader* sh, glm::vec3 col) {
+	Material(float diff, float spec, Texture tex, Shader* sh, glm::vec3 col = glm::vec3(1, 1, 1)) {
 		this->diffuse = diff;
 		this->specular = spec;
 		this->texture = tex;
@@ -35,9 +35,10 @@ public:
 		this->color = col;
 	};
 
-	float GetDiffuse() { return this->diffuse; };
-	float GetSpecular() { return this->specular; };
+	const float GetDiffuse() { return this->diffuse; };
+	const float GetSpecular() { return this->specular; };
 	Shader* GetShader() { return shader; };
+	const glm::vec3 GetColor() { return color; };
 	void SetDiffuse(int diff) { this->diffuse = diff; };
 	void SetSpecular(int spec) { this->specular = spec; };
 	void SetTexture(Texture tex) { this->texture = tex; };

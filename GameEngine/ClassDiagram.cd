@@ -24,14 +24,14 @@
   <Class Name="Material">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAgAAAAAAAAAQAAAAAIAACAAggCABAgABEBAAAA=</HashCode>
+      <HashCode>AEAAAAgAAAAAAAAAQAAAAAIAACAAggCABAhABEBAAAA=</HashCode>
       <FileName>Material.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Object">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAEAAAAEBAgAAAQIAAAAABAAgAEABQAAABAAAA=</HashCode>
+      <HashCode>AAAAAEAEAAAAEBAgAAAQIAAAAABAAgAEABQAAABEAAA=</HashCode>
       <FileName>Object.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,25 +52,33 @@
   <Class Name="RenderItem" Collapsed="true">
     <Position X="14.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAYAAAAIAAAAAAAgAAAgAAAAAAAQAAAgAEAAgA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>RenderItem.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Texture" Collapsed="true">
     <Position X="13.5" Y="2" Width="1.5" />
+    <InheritanceLine Type="RenderItem" FixedFromPoint="true">
+      <Path>
+        <Point X="15.5" Y="1.312" />
+        <Point X="15.5" Y="1.625" />
+        <Point X="14.25" Y="1.625" />
+        <Point X="14.25" Y="2" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAAABAAAQAAAAAAAIAAEAAAAQ=</HashCode>
       <FileName>Texture.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Verticies">
-    <Position X="5.75" Y="4.5" Width="1.5" />
+    <Position X="5.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAIAAAggAEAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>Verticies.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OpenGlRenderer" Collapsed="true">
+  <Class Name="OpenGlRenderer">
     <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAKQAAAAAACgAAQAAAAAAAAQAQAAAAYABIIAABAAAA=</HashCode>

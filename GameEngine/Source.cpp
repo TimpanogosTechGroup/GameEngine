@@ -15,10 +15,15 @@ int main(int argc, char** argv) {
 	renderer.SetStatus(RenderEngine::RUNNING);
 
 	Registry::SetRenderEngine(&renderer);
+	Registry::PrintClassName<OpenGlRenderer>();
+	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
 
-	Object test = *PrimitiveShape::GenerateSquare(10, 10, Material(1, 1, NULL, AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl")));
+
+	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, NULL, shader, glm::vec3(1, 1, 0)));
+	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, NULL, shader, glm::vec3(0, 1, 1)));
 	
 	renderer.CompileObject(test);
+	renderer.CompileObject(tes1);
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
@@ -34,6 +39,7 @@ int main(int argc, char** argv) {
 		}
 		
 		renderer.RenderObject(test);
+		renderer.RenderObject(tes1);
 		renderer.UpdateScreen();
 	}
 

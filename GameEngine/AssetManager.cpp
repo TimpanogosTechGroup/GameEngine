@@ -53,35 +53,13 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
-	// 2. compile shaders
-	unsigned int vertex, fragment;
 
+	// 2. compile shaders
 	Shader* shader = new Shader();
 
 	Registry::GetRenderEngine()->CompileShader(SHADER_VERTEX, shader->vertex.GetID(), vShaderCode);
 	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
 	Registry::GetRenderEngine()->LinkShaderProgram(*shader);
-
-	// vertex shader
- //   vertex = glCreateShader(GL_VERTEX_SHADER);
-	//glShaderSource(vertex, 1, &vShaderCode, NULL);
-	//glCompileShader(vertex);
-	//CheckCompileErrors(vertex, "VERTEX");
-	// fragment Shader
-	//fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	//glShaderSource(fragment, 1, &fShaderCode, NULL);
-	//glCompileShader(fragment);
-	//CheckCompileErrors(fragment, "FRAGMENT");
-	// shader Program
-	//ID = glCreateProgram();
-	//glAttachShader(ID, vertex);
-	//glAttachShader(ID, fragment);
-	//glLinkProgram(ID);
-	//CheckCompileErrors(ID, "PROGRAM");
-	//// delete the shaders as they're linked into our program now and no longer necessery
-	//glDeleteShader(vertex);
-	//glDeleteShader(fragment);
-
 	
 	return shader;
 }
