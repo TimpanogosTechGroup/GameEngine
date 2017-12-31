@@ -18,12 +18,14 @@ public:
 	Object();
 	RenderItem VBO;
 
-	void CreateBoundBox(); // not implemented
+	// TODO: Create 3d object to test the order of vertices for rendering purposes - assuming order matters (check bullet)
+	void CreateBoundBox(); // NOTE: vertices size must be at least 18 to work properly, 18 will give a plane
 
 	Verticies& GetVerticies() { return verticies; };
 	Material* GetMaterial() { return &material; };
 	glm::vec3 GetPostion() { return position; };
 	Verticies& GetUVCoords() { return uvCoords; };
+	Verticies GetBoundBox() { return boundBox; }
 
 	void SetMaterial(Material mat);
 	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
