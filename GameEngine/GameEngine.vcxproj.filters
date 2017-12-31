@@ -107,5 +107,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Shader\frag.glsl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shader\vert.glsl">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -30,6 +30,19 @@ int main(int argc, char** argv) {
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
 	Object frame2 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, buffer2.GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
+
+	test.CreateBoundBox();
+	tes1.CreateBoundBox();
+	frame.CreateBoundBox();
+	frame2.CreateBoundBox();
+
+	std::cout << std::endl << "Bounding Boxes: " << std::endl;
+	test.GetBoundBox().ToString();
+	tes1.GetBoundBox().ToString();
+	frame.GetBoundBox().ToString();
+	frame2.GetBoundBox().ToString();
+
+	std:cout << std::endl;
 	
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);

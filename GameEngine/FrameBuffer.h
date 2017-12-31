@@ -26,4 +26,3 @@ private:
 	RenderItem RBO;
 	Texture* colorTextureBuffer;
 };
-
