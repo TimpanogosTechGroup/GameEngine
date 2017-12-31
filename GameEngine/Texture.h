@@ -10,7 +10,6 @@ opengl texture ID here? --> What do you think of this method? I added a new clas
 
 class Texture : public RenderItem {
 public:
-
 	// We can set default values in the constructor, so we don't need to have two constructors
 	Texture(unsigned int widthPix = 0, unsigned int heightPix = 0) {
 		this->width = widthPix;

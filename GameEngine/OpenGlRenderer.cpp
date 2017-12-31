@@ -10,6 +10,8 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include <string>
 #include <GLEW\glew.h>
 #include <glm\gtc\matrix_transform.hpp>
+#include <glm\gtc\type_ptr.hpp>
+#include "Camera.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -23,6 +25,10 @@ OpenGlRenderer::~OpenGlRenderer()
 
 // Creates a window
 void OpenGlRenderer::CreateWindow(int width, int height) {
+
+	window_width = width;
+	window_height = height;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cout << "SDL could not initialize: " << std::endl;
 	}
@@ -37,7 +43,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 
 		// Setsup glew and sets the clear color (background color)
 		glewInit();
-		glClearColor(0.3, 0.3, 0.3, 1);
+		glClearColor(backgroundColor.r, backgroundColor.b, backgroundColor.g, 1);
 		glViewport(0, 0, width, height);
 		
 		// Polygon mode is the way OpenGl renders the triangles, you can change the setting here to get wireframe mode
@@ -61,11 +67,15 @@ void OpenGlRenderer::UpdateScreen() {
 // Binds a framebuffer so we can render to it
 void OpenGlRenderer::BindFramBuffer(FrameBuffer* frame) {
 	glBindFramebuffer(GL_FRAMEBUFFER, frame->GetID());
+	glViewport(0, 0, frame->GetColorBuffer()->GetWidth(), frame->GetColorBuffer()->GetHeight());
+	glClearColor(frame->GetBackgroundColor().r, frame->GetBackgroundColor().b, frame->GetBackgroundColor().g, 1.0);
 }
 
 // Effectively unbinds the bound frame buffer setting it back to default render location.
 void OpenGlRenderer::BindDefaultFrameBuffer() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, window_width, window_height);
+	glClearColor(backgroundColor.r, backgroundColor.b, backgroundColor.g, 1.0);
 }
 
 // Graphics card calls
@@ -108,7 +118,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 
 }
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
-bool OpenGlRenderer::RenderObject(Object& object) {
+bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 
 	// Generate the model matrix
 	glm::mat4 model; // Create a indentity matrix
@@ -120,6 +130,11 @@ bool OpenGlRenderer::RenderObject(Object& object) {
 		glUseProgram(object.GetMaterial()->GetShader()->GetID());
 		//glUseProgram(3);
 		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
+		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
+		glm::mat4 model;
+		model = glm::translate(model, object.GetPostion());
+		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model);
 	}
 
 	if (object.GetMaterial()->GetTexture() != nullptr) {
@@ -206,3 +221,65 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 	}
 	return true;
 }
+
+
+// Create a new framebuffer and initializes it
+FrameBuffer* OpenGlRenderer::CreateFramebuffer(unsigned int width, unsigned int height) {
+
+	FrameBuffer* framebuffer = new FrameBuffer(width, height, 0);
+
+	//unsigned int framebuffer;
+	glGenFramebuffers(1, &framebuffer->GetID());
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer->GetID());
+
+	// create a color attachment texture
+	glGenTextures(1, &framebuffer->GetColorBuffer()->GetID());
+	glBindTexture(GL_TEXTURE_2D, framebuffer->GetColorBuffer()->GetID());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, framebuffer->GetColorBuffer()->GetWidth(), framebuffer->GetColorBuffer()->GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, framebuffer->GetColorBuffer()->GetID(), 0);
+	// create a renderbuffer object for depth and stencil attachment (we won't be sampling these)
+
+	glGenRenderbuffers(1, &framebuffer->GetRbo()->GetID());
+	glBindRenderbuffer(GL_RENDERBUFFER, framebuffer->GetRbo()->GetID());
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, framebuffer->GetWidth(), framebuffer->GetHeight()); // use a single renderbuffer object for both a depth AND stencil buffer.
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, framebuffer->GetRbo()->GetID()); // now actually attach it
+																										  // now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	return framebuffer;
+}
+
+/*
+This section is for shaders, setting uniform values
+*/
+
+// Sets a unifmor vec2
+void OpenGlRenderer::SetUniformVec2(Shader* shader, const GLchar* name, glm::vec2 value) {
+	int locaton = glGetUniformLocation(shader->GetID(), name);
+	glUniform2f(locaton, value.x, value.y);
+};
+// Sets a unifmor vec3
+void OpenGlRenderer::SetUniformVec3(Shader* shader, const GLchar* name, glm::vec3 value) {
+	int locaton = glGetUniformLocation(shader->GetID(), name);
+	glUniform3f(locaton, value.x, value.y, value.z);
+};
+// Sets a unifmor float
+void OpenGlRenderer::SetUniformFloat(Shader* shader, const GLchar* name, float value) {
+	int locaton = glGetUniformLocation(shader->GetID(), name);
+	glUniform1f(locaton, value);
+};
+// Sets a unifmor int
+void OpenGlRenderer::SetUniformInt(Shader* shader, const GLchar* name, int value) {
+	int locaton = glGetUniformLocation(shader->GetID(), name);
+	glUniform1i(locaton, value);
+};
+// Sets a unifmor mat4
+void OpenGlRenderer::SetUniformMat4(Shader* shader, const GLchar* name, glm::mat4 value) {
+	int locaton = glGetUniformLocation(shader->GetID(), name);
+	glUniformMatrix4fv(locaton, 1, GL_FALSE, glm::value_ptr(value));
+};

@@ -6,6 +6,7 @@
 #include "Registry.h"
 #include "FrameBuffer.h"
 #include "PhysicsEngine.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -15,47 +16,46 @@ int main(int argc, char** argv) {
 	renderer.CreateWindow(640, 480);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
+	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
 
 	Registry::SetRenderEngine(&renderer);
 	Registry::PrintClassName<OpenGlRenderer>();
+
+	Camera* camera = new Camera();
+	camera->Move(BACKWARD, 1);
 
 	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
 	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\Framebuffer\\kernel_vert.glsl", "Shader\\Framebuffer\\kernel_frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
-	FrameBuffer* buffer = new FrameBuffer(640, 480, FrameBuffer::COLOR_BUFFER | FrameBuffer::STENCIL_DEPTH);
-	FrameBuffer buffer2(640, 480, FrameBuffer::COLOR_BUFFER);
-	buffer->Initialize();
-	buffer2.Initialize();
+	FrameBuffer* buffer = renderer.CreateFramebuffer(640, 480);
 
 	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
 
-	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
-	Object frame2 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, buffer2.GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
+	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
 
 	test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
 	tes1.CreateBoundBox(); 
 	frame.CreateBoundBox();
-	frame2.CreateBoundBox();
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
 	test.GetBoundBox().ToString();
 	tes1.GetBoundBox().ToString();
 	frame.GetBoundBox().ToString();
-	frame2.GetBoundBox().ToString();
 
 	std:cout << std::endl;
 	
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
-	renderer.CompileObject(frame2);
 
 	//std::cout << "Texture: " << buffer.GetColorBuffer()->GetID() << std::endl;
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+
+		float delta = .16;
 
 		renderer.BindFramBuffer(buffer);
 		renderer.Clear();
@@ -66,24 +66,32 @@ int main(int argc, char** argv) {
 			case  SDL_QUIT:
 				renderer.SetStatus(RenderEngine::SHUTDOWN);
 				break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+				case SDLK_w:
+					camera->ProcessKeyboard(FORWARD, delta);
+					break;
+				case SDLK_s:
+					camera->ProcessKeyboard(BACKWARD, delta);
+					break;
+				case SDLK_a:
+					camera->ProcessKeyboard(LEFT, delta);
+					break;
+				case SDLK_d:
+					camera->ProcessKeyboard(RIGHT, delta);
+					break;
+				}
 			}
 		}
+			
 		
-		renderer.RenderObject(test);
-		renderer.RenderObject(tes1);
-
-		renderer.BindFramBuffer(&buffer2);
-
-		renderer.Clear();
-
-		renderer.RenderObject(test);
-		renderer.RenderObject(tes1);
+		renderer.RenderObject(*camera, test);
+		renderer.RenderObject(*camera, tes1);
 
 		renderer.BindDefaultFrameBuffer();
 
 		renderer.Clear();
-		renderer.RenderObject(frame);
-		renderer.RenderObject(frame2);
+		renderer.RenderObject(*camera, frame);
 
 		renderer.UpdateScreen();
 	}

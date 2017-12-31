@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Registry.h"
 
 // Constructor with vectors
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch ) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
@@ -8,6 +9,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch ) : Fron
 	Yaw = yaw;
 	Pitch = pitch;
 	updateCameraVectors();
+	projection = glm::perspective(glm::radians(fov), (float)Registry::GetRenderEngine()->GetWidth() / (float)Registry::GetRenderEngine()->GetHeight(), 0.1f, 100.0f);
 }
 // Constructor with scalar values
 Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
@@ -17,6 +19,7 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
 	Yaw = yaw;
 	Pitch = pitch;
 	updateCameraVectors();
+	projection = glm::perspective(glm::radians(fov), (float)Registry::GetRenderEngine()->GetWidth() / (float)Registry::GetRenderEngine()->GetHeight(), 0.1f, 100.0f);
 }
 
 // Returns the view matrix calculated using Eular Angles and the LookAt Matrix
@@ -123,4 +126,8 @@ void Camera::EnableLookAt() {
 // Diables the look at function
 void Camera::DisableLookAt() {
 	mustLookAt = false;
+};
+
+glm::mat4 Camera::GetProjectionMatrix() {
+	return projection;
 };

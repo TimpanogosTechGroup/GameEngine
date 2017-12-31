@@ -55,6 +55,9 @@ public:
 	// Sets the Cameras look at target, must use function EnableLookAt() to use
 	void SetCameraLookAtTarget(Object* target);
 
+	// Gets the perpective matrix of the camera
+	glm::mat4 GetProjectionMatrix();
+
 	// Look At target enablers and diablers. Tells the camera wether or not to look at a target or not
 	void EnableLookAt();
 	void DisableLookAt();
@@ -101,10 +104,14 @@ private:
 	float MovementSpeed;
 	float MouseSensitivity;
 	float Zoom;
+	float fov = 45.0f;
 
 	// LookAtTarget
 	bool mustLookAt = false;
 	Object* lookAtTarget = nullptr;
+
+	// Prespective matrix
+	glm::mat4 projection;
 };
 #endif
 

@@ -34,10 +34,11 @@ private:
 	Verticies verticies;
 	Verticies normals;
 	Verticies uvCoords;
-
 	Verticies boundBox;
 	Verticies attachNodes; // not implemented
+
 	glm::vec3 position; // FIXME TODO this will be removed and replaced with the bullet physics stuff
+
 	Material material;
 	
 };

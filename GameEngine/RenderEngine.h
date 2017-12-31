@@ -5,6 +5,8 @@ This is the RenderEngine class, we will have different implementations of this c
 */
 #pragma once
 #include "Object.h"
+#include "FrameBuffer.h"
+#include "Camera.h"
 
 class RenderEngine {
 public:
@@ -15,10 +17,12 @@ public:
 	void SetStatus(Status stat) { status = stat; };
 	void Clear();
 
+	void SetBackgroundColor(glm::vec3 color) { backgroundColor = color; };
+
 	// Graphics card calls
 	bool CompileObject(Object& object);
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
-	bool RenderObject(Object& object);
+	bool RenderObject(Camera& camera, Object& object);
 	//bool RenderObject(Object& object, char attributes);
 
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
@@ -26,10 +30,17 @@ public:
 	virtual bool CompileShader(ShaderType type, unsigned int &ID, const char* source) { return true; };
 	// Links all the shaders together
 	virtual bool LinkShaderProgram(Shader& shader) { return true; };
+	// Creates a framebuffer
+	virtual FrameBuffer* CreateFramebuffer(unsigned int width, unsigned int height) { return nullptr; };
+
+	// Gets the screen width and height
+	int GetWidth() { return window_width; };
+	int GetHeight() { return window_height; };
 
 
-private:
+protected:
 	int window_height = 0;
 	int window_width = 0;
 	Status status;
+	glm::vec3 backgroundColor = glm::vec3(0, 0, 0);
 };

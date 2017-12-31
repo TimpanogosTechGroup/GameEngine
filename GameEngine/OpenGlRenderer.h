@@ -8,6 +8,7 @@ Our OpenGl implementation of the RenderEngine
 #include "RenderEngine.h"
 #include <SDL\SDL.h>
 #include "FrameBuffer.h"
+#include <string>
 
 class OpenGlRenderer :
 	public RenderEngine
@@ -25,7 +26,7 @@ public:
 	// Graphics card calls
 	bool CompileObject(Object& object);
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
-	bool RenderObject(Object& object);
+	bool RenderObject(Camera& camera, Object& object);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
@@ -33,6 +34,24 @@ public:
 	bool CompileShader(ShaderType type, unsigned int &ID, const char* source) override;
 	// Links all the shaders together
 	bool LinkShaderProgram(Shader& shader) override;
+	// Creates a framebuffer
+	FrameBuffer* CreateFramebuffer(unsigned int width, unsigned int height) override;
+
+	/*
+	This section is for shaders, setting uniform values
+	*/
+
+	// Sets a unifmor vec2
+	void SetUniformVec2(Shader* shader, const GLchar* name, glm::vec2 value);
+	// Sets a unifmor vec3
+	void SetUniformVec3(Shader* shader, const GLchar* name, glm::vec3 value);
+	// Sets a unifmor float
+	void SetUniformFloat(Shader* shader, const GLchar* name, float value);
+	// Sets a unifmor int
+	void SetUniformInt(Shader* shader, const GLchar* name, int value);
+	// Sets a unifmor mat4
+	void SetUniformMat4(Shader* shader, const GLchar* name, glm::mat4 value);
+
 
 private:
 	SDL_Window* window = NULL;
