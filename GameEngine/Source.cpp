@@ -5,6 +5,7 @@
 #include "PrimitiveShape.h"
 #include "Registry.h"
 #include "FrameBuffer.h"
+#include "PhysicsEngine.h"
 
 using namespace std;
 
@@ -86,7 +87,9 @@ int main(int argc, char** argv) {
 	}
 
 	SDL_Quit();
-	
+
+	PhysicsEngine physics;
+	physics.PhysicsTest();
 
 	std::cout << "GameEngine" << std::endl;
 	return 0;
