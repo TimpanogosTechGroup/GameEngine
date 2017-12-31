@@ -15,6 +15,7 @@ NOT COMPLETE
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
+#include <assimp\cimport.h>
 #include <assimp\postprocess.h>
 
 // ID is the id of the program the shader will be linked to - initial value will be changed
@@ -104,8 +105,36 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-void AssetManager::LoadModel() {
-	// working on assimp
+void AssetManager::LoadModel(const char* pFile) {
+	// not finished
+
+	// Create an instance of the Importer class
+	Assimp::Importer importer;
+
+	// And have it read the given file with some example postprocessing
+	// Usually - if speed is not the most important aspect for you - you'll 
+	// propably request more postprocessing than we do in this example.
+	const aiScene* scene = importer.ReadFile(pFile,
+		aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType);
+
+	// If the import failed, report it
+	if (!scene) {
+		std::cout << importer.GetErrorString() << std::endl;
+	}
+
+	// Now we can access the file's contents. 
+	ProcessScene(scene);
+
+	// Everything will be cleaned up by the importer destructor
+	return;
+}
+
+void AssetManager::ProcessScene(const aiScene* scene) {
+
+	return;
 }
 
 void AssetManager::CheckCompileErrors(GLuint shader, std::string type)

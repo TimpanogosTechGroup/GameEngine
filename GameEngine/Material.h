@@ -40,8 +40,8 @@ public:
 	Shader* GetShader() { return shader; };
 	const glm::vec3 GetColor() { return color; };
 	Texture* GetTexture() { return texture; };
-	void SetDiffuse(int diff) { this->diffuse = diff; };
-	void SetSpecular(int spec) { this->specular = spec; };
+	void SetDiffuse(float diff) { this->diffuse = diff; };
+	void SetSpecular(float spec) { this->specular = spec; };
 	void SetTexture(Texture* tex) { this->texture = tex; };
 	void SetShader(Shader* sh) { this->shader = sh; };
 	void SetColor(glm::vec3 col) { this->color = col; };

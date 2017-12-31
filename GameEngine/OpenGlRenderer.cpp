@@ -133,29 +133,6 @@ bool OpenGlRenderer::RenderObject(Object& object) {
 
 	return true;
 }
-bool OpenGlRenderer::RenderObject(Object& object, int id) {
-
-	// Generate the model matrix
-	glm::mat4 model; // Create a indentity matrix
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Apply a translation to the matrix
-																//model = glm::rotate(model, 5.0f, glm::vec3(0.0, 0.0, 1.0)); // Rotate matrix
-																//model = glm::scale(model, glm::vec3(0.5, 0.5, 0.5)); // Scale Matrix
-
-	if (object.GetMaterial()->GetShader() != nullptr) {
-		glUseProgram(object.GetMaterial()->GetShader()->GetID());
-		//glUseProgram(3);
-		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
-	}
-
-		glBindTexture(GL_TEXTURE_2D, id);
-
-	glBindVertexArray(object.GetID());
-	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	return true;
-}
 //bool RenderObject(Object& object, char attributes);
 
 void OpenGlRenderer::Clear() {

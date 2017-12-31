@@ -11,6 +11,7 @@ This is the header to manage loading assets to opengl.
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <assimp\scene.h>
 #include "Shader.h"
 #include "Texture.h"
 
@@ -21,8 +22,9 @@ public:
 	// Parameters: ID of texture, filepath to image
 	static Texture* LoadTexture(const char* file);
 
-	void LoadModel(); // not complete, currently working on getting assimp to work
+	void LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
 
 private:
 	void CheckCompileErrors(GLuint shader, std::string type);
+	void ProcessScene(const aiScene* scene);
 };

@@ -18,7 +18,9 @@ int main(int argc, char** argv) {
 
 	Registry::SetRenderEngine(&renderer);
 	Registry::PrintClassName<OpenGlRenderer>();
+
 	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
+	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\Framebuffer\\kernel_vert.glsl", "Shader\\Framebuffer\\kernel_frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
 	FrameBuffer* buffer = new FrameBuffer(640, 480, FrameBuffer::COLOR_BUFFER | FrameBuffer::STENCIL_DEPTH);
@@ -30,10 +32,10 @@ int main(int argc, char** argv) {
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
-	Object frame2 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, buffer2.GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
+	Object frame2 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, buffer2.GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
 
-	test.CreateBoundBox();
-	tes1.CreateBoundBox();
+	test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
+	tes1.CreateBoundBox(); 
 	frame.CreateBoundBox();
 	frame2.CreateBoundBox();
 
