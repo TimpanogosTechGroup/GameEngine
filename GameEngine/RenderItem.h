@@ -7,5 +7,5 @@ public:
 	void SetId(unsigned int ID) { id = ID; };
 
 protected:
-	unsigned int id;
+	unsigned int id = 0;
 };

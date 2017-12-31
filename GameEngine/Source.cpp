@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "PrimitiveShape.h"
 #include "Registry.h"
+#include "FrameBuffer.h"
 
 using namespace std;
 
@@ -19,15 +20,28 @@ int main(int argc, char** argv) {
 	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
+	FrameBuffer* buffer = new FrameBuffer(640, 480, FrameBuffer::COLOR_BUFFER | FrameBuffer::STENCIL_DEPTH);
+	FrameBuffer buffer2(640, 480, FrameBuffer::COLOR_BUFFER);
+	buffer->Initialize();
+	buffer2.Initialize();
 
 	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
+
+	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
+	Object frame2 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, buffer2.GetColorBuffer(), shader, glm::vec3(1, 1, 1)));
 	
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);
+	renderer.CompileObject(frame);
+	renderer.CompileObject(frame2);
+
+	//std::cout << "Texture: " << buffer.GetColorBuffer()->GetID() << std::endl;
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+
+		renderer.BindFramBuffer(buffer);
 		renderer.Clear();
 		// We'll take out all of this input stuff out and make an InputManager class
 		SDL_Event event;
@@ -41,12 +55,26 @@ int main(int argc, char** argv) {
 		
 		renderer.RenderObject(test);
 		renderer.RenderObject(tes1);
+
+		renderer.BindFramBuffer(&buffer2);
+
+		renderer.Clear();
+
+		renderer.RenderObject(test);
+		renderer.RenderObject(tes1);
+
+		renderer.BindDefaultFrameBuffer();
+
+		renderer.Clear();
+		renderer.RenderObject(frame);
+		renderer.RenderObject(frame2);
+
 		renderer.UpdateScreen();
 	}
 
 	SDL_Quit();
 	
 
-	cout << "GameEngine" << endl;
+	std::cout << "GameEngine" << std::endl;
 	return 0;
 }

@@ -66,10 +66,9 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 // basic version, eventually edit wrapping and filtering parameters
 Texture* AssetManager::LoadTexture(const char* file) {
-	Texture* texture = new Texture();
-	unsigned int id;
-	glGenTextures(1, &id);
-	texture->SetId(id);
+	Texture* texture = new Texture(); // Create a new texture
+	// Genereate buffers and bind
+	glGenTextures(1, &texture->GetID());
 	glBindTexture(GL_TEXTURE_2D, texture->GetID());
 	// set the texture wrapping parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
