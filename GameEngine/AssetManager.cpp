@@ -5,18 +5,12 @@ This is the implementation to manage loading assets to opengl.
 
 NOT COMPLETE
 */
+#include <vector>
 
 #include "AssetManager.h"
-#include "Shader.h"
-#include "Registry.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
-
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\cimport.h>
-#include <assimp\postprocess.h>
 
 // ID is the id of the program the shader will be linked to - initial value will be changed
 Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPath) {
@@ -105,11 +99,21 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-void AssetManager::LoadModel(const char* pFile) {
+Object AssetManager::LoadModel(const char* pFile, FrameBuffer* buffer, Shader* frameBufferEffects) {
 	// not finished
 
 	// Create an instance of the Importer class
 	Assimp::Importer importer;
+
+	//check if file exists
+	std::ifstream fin(pFile);
+	if (!fin.fail()) {
+		fin.close();
+	}
+	else {
+		printf("Couldn't open file: %s\n", pFile);
+		printf("%s\n", importer.GetErrorString());
+	}
 
 	// And have it read the given file with some example postprocessing
 	// Usually - if speed is not the most important aspect for you - you'll 
@@ -124,39 +128,56 @@ void AssetManager::LoadModel(const char* pFile) {
 	if (!scene) {
 		std::cout << importer.GetErrorString() << std::endl;
 	}
+	else {
+		std::cout << "Model loaded" << std::endl;
+	}
 
-	// Now we can access the file's contents. 
-	ProcessScene(scene);
+	std::vector<float> vertices;
+	std::vector<float> normals;
+	std::vector<float> uvs;
+
+	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
+		const aiMesh* mesh = scene->mMeshes[n];
+
+		for (int j = 0; j < mesh->mNumVertices; j++) {
+			vertices.push_back(mesh->mVertices[n].x); vertices.push_back(mesh->mVertices[n].y); vertices.push_back(mesh->mVertices[n].z);
+			normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
+			if (mesh->HasTextureCoords(n)) {
+				uvs.push_back(mesh->mTextureCoords[n]->x); normals.push_back(mesh->mTextureCoords[n]->y);
+			}
+		}
+	}
+
+	float* vertexArray = &vertices[0];
+	float* normalArray = &normals[0];
+	float* uvArray = &uvs[0];
+	Object object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
+	object.SetMaterial(Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
+	// TODO: replace above line with LoadMaterial
+	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
+
+	LoadMaterial(scene);
 
 	// Everything will be cleaned up by the importer destructor
-	return;
+	return object;
 }
 
-void AssetManager::ProcessScene(const aiScene* scene) {
+Material AssetManager::LoadMaterial(const aiScene* scene) {
+	aiMaterial* mat = scene->mMaterials[0];
+	aiString name;
+	aiColor3D diffuse;
+	aiColor3D specular;
 
-	return;
-}
+	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
+		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
+	}
+	else {
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+		mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
 
-void AssetManager::CheckCompileErrors(GLuint shader, std::string type)
-{
-	GLint success;
-	GLchar infoLog[1024];
-	if (type != "PROGRAM")
-	{
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
+		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
-	else
-	{
-		glGetProgramiv(shader, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
+
+	Material tmp;
+	return tmp;
 }

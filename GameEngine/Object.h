@@ -15,6 +15,12 @@ public:
 		verticies.SetValues(vert);
 		normals.SetValues(norms);
 	}
+	// this constructor is for model loading, necesarry becuase not possible to get array size using pointer
+	Object(float vert[], float norms[], float uvs[], unsigned int size, unsigned int uvSize) {
+		verticies.SetValues(vert, size);
+		normals.SetValues(norms, size);
+		uvCoords.SetValues(uvs, uvSize);
+	}
 	Object();
 	RenderItem VBO;
 

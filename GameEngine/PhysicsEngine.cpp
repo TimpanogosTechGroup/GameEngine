@@ -38,7 +38,7 @@ void PhysicsEngine::PhysicsTest() {
 	dynamicsWorld->addRigidBody(fallRigidBody);
 
 
-	for (int i = 0; i < 300; i++) {
+	for (int i = 0; i < 3; i++) {
 		dynamicsWorld->stepSimulation(1 / 60.f, 10);
 
 		btTransform trans;
