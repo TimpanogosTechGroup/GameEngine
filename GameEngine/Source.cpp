@@ -32,6 +32,8 @@ int main(int argc, char** argv) {
 
 	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
+	Object model = AssetManager::LoadModel("Model\\bench.obj", buffer, frameBufferEffects); // TODO: remove params 1 and 2, temporary to prevent crashing
+
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
 
@@ -49,6 +51,10 @@ int main(int argc, char** argv) {
 	renderer.CompileObject(test);
 	renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
+	renderer.CompileObject(model);
+
+	std::cout << "model data:" << std::endl;
+	std::cout << "# of vertices: " << model.GetVerticies().Size() << std::endl;
 
 	//std::cout << "Texture: " << buffer.GetColorBuffer()->GetID() << std::endl;
 

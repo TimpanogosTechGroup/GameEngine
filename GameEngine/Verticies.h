@@ -15,6 +15,11 @@ public:
 			values.push_back(vert[i]);
 		}
 	};
+	void SetValues(float vert[], unsigned int size) {
+		for (unsigned int i = 0; i < size; i++) {
+			values.push_back(vert[i]);
+		}
+	};
 
 	// You cannot return an array from a function, arrays are too large and so must be returned by pointer
 	// This is a neat trick to get the array data from the vector wrapper &name[0] will return the array data

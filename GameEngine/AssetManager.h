@@ -11,9 +11,16 @@ This is the header to manage loading assets to opengl.
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <assimp\scene.h>
 #include "Shader.h"
+#include "Object.h"
+#include "Material.h"
 #include "Texture.h"
+#include "Registry.h"
+
+#include <assimp\Importer.hpp>
+#include <assimp\scene.h>
+#include <assimp\cimport.h>
+#include <assimp\postprocess.h>
 
 class AssetManager {
 public:
@@ -22,9 +29,8 @@ public:
 	// Parameters: ID of texture, filepath to image
 	static Texture* LoadTexture(const char* file);
 
-	void LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
+	static Object LoadModel(const char* pFile, FrameBuffer* buffer, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
 
 private:
-	void CheckCompileErrors(GLuint shader, std::string type);
-	void ProcessScene(const aiScene* scene);
+	static Material LoadMaterial(const aiScene* scene);
 };
