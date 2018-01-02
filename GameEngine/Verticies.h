@@ -24,6 +24,7 @@ public:
 	// You cannot return an array from a function, arrays are too large and so must be returned by pointer
 	// This is a neat trick to get the array data from the vector wrapper &name[0] will return the array data
 	float* GetValues() { return &values[0]; };
+	std::vector<float>* GetValueVector() { return &values; };
 	float GetValue(unsigned int i) { return values.at(i); }
 
 	// Adds a float to the vertecies vector

@@ -29,7 +29,7 @@ public:
 	// Parameters: ID of texture, filepath to image
 	static Texture* LoadTexture(const char* file);
 
-	static Object LoadModel(const char* pFile, FrameBuffer* buffer, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
+	static Object* LoadModel(const char* pFile, Texture* texture, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
 
 private:
 	static Material LoadMaterial(const aiScene* scene);

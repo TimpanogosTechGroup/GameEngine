@@ -1,4 +1,5 @@
 #include "Object.h"
+#include <iomanip>
 
 Object::Object() { 
 	position = glm::vec3(0, 0, 0);
@@ -69,4 +70,12 @@ void Object::CreateBoundBox() {
 	}
 
 	return;
+}
+
+void Object::ToString() {
+
+	std::cout << "Object: " << std::endl;
+	std::cout << "Verticies" << std::endl << std::setw(10) << "x" << std::setw(10) << "y" << std::setw(10) << "z" << std::endl;
+
+	verticies.ToString();
 }

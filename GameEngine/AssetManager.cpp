@@ -99,7 +99,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-Object AssetManager::LoadModel(const char* pFile, FrameBuffer* buffer, Shader* frameBufferEffects) {
+Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shader) {
 	// not finished
 
 	// Create an instance of the Importer class
@@ -136,13 +136,16 @@ Object AssetManager::LoadModel(const char* pFile, FrameBuffer* buffer, Shader* f
 	std::vector<float> normals;
 	std::vector<float> uvs;
 
+	bool hasTex = false;
+
 	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
 		const aiMesh* mesh = scene->mMeshes[n];
 
 		for (int j = 0; j < mesh->mNumVertices; j++) {
-			vertices.push_back(mesh->mVertices[n].x); vertices.push_back(mesh->mVertices[n].y); vertices.push_back(mesh->mVertices[n].z);
+			vertices.push_back(mesh->mVertices[j].x); vertices.push_back(mesh->mVertices[j].y); vertices.push_back(mesh->mVertices[j].z);
 			normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
 			if (mesh->HasTextureCoords(n)) {
+				hasTex = true;
 				uvs.push_back(mesh->mTextureCoords[n]->x); normals.push_back(mesh->mTextureCoords[n]->y);
 			}
 		}
@@ -150,9 +153,12 @@ Object AssetManager::LoadModel(const char* pFile, FrameBuffer* buffer, Shader* f
 
 	float* vertexArray = &vertices[0];
 	float* normalArray = &normals[0];
-	float* uvArray = &uvs[0];
-	Object object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
-	object.SetMaterial(Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
+	if (hasTex) {
+		float* uvArray = &uvs[0];
+		Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
+	}
+	Object* object = new Object(vertices, normals);
+	object->SetMaterial(Material(1, 1, texture, shader, glm::vec3(1, 1, 1)));
 	// TODO: replace above line with LoadMaterial
 	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 

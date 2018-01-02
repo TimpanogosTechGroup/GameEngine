@@ -92,8 +92,11 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 		buffer.push_back(object.GetMaterial()->GetColor().g);
 		buffer.push_back(object.GetMaterial()->GetColor().b);
 
-		buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0))]); // Need to cast it to int, because we need to use float for the calculation
-		buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0)) + 1]);
+		//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0))]); // Need to cast it to int, because we need to use float for the calculation
+		//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0)) + 1]);
+
+		buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
+		buffer.push_back(0);
 	}
 
 	glGenVertexArrays(1, &object.GetID());

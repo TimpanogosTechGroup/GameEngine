@@ -14,12 +14,24 @@ public:
 	Object(float vert[], float norms[]) {
 		verticies.SetValues(vert);
 		normals.SetValues(norms);
+		position = glm::vec3(0, 0, 0);
 	}
 	// this constructor is for model loading, necesarry becuase not possible to get array size using pointer
 	Object(float vert[], float norms[], float uvs[], unsigned int size, unsigned int uvSize) {
 		verticies.SetValues(vert, size);
 		normals.SetValues(norms, size);
 		uvCoords.SetValues(uvs, uvSize);
+		position = glm::vec3(0, 0, 0);
+	}
+	Object(std::vector<float> verticies, std::vector<float> normals) {
+		
+		for (auto &v : verticies) {
+			this->verticies.AddFloat(v);
+		}
+		for (auto &n : normals) {
+			this->normals.AddFloat(n);
+		}
+		position = glm::vec3(0, 0, 0);
 	}
 	Object();
 	RenderItem VBO;
@@ -35,6 +47,7 @@ public:
 
 	void SetMaterial(Material mat);
 	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
+	void ToString();
 
 private:
 	Verticies verticies;

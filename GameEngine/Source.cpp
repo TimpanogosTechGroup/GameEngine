@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 	Camera* camera = new Camera();
 	camera->Move(BACKWARD, 1);
 
-	Shader* shader = AssetManager::LoadShader("Shader\\vert.glsl", "Shader\\frag.glsl");
+	Shader* shader = AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\frag.glsl");
 	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\Framebuffer\\kernel_vert.glsl", "Shader\\Framebuffer\\kernel_frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
 	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	Object model = AssetManager::LoadModel("Model\\bench.obj", buffer, frameBufferEffects); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Object model = *AssetManager::LoadModel("Model\\bench.obj", text, shader); // TODO: remove params 1 and 2, temporary to prevent crashing
 
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
@@ -53,17 +53,16 @@ int main(int argc, char** argv) {
 	renderer.CompileObject(frame);
 	renderer.CompileObject(model);
 
+	model.ToString();
+
 	std::cout << "model data:" << std::endl;
 	std::cout << "# of vertices: " << model.GetVerticies().Size() << std::endl;
-
-	//std::cout << "Texture: " << buffer.GetColorBuffer()->GetID() << std::endl;
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
 		float delta = .16;
-
-		renderer.BindFramBuffer(buffer);
+		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
 		// We'll take out all of this input stuff out and make an InputManager class
 		SDL_Event event;
@@ -90,14 +89,8 @@ int main(int argc, char** argv) {
 			}
 		}
 			
-		
+		renderer.RenderObject(*camera, model);
 		renderer.RenderObject(*camera, test);
-		renderer.RenderObject(*camera, tes1);
-
-		renderer.BindDefaultFrameBuffer();
-
-		renderer.Clear();
-		renderer.RenderObject(*camera, frame);
 
 		renderer.UpdateScreen();
 	}
