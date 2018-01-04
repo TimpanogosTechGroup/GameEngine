@@ -40,6 +40,7 @@ public:
 	void CreateBoundBox(); // NOTE: vertices size must be at least 18 to work properly, 18 will give a plane
 
 	Verticies& GetVerticies() { return verticies; };
+	Verticies& GetNormals() { return normals; };
 	Material* GetMaterial() { return &material; };
 	glm::vec3 GetPostion() { return position; };
 	Verticies& GetUVCoords() { return uvCoords; };

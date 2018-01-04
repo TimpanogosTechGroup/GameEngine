@@ -133,6 +133,7 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 	}
 
 	std::vector<float> vertices;
+	std::vector<float> colors;
 	std::vector<float> normals;
 	std::vector<float> uvs;
 
@@ -157,6 +158,7 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 					normals.push_back(mesh->mNormals[face.mIndices[j]].x);
 					normals.push_back(mesh->mNormals[face.mIndices[j]].y);
 					normals.push_back(mesh->mNormals[face.mIndices[j]].z);
+					//std::cout << "Normal: " << mesh->mNormals[face.mIndices[j]].x << ", " << mesh->mNormals[face.mIndices[j]].y << ", " << mesh->mNormals[face.mIndices[j]].z << std::endl;
 				}
 				else {
 					normals.push_back(1);
@@ -188,14 +190,14 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 		//}
 	}
 
-	float* vertexArray = &vertices[0];
-	float* normalArray = &normals[0];
-	if (hasTex) {
-		float* uvArray = &uvs[0];
-		Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
-	}
+	//float* vertexArray = &vertices[0];
+	//float* normalArray = &normals[0];
+	//if (hasTex) {
+	//	float* uvArray = &uvs[0];
+	//	Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
+	//}
 	Object* object = new Object(vertices, normals);
-	object->SetMaterial(Material(1, 1, texture, shader, glm::vec3(1, 1, 1)));
+	object->SetMaterial(Material(1, 1, texture, shader, glm::vec3(0, 1, 1)));
 	// TODO: replace above line with LoadMaterial
 	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 
@@ -217,7 +219,6 @@ Material AssetManager::LoadMaterial(const aiScene* scene) {
 	else {
 		mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
 		mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
-
 		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
 

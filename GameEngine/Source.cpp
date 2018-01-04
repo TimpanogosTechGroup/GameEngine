@@ -24,35 +24,35 @@ int main(int argc, char** argv) {
 	Camera* camera = new Camera();
 	camera->Move(BACKWARD, 1);
 
-	Shader* shader = AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\frag.glsl");
+	Shader* shader = AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl");
 	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\Framebuffer\\kernel_vert.glsl", "Shader\\Framebuffer\\kernel_frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
 
 	FrameBuffer* buffer = renderer.CreateFramebuffer(640, 480);
 
-	Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
-	Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
+	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
+	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
 	Object model = *AssetManager::LoadModel("Model\\bench.obj", text, shader); // TODO: remove params 1 and 2, temporary to prevent crashing
 
 
-	Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
+	//Object frame = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
 
-	test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
-	tes1.CreateBoundBox(); 
-	frame.CreateBoundBox();
+	//test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
+	//tes1.CreateBoundBox(); 
+	//frame.CreateBoundBox();
 	model.CreateBoundBox();
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
-	test.GetBoundBox().ToString();
-	tes1.GetBoundBox().ToString();
-	frame.GetBoundBox().ToString();
+	//test.GetBoundBox().ToString();
+	//tes1.GetBoundBox().ToString();
+	//frame.GetBoundBox().ToString();
 	model.GetBoundBox().ToString();
 
 	std:cout << std::endl;
 	
-	renderer.CompileObject(test);
-	renderer.CompileObject(tes1);
-	renderer.CompileObject(frame);
+	//renderer.CompileObject(test);
+	//renderer.CompileObject(tes1);
+	//renderer.CompileObject(frame);
 	renderer.CompileObject(model);
 
 	//model.ToString();
@@ -87,12 +87,30 @@ int main(int argc, char** argv) {
 				case SDLK_d:
 					camera->ProcessKeyboard(RIGHT, delta);
 					break;
+				case SDLK_LSHIFT:
+					camera->ProcessKeyboard(UP, delta);
+					break;
+				case SDLK_LCTRL:
+					camera->ProcessKeyboard(DOWN, delta);
+					break;
+				case SDLK_LEFT:
+					camera->ProcessMouseMovement(10, 0, true);
+					break;
+				case SDLK_RIGHT:
+					camera->ProcessMouseMovement(-10, 0, true);
+					break;
+				case SDLK_UP:
+					camera->ProcessMouseMovement(0, 10, true);
+					break;
+				case SDLK_DOWN:
+					camera->ProcessMouseMovement(0, -10, true);
+					break;
 				}
 			}
 		}
 			
 		renderer.RenderObject(*camera, model);
-		renderer.RenderObject(*camera, test);
+		//renderer.RenderObject(*camera, test);
 
 		renderer.UpdateScreen();
 	}
