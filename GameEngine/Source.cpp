@@ -40,11 +40,13 @@ int main(int argc, char** argv) {
 	test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
 	tes1.CreateBoundBox(); 
 	frame.CreateBoundBox();
+	model.CreateBoundBox();
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
 	test.GetBoundBox().ToString();
 	tes1.GetBoundBox().ToString();
 	frame.GetBoundBox().ToString();
+	model.GetBoundBox().ToString();
 
 	std:cout << std::endl;
 	
@@ -53,7 +55,7 @@ int main(int argc, char** argv) {
 	renderer.CompileObject(frame);
 	renderer.CompileObject(model);
 
-	model.ToString();
+	//model.ToString();
 
 	std::cout << "model data:" << std::endl;
 	std::cout << "# of vertices: " << model.GetVerticies().Size() << std::endl;

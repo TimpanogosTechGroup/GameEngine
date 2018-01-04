@@ -140,15 +140,52 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 
 	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
 		const aiMesh* mesh = scene->mMeshes[n];
+		int iMeshFaces = mesh->mNumFaces;
 
-		for (int j = 0; j < mesh->mNumVertices; j++) {
-			vertices.push_back(mesh->mVertices[j].x); vertices.push_back(mesh->mVertices[j].y); vertices.push_back(mesh->mVertices[j].z);
-			normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
-			if (mesh->HasTextureCoords(n)) {
-				hasTex = true;
-				uvs.push_back(mesh->mTextureCoords[n]->x); normals.push_back(mesh->mTextureCoords[n]->y);
+		for (int k = 0; k < iMeshFaces; k++) {
+			const aiFace& face = mesh->mFaces[k];
+			//aiVector3D pos = mesh->mVertices[face.mIndices[k]];
+			//aiVector3D uv = mesh->mTextureCoords[0][face.mIndices[k]];
+			//aiVector3D normal = mesh->HasNormals() ? mesh->mNormals[face.mIndices[k]] : aiVector3D(1.0f, 1.0f, 1.0f);
+
+			for (int j = 0; j < 3; j++) {
+				vertices.push_back(mesh->mVertices[face.mIndices[j]].x);
+				vertices.push_back(mesh->mVertices[face.mIndices[j]].y);
+				vertices.push_back(mesh->mVertices[face.mIndices[j]].z);
+
+				if (mesh->HasNormals()) {
+					normals.push_back(mesh->mNormals[face.mIndices[j]].x);
+					normals.push_back(mesh->mNormals[face.mIndices[j]].y);
+					normals.push_back(mesh->mNormals[face.mIndices[j]].z);
+				}
+				else {
+					normals.push_back(1);
+					normals.push_back(1);
+					normals.push_back(1);
+				}
+
+				if (mesh->HasTextureCoords(0)) {
+					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].x);
+					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].y);
+				}
+				else {
+					uvs.push_back(1);
+					uvs.push_back(1);
+				}
 			}
+
+			//vertices.push_back(uv.x);
+			//vertices.push_back(uv.y);
 		}
+
+		//for (int j = 0; j < mesh->mNumVertices; j++) {
+		//	vertices.push_back(mesh->mVertices[j].x); vertices.push_back(mesh->mVertices[j].y); vertices.push_back(mesh->mVertices[j].z);
+		//	normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
+		//	if (mesh->HasTextureCoords(n)) {
+		//		hasTex = true;
+		//		uvs.push_back(mesh->mTextureCoords[n]->x); normals.push_back(mesh->mTextureCoords[n]->y);
+		//	}
+		//}
 	}
 
 	float* vertexArray = &vertices[0];
