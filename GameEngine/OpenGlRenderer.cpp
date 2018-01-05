@@ -55,6 +55,10 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		// Standard clear depth buffer bit and color buffer bit
 		glClearDepth(1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		SDL_CaptureMouse(SDL_TRUE);
+		//SDL_SetWindowGrab(window, SDL_TRUE);
+		SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
 }
 
@@ -100,8 +104,17 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0))]); // Need to cast it to int, because we need to use float for the calculation
 			//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0)) + 1]);
 
-			buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
-			buffer.push_back(0);
+			if (object.GetUVCoords().Size() < (object.GetVerticies().Size() * (2.0 / 3.0))) {
+
+				buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
+				buffer.push_back(0);
+			}
+			else {
+				int x = i * (2.0 / 3.0);
+				buffer.push_back(object.GetUVCoords().GetValues()[x]);
+				buffer.push_back(object.GetUVCoords().GetValues()[x + 1]);
+				std::cout << "Added texture coord: i, " << i << " x, " << x << " u, " << (object.GetUVCoords().GetValues()[x]) << " v, " << (object.GetUVCoords().GetValues()[x + 1]) <<  std::endl;
+			}
 		}
 	}
 	else {
@@ -151,9 +164,9 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model);
 	}
 
-	if (object.GetMaterial()->GetTexture() != nullptr) {
+	//if (!(object.GetMaterial()->GetTexture()->GetID() < 0)) {
 		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
-	}
+	//}
 
 	SetUniformVec3(object.GetMaterial()->GetShader(), "lightPos", camera.GetPosition());
 	SetUniformVec3(object.GetMaterial()->GetShader(), "lightColor", glm::vec3(1, 0.9, 1));

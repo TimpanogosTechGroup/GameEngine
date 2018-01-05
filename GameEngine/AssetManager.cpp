@@ -22,11 +22,6 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 	std::ofstream output;
 
-	output.open("test.txt");
-	output << "Hello";
-	output.close();
-
-
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -48,7 +43,7 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	}
 	catch (std::ifstream::failure e)
 	{
-		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath << std::endl;
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
@@ -174,6 +169,14 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 				else {
 					uvs.push_back(1);
 					uvs.push_back(1);
+				}
+
+				if (mesh->HasVertexColors(0)) {
+					colors.push_back(mesh->mColors[face.mIndices[j]]->r);
+					colors.push_back(mesh->mColors[face.mIndices[j]]->g);
+					colors.push_back(mesh->mColors[face.mIndices[j]]->b);
+
+					std::cout << "Color: " << mesh->mColors[face.mIndices[j]]->r << std::endl;
 				}
 			}
 
