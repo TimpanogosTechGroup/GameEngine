@@ -127,6 +127,7 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 	// If the import failed, report it
 	if (!scene) {
 		std::cout << importer.GetErrorString() << std::endl;
+		return nullptr;
 	}
 	else {
 		std::cout << "Model loaded" << std::endl;
@@ -197,31 +198,33 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 	//	Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
 	//}
 	Object* object = new Object(vertices, normals);
-	object->SetMaterial(Material(1, 1, texture, shader, glm::vec3(0, 1, 1)));
 	// TODO: replace above line with LoadMaterial
 	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 
-	LoadMaterial(scene);
+	object->SetMaterial(new Material(1, 1, texture, shader, LoadMaterial(scene)->GetColor()));
 
 	// Everything will be cleaned up by the importer destructor
 	return object;
 }
 
-Material AssetManager::LoadMaterial(const aiScene* scene) {
+Material* AssetManager::LoadMaterial(const aiScene* scene) {
 	aiMaterial* mat = scene->mMaterials[0];
 	aiString name;
-	aiColor3D diffuse;
+	aiColor4D diffuse;
 	aiColor3D specular;
 
 	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
 		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
 	}
 	else {
-		mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
-		mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
+		//mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
+		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << std::endl;
+		//mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
 		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
 
-	Material tmp;
+	Material* tmp = new Material();
+	tmp->SetColor(glm::vec3(diffuse.r, diffuse.g, diffuse.b));
 	return tmp;
 }

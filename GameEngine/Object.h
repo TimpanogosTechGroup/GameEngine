@@ -41,12 +41,12 @@ public:
 
 	Verticies& GetVerticies() { return verticies; };
 	Verticies& GetNormals() { return normals; };
-	Material* GetMaterial() { return &material; };
+	Material* GetMaterial() { return material; };
 	glm::vec3 GetPostion() { return position; };
 	Verticies& GetUVCoords() { return uvCoords; };
 	Verticies GetBoundBox() { return boundBox; }
 
-	void SetMaterial(Material mat);
+	void SetMaterial(Material* mat);
 	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
 	void ToString();
 
@@ -59,6 +59,6 @@ private:
 
 	glm::vec3 position; // FIXME TODO this will be removed and replaced with the bullet physics stuff
 
-	Material material;
+	Material* material;
 	
 };

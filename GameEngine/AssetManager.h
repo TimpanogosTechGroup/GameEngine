@@ -32,5 +32,5 @@ public:
 	static Object* LoadModel(const char* pFile, Texture* texture, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
 
 private:
-	static Material LoadMaterial(const aiScene* scene);
+	static Material* LoadMaterial(const aiScene* scene);
 };

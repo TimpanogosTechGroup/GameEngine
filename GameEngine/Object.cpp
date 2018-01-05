@@ -5,7 +5,7 @@ Object::Object() {
 	position = glm::vec3(0, 0, 0);
 }
 
-void Object::SetMaterial(Material material) {
+void Object::SetMaterial(Material* material) {
 	this->material = material;
 }
 
