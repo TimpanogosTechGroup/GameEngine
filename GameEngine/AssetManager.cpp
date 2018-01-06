@@ -94,7 +94,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shader) {
+Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 	// not finished
 
 	Model* model = new Model();

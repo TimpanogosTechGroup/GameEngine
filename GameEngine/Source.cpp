@@ -37,9 +37,9 @@ int main(int argc, char** argv) {
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	Model model = *AssetManager::LoadModel("Model\\bench.obj", text, shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Model model = *AssetManager::LoadModel("Model\\bench.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
 	std::cout << std::endl << std::endl << std::endl;
-	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", libertyText, shader);
+	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", shader);
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec4(1, 1, 1, 1)));
 
