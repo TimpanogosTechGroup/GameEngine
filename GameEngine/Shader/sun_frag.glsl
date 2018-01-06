@@ -4,10 +4,12 @@ out vec4 FragColor;
 in vec3 Normal;
 in vec3 FragPos;
 in vec3 vertexColor;
+in vec2 texCoord;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 viewPos; // Camera position
+uniform sampler2D texture1;
 
 void main()
 {
@@ -30,6 +32,7 @@ void main()
 
 
     vec3 result = (ambient + diffuse + specular) * vertexColor;
-    FragColor = vec4(result, 1.0);
+    //FragColor = vec4(result, 1.0);
+	FragColor = texture(texture1, texCoord) * vec4(result, 1.0);
 	//FragColor = vec4(vertexColor, 1.0);
 }
