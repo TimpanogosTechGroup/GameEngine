@@ -33,6 +33,19 @@ public:
 		}
 		position = glm::vec3(0, 0, 0);
 	}
+	Object(std::vector<float> verticies, std::vector<float> normals, std::vector<float> uvs) {
+
+		for (auto &v : verticies) {
+			this->verticies.AddFloat(v);
+		}
+		for (auto &n : normals) {
+			this->normals.AddFloat(n);
+		}
+		for (auto &uv : uvs) {
+			this->uvCoords.AddFloat(uv);
+		}
+		position = glm::vec3(0, 0, 0);
+	}
 	Object();
 	RenderItem VBO;
 

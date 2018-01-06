@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	Model model = *AssetManager::LoadModel("Model\\bench.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	//Model model = *AssetManager::LoadModel("Model\\bench.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
 	std::cout << std::endl << std::endl << std::endl;
 	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", shader);
 
@@ -45,26 +45,26 @@ int main(int argc, char** argv) {
 
 	//test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
 	//tes1.CreateBoundBox(); 
-	frame.CreateBoundBox();
+	//frame.CreateBoundBox();
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
 	//test.GetBoundBox().ToString();
 	//tes1.GetBoundBox().ToString();
-	frame.GetBoundBox().ToString();
+	//frame.GetBoundBox().ToString();
 
 	std:cout << std::endl;
 	
 	//renderer.CompileObject(test);
 	//renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
-	renderer.CompileModel(model);
+	//renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 	std::cout << std::endl << std::endl << std::endl;
 
 	//model.ToString();
 
 	std::cout << "model data:" << std::endl;
-	std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
+	//std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
 	std::cout << "# of vertices: " << liberty.GetObject(0)->GetVerticies().Size() << std::endl;
 
 	// Main loop
@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
 			SDL_CaptureMouse(SDL_FALSE);
 		}
 			
-		renderer.RenderModel(*camera, model);
+		//renderer.RenderModel(*camera, model);
 		renderer.RenderModel(*camera, liberty);
 
 		//renderer.BindDefaultFrameBuffer();

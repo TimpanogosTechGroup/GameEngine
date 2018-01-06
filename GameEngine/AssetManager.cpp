@@ -137,7 +137,11 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 
 	bool hasTex = false;
 
+	std::cout << "File: " << pFile << " INFO" << std::endl << "#Meshes: " << scene->mNumMeshes << std::endl;
+
 	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
+
+		//std::cout << "#Faces: " << scene->mMeshes[n]->mNumFaces << std::endl;
 		const aiMesh* mesh = scene->mMeshes[n];
 		int iMeshFaces = mesh->mNumFaces;
 
@@ -164,21 +168,20 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 					normals.push_back(1);
 				}
 
-				if (mesh->HasTextureCoords(0)) {
+				//if (mesh->HasTextureCoords(0)) {
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].x);
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].y);
-				}
-				else {
-					uvs.push_back(1);
-					uvs.push_back(1);
-				}
+					//std::cout << mesh->mTextureCoords[0][face.mIndices[j]].x << mesh->mTextureCoords[0][face.mIndices[j]].y << std::endl;
+				//}
+				//else {
+					//uvs.push_back(1);
+					//uvs.push_back(1);
+				//}
 
 				if (mesh->HasVertexColors(0)) {
 					colors.push_back(mesh->mColors[face.mIndices[j]]->r);
 					colors.push_back(mesh->mColors[face.mIndices[j]]->g);
 					colors.push_back(mesh->mColors[face.mIndices[j]]->b);
-
-					std::cout << "Color: " << mesh->mColors[face.mIndices[j]]->r << std::endl;
 				}
 			}
 
@@ -186,7 +189,7 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 			//vertices.push_back(uv.y);
 		}
 
-		Object* object = new Object(vertices, normals);
+		Object* object = new Object(vertices, normals, uvs);
 
 		//object->SetMaterial(new Material(1, 1, ________, shader, LoadMaterial(scene)->GetColor()));
 		object->SetMaterial(LoadMaterial(scene, mesh, shader));
