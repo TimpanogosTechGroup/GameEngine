@@ -13,6 +13,7 @@ This is the header to manage loading assets to opengl.
 #include <sstream>
 #include "Shader.h"
 #include "Object.h"
+#include "Model.h"
 #include "Material.h"
 #include "Texture.h"
 #include "Registry.h"
@@ -29,7 +30,7 @@ public:
 	// Parameters: ID of texture, filepath to image
 	static Texture* LoadTexture(const char* file);
 
-	static Object* LoadModel(const char* pFile, Texture* texture, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
+	static Model* LoadModel(const char* pFile, Texture* texture, Shader* frameBufferEffects); // not complete, currently working on getting assimp to work
 
 private:
 	static Material* LoadMaterial(const aiScene* scene);

@@ -23,6 +23,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="PhysicsEngine.h" />

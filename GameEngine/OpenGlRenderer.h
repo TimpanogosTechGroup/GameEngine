@@ -25,9 +25,11 @@ public:
 
 	// Graphics card calls
 	bool CompileObject(Object& object);
+	bool CompileModel(Model& model);
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 	bool RenderObject(Camera& camera, Object& object);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
+	bool RenderModel(Camera& camera, Model& model);
 
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
 	// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
@@ -59,4 +61,3 @@ private:
 
 	bool CheckCompileErrors(GLuint shader, std::string type);
 };
-

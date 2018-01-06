@@ -94,7 +94,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shader) {
+Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shader) {
 	// not finished
 
 	// Create an instance of the Importer class
@@ -201,17 +201,19 @@ Object* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* sha
 	//	Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
 	//}
 	Object* object = new Object(vertices, normals);
+	Model* model = new Model();
 	// TODO: replace above line with LoadMaterial
 	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 
 	object->SetMaterial(new Material(1, 1, texture, shader, LoadMaterial(scene)->GetColor()));
-
-	// Everything will be cleaned up by the importer destructor
-	return object;
+	model->AddObject(object);
+	// Everything (assimp) will be cleaned up by the importer destructor
+	return model;
 }
 
 Material* AssetManager::LoadMaterial(const aiScene* scene) {
-	aiMaterial* mat = scene->mMaterials[0];
+	aiMesh *mesh = scene->mMeshes[0];
+	aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 	aiString name;
 	aiColor4D diffuse;
 	aiColor3D specular;
@@ -222,12 +224,12 @@ Material* AssetManager::LoadMaterial(const aiScene* scene) {
 	else {
 		//mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << std::endl;
+		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << std::endl;
 		//mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
 		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
 
 	Material* tmp = new Material();
-	tmp->SetColor(glm::vec3(diffuse.r, diffuse.g, diffuse.b));
+	tmp->SetColor(glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }

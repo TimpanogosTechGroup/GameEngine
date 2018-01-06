@@ -14,7 +14,7 @@ using namespace std;
 int main(int argc, char** argv) {
 
 	OpenGlRenderer renderer;
-	renderer.CreateWindow(1280, 720);
+	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
@@ -30,39 +30,40 @@ int main(int argc, char** argv) {
 	Shader* shader = AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl");
 	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl");
 	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
+	Texture* libertyText = AssetManager::LoadTexture("Texture\\Liberty-GreenBronze-1.bmp");
 
 	FrameBuffer* buffer = renderer.CreateFramebuffer(640, 480);
 	buffer->SetBackgourndColor(glm::vec3(1, 1, 1));
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	Object model = *AssetManager::LoadModel("Model\\bench.obj", text, shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Model model = *AssetManager::LoadModel("Model\\bench.obj", text, shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", libertyText, shader);
 
-
-	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec3(1, 1, 1)));
+	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec4(1, 1, 1, 1)));
 
 	//test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
 	//tes1.CreateBoundBox(); 
 	frame.CreateBoundBox();
-	model.CreateBoundBox();
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
 	//test.GetBoundBox().ToString();
 	//tes1.GetBoundBox().ToString();
 	frame.GetBoundBox().ToString();
-	model.GetBoundBox().ToString();
 
 	std:cout << std::endl;
 	
 	//renderer.CompileObject(test);
 	//renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
-	renderer.CompileObject(model);
+	renderer.CompileModel(model);
+	renderer.CompileModel(liberty);
 
 	//model.ToString();
 
 	std::cout << "model data:" << std::endl;
-	std::cout << "# of vertices: " << model.GetVerticies().Size() << std::endl;
+	std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
+	std::cout << "# of vertices: " << liberty.GetObject(0)->GetVerticies().Size() << std::endl;
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
@@ -86,7 +87,7 @@ int main(int argc, char** argv) {
 				break;
 			case SDL_MOUSEMOTION:
 				camera->ProcessMouseMovement(event.motion.xrel, -event.motion.yrel);
-				std::cout << "Mouse x offset: " << event.motion.xrel << " y: " << event.motion.yrel << std::endl;
+				//std::cout << "Mouse x offset: " << event.motion.xrel << " y: " << event.motion.yrel << std::endl;
 				break;
 			}
 		}
@@ -117,7 +118,8 @@ int main(int argc, char** argv) {
 			SDL_CaptureMouse(SDL_FALSE);
 		}
 			
-		renderer.RenderObject(*camera, model);
+		renderer.RenderModel(*camera, model);
+		renderer.RenderModel(*camera, liberty);
 
 		//renderer.BindDefaultFrameBuffer();
 		//renderer.Clear();

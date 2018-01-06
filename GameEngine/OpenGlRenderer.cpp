@@ -144,6 +144,15 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 	return true;
 
 }
+
+bool OpenGlRenderer::CompileModel(Model& model) {
+	OpenGlRenderer renderer;
+	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
+		renderer.CompileObject(*(model.GetObject(i)));
+	}
+	return true;
+}
+
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 
@@ -181,6 +190,14 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 	return true;
 }
 //bool RenderObject(Object& object, char attributes);
+
+bool OpenGlRenderer::RenderModel(Camera& camera, Model& model) {
+	OpenGlRenderer renderer;
+	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
+		renderer.RenderObject(camera, *(model.GetObject(i)));
+	}
+	return true;
+}
 
 void OpenGlRenderer::Clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

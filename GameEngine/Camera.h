@@ -116,4 +116,3 @@ private:
 	glm::mat4 projection;
 };
 #endif
-
