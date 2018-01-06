@@ -168,7 +168,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
 	//}
 
-	SetUniformVec3(object.GetMaterial()->GetShader(), "lightPos", camera.GetPosition());
+	SetUniformVec3(object.GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
 	SetUniformVec3(object.GetMaterial()->GetShader(), "lightColor", glm::vec3(1, 0.9, 1));
 	SetUniformVec3(object.GetMaterial()->GetShader(), "viewPos", camera.GetPosition());
 

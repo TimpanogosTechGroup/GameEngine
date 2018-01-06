@@ -22,8 +22,8 @@ void main()
     vec3 diffuse = diff * lightColor;
 
     // Specular
-    float specularStrength = 0.5;
-    vec3 viewDir = normalize(-viewPos - FragPos); // If specular seems to be showing up on the wrong side, remember the camera position and actual location are in opposite directions
+    float specularStrength = 2.5;
+    vec3 viewDir = normalize(viewPos - FragPos); // If specular seems to be showing up on the wrong side, remember the camera position and actual location are in opposite directions
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
