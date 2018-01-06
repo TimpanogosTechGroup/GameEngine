@@ -97,6 +97,8 @@ Texture* AssetManager::LoadTexture(const char* file) {
 Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shader) {
 	// not finished
 
+	Model* model = new Model();
+
 	// Create an instance of the Importer class
 	Assimp::Importer importer;
 
@@ -184,6 +186,17 @@ Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shad
 			//vertices.push_back(uv.y);
 		}
 
+		Object* object = new Object(vertices, normals);
+
+		//object->SetMaterial(new Material(1, 1, ________, shader, LoadMaterial(scene)->GetColor()));
+		object->SetMaterial(LoadMaterial(scene, shader));
+		model->AddObject(object);
+
+		vertices.clear();
+		colors.clear();
+		normals.clear();
+		uvs.clear();
+
 		//for (int j = 0; j < mesh->mNumVertices; j++) {
 		//	vertices.push_back(mesh->mVertices[j].x); vertices.push_back(mesh->mVertices[j].y); vertices.push_back(mesh->mVertices[j].z);
 		//	normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
@@ -200,23 +213,22 @@ Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shad
 	//	float* uvArray = &uvs[0];
 	//	Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
 	//}
-	Object* object = new Object(vertices, normals);
-	Model* model = new Model();
 	// TODO: replace above line with LoadMaterial
 	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 
-	object->SetMaterial(new Material(1, 1, texture, shader, LoadMaterial(scene)->GetColor()));
-	model->AddObject(object);
 	// Everything (assimp) will be cleaned up by the importer destructor
 	return model;
 }
 
-Material* AssetManager::LoadMaterial(const aiScene* scene) {
-	aiMesh *mesh = scene->mMeshes[0];
+Material* AssetManager::LoadMaterial(const aiScene* scene, Shader* shader) {
+	aiMesh* mesh = scene->mMeshes[0];
 	aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 	aiString name;
 	aiColor4D diffuse;
 	aiColor3D specular;
+
+	aiTextureType textureType = aiTextureType_DIFFUSE;
+	aiString texturePath;
 
 	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
 		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
@@ -228,8 +240,15 @@ Material* AssetManager::LoadMaterial(const aiScene* scene) {
 		//mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
 		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
+	if (AI_SUCCESS != mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath)) {
+		std::cout << "ERROR::LOAD_MODEL::LOAD_TEXTURE::Cannot load texture" << std::endl;
+	}
+	else {
+		mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath);
+		std::cout << texturePath.C_Str() << std::endl;
+	}
 
-	Material* tmp = new Material();
-	tmp->SetColor(glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
+	Material* tmp = new Material(1, 1, LoadTexture(texturePath.C_Str()), shader, glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
+	//tmp->SetColor(glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }
