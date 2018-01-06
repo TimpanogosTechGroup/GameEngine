@@ -87,7 +87,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl; // replace this to a call from the logger
+		std::cout << "Failed to load texture: " << file << std::endl; // replace this to a call from the logger
 	}
 	stbi_image_free(data);
 
@@ -189,7 +189,7 @@ Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shad
 		Object* object = new Object(vertices, normals);
 
 		//object->SetMaterial(new Material(1, 1, ________, shader, LoadMaterial(scene)->GetColor()));
-		object->SetMaterial(LoadMaterial(scene, shader));
+		object->SetMaterial(LoadMaterial(scene, mesh, shader));
 		model->AddObject(object);
 
 		vertices.clear();
@@ -220,12 +220,10 @@ Model* AssetManager::LoadModel(const char* pFile, Texture* texture, Shader* shad
 	return model;
 }
 
-Material* AssetManager::LoadMaterial(const aiScene* scene, Shader* shader) {
-	aiMesh* mesh = scene->mMeshes[0];
+Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh, Shader* shader) {
 	aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 	aiString name;
 	aiColor4D diffuse;
-	aiColor3D specular;
 
 	aiTextureType textureType = aiTextureType_DIFFUSE;
 	aiString texturePath;
@@ -234,21 +232,12 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, Shader* shader) {
 		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
 	}
 	else {
-		//mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
 		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << std::endl;
-		//mat->Get(AI_MATKEY_COLOR_SPECULAR, specular);
-		//TODO: finish loading material - convert aiColor3D (either to float (current) or vec3 (more likely))
 	}
-	if (AI_SUCCESS != mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath)) {
-		std::cout << "ERROR::LOAD_MODEL::LOAD_TEXTURE::Cannot load texture" << std::endl;
-	}
-	else {
-		mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath);
-		std::cout << texturePath.C_Str() << std::endl;
-	}
+	mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath);
+	std::cout << "From LOAD_MATERIAL: " << texturePath.C_Str() << std::endl;
 
 	Material* tmp = new Material(1, 1, LoadTexture(texturePath.C_Str()), shader, glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
-	//tmp->SetColor(glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }
