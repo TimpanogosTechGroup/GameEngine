@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	//Model model = *AssetManager::LoadModel("Model\\bench.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Model model = *AssetManager::LoadModel("Model\\cube.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
 	std::cout << std::endl << std::endl << std::endl;
 	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", shader);
 
@@ -45,7 +45,18 @@ int main(int argc, char** argv) {
 
 	//test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
 	//tes1.CreateBoundBox(); 
-	//frame.CreateBoundBox();
+	frame.CreateBoundBox();
+
+	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
+		model.GetObject(i)->CreateBoundBox();
+		renderer.CompileBoundingBox(model.GetObject(i)->boundingBox);
+		model.GetObject(i)->boundingBox.ToString();
+	}
+	for (unsigned int i = 0; i < liberty.NumOfObjects(); i++) {
+		liberty.GetObject(i)->CreateBoundBox();
+		renderer.CompileBoundingBox(liberty.GetObject(i)->boundingBox);
+		liberty.GetObject(i)->boundingBox.ToString();
+	}
 
 	std::cout << std::endl << "Bounding Boxes: " << std::endl;
 	//test.GetBoundBox().ToString();
@@ -57,7 +68,7 @@ int main(int argc, char** argv) {
 	//renderer.CompileObject(test);
 	//renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
-	//renderer.CompileModel(model);
+	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 	std::cout << std::endl << std::endl << std::endl;
 
@@ -121,6 +132,8 @@ int main(int argc, char** argv) {
 		}
 			
 		//renderer.RenderModel(*camera, model);
+		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
+		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
 
 		//renderer.BindDefaultFrameBuffer();

@@ -15,6 +15,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include <iterator>
 #include <ostream>
 #include <sstream>
+#include "AssetManager.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -124,17 +125,17 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			}
 		}
 
-		std::ostringstream oss;
+		//std::ostringstream oss;
 
-		if (!buffer.empty())
-		{
-			// Convert all but the last element to avoid a trailing ","
-			std::copy(buffer.begin(), buffer.end() - 1,
-				std::ostream_iterator<float>(oss, ","));
+		//if (!buffer.empty())
+		//{
+		//	// Convert all but the last element to avoid a trailing ","
+		//	std::copy(buffer.begin(), buffer.end() - 1,
+		//		std::ostream_iterator<float>(oss, ","));
 
-			// Now add the last element with no delimiter
-			oss << buffer.back();
-		}
+		//	// Now add the last element with no delimiter
+		//	oss << buffer.back();
+		//}
 
 		//std::cout << oss.str() << std::endl;
 	}
@@ -216,7 +217,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 bool OpenGlRenderer::RenderModel(Camera& camera, Model& model) {
 	OpenGlRenderer renderer;
 	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
-		renderer.RenderObject(camera, *(model.GetObject(i)));
+		RenderObject(camera, *(model.GetObject(i)));
 	}
 	return true;
 }
@@ -354,3 +355,123 @@ void OpenGlRenderer::SetUniformMat4(Shader* shader, const GLchar* name, glm::mat
 	int locaton = glGetUniformLocation(shader->GetID(), name);
 	glUniformMatrix4fv(locaton, 1, GL_FALSE, glm::value_ptr(value));
 };
+
+// Creates the bounding box mesh based on the info from the bounding box and loads it to the GPU, notice if you change the values in the bounding box you must recompile it!
+void OpenGlRenderer::CompileBoundingBox(BoundingBox& boundingbox) {
+	bbShader = *AssetManager::LoadShader("Shader\\bb_vert.glsl", "Shader\\bb_frag.glsl");
+	// First we need to create the buffer to send off to the GPU
+	std::vector<float> buffer;
+	// First 8 verticies are rendered to produce to squares
+	// 0
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMin());
+	// 1
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMin());
+	// 2
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMin());
+	// 3
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMin());
+	// 4
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMax());
+	// 5
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMax());
+	// 6
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMax());
+	// 7
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMax());
+
+	// Final 8 verticeis are used to connect the 2 squares to make the cube shape
+	// 0
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMin());
+	// 4
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMax());
+	// 1
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMin());
+	// 5
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMin());
+	buffer.push_back(boundingbox.GetzMax());
+	// 2
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMin());
+	// 6
+	buffer.push_back(boundingbox.GetxMax());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMax());
+	// 3
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMin());
+	// 7
+	buffer.push_back(boundingbox.GetxMin());
+	buffer.push_back(boundingbox.GetyMax());
+	buffer.push_back(boundingbox.GetzMax());
+
+	//std::ostringstream oss;
+
+	//// Convert all but the last element to avoid a trailing ","
+	//std::copy(buffer.begin(), buffer.end() - 1,
+	//std::ostream_iterator<float>(oss, ","));
+
+	//// Now add the last element with no delimiter
+	//oss << buffer.back();
+	//std::cout << oss.str() << std::endl;
+
+	glGenVertexArrays(1, &boundingbox.GetID());
+	glBindVertexArray(boundingbox.GetID());
+	glGenBuffers(1, &boundingbox.VBO.GetID());
+
+	glBindBuffer(GL_ARRAY_BUFFER, boundingbox.VBO.GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+// Renderes the bounding box with the view of the camera and color given in
+void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 color) {
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(1, 0);
+	glLineWidth(2);
+	for (unsigned int i = 0; i < modelO.NumOfObjects(); i++) {
+		glUseProgram(bbShader.GetID());
+		SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
+		SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
+		glm::mat4 model;
+		model = glm::translate(model, glm::vec3(0, 0, 0));
+		SetUniformMat4(&bbShader, "model", model);
+		SetUniformVec3(&bbShader, "color", color);
+
+		glBindVertexArray(modelO.GetObject(i)->boundingBox.GetID());
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
+		glDrawArrays(GL_LINE_LOOP, 4, 4);
+		glDrawArrays(GL_LINES, 8, 8);
+		glBindVertexArray(0);
+	}
+}

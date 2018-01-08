@@ -46,6 +46,9 @@ void Object::CreateBoundBox() {
 			}
 		}
 
+		boundingBox.SetMinValues(xmin, ymin, zmin);
+		boundingBox.SetMaxValues(xmax, ymax, zmax);
+
 		if (this->verticies.Size() == 18) {
 			this->boundBox.AddFloat(xmin)->AddFloat(ymin)->AddFloat(zmin);
 			this->boundBox.AddFloat(xmax)->AddFloat(ymin)->AddFloat(zmin);

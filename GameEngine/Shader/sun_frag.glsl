@@ -14,7 +14,7 @@ uniform sampler2D texture1;
 void main()
 {
     // ambient
-    float ambientStrength = 0.1;
+    float ambientStrength = 0.5;
     vec3 ambient = ambientStrength * lightColor;
 
     // diffuse
@@ -29,6 +29,10 @@ void main()
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
+
+	//vec3 halfwayDir = normalize(lightDir + viewDir);  
+ //   spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
+	//vec3 specular = specularStrength * spec * lightColor;
 
 
     vec3 result = (ambient + diffuse + specular) * vertexColor;

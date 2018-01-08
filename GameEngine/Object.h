@@ -7,6 +7,7 @@ This file is not complete
 
 #include "Verticies.h"
 #include "Material.h"
+#include "BoundingBox.h"
 
 class Object : public RenderItem {
 public:
@@ -44,8 +45,10 @@ public:
 		for (auto &uv : uvs) {
 			this->uvCoords.AddFloat(uv);
 		}
+
 		position = glm::vec3(0, 0, 0);
 	}
+
 	Object();
 	RenderItem VBO;
 
@@ -62,6 +65,8 @@ public:
 	void SetMaterial(Material* mat);
 	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
 	void ToString();
+
+	BoundingBox boundingBox;
 
 private:
 	Verticies verticies;

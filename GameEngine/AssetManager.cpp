@@ -168,15 +168,15 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 					normals.push_back(1);
 				}
 
-				//if (mesh->HasTextureCoords(0)) {
+				if (mesh->HasTextureCoords(0)) {
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].x);
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].y);
 					//std::cout << mesh->mTextureCoords[0][face.mIndices[j]].x << mesh->mTextureCoords[0][face.mIndices[j]].y << std::endl;
-				//}
-				//else {
-					//uvs.push_back(1);
-					//uvs.push_back(1);
-				//}
+				}
+				else {
+					uvs.push_back(1);
+					uvs.push_back(1);
+				}
 
 				if (mesh->HasVertexColors(0)) {
 					colors.push_back(mesh->mColors[face.mIndices[j]]->r);
