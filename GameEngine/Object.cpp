@@ -15,36 +15,17 @@ void Object::SetPosition(glm::vec3 position) {
 
 void Object::CreateBoundBox() {
 	float xmin, ymin, zmin, xmax, ymax, zmax;
+	std::vector<float> values;
 
 	if (this->verticies.Size() > 8) {
-
-		xmin = this->verticies.GetValue(0);
-		ymin = this->verticies.GetValue(1);
-		zmin = this->verticies.GetValue(2);
-		xmax = this->verticies.GetValue(0);
-		ymax = this->verticies.GetValue(1);
-		zmax = this->verticies.GetValue(2);
-
-		for (unsigned int i = 0; i < this->verticies.Size() - 2; i+=3) {
-			if (this->verticies.GetValue(i) < xmin) {
-				xmin = this->verticies.GetValue(i);
-			}
-			else if (this->verticies.GetValue(i) > xmax) {
-				xmax = this->verticies.GetValue(i);
-			}
-			if (this->verticies.GetValue(i + 1) < ymin) {
-				ymin = this->verticies.GetValue(i+1);
-			}
-			else if (this->verticies.GetValue(i + 1) > ymax) {
-				ymax = this->verticies.GetValue(i+1);
-			}
-			if (this->verticies.GetValue(i + 2) < zmin) {
-				zmin = this->verticies.GetValue(i+2);
-			}
-			else if (this->verticies.GetValue(i + 2) > zmax) {
-				zmax = this->verticies.GetValue(i+2);
-			}
-		}
+		values = BoundingBoxMinMaxValues();
+		
+		xmin = values.at(0);
+		ymin = values.at(1);
+		zmin = values.at(2);
+		xmax = values.at(3);
+		ymax = values.at(4);
+		zmax = values.at(5);
 
 		boundingBox.SetMinValues(xmin, ymin, zmin);
 		boundingBox.SetMaxValues(xmax, ymax, zmax);
@@ -73,6 +54,43 @@ void Object::CreateBoundBox() {
 	}
 
 	return;
+}
+
+std::vector<float> Object::BoundingBoxMinMaxValues() {
+	float xmin, ymin, zmin, xmax, ymax, zmax;
+	std::vector<float> values;
+
+	xmin = this->verticies.GetValue(0);
+	ymin = this->verticies.GetValue(1);
+	zmin = this->verticies.GetValue(2);
+	xmax = this->verticies.GetValue(0);
+	ymax = this->verticies.GetValue(1);
+	zmax = this->verticies.GetValue(2);
+
+	for (unsigned int i = 0; i < this->verticies.Size() - 2; i += 3) {
+		if (this->verticies.GetValue(i) < xmin) {
+			xmin = this->verticies.GetValue(i);
+		}
+		else if (this->verticies.GetValue(i) > xmax) {
+			xmax = this->verticies.GetValue(i);
+		}
+		if (this->verticies.GetValue(i + 1) < ymin) {
+			ymin = this->verticies.GetValue(i + 1);
+		}
+		else if (this->verticies.GetValue(i + 1) > ymax) {
+			ymax = this->verticies.GetValue(i + 1);
+		}
+		if (this->verticies.GetValue(i + 2) < zmin) {
+			zmin = this->verticies.GetValue(i + 2);
+		}
+		else if (this->verticies.GetValue(i + 2) > zmax) {
+			zmax = this->verticies.GetValue(i + 2);
+		}
+	}
+
+	values.push_back(xmin); values.push_back(ymin); values.push_back(zmin);
+	values.push_back(xmax); values.push_back(ymax); values.push_back(zmax);
+	return values;
 }
 
 void Object::ToString() {

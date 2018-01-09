@@ -41,46 +41,29 @@ int main(int argc, char** argv) {
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec4(1, 1, 1, 1)));
 
-	//test.CreateBoundBox(); // Maybe we should move this method call into the OpenGlRenderer::CompileObject(Object* object) method later
-	//tes1.CreateBoundBox(); 
 	frame.CreateBoundBox();
 
-	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
-		model.GetObject(i)->CreateBoundBox();
-		renderer.CompileBoundingBox(model.GetObject(i)->boundingBox);
-		model.GetObject(i)->boundingBox.ToString();
-	}
-	for (unsigned int i = 0; i < liberty.NumOfObjects(); i++) {
-		liberty.GetObject(i)->CreateBoundBox();
-		renderer.CompileBoundingBox(liberty.GetObject(i)->boundingBox);
-		liberty.GetObject(i)->boundingBox.ToString();
-	}
-
-	std::cout << std::endl << "Bounding Boxes: " << std::endl;
-	//test.GetBoundBox().ToString();
-	//tes1.GetBoundBox().ToString();
-	//frame.GetBoundBox().ToString();
+	model.CreateBoundBox();
+	liberty.CreateBoundBox();
+	renderer.CompileBoundingBox(model.boundingBox);
+	renderer.CompileBoundingBox(liberty.boundingBox);
 
 	std:cout << std::endl;
 	
-	//renderer.CompileObject(test);
-	//renderer.CompileObject(tes1);
 	renderer.CompileObject(frame);
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 	std::cout << std::endl << std::endl << std::endl;
 
-	//model.ToString();
-
 	std::cout << "model data:" << std::endl;
-	//std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
+	std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
 	std::cout << "# of vertices: " << liberty.GetObject(0)->GetVerticies().Size() << std::endl;
 
 	// Main loop
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
 		float delta = .002;
-		//renderer.BindFramBuffer(buffer);
+
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
 		// We'll take out all of this input stuff out and make an InputManager class
@@ -133,11 +116,6 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
-
-		//renderer.BindDefaultFrameBuffer();
-		//renderer.Clear();
-
-		//renderer.RenderObject(*camera, frame);
 
 		renderer.UpdateScreen();
 	}

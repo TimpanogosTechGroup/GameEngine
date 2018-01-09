@@ -459,19 +459,18 @@ void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonOffset(1, 0);
 	glLineWidth(2);
-	for (unsigned int i = 0; i < modelO.NumOfObjects(); i++) {
-		glUseProgram(bbShader.GetID());
-		SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
-		SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
-		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0, 0, 0));
-		SetUniformMat4(&bbShader, "model", model);
-		SetUniformVec3(&bbShader, "color", color);
 
-		glBindVertexArray(modelO.GetObject(i)->boundingBox.GetID());
-		glDrawArrays(GL_LINE_LOOP, 0, 4);
-		glDrawArrays(GL_LINE_LOOP, 4, 4);
-		glDrawArrays(GL_LINES, 8, 8);
-		glBindVertexArray(0);
-	}
+	glUseProgram(bbShader.GetID());
+	SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
+	SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 0, 0));
+	SetUniformMat4(&bbShader, "model", model);
+	SetUniformVec3(&bbShader, "color", color);
+
+	glBindVertexArray(modelO.boundingBox.GetID());
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
+	glDrawArrays(GL_LINE_LOOP, 4, 4);
+	glDrawArrays(GL_LINES, 8, 8);
+	glBindVertexArray(0);
 }
