@@ -127,7 +127,7 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 		return nullptr;
 	}
 	else {
-		std::cout << "Model loaded" << std::endl;
+		std::cout << pFile << " model loaded" << std::endl;
 	}
 
 	std::vector<float> vertices;
@@ -137,19 +137,14 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 
 	bool hasTex = false;
 
-	std::cout << "File: " << pFile << " INFO" << std::endl << "#Meshes: " << scene->mNumMeshes << std::endl;
+	//std::cout << "File: " << pFile << " INFO" << std::endl << "#Meshes: " << scene->mNumMeshes << std::endl;
 
 	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
-
-		//std::cout << "#Faces: " << scene->mMeshes[n]->mNumFaces << std::endl;
 		const aiMesh* mesh = scene->mMeshes[n];
 		int iMeshFaces = mesh->mNumFaces;
 
 		for (int k = 0; k < iMeshFaces; k++) {
 			const aiFace& face = mesh->mFaces[k];
-			//aiVector3D pos = mesh->mVertices[face.mIndices[k]];
-			//aiVector3D uv = mesh->mTextureCoords[0][face.mIndices[k]];
-			//aiVector3D normal = mesh->HasNormals() ? mesh->mNormals[face.mIndices[k]] : aiVector3D(1.0f, 1.0f, 1.0f);
 
 			for (int j = 0; j < 3; j++) {
 				vertices.push_back(mesh->mVertices[face.mIndices[j]].x);
@@ -160,7 +155,6 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 					normals.push_back(mesh->mNormals[face.mIndices[j]].x);
 					normals.push_back(mesh->mNormals[face.mIndices[j]].y);
 					normals.push_back(mesh->mNormals[face.mIndices[j]].z);
-					//std::cout << "Normal: " << mesh->mNormals[face.mIndices[j]].x << ", " << mesh->mNormals[face.mIndices[j]].y << ", " << mesh->mNormals[face.mIndices[j]].z << std::endl;
 				}
 				else {
 					normals.push_back(1);
@@ -184,14 +178,9 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 					colors.push_back(mesh->mColors[face.mIndices[j]]->b);
 				}
 			}
-
-			//vertices.push_back(uv.x);
-			//vertices.push_back(uv.y);
 		}
 
 		Object* object = new Object(vertices, normals, uvs);
-
-		//object->SetMaterial(new Material(1, 1, ________, shader, LoadMaterial(scene)->GetColor()));
 		object->SetMaterial(LoadMaterial(scene, mesh, shader));
 		model->AddObject(object);
 
@@ -199,25 +188,7 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 		colors.clear();
 		normals.clear();
 		uvs.clear();
-
-		//for (int j = 0; j < mesh->mNumVertices; j++) {
-		//	vertices.push_back(mesh->mVertices[j].x); vertices.push_back(mesh->mVertices[j].y); vertices.push_back(mesh->mVertices[j].z);
-		//	normals.push_back(mesh->mNormals[n].x); normals.push_back(mesh->mNormals[n].y); normals.push_back(mesh->mNormals[n].z);
-		//	if (mesh->HasTextureCoords(n)) {
-		//		hasTex = true;
-		//		uvs.push_back(mesh->mTextureCoords[n]->x); normals.push_back(mesh->mTextureCoords[n]->y);
-		//	}
-		//}
 	}
-
-	//float* vertexArray = &vertices[0];
-	//float* normalArray = &normals[0];
-	//if (hasTex) {
-	//	float* uvArray = &uvs[0];
-	//	Object* object = new Object(vertexArray, normalArray, uvArray, vertices.size(), uvs.size());
-	//}
-	// TODO: replace above line with LoadMaterial
-	// TODO: get textures (uv's are maybe not correct, need to check mTextureCoords and test more)
 
 	// Everything (assimp) will be cleaned up by the importer destructor
 	return model;
@@ -231,6 +202,8 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh, S
 	aiTextureType textureType = aiTextureType_DIFFUSE;
 	aiString texturePath;
 
+	bool containsText = true;
+
 	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
 		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
 	}
@@ -238,9 +211,12 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh, S
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
 		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << std::endl;
 	}
-	mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath);
-	std::cout << "From LOAD_MATERIAL: " << texturePath.C_Str() << std::endl;
-
-	Material* tmp = new Material(1, 1, LoadTexture(texturePath.C_Str()), shader, glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
+	if (mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath) == AI_SUCCESS) {
+		std::cout << "From LOAD_MATERIAL: " << texturePath.C_Str() << std::endl;
+		containsText = false;
+	}
+	Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
+	Texture* texture = LoadTexture(texturePath.C_Str());
+	Material* tmp = new Material(1, 1, texture, containsText ? other : shader, glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }

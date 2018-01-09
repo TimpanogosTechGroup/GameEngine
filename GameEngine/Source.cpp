@@ -29,8 +29,6 @@ int main(int argc, char** argv) {
 
 	Shader* shader = AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl");
 	Shader* frameBufferEffects = AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl");
-	Texture* text = AssetManager::LoadTexture("Texture\\test.jpg");
-	Texture* libertyText = AssetManager::LoadTexture("Texture\\Liberty-GreenBronze-1.bmp");
 
 	FrameBuffer* buffer = renderer.CreateFramebuffer(640, 480);
 	buffer->SetBackgourndColor(glm::vec3(1, 1, 1));
@@ -131,7 +129,7 @@ int main(int argc, char** argv) {
 			SDL_CaptureMouse(SDL_FALSE);
 		}
 			
-		//renderer.RenderModel(*camera, model);
+		renderer.RenderModel(*camera, model);
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
