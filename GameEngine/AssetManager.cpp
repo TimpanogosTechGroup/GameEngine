@@ -8,6 +8,7 @@ NOT COMPLETE
 #include <vector>
 
 #include "AssetManager.h"
+#include "ResourceManager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
@@ -94,7 +95,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	return texture;
 }
 
-Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
+Model* AssetManager::LoadModel(const char* pFile) {
 	// not finished
 
 	Model* model = new Model();
@@ -181,7 +182,7 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 		}
 
 		Object* object = new Object(vertices, normals, uvs);
-		object->SetMaterial(LoadMaterial(scene, mesh, shader));
+		object->SetMaterial(LoadMaterial(scene, mesh));
 		model->AddObject(object);
 
 		vertices.clear();
@@ -194,7 +195,7 @@ Model* AssetManager::LoadModel(const char* pFile, Shader* shader) {
 	return model;
 }
 
-Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh, Shader* shader) {
+Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 	aiString name;
 	aiColor4D diffuse;
@@ -215,8 +216,8 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh, S
 		std::cout << "From LOAD_MATERIAL: " << texturePath.C_Str() << std::endl;
 		containsText = false;
 	}
-	Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
+	//Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
 	Texture* texture = LoadTexture(texturePath.C_Str());
-	Material* tmp = new Material(1, 1, texture, containsText ? other : shader, glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
+	Material* tmp = new Material(1, 1, texture, containsText ? ResourceManager::getShader("color_shader") : ResourceManager::getShader("texture_shader"), glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }

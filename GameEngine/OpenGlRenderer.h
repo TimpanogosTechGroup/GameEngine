@@ -43,6 +43,9 @@ public:
 	void CompileBoundingBox(BoundingBox& boundingbox);
 	// Renders the bounding box, these are different from normal Objects becuase we render them using GL_LINE_LOOP, and we have to change up the way OpenGlRenders stuff
 	void RenderBoundingBox(Camera& camera, Model& model, glm::vec3 color);
+
+	void init() override;
+
 	Shader bbShader;
 
 	/*

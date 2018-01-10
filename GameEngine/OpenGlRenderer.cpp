@@ -16,6 +16,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include <ostream>
 #include <sstream>
 #include "AssetManager.h"
+#include "ResourceManager.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -64,6 +65,12 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		//SDL_SetWindowGrab(window, SDL_TRUE);
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
+}
+
+void OpenGlRenderer::init() {
+	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl"));
+	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl"));
+	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
 }
 
 // Swaps the render buffers so we can see the changes that we have rendered

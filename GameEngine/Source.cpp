@@ -24,6 +24,8 @@ int main(int argc, char** argv) {
 	Registry::SetRenderEngine(&renderer);
 	Registry::PrintClassName<OpenGlRenderer>();
 
+	renderer.init();
+
 	Camera* camera = new Camera();
 	camera->Move(BACKWARD, 1);
 
@@ -35,9 +37,9 @@ int main(int argc, char** argv) {
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
-	Model model = *AssetManager::LoadModel("Model\\cube.obj", shader); // TODO: remove params 1 and 2, temporary to prevent crashing
+	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	std::cout << std::endl << std::endl << std::endl;
-	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj", shader);
+	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj");
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec4(1, 1, 1, 1)));
 
@@ -112,7 +114,7 @@ int main(int argc, char** argv) {
 			SDL_CaptureMouse(SDL_FALSE);
 		}
 			
-		renderer.RenderModel(*camera, model);
+		//renderer.RenderModel(*camera, model);
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
