@@ -29,7 +29,7 @@ public:
 	static Shader* LoadShader(const char* vertexPath, const char* fragmentPath);
 	// Parameters: ID of texture, filepath to image
 	static Texture* LoadTexture(const char* file);
-
+	// Load the model from the file pFile
 	static Model* LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
 
 private:

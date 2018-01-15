@@ -8,6 +8,8 @@
 #include "PhysicsEngine.h"
 #include "Camera.h"
 #include "InputManager.h"
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -22,7 +24,9 @@ int main(int argc, char** argv) {
 	InputManager inputManager;
 
 	Registry::SetRenderEngine(&renderer);
-	Registry::PrintClassName<OpenGlRenderer>();
+	Registry::PrintClassName<InputManager>();
+
+	Registry::registerClass("test", &renderer);
 
 	renderer.init();
 

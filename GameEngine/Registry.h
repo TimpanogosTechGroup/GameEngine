@@ -15,18 +15,22 @@ public:
 
 	// Coolness Right Here! You call this method like this Registry::PrintClassName<Class>(); And out the class in between the <>, the function will print the name of the class.
 	// We can use this as part of a logger to find out where the print statement came from
-	template <class T>
+	template <typename T>
 	static void PrintClassName() {
-		std::cout << typeid(T).name() << std::endl;
+		std::istringstream iss(typeid(T).name());
+		std::cout << "Yeah" << std::endl;
 	};
 
 	// Registers an object by storing the pointer to the object and storing it in a hash map with a string as the key
-	void registerClass(std::string name, int* objectPointer);
+	static void registerClass(std::string name, void* objectPointer);
 
+	// Gets a restiry entry and attempts to cast it to the template T
 	template <typename T>
-	int* getRegisteredClass(std::string name);
+	static T* GetRegistryEntry(const char* name) {
+		return dynamic_cast<T*>(registry[name]);
+	}
 
 private:
 	static RenderEngine* renderEngine;
-	static std::unordered_map<std::string, int*> registry;
+	static std::unordered_map<std::string, void*> registry;
 };
