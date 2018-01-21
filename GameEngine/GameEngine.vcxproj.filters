@@ -78,6 +78,9 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LuaScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Material.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

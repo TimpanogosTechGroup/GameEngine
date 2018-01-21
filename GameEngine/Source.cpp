@@ -11,10 +11,17 @@
 #include <string>
 #include <iostream>
 
+extern "C" {
+#include <lua\lua.hpp>
+#include <lua\lua.h>
+#include <lua\lauxlib.h>
+#include <lua\lualib.h>
+}
+
 using namespace std;
 
 int main(int argc, char** argv) {
-
+	/*
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
@@ -130,6 +137,20 @@ int main(int argc, char** argv) {
 
 	PhysicsEngine physics;
 	physics.PhysicsTest();
+	*/
+
+	std::cout << "LUA TEST:" << std::endl << std::endl;
+
+	lua_State *L = luaL_newstate();
+	std::string file = "LUA_TEST.lua";
+	luaL_openlibs(L);
+	luaL_loadfile(L, file.c_str());
+	lua_pcall(L, 0, 0, 0);
+	lua_getglobal(L, "fact");
+	lua_pcall(L, 0, 1, 0);
+	int testFact = lua_tonumber(L, -1);
+	std::cout << "From c++ now: " << testFact << std::endl;
+	lua_close(L);
 
 	std::cout << "GameEngine" << std::endl;
 	return 0;
