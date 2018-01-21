@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include <string>
 #include <iostream>
+#include "Logger.h"
 
 using namespace std;
 
@@ -27,6 +28,8 @@ int main(int argc, char** argv) {
 	Registry::PrintClassName<InputManager>();
 
 	Registry::registerClass("test", &renderer);
+
+	//Logger::Log<OpenGlRenderer>(renderer, LoggerLevel::DEBUG,"Start Up");
 
 	renderer.init();
 
@@ -122,6 +125,11 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
+
+		//renderer.BindDefaultFrameBuffer();
+		//renderer.Clear();
+
+		//renderer.RenderObject(*camera, frame);
 
 		renderer.UpdateScreen();
 	}
