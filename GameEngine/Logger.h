@@ -27,45 +27,53 @@ public:
 	~Logger() {};
 
 private:
-	static LoggerLevel level;
-	static std::unordered_map<std::string, std::ostringstream*> logStreams;
+	static LoggerLevel level; // Level at which to display the logging
+	static std::unordered_map<std::string, std::ostringstream*> logStreams; // this holds each stream that is associated with a class
 };
-
-#endif LOGGER_H
 
 template <class T>
 inline void Logger::Log(LoggerLevel level, const char* printLine)
 {
+	// Gets the current time, the time that the function was called.
 	time_t timev = time(0);
 	struct tm * timec = localtime(&timev);
-	std::ostringstream date;
+
+	// Format the time
+	std::ostringstream timeStamp;
 	// year-month-day
-	date << timec->tm_year + 1900 << "-" << timec->tm_mon + 1 << "-" << timec->tm_mday;
+	timeStamp << timec->tm_year + 1900 << "-" << timec->tm_mon + 1 << "-" << timec->tm_mday;
 	// hour:minute:second
-	date << " " << std::right << std::setw(2) << std::setfill('0') <<  timec->tm_hour << ":" << std::right << std::setw(2) << std::setfill('0') << timec->tm_min << ":" << std::right << std::setw(2) << std::setfill('0') << timec->tm_sec;
+	timeStamp << " " << std::right << std::setw(2) << std::setfill('0') <<  timec->tm_hour << ":" << std::right << std::setw(2) << std::setfill('0') << timec->tm_min << ":" << std::right << std::setw(2) << std::setfill('0') << timec->tm_sec;
+
+	// Extract name of class T
+	std::istringstream className(typeid(T).name());
+	std::string CName;
+	className >> CName;
+	if (CName == "class")
+		className >> CName;
 
 	switch (level)
 	{
 	case INFO:
-		std::cout << date.str() << " [" << typeid(T).name() << "] INFO: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [INFO][" << CName << "] " << printLine << std::endl;
 		break;
 	case ERROR:
-		std::cout << date.str() << " [" << typeid(T).name() << "] ERROR: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [ERROR][" << CName << "] " << printLine << std::endl;
 		break;
 	case SEVERE:
-		std::cout << date.str() << " [" << typeid(T).name() << "] SEVERE: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [SEVERE][" << CName << "] " << printLine << std::endl;
 		break;
 	case EXPCEPTION:
-		std::cout << date.str() << " [" << typeid(T).name() << "] EXCEPTION: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [EXCEPTION][" << CName << "] " << printLine << std::endl;
 		break;
 	case LOG:
-		std::cout << date.str() << " [" << typeid(T).name() << "] LOG: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [LOG][" << CName << "] " << printLine << std::endl;
 		break;
 	case DEBUG:
-		std::cout << date.str() << " [" << typeid(T).name() << "] DEBUG: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [DEBUG][" << CName << "] " << printLine << std::endl;
 		break;
 	case RELEASE:
-		std::cout << date.str() << " [" << typeid(T).name() << "] RELEASE: " << printLine << std::endl;
+		std::cout << timeStamp.str() << " [RELEASE][" << CName << "] " << printLine << std::endl;
 		break;
 	default:
 		break;
@@ -93,3 +101,5 @@ std::ostringstream* Logger::GetLogStream() {
 		return stream->second;
 	}
 }
+
+#endif LOGGER_H

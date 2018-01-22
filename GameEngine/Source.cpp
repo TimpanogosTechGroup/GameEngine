@@ -47,8 +47,6 @@ int main(int argc, char** argv) {
 	FrameBuffer* buffer = renderer.CreateFramebuffer(640, 480);
 	buffer->SetBackgourndColor(glm::vec3(1, 1, 1));
 
-	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
-	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
 	Logger::Log<Logger>(INFO, "Loading models");
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj");
@@ -70,7 +68,7 @@ int main(int argc, char** argv) {
 	Logger::Log<Logger>(INFO, "Entering main loop");
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
-		float delta = .002;
+		float delta = .002f;
 
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
@@ -88,8 +86,7 @@ int main(int argc, char** argv) {
 				inputManager.releaseKey(event.key.keysym.sym);
 				break;
 			case SDL_MOUSEMOTION:
-				camera->ProcessMouseMovement(event.motion.xrel, -event.motion.yrel);
-				//*Logger::GetLogStream<AssetManager>() << "Mouse x offset: " << event.motion.xrel << " y: " << event.motion.yrel << std::endl;
+				camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
 				break;
 			}
 		}
@@ -108,30 +105,26 @@ int main(int argc, char** argv) {
 		if (inputManager.isKeyPressed(SDLK_LCTRL))
 			camera->ProcessKeyboard(DOWN, delta);
 		if (inputManager.isKeyPressed(SDLK_LEFT))
-			camera->ProcessMouseMovement(0.3, 0, true);
+			camera->ProcessMouseMovement(0.3f, 0, true);
 		if (inputManager.isKeyPressed(SDLK_RIGHT))
-			camera->ProcessMouseMovement(-0.3, 0, true);
+			camera->ProcessMouseMovement(-0.3f, 0, true);
 		if (inputManager.isKeyPressed(SDLK_UP))
-			camera->ProcessMouseMovement(0, 0.3, true);
+			camera->ProcessMouseMovement(0, 0.3f, true);
 		if (inputManager.isKeyPressed(SDLK_DOWN))
-			camera->ProcessMouseMovement(0, -0.3, true);
+			camera->ProcessMouseMovement(0, -0.3f, true);
 		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 			SDL_CaptureMouse(SDL_FALSE);
 		}
 			
-		//renderer.RenderModel(*camera, model);
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
 
-		//renderer.BindDefaultFrameBuffer();
-		//renderer.Clear();
-
-		//renderer.RenderObject(*camera, frame);
-
 		renderer.UpdateScreen();
 	}
+
+	Logger::Log<Logger>(INFO, "Exiting main loop");
 
 	SDL_Quit();
 
@@ -148,7 +141,7 @@ int main(int argc, char** argv) {
 	lua_pcall(L, 0, 0, 0);
 	lua_getglobal(L, "fact");
 	lua_pcall(L, 0, 1, 0);
-	int testFact = lua_tonumber(L, -1);
+	int testFact = static_cast<int>(lua_tonumber(L, -1));
 	*Logger::GetLogStream<OpenGlRenderer>() << "From c++ now: " << testFact << std::endl;
 	lua_close(L);
 	
