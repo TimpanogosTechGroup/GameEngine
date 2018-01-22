@@ -31,8 +31,5 @@ Object* PrimitiveShape::GenerateSquare(float width, float height, Material* mate
 
 	object->SetMaterial(material);
 
-	object->GetVerticies().ToString();
-	object->GetUVCoords().ToString();
-
 	return object;
 }

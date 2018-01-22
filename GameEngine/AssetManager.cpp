@@ -9,6 +9,7 @@ NOT COMPLETE
 
 #include "AssetManager.h"
 #include "ResourceManager.h"
+#include "Logger.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
@@ -44,7 +45,9 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	}
 	catch (std::ifstream::failure e)
 	{
-		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath << std::endl;
+		*Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
+		Logger::Log<AssetManager>(LoggerLevel::ERROR);
+		
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
@@ -82,13 +85,11 @@ Texture* AssetManager::LoadTexture(const char* file) {
 
 		texture->SetWidth(width);
 		texture->SetHeight(height);
-
-		//std::cout << "Loaded texture: " << data << std::endl;
-		std::cout << "Texture: " << texture->GetID() << std::endl;
 	}
 	else
 	{
-		std::cout << "Failed to load texture: " << file << std::endl; // replace this to a call from the logger
+		*Logger::GetLogStream<AssetManager>() << "Failed to load texture: " << file;
+		Logger::Log<AssetManager>(LoggerLevel::ERROR);
 	}
 	stbi_image_free(data);
 
@@ -109,8 +110,10 @@ Model* AssetManager::LoadModel(const char* pFile) {
 		fin.close();
 	}
 	else {
-		printf("Couldn't open file: %s\n", pFile);
-		printf("%s\n", importer.GetErrorString());
+		*Logger::GetLogStream<AssetManager>() << "Couldn't open this file : " << pFile;
+		Logger::Log<AssetManager>(LoggerLevel::SEVERE);
+		*Logger::GetLogStream<AssetManager>() << importer.GetErrorString();
+		Logger::Log<AssetManager>(LoggerLevel::SEVERE);
 	}
 
 	// And have it read the given file with some example postprocessing
@@ -124,11 +127,12 @@ Model* AssetManager::LoadModel(const char* pFile) {
 
 	// If the import failed, report it
 	if (!scene) {
-		std::cout << importer.GetErrorString() << std::endl;
+		*Logger::GetLogStream<AssetManager>() << importer.GetErrorString();
 		return nullptr;
 	}
 	else {
-		std::cout << pFile << " model loaded" << std::endl;
+		*Logger::GetLogStream<AssetManager>() << pFile << ": Loaded";
+		Logger::Log<AssetManager>(LoggerLevel::INFO);
 	}
 
 	std::vector<float> vertices;
@@ -138,7 +142,7 @@ Model* AssetManager::LoadModel(const char* pFile) {
 
 	bool hasTex = false;
 
-	//std::cout << "File: " << pFile << " INFO" << std::endl << "#Meshes: " << scene->mNumMeshes << std::endl;
+	//*Logger::GetLogStream<AssetManager>() << "File: " << pFile << " INFO" << std::endl << "#Meshes: " << scene->mNumMeshes << std::endl;
 
 	for (unsigned int n = 0; n < scene->mNumMeshes; n++) {
 		const aiMesh* mesh = scene->mMeshes[n];
@@ -166,7 +170,7 @@ Model* AssetManager::LoadModel(const char* pFile) {
 				if (mesh->HasTextureCoords(0)) {
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].x);
 					uvs.push_back(mesh->mTextureCoords[0][face.mIndices[j]].y);
-					//std::cout << mesh->mTextureCoords[0][face.mIndices[j]].x << mesh->mTextureCoords[0][face.mIndices[j]].y << std::endl;
+					//*Logger::GetLogStream<AssetManager>() << mesh->mTextureCoords[0][face.mIndices[j]].x << mesh->mTextureCoords[0][face.mIndices[j]].y << std::endl;
 				}
 				else {
 					uvs.push_back(1);
@@ -206,14 +210,16 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	bool containsText = true;
 
 	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
-		std::cout << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material" << std::endl;
+		*Logger::GetLogStream<AssetManager>() << "ERROR::LOAD_MODEL::LOAD_MATERIAL::Cannot load material";
+		Logger::Log<AssetManager>(LoggerLevel::DEBUG);
 	}
 	else {
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-		std::cout << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << std::endl;
+		//*Logger::GetLogStream<AssetManager>() << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << " ";
 	}
 	if (mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath) == AI_SUCCESS) {
-		std::cout << "From LOAD_MATERIAL: " << texturePath.C_Str() << std::endl;
+		*Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << texturePath.C_Str();
+		Logger::Log<AssetManager>(LoggerLevel::DEBUG);
 		containsText = false;
 	}
 	//Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");

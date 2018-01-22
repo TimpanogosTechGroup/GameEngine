@@ -24,6 +24,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="LuaScript.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
@@ -58,8 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="Shader\frag.glsl" />
-    <None Include="Shader\vert.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

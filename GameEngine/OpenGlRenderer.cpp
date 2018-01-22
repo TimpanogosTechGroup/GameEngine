@@ -17,6 +17,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include <sstream>
 #include "AssetManager.h"
 #include "ResourceManager.h"
+#include "Logger.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -35,13 +36,13 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 	window_height = height;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "SDL could not initialize: " << std::endl;
+		Logger::Log<OpenGlRenderer>(SEVERE, "SDL could not initialize... :(");
 	}
 	else {
 		// Creates a window
 		window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 		if (window == NULL) {
-			std::cout << "Couldn't create window :(";
+			Logger::Log<OpenGlRenderer>(SEVERE, "Couldn't create window :(");
 		}
 		context = SDL_GL_CreateContext(window);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -147,7 +148,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 		//std::cout << oss.str() << std::endl;
 	}
 	else {
-		std::cout << "ERROR:: NOT ENOUGH NORMALS" << std::endl;
+		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
 	}
 
 	glGenVertexArrays(1, &object.GetID());
@@ -265,7 +266,6 @@ bool OpenGlRenderer::CompileShader(ShaderType type, unsigned int &ID, const char
 bool OpenGlRenderer::LinkShaderProgram(Shader& shader) {
 	// shader Program
 	shader.GetID() = glCreateProgram();
-	std::cout << "Created Shader: " << shader.GetID() << std::endl;
 	glAttachShader(shader.GetID(), shader.vertex.GetID());
 	glAttachShader(shader.GetID(), shader.fragment.GetID());
 	glLinkProgram(shader.GetID());
@@ -286,7 +286,8 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			*Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
 	else
@@ -295,7 +296,8 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+			*Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
 	return true;
@@ -326,7 +328,7 @@ FrameBuffer* OpenGlRenderer::CreateFramebuffer(unsigned int width, unsigned int 
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, framebuffer->GetRbo()->GetID()); // now actually attach it
 																										  // now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

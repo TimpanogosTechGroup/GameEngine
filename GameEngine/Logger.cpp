@@ -1,20 +1,7 @@
 #include "Logger.h"
 
-Logger::Logger()
-{
-}
+/*
+Do not include this class, it is only here for this purpose to initialize the logStreams
+*/
 
-
-
-void Logger::SetLoggerLevel(LoggerLevel level)
-{
-}
-
-LoggerLevel Logger::GetLoggerLevel()
-{
-	return LoggerLevel();
-}
-
-Logger::~Logger()
-{
-}
+std::unordered_map<std::string, std::ostringstream*> Logger::logStreams;

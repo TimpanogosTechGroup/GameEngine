@@ -1,8 +1,8 @@
 #include <iostream>
 #include "PhysicsEngine.h"
+#include "Logger.h"
 
 void PhysicsEngine::PhysicsTest() {
-	std::cout << "PHYSICS TEST:" << std::endl;
 
 	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
 

@@ -22,21 +22,19 @@ extern "C" {
 using namespace std;
 
 int main(int argc, char** argv) {
-	/*
+
+	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
 
+	Logger::Log<InputManager>(INFO, "Initializig...");
 	InputManager inputManager;
 
+	Logger::Log<Registry>(INFO, "Initializig...");
 	Registry::SetRenderEngine(&renderer);
-	Registry::PrintClassName<InputManager>();
-
-	Registry::registerClass("test", &renderer);
-
-	//Logger::Log<OpenGlRenderer>(renderer, LoggerLevel::DEBUG,"Start Up");
 
 	renderer.init();
 
@@ -51,8 +49,8 @@ int main(int argc, char** argv) {
 
 	//Object test = *PrimitiveShape::GenerateSquare(1, 1, Material(1, 1, text, shader, glm::vec3(1, 1, 0)));
 	//Object tes1 = *PrimitiveShape::GenerateSquare(-1, -1, Material(1, 1, text, shader, glm::vec3(0, 1, 1)));
+	Logger::Log<Logger>(INFO, "Loading models");
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
-	std::cout << std::endl << std::endl << std::endl;
 	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj");
 
 	Object frame = *PrimitiveShape::GenerateSquare(1, 1, new Material(1, 1, buffer->GetColorBuffer(), frameBufferEffects, glm::vec4(1, 1, 1, 1)));
@@ -63,19 +61,13 @@ int main(int argc, char** argv) {
 	liberty.CreateBoundBox();
 	renderer.CompileBoundingBox(model.boundingBox);
 	renderer.CompileBoundingBox(liberty.boundingBox);
-
-	std:cout << std::endl;
 	
 	renderer.CompileObject(frame);
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
-	std::cout << std::endl << std::endl << std::endl;
-
-	std::cout << "model data:" << std::endl;
-	std::cout << "# of vertices: " << model.GetObject(0)->GetVerticies().Size() << std::endl;
-	std::cout << "# of vertices: " << liberty.GetObject(0)->GetVerticies().Size() << std::endl;
 
 	// Main loop
+	Logger::Log<Logger>(INFO, "Entering main loop");
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
 		float delta = .002;
@@ -97,7 +89,7 @@ int main(int argc, char** argv) {
 				break;
 			case SDL_MOUSEMOTION:
 				camera->ProcessMouseMovement(event.motion.xrel, -event.motion.yrel);
-				//std::cout << "Mouse x offset: " << event.motion.xrel << " y: " << event.motion.yrel << std::endl;
+				//*Logger::GetLogStream<AssetManager>() << "Mouse x offset: " << event.motion.xrel << " y: " << event.motion.yrel << std::endl;
 				break;
 			}
 		}
@@ -144,10 +136,10 @@ int main(int argc, char** argv) {
 	SDL_Quit();
 
 	PhysicsEngine physics;
+	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
 	physics.PhysicsTest();
-	*/
 
-	std::cout << "LUA TEST:" << std::endl << std::endl;
+	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Lua Test");
 
 	lua_State *L = luaL_newstate();
 	std::string file = "LUA_TEST.lua";
@@ -157,9 +149,8 @@ int main(int argc, char** argv) {
 	lua_getglobal(L, "fact");
 	lua_pcall(L, 0, 1, 0);
 	int testFact = lua_tonumber(L, -1);
-	std::cout << "From c++ now: " << testFact << std::endl;
+	*Logger::GetLogStream<OpenGlRenderer>() << "From c++ now: " << testFact << std::endl;
 	lua_close(L);
-
-	std::cout << "GameEngine" << std::endl;
+	
 	return 0;
 }
