@@ -126,7 +126,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 				buffer.push_back(0);
 			}
 			else {
-				int x = i * (2.0 / 3.0);
+				int x = static_cast<int>(i * (2.0 / 3.0));
 				buffer.push_back(object.GetUVCoords().GetValues()[x]);
 				buffer.push_back(object.GetUVCoords().GetValues()[x + 1]);
 				//std::cout << "Added texture coord: i, " << i << " x, " << x << " u, " << (object.GetUVCoords().GetValues()[x]) << " v, " << (object.GetUVCoords().GetValues()[x + 1]) <<  std::endl;

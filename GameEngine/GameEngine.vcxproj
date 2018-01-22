@@ -51,6 +51,7 @@
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />
     <ClInclude Include="Registry.h" />
+    <ClInclude Include="RegistryEntry.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="RenderItem.h" />
     <ClInclude Include="ResourceManager.h" />

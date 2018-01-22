@@ -35,8 +35,10 @@ int main(int argc, char** argv) {
 
 	Logger::Log<Registry>(INFO, "Initializig...");
 	Registry::SetRenderEngine(&renderer);
+	Registry::registerClass("renderer", &renderer);
+	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->init();
 
-	renderer.init();
+	//renderer.init();
 
 	Camera* camera = new Camera();
 	camera->Move(BACKWARD, 1);

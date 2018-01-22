@@ -8,10 +8,11 @@ Our OpenGl implementation of the RenderEngine
 #include "RenderEngine.h"
 #include <SDL\SDL.h>
 #include "FrameBuffer.h"
+#include "RegistryEntry.h"
 #include <string>
 
 class OpenGlRenderer :
-	public RenderEngine
+	public RenderEngine, public RegistryEntry
 {
 public:
 	OpenGlRenderer();

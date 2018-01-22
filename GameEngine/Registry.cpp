@@ -8,7 +8,7 @@ Notes: This is a Registry clas, it is static therefore accsesible everywhere. Yo
 
 // Initialize the variables
 RenderEngine* Registry::renderEngine = nullptr;
-std::unordered_map<std::string, void*> Registry::registry;
+std::unordered_map<std::string, RegistryEntry*> Registry::registry;
 
 Registry::Registry()
 {
@@ -16,7 +16,7 @@ Registry::Registry()
 }
 
 // Registers an object by storing the pointer to the object and storing it in a hash map with a string as the key
-void Registry::registerClass(std::string name, void* objectPointer) {
+void Registry::registerClass(std::string name, RegistryEntry* objectPointer) {
 	registry[name] = objectPointer;
 }
 
