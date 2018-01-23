@@ -11,6 +11,5 @@ function fact()
 	print("enter a number:")
 	a = io.read("*number")        -- read a number
 	val = fun(a)
-	print(val)
 	return val
 end

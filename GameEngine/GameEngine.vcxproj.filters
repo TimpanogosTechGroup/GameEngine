@@ -131,9 +131,6 @@
     <ClInclude Include="InputManager.h">
       <Filter>Header Files\manager</Filter>
     </ClInclude>
-    <ClInclude Include="LuaScript.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RegistryEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

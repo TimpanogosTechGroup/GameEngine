@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include "Logger.h"
+#include "LuaScript.h"
 
 extern "C" {
 #include <lua\lua.hpp>
@@ -24,6 +25,8 @@ using namespace std;
 int main(int argc, char** argv) {
 
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
+
+	/*
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
@@ -134,18 +137,16 @@ int main(int argc, char** argv) {
 	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
 	physics.PhysicsTest();
 
+	*/
+
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Lua Test");
 
-	lua_State *L = luaL_newstate();
-	std::string file = "LUA_TEST.lua";
-	luaL_openlibs(L);
-	luaL_loadfile(L, file.c_str());
-	lua_pcall(L, 0, 0, 0);
-	lua_getglobal(L, "fact");
-	lua_pcall(L, 0, 1, 0);
-	int testFact = static_cast<int>(lua_tonumber(L, -1));
-	*Logger::GetLogStream<OpenGlRenderer>() << "From c++ now: " << testFact << std::endl;
-	lua_close(L);
+	LuaScript script("LUA_TEST.lua");
+	int test = script.RunScript("fact", 1);
+	std::cout << test << std::endl;
+	std::cout << std::endl;
+
+	script.test("iiis", 1, 2, 3, "test");
 	
 	return 0;
 }
