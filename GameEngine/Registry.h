@@ -1,4 +1,6 @@
-#pragma once
+#ifndef REGISTRY_H
+#define REGISTRY_H
+
 #include "RenderEngine.h"
 #include "RegistryEntry.h"
 #include <unordered_map>
@@ -15,7 +17,7 @@ public:
 	};
 
 	// Registers an object by storing the pointer to the object and storing it in a hash map with a string as the key
-	static void registerClass(std::string name, RegistryEntry* objectPointer);
+	static void Register(std::string name, RegistryEntry* objectPointer);
 
 	// Gets a restiry entry and attempts to cast it to the template T
 	template <typename T>
@@ -31,3 +33,5 @@ template <typename T>
 inline T* Registry::GetRegistryEntry(const char* name) {
 	return static_cast<T*>(registry[name]);
 }
+
+#endif REGISTRY_H

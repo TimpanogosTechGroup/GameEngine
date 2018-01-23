@@ -4,8 +4,9 @@
 #include "Texture.h"
 #include "Shader.h"
 #include <string>
+#include "RegistryEntry.h"
 
-class ResourceManager
+class ResourceManager : public RegistryEntry
 {
 public:
 	ResourceManager();

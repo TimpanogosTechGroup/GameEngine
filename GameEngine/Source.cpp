@@ -35,8 +35,8 @@ int main(int argc, char** argv) {
 
 	Logger::Log<Registry>(INFO, "Initializig...");
 	Registry::SetRenderEngine(&renderer);
-	Registry::registerClass("renderer", &renderer);
-	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->init();
+	Registry::Register("renderer", &renderer);
+	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->init(); // WARNING may not return anything, check for nullptr!!
 
 	//renderer.init();
 

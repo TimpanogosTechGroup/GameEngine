@@ -8,8 +8,9 @@ This is the RenderEngine class, we will have different implementations of this c
 #include "Model.h"
 #include "FrameBuffer.h"
 #include "Camera.h"
+#include "RegistryEntry.h"
 
-class RenderEngine {
+class RenderEngine : public RegistryEntry {
 public:
 	void CreateWindow(int width, int height);
 	void UpdateScreen();

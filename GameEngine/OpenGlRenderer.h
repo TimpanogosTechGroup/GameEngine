@@ -12,7 +12,7 @@ Our OpenGl implementation of the RenderEngine
 #include <string>
 
 class OpenGlRenderer :
-	public RenderEngine, public RegistryEntry
+	public RenderEngine
 {
 public:
 	OpenGlRenderer();

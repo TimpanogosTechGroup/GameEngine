@@ -10,13 +10,10 @@ Notes: This is a Registry clas, it is static therefore accsesible everywhere. Yo
 RenderEngine* Registry::renderEngine = nullptr;
 std::unordered_map<std::string, RegistryEntry*> Registry::registry;
 
-Registry::Registry()
-{
-	
-}
+Registry::Registry() {}
 
 // Registers an object by storing the pointer to the object and storing it in a hash map with a string as the key
-void Registry::registerClass(std::string name, RegistryEntry* objectPointer) {
+void Registry::Register(std::string name, RegistryEntry* objectPointer) {
 	registry[name] = objectPointer;
 }
 
