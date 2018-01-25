@@ -13,3 +13,11 @@ function fact()
 	val = fun(a)
 	return val
 end
+
+function multiply(a, b)
+	return a*b, "d"
+end
+
+function concat(a,b,c,d)
+	return a..b..c..d
+end

@@ -143,7 +143,29 @@ int main(int argc, char** argv) {
 	std::cout << test << std::endl;
 	std::cout << std::endl;
 
-	script.test("iiis", 1, 2, 3, "test");
+	// This shows the same function in lua being called in the 4 implemented ways.
+	// Note that while the return type (in <TYPE>) can change, the values passed to the lua script function ("dd") must match what will happen in the script
+	// The <> indicate what type to return to c++
+	// 1st param = the name of the function within the opened file
+	// 2nd param = the number of arguments passed to the function
+	// 3rd param = the data type for each lua param, each letter corrosponds to a type (d->double, s->string, i->integer, c->char, b->boolean)
+	// other = simply pass the number of parameters as if you were passing them to the lua script directly, in this example, 2 doubles
+	string s = script.RunFunction<string>("multiply", 2, "dd", 2.1, 51.5);
+	std::cout << s << std::endl;
+	int i = script.RunFunction<int>("multiply", 2, "dd", 2.1, 51.5);
+	std::cout << i << std::endl;
+	double d = script.RunFunction<double>("multiply", 2, "dd", 2.1, 51.5);
+	std::cout << d << std::endl;
+	bool b = script.RunFunction<bool>("multiply", 2, "dd", 2.1, 51.5);
+	std::cout << b << std::endl;
+
+	std::cout << std::endl;
+
+	// another example, but with a different number of paramaters of type strings
+	string concat = script.RunFunction<string>("concat", 4, "ssss", "This ", "is ", "a ", "test!");
+	std::cout << concat << std::endl;
+
+	script.CloseScript();
 	
 	return 0;
 }
