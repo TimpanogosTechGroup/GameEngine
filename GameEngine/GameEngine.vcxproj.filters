@@ -31,6 +31,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\profiler">
+      <UniqueIdentifier>{2db7e06e-17ee-42ba-875f-6106b21357fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\profiler">
+      <UniqueIdentifier>{51439163-7424-4353-82f8-ccf7aedd5e1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -79,7 +85,7 @@
       <Filter>Source Files\manager</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\profiler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,14 +143,14 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files\manager</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RegistryEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LuaScript.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\profiler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

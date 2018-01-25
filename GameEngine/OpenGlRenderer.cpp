@@ -287,7 +287,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		{
 			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
 			*Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
-			Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR);
+			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
 	else
@@ -297,7 +297,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		{
 			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
 			*Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
-			Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR);
+			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
 	return true;

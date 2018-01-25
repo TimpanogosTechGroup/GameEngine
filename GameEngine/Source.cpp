@@ -26,7 +26,6 @@ int main(int argc, char** argv) {
 
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
 
-	/*
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
@@ -136,8 +135,6 @@ int main(int argc, char** argv) {
 	PhysicsEngine physics;
 	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
 	physics.PhysicsTest();
-
-	*/
 
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Lua Test");
 

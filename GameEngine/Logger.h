@@ -12,6 +12,10 @@ enum LoggerLevel {
 	INFO, ERROR, SEVERE, EXPCEPTION, LOG, DEBUG, RELEASE
 };
 
+enum STREAM {
+	ENDL, ENDLOG
+};
+
 class Logger
 {
 public:
@@ -19,7 +23,7 @@ public:
 	template <class T>
 	static void Log(LoggerLevel level, const char* printLine);
 	template <class T>
-	static void Log(LoggerLevel level);
+	static void LogClassStream(LoggerLevel level);
 	static void SetLoggerLevel(LoggerLevel level) {	};
 	const static LoggerLevel GetLoggerLevel() { return level; };
 	template <class T>
@@ -81,7 +85,7 @@ inline void Logger::Log(LoggerLevel level, const char* printLine)
 }
 
 template <class T>
-inline void Logger::Log(LoggerLevel level = LoggerLevel::DEBUG)
+inline void Logger::LogClassStream(LoggerLevel level = LoggerLevel::DEBUG)
 {
 	// Log and print out
 	Log<T>(level, GetLogStream<T>()->str().c_str());
@@ -101,5 +105,4 @@ std::ostringstream* Logger::GetLogStream() {
 		return stream->second;
 	}
 }
-
 #endif LOGGER_H
