@@ -12,6 +12,7 @@
 #include <iostream>
 #include "Logger.h"
 #include "LuaScript.h"
+#include "Properties.h"
 
 extern "C" {
 #include <lua\lua.hpp>
@@ -166,6 +167,9 @@ int main(int argc, char** argv) {
 	std::cout << concat << std::endl;
 
 	script.CloseScript();
+
+	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Properties Test");
+	Properties::Init();
 	
 	return 0;
 }
