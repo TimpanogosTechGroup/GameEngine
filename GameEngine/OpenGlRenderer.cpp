@@ -18,6 +18,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include "AssetManager.h"
 #include "ResourceManager.h"
 #include "Logger.h"
+#include "Properties.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -53,10 +54,13 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		glViewport(0, 0, width, height);
 		
 		// Polygon mode is the way OpenGl renders the triangles, you can change the setting here to get wireframe mode
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		if (Properties::Get("renderMode") == "fill")
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		else if (Properties::Get("renderMode") == "wireframe") {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+		}
 		// Sets depth test so pixels rendererd underneath other pixels don't overrite those pixels (you get a really weird looking picture if you don't do this
 		glEnable(GL_DEPTH_TEST);
-
 
 		// Standard clear depth buffer bit and color buffer bit
 		glClearDepth(1.0);
@@ -204,7 +208,10 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 	}
 
 	//if (!(object.GetMaterial()->GetTexture()->GetID() < 0)) {
+	if (Properties::Get("renderMode") == "fill")
 		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
+	else
+		glBindTexture(GL_TEXTURE_2D, 0);
 		//std::cout << object.GetMaterial()->GetTexture()->GetID();
 	//}
 

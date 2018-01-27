@@ -25,6 +25,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
+	Properties::Init();
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
 
 	OpenGlRenderer renderer;

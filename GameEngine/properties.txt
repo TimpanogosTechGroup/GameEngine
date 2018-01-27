@@ -1,1 +1,1 @@
-gravity 20
+renderMode wireframe

@@ -7,7 +7,7 @@ class Properties {
 public:
 	static bool Init();
 	static bool Set(std::string key, std::string value);
-	static std::string Get(std::string key, std::string value);
+	static std::string Get(std::string key);
 private:
 	static std::unordered_map<std::string, std::string> properties;
 };

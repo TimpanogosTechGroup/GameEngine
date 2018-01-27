@@ -26,7 +26,7 @@ bool Properties::Set(std::string key, std::string value) {
 	return true;
 }
 
-std::string Properties::Get(std::string key, std::string value) {
+std::string Properties::Get(std::string key) {
 	auto var = properties.find(key);
 	if (var != properties.end())
 		return var->second;
