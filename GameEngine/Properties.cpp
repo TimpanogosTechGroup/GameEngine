@@ -8,6 +8,7 @@ std::unordered_map<std::string, std::string> Properties::properties;
 bool Properties::Init() {
 	properties["renderMode"] = "fill";
 	properties["gravity"] = "9.81";
+	properties["glLineWidth"] = "0.5";
 
 	std::fstream file("properties.txt");
 	std::string line, key, val;
@@ -26,13 +27,7 @@ bool Properties::Set(std::string key, std::string value) {
 	return true;
 }
 
-std::string Properties::Get(std::string key) {
-	auto var = properties.find(key);
-	if (var != properties.end())
-		return var->second;
 
-	return "ERROR::KEY NOT FOUND";
-}
 
 /*
 ALL PROPERTIES THAT WE CHECK ARE LISTED HERE (PLEASE KEEP UPDATED):

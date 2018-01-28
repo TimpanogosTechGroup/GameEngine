@@ -1,1 +1,2 @@
 renderMode wireframe
+glLineWidth .005
