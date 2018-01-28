@@ -19,7 +19,7 @@ bool Properties::Init() {
 	properties["cameraFOV"]				= "45.0";
 
 	// PHYSICS
-	properties["gravity"] = "9.81";
+	properties["gravity"] = "-9.81";
 
 	std::fstream file("properties.txt");
 	std::string line, key, val;

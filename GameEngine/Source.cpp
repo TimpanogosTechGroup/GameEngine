@@ -34,10 +34,10 @@ int main(int argc, char** argv) {
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
 
-	Logger::Log<InputManager>(INFO, "Initializig...");
+	Logger::Log<InputManager>(INFO, "Initializing...");
 	InputManager inputManager;
 
-	Logger::Log<Registry>(INFO, "Initializig...");
+	Logger::Log<Registry>(INFO, "Initializing...");
 	Registry::SetRenderEngine(&renderer);
 	Registry::Register("renderer", &renderer);
 	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->init(); // WARNING may not return anything, check for nullptr!!
