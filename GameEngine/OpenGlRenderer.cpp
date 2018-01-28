@@ -40,6 +40,16 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		Logger::Log<OpenGlRenderer>(SEVERE, "SDL could not initialize... :(");
 	}
 	else {
+
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+
+		//std::string version = static_cast<std::string>(glGetString(GL_VERSION));
+		
+		//*Logger::GetLogStream<OpenGlRenderer>() << "OpenGl Version: " << version;
+		//Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::INFO);
+
 		// Creates a window
 		window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 		if (window == NULL) {
