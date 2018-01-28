@@ -30,6 +30,7 @@
     <ClCompile Include="OpenGlRenderer.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PrimitiveShape.cpp" />
+    <ClCompile Include="Properties.cpp" />
     <ClCompile Include="Registry.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />
+    <ClInclude Include="Properties.h" />
     <ClInclude Include="Registry.h" />
     <ClInclude Include="RegistryEntry.h" />
     <ClInclude Include="RenderEngine.h" />

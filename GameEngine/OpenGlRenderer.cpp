@@ -18,6 +18,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include "AssetManager.h"
 #include "ResourceManager.h"
 #include "Logger.h"
+#include "Properties.h"
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -63,10 +64,13 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		glViewport(0, 0, width, height);
 		
 		// Polygon mode is the way OpenGl renders the triangles, you can change the setting here to get wireframe mode
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		if (Properties::Get<std::string>("renderMode") == "fill")
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		else if (Properties::Get<std::string>("renderMode") == "wireframe") {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
 		// Sets depth test so pixels rendererd underneath other pixels don't overrite those pixels (you get a really weird looking picture if you don't do this
 		glEnable(GL_DEPTH_TEST);
-
 
 		// Standard clear depth buffer bit and color buffer bit
 		glClearDepth(1.0);
@@ -214,7 +218,10 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 	}
 
 	//if (!(object.GetMaterial()->GetTexture()->GetID() < 0)) {
+	//if (Properties::Get("renderMode") == "fill")
 		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
+	//else
+		//glDisable(GL_TEXTURE_2D);
 		//std::cout << object.GetMaterial()->GetTexture()->GetID();
 	//}
 
@@ -475,9 +482,9 @@ void OpenGlRenderer::CompileBoundingBox(BoundingBox& boundingbox) {
 
 // Renderes the bounding box with the view of the camera and color given in
 void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 color) {
-	glEnable(GL_POLYGON_OFFSET_FILL);
+	//glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonOffset(1, 0);
-	glLineWidth(2);
+	glLineWidth(Properties::Get<float>("glLineWidth"));
 
 	glUseProgram(bbShader.GetID());
 	SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
