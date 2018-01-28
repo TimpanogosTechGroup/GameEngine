@@ -1,17 +1,24 @@
 #include <iostream>
 #include "PhysicsEngine.h"
+#include "Object.h"
 
 void PhysicsEngine::PhysicsTest() {
 	btCollisionShape* fallShape = new btSphereShape(1);
+	btCollisionShape* fallShape2 = new btSphereShape(1);
 
-	AddObject(fallShape);
+	Object p;
+	Object p2;
 
-	for (int i = 0; i < 3; i++) {
+	AddObject(p);
+	AddObject(p2);
+
+	for (int i = 0; i < 30; i++) {
 		dynamicsWorld->stepSimulation(1 / 60.f, 10);
 
-		btTransform trans;
-		rigidBodies.at(1)->getMotionState()->getWorldTransform(trans);
-
-		std::cout << "sphere height: " << trans.getOrigin().getY() << std::endl;
+		for (int j = 1; j < rigidBodies.size(); j++) {
+			btTransform trans;
+			rigidBodies.at(i)->getMotionState()->getWorldTransform(trans);
+			std::cout << "sphere height: " << trans.getOrigin().getY() << std::endl;
+		}
 	}
 }

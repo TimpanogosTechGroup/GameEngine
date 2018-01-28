@@ -28,6 +28,10 @@ public:
 	void SetMinValues(float xMin, float yMin, float zMin);
 	void SetMaxValues(float xMax, float yMax, float zMax);
 
+	float GetxDist() { return std::abs(xMax - xMin); }
+	float GetyDist() { return std::abs(yMax - yMin); }
+	float GetzDist() { return std::abs(zMax - zMin); }
+
 	RenderItem VBO;
 
 	void ToString();

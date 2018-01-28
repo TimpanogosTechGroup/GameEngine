@@ -4,6 +4,8 @@
 #include <vector>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
+
+#include "Model.h"
 #include "RegistryEntry.h"
 #include "Logger.h"
 #include "Properties.h"
@@ -44,16 +46,20 @@ public:
 		delete collisionConfiguration;
 		delete broadphase;
 	}
-	bool AddObject(btCollisionShape* shape) { // eventually accept object's vertices
+	bool AddObject(Object obj) { // eventually accept object's vertices
+		btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
+		
 		collisionObjects.push_back(shape);
-		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1));
+		AddRigidBody(obj, collisionObjects.at(collisionObjects.size() - 1));
 		return true;
 	}
-	bool AddRigidBody(btCollisionShape* collisionShape) {
+	bool AddRigidBody(Object obj, btCollisionShape* collisionShape) {
 		btScalar mass = 1;
 		btVector3 fallInertia(0, 0, 0);
 		collisionShape->calculateLocalInertia(mass, fallInertia);
 		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, collisionShape, fallInertia);
+		fallRigidBodyCI.m_startWorldTransform(btVector3(10, 10, 10));
+		std::cout << "(" << fallRigidBodyCI.m_startWorldTransform.getOrigin().getX() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getY() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getZ() << ")" << std::endl;
 		rigidBodies.push_back(new btRigidBody(fallRigidBodyCI));
 		if (AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1)))
 			return true;
