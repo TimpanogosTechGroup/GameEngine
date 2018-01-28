@@ -2,7 +2,7 @@
 #define PROPERTIES_H
 
 #include <unordered_map>
-#include <fstream>
+#include <sstream>
 
 class Properties {
 public:
@@ -16,8 +16,7 @@ private:
 
 template <typename T>
 inline T Properties::Get(std::string key) {
-
-	auto var = properties.find(key);
+	std::unordered_map<std::string, std::string>::const_iterator var = properties.find(key);
 	if (var != properties.end()) {
 		std::string val = var->second;
 		std::stringstream stream(val);

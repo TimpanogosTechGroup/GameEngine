@@ -1,3 +1,4 @@
+#include "Properties.h"
 #include <iostream>
 #include "OpenGlRenderer.h"
 #include "AssetManager.h"
@@ -12,7 +13,6 @@
 #include <iostream>
 #include "Logger.h"
 #include "LuaScript.h"
-#include "Properties.h"
 
 extern "C" {
 #include <lua\lua.hpp>
