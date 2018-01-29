@@ -64,6 +64,13 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 // basic version, eventually edit wrapping and filtering parameters
 Texture* AssetManager::LoadTexture(const char* file) {
+
+	if (ResourceManager::hasTexture(file)) {
+		Logger::Log<AssetManager>(DEBUG, "Already Loaded");
+		return ResourceManager::getTexture(file);
+	}
+		
+
 	Texture* texture = new Texture(); // Create a new texture
 	// Genereate buffers and bind
 	glGenTextures(1, &texture->GetID());
@@ -93,12 +100,13 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	}
 	stbi_image_free(data);
 
+	ResourceManager::addTexture(file, texture);
+
 	return texture;
 }
 
 Model* AssetManager::LoadModel(const char* pFile) {
 	// not finished
-
 	Model* model = new Model();
 
 	// Create an instance of the Importer class

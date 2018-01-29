@@ -113,8 +113,6 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 	// First we need to create the buffer to send off to the GPU
 	std::vector<float> buffer;
 
-	//std::cout << "Compile start: Veticies: " << object.GetVerticies().Size() << std::endl;
-
 	if (object.GetVerticies().Size() == object.GetNormals().Size()) {
 		for (int i = 0; i < object.GetVerticies().Size(); i += 3) {
 			buffer.push_back(object.GetVerticies().GetValues()[i]);
@@ -129,12 +127,6 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			buffer.push_back(object.GetNormals().GetValues()[i + 1]);
 			buffer.push_back(object.GetNormals().GetValues()[i + 2]);
 
-			//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0))]); // Need to cast it to int, because we need to use float for the calculation
-			//buffer.push_back(object.GetUVCoords().GetValues()[static_cast<int>(i * (2.0 / 3.0)) + 1]);
-
-			//std::cout << "UVCoord size: " << object.GetUVCoords().Size() << std::endl;
-			//std::cout << "Verticie size: " << object.GetVerticies().Size() * (2.0 / 3.0) << std::endl;
-
 			if (object.GetUVCoords().Size() < (object.GetVerticies().Size() * (2.0 / 3.0))) {
 				buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
 				buffer.push_back(0);
@@ -143,23 +135,8 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 				int x = static_cast<int>(i * (2.0 / 3.0));
 				buffer.push_back(object.GetUVCoords().GetValues()[x]);
 				buffer.push_back(object.GetUVCoords().GetValues()[x + 1]);
-				//std::cout << "Added texture coord: i, " << i << " x, " << x << " u, " << (object.GetUVCoords().GetValues()[x]) << " v, " << (object.GetUVCoords().GetValues()[x + 1]) <<  std::endl;
 			}
 		}
-
-		//std::ostringstream oss;
-
-		//if (!buffer.empty())
-		//{
-		//	// Convert all but the last element to avoid a trailing ","
-		//	std::copy(buffer.begin(), buffer.end() - 1,
-		//		std::ostream_iterator<float>(oss, ","));
-
-		//	// Now add the last element with no delimiter
-		//	oss << buffer.back();
-		//}
-
-		//std::cout << oss.str() << std::endl;
 	}
 	else {
 		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
