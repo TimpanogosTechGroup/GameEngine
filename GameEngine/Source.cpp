@@ -128,6 +128,12 @@ int main(int argc, char** argv) {
 	PhysicsEngine physics;
 	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
 	physics.PhysicsTest();
+
+	//Scene and Scene Manager Test Stuff
+	SceneManager sceneManager;
+	sceneManager.CreateNewScene("testScene");
+	Scene testScene = *sceneManager.GetScene("testScene");
+	testScene.AddModel(liberty);
 	
 	return 0;
 }
