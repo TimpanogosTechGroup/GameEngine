@@ -86,6 +86,7 @@ void OpenGlRenderer::init() {
 	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl"));
 	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl"));
 	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
+	ResourceManager::addTexture("default", AssetManager::LoadTexture("Texture\\question.png"));
 }
 
 // Swaps the render buffers so we can see the changes that we have rendered
@@ -280,7 +281,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
-			*Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
 			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
@@ -290,7 +291,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
-			*Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
 			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}

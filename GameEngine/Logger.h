@@ -27,7 +27,7 @@ public:
 	static void SetLoggerLevel(LoggerLevel level) {	};
 	const static LoggerLevel GetLoggerLevel() { return level; };
 	template <class T>
-	static std::ostringstream* GetLogStream();
+	static std::ostringstream& GetLogStream();
 	~Logger() {};
 
 private:
@@ -88,21 +88,21 @@ template <class T>
 inline void Logger::LogClassStream(LoggerLevel level = LoggerLevel::DEBUG)
 {
 	// Log and print out
-	Log<T>(level, GetLogStream<T>()->str().c_str());
+	Log<T>(level, GetLogStream<T>().str().c_str());
 	// Clear the string stream so it doesnt pile up
-	GetLogStream<T>()->str("");
+	GetLogStream<T>().str("");
 }
 
 template <class T>
-std::ostringstream* Logger::GetLogStream() {
+std::ostringstream& Logger::GetLogStream() {
 	auto stream = logStreams.find(typeid(T).name());
 	if (stream == logStreams.end()) {
 		std::ostringstream* sstream = new std::ostringstream;
 		logStreams[typeid(T).name()] = sstream;
-		return sstream;
+		return *sstream;
 	}
 	else {
-		return stream->second;
+		return *stream->second;
 	}
 }
 #endif LOGGER_H
