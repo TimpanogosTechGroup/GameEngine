@@ -13,6 +13,8 @@
 #include <iostream>
 #include "Logger.h"
 #include "LuaScript.h"
+#include "Scene.h"
+#include "SceneManager.h"
 
 extern "C" {
 #include <lua\lua.hpp>
