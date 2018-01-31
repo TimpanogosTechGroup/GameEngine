@@ -107,6 +107,10 @@ Texture* AssetManager::LoadTexture(const char* file) {
 
 Model* AssetManager::LoadModel(const char* pFile) {
 	// not finished
+	if (ResourceManager::hasModel(pFile)) {
+		Logger::Log<AssetManager>(DEBUG, "Model already loaded.....might need to double check your code");
+	}
+
 	Model* model = new Model();
 
 	// Create an instance of the Importer class
