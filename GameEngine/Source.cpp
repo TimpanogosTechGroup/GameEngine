@@ -15,6 +15,7 @@
 #include "LuaScript.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
 
 extern "C" {
 #include <lua\lua.hpp>
@@ -50,8 +51,9 @@ int main(int argc, char** argv) {
 	camera->Move(BACKWARD, 1);
 
 	Logger::Log<Logger>(INFO, "Loading models");
+	ResourceManager::loadModel("Model\\LibertStatue.obj", "statue");
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
-	Model liberty = *AssetManager::LoadModel("Model\\LibertStatue.obj");
+	Model liberty = *ResourceManager::getModel("statue");
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
