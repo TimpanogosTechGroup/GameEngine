@@ -90,3 +90,23 @@ bool ResourceManager::hasModel(std::string name)
 		return false;
 	}
 }
+
+void ResourceManager::loadModel(const char * pFile, std::string name)
+{
+	if (ResourceManager::hasModel(pFile)) {
+		ResourceManager::addModel(name, ResourceManager::getModel(pFile));
+	}
+	else {
+		ResourceManager::addModel(name, AssetManager::LoadModel(pFile));
+	}
+}
+
+void ResourceManager::loadModel(const char * pFile)
+{
+	if (ResourceManager::hasModel(pFile)) {
+	
+	}
+	else {
+		ResourceManager::addModel(pFile, AssetManager::LoadModel(pFile));
+	}
+}
