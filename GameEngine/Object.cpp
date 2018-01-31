@@ -13,6 +13,11 @@ void Object::SetPosition(glm::vec3 position) {
 	this->position = position;
 }
 
+void Object::SetPosition(double x, double y, double z) {
+	glm::vec3 pos(x, y, z);
+	this->SetPosition(pos);
+}
+
 void Object::CreateBoundBox() {
 	float xmin, ymin, zmin, xmax, ymax, zmax;
 	std::vector<float> values;

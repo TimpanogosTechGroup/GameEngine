@@ -4,6 +4,7 @@
 #include <vector>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
+#include "MotionState.h"
 
 #include "Model.h"
 #include "RegistryEntry.h"
@@ -20,11 +21,10 @@ public:
 		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
-		groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-		fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0)));
+		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0))));
 	
 		collisionObjects.push_back(new btStaticPlaneShape(btVector3(0, 1, 0), 1));
-		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, collisionObjects.at(0), btVector3(0, 0, 0));
+		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, motionStates.at(0), collisionObjects.at(0), btVector3(0, 0, 0));
 		rigidBodies.push_back(new btRigidBody(groundRigidBodyCI));
 		AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1));
 	}
@@ -50,18 +50,20 @@ public:
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
 		
 		collisionObjects.push_back(shape);
-		AddRigidBody(obj, collisionObjects.at(collisionObjects.size() - 1));
+		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0))));
+		AddRigidBody(obj, collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1));
 		return true;
 	}
-	bool AddRigidBody(Object obj, btCollisionShape* collisionShape) {
+	bool AddRigidBody(Object obj, btCollisionShape* collisionShape, btMotionState* motionState) {
 		btScalar mass = 1;
 		btVector3 fallInertia(0, 0, 0);
 		collisionShape->calculateLocalInertia(mass, fallInertia);
-		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, collisionShape, fallInertia);
+		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, motionState, collisionShape, fallInertia);
 		fallRigidBodyCI.m_startWorldTransform(btVector3(10, 10, 10));
 		std::cout << "(" << fallRigidBodyCI.m_startWorldTransform.getOrigin().getX() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getY() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getZ() << ")" << std::endl;
 		rigidBodies.push_back(new btRigidBody(fallRigidBodyCI));
 		if (AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1)))
+			std::cout << "ADDED" << std::endl;
 			return true;
 		return false;
 	}
@@ -88,6 +90,7 @@ private:
 
 	std::vector<btCollisionShape*> collisionObjects; // ground is at index 0
 	std::vector<btRigidBody*> rigidBodies; // ground is at index 0
+	std::vector<btMotionState*> motionStates; // ground is at index 0
 };
 
 #endif PHYSICSENGINE_H

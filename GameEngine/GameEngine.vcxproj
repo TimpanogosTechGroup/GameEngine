@@ -49,6 +49,7 @@
     <ClInclude Include="LuaScript.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="MotionState.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="PhysicsEngine.h" />

@@ -66,7 +66,8 @@ public:
 	Verticies GetBoundBox() { return boundBox; };
 
 	void SetMaterial(Material* mat);
-	void SetPosition(glm::vec3 position); // TODO this will be made to return the actual position from bullet phyics
+	void SetPosition(glm::vec3 position);
+	void SetPosition(double x, double y, double z);
 	void ToString();
 
 	BoundingBox boundingBox;
@@ -76,9 +77,8 @@ private:
 	Verticies normals;
 	Verticies uvCoords;
 	Verticies boundBox;
-	Verticies attachNodes; // not implemented
 
-	glm::vec3 position; // FIXME TODO this will be removed and replaced with the bullet physics stuff
+	glm::vec3 position;
 
 	Material* material;
 	
