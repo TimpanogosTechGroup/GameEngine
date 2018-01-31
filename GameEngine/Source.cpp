@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 	liberty.CreateBoundBox();
 	renderer.CompileBoundingBox(model.boundingBox);
 	renderer.CompileBoundingBox(liberty.boundingBox);
-	
+
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 
@@ -81,11 +81,13 @@ int main(int argc, char** argv) {
 				inputManager.releaseKey(event.key.keysym.sym);
 				break;
 			case SDL_MOUSEMOTION:
-				camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
+				if (inputManager.isMouseMovementEnabled()) {
+					camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
+				}
 				break;
 			}
 		}
-		
+
 		// Process input
 		if (inputManager.isKeyPressed(SDLK_w))
 			camera->ProcessKeyboard(FORWARD, delta);
@@ -99,19 +101,22 @@ int main(int argc, char** argv) {
 			camera->ProcessKeyboard(UP, delta);
 		if (inputManager.isKeyPressed(SDLK_LCTRL))
 			camera->ProcessKeyboard(DOWN, delta);
-		if (inputManager.isKeyPressed(SDLK_LEFT))
-			camera->ProcessMouseMovement(0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_RIGHT))
-			camera->ProcessMouseMovement(-0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_UP))
-			camera->ProcessMouseMovement(0, 0.3f, true);
-		if (inputManager.isKeyPressed(SDLK_DOWN))
-			camera->ProcessMouseMovement(0, -0.3f, true);
+		if (inputManager.isMouseMovementEnabled()) {
+			if (inputManager.isKeyPressed(SDLK_LEFT))
+				camera->ProcessMouseMovement(0.3f, 0, true);
+			if (inputManager.isKeyPressed(SDLK_RIGHT))
+				camera->ProcessMouseMovement(-0.3f, 0, true);
+			if (inputManager.isKeyPressed(SDLK_UP))
+				camera->ProcessMouseMovement(0, 0.3f, true);
+			if (inputManager.isKeyPressed(SDLK_DOWN))
+				camera->ProcessMouseMovement(0, -0.3f, true);
+		}
 		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 			SDL_CaptureMouse(SDL_FALSE);
+			inputManager.disableMouseMovement();
 		}
-			
+
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderModel(*camera, liberty);
@@ -160,6 +165,7 @@ int main(int argc, char** argv) {
 
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Properties Test");
 	Properties::Init();
-	
+	Logger::Log<Logger>(INFO, "Closing....no problems detected");
+
 	return 0;
 }

@@ -1,2 +1,2 @@
-renderMode fill
+renderMode wireframe
 glLineWidth .005
