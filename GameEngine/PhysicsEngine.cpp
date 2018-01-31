@@ -5,20 +5,18 @@
 
 void PhysicsEngine::PhysicsTest() {
 	btCollisionShape* fallShape = new btSphereShape(1);
-	btCollisionShape* fallShape2 = new btSphereShape(1);
+	//btCollisionShape* fallShape2 = new btSphereShape(1);
 
 	Object p;
-	Object p2;
+	//Object p2;
 
 	AddObject(p);
-	AddObject(p2);
-
-	std::cout << rigidBodies.size();
+	//AddObject(p2);
 
 	for (int i = 0; i < 30; i++) {
 		dynamicsWorld->stepSimulation(1 / 60.f, 10);
 
-		for (int j = 1; j < rigidBodies.size() - 1; j++) {
+		for (int j = 1; j < rigidBodies.size(); j++) {
 			btTransform trans;
 			rigidBodies.at(i)->getMotionState()->getWorldTransform(trans);
 			

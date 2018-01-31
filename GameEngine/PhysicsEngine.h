@@ -21,7 +21,7 @@ public:
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
 		groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-		fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
+		fallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0)));
 	
 		collisionObjects.push_back(new btStaticPlaneShape(btVector3(0, 1, 0), 1));
 		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, collisionObjects.at(0), btVector3(0, 0, 0));

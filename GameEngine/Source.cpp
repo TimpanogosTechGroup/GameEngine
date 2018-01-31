@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
 
 	PhysicsEngine physics;
 	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
-	//physics.PhysicsTest();
+	physics.PhysicsTest();
 
 	//Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Lua Test");
 
@@ -157,9 +157,6 @@ int main(int argc, char** argv) {
 	//std::cout << concat << std::endl;
 
 	//script.CloseScript();
-
-	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Properties Test");
-	Properties::Init();
 	
 	return 0;
 }
