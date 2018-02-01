@@ -31,6 +31,8 @@ int main(int argc, char** argv) {
 	Properties::Init();
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
 
+	PhysicsEngine physics;
+
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(800, 600);
 	renderer.UpdateScreen();
@@ -55,6 +57,9 @@ int main(int argc, char** argv) {
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	Model liberty = *ResourceManager::getModel("statue");
 
+	model.SetPosition(glm::vec3(0, 0, 0));
+	liberty.SetPosition(glm::vec3(0, 10, 0));
+
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
 	renderer.CompileBoundingBox(model.boundingBox);
@@ -63,9 +68,13 @@ int main(int argc, char** argv) {
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 
+	physics.AddModel(model);
+	physics.AddModel(liberty);
+
 	// Main loop
 	Logger::Log<Logger>(INFO, "Entering main loop");
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+		physics.Update(model, liberty);
 
 		float delta = .002f;
 
@@ -127,15 +136,11 @@ int main(int argc, char** argv) {
 
 	SDL_Quit();
 
-	PhysicsEngine physics;
-	Logger::Log<PhysicsEngine>(LoggerLevel::INFO, "Physics Test");
-	physics.PhysicsTest();
-
 	//Scene and Scene Manager Test Stuff
 	SceneManager sceneManager;
 	sceneManager.CreateNewScene("testScene");
 	Scene testScene = *sceneManager.GetScene("testScene");
-	testScene.AddModel(liberty);
+	testScene.AddModel(&liberty);
 	
 	return 0;
 }

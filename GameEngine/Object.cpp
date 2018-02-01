@@ -9,8 +9,8 @@ void Object::SetMaterial(Material* material) {
 	this->material = material;
 }
 
-void Object::SetPosition(glm::vec3 position) {
-	this->position = position;
+void Object::SetPosition(glm::vec3 p) {
+	this->position = p;
 }
 
 void Object::SetPosition(double x, double y, double z) {

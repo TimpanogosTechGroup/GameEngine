@@ -23,7 +23,7 @@ public:
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
 		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0))));
 	
-		collisionObjects.push_back(new btStaticPlaneShape(btVector3(0, 1, 0), 1));
+		collisionObjects.push_back(new btStaticPlaneShape(btVector3(0, -1, 0), 1));
 		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, motionStates.at(0), collisionObjects.at(0), btVector3(0, 0, 0));
 		rigidBodies.push_back(new btRigidBody(groundRigidBodyCI));
 		AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1));
@@ -46,24 +46,32 @@ public:
 		delete collisionConfiguration;
 		delete broadphase;
 	}
-	bool AddObject(Object obj) { // eventually accept object's vertices
+	bool AddObject(Object obj) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
 		
 		collisionObjects.push_back(shape);
-		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0))));
-		AddRigidBody(obj, collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1));
+
+		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(obj.GetPostion().x, obj.GetPostion().y, obj.GetPostion().z))));
+		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1));
 		return true;
 	}
-	bool AddRigidBody(Object obj, btCollisionShape* collisionShape, btMotionState* motionState) {
+	bool AddModel(Model model) {
+		btBoxShape* shape = new btBoxShape(btVector3(btScalar(model.boundingBox.GetxDist() / 2), btScalar(model.boundingBox.GetyDist() / 2), btScalar(model.boundingBox.GetzDist() / 2)));
+
+		collisionObjects.push_back(shape);
+
+		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(model.GetPostion().x, model.GetPostion().y, model.GetPostion().z))));
+		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1));
+		return true;
+	}
+	bool AddRigidBody(btCollisionShape* collisionShape, btMotionState* motionState) {
 		btScalar mass = 1;
 		btVector3 fallInertia(0, 0, 0);
 		collisionShape->calculateLocalInertia(mass, fallInertia);
 		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, motionState, collisionShape, fallInertia);
 		fallRigidBodyCI.m_startWorldTransform(btVector3(10, 10, 10));
-		std::cout << "(" << fallRigidBodyCI.m_startWorldTransform.getOrigin().getX() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getY() << ", " << fallRigidBodyCI.m_startWorldTransform.getOrigin().getZ() << ")" << std::endl;
 		rigidBodies.push_back(new btRigidBody(fallRigidBodyCI));
 		if (AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1)))
-			std::cout << "ADDED" << std::endl;
 			return true;
 		return false;
 	}
@@ -77,6 +85,7 @@ public:
 	}
 
 	void PhysicsTest();
+	void Update(Model model, Model liberty);
 
 private:
 	btBroadphaseInterface * broadphase;

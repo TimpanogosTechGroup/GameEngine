@@ -180,7 +180,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 
 	// Generate the model matrix
 	glm::mat4 model; // Create a indentity matrix
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Apply a translation to the matrix
+	model = glm::translate(model, object.GetPostion()); // Apply a translation to the matrix
 	//model = glm::rotate(model, 5.0f, glm::vec3(0.0, 0.0, 1.0)); // Rotate matrix
 	//model = glm::scale(model, glm::vec3(0.5, 0.5, 0.5)); // Scale Matrix
 
@@ -191,6 +191,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
 		glm::mat4 model;
+
 		model = glm::translate(model, object.GetPostion());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model);
 	}

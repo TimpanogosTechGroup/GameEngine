@@ -9,6 +9,7 @@ Our OpenGl implementation of the RenderEngine
 #include <SDL\SDL.h>
 #include "FrameBuffer.h"
 #include "RegistryEntry.h"
+#include "PhysicsEngine.h"
 #include <string>
 
 class OpenGlRenderer :
