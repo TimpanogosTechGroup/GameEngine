@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Object.h"
+#include "Logger.h"
 
 class Model {
 public:
@@ -11,9 +12,9 @@ public:
 	Verticies GetBoundBox() { return boundBox; };
 
 	void SetPosition(glm::vec3 p) {
-		position = p;
+		position = glm::vec3(p);
 		for (int i = 0; i < objects.size(); i++) {
-			objects.at(i)->SetPosition(position);
+			objects.at(i)->SetPosition(p);
 		}
 	}
 	glm::vec3 GetPostion() { return position; };

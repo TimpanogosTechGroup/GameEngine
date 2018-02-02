@@ -52,13 +52,14 @@ int main(int argc, char** argv) {
 	Camera* camera = new Camera();
 	camera->Move(BACKWARD, 1);
 
+
 	Logger::Log<Logger>(INFO, "Loading models");
 	ResourceManager::loadModel("Model\\LibertStatue.obj", "statue");
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	Model liberty = *ResourceManager::getModel("statue");
 
 	model.SetPosition(glm::vec3(0, 0, 0));
-	liberty.SetPosition(glm::vec3(0, 10, 0));
+	liberty.SetPosition(glm::vec3(0, -10, 0));
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();

@@ -3,7 +3,7 @@
 #include "Model.h"
 #include "Logger.h"
 
-void PhysicsEngine::Update(Model model, Model liberty) {
+void PhysicsEngine::Update(Model& model, Model& liberty) {
 	dynamicsWorld->stepSimulation(1 / 100.f, 10);
 
 	btTransform trans;

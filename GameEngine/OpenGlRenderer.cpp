@@ -191,7 +191,6 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
 		glm::mat4 model;
-
 		model = glm::translate(model, object.GetPostion());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model);
 	}
@@ -469,7 +468,7 @@ void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 
 	SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
 	SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, 0, 0));
+	model = glm::translate(model, modelO.GetPostion());
 	SetUniformMat4(&bbShader, "model", model);
 	SetUniformVec3(&bbShader, "color", color);
 
