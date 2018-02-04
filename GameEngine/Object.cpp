@@ -2,7 +2,7 @@
 #include <iomanip>
 
 Object::Object() { 
-	position = glm::vec3(0, 0, 0);
+	trans.setOrigin(btVector3(0, 0, 0));
 }
 
 void Object::SetMaterial(Material* material) {
@@ -10,7 +10,7 @@ void Object::SetMaterial(Material* material) {
 }
 
 void Object::SetPosition(glm::vec3 p) {
-	this->position = p;
+	trans.setOrigin(btVector3(p.x, p.y, p.z));
 }
 
 void Object::SetPosition(double x, double y, double z) {

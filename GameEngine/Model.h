@@ -7,23 +7,34 @@
 
 class Model {
 public:
+	Model() {
+		trans.setOrigin(btVector3(0, 0, 0));
+		trans.setRotation(btQuaternion(0, 0, 0, 0));
+	}
 	Object* GetObject(unsigned int n) { return this->objects.at(n); }
 	void AddObject(Object* obj) { this->objects.push_back(obj); }
 	unsigned int NumOfObjects() { return this->objects.size(); }
 	Verticies GetBoundBox() { return boundBox; };
 
 	void SetPosition(glm::vec3 p) {
-		position = glm::vec3(p);
+		trans.setOrigin(btVector3(p.x, p.y, p.z));
 		for (int i = 0; i < objects.size(); i++) {
 			objects.at(i)->SetPosition(p);
 		}
 	}
-	glm::vec3 GetPostion() { return position; };
+	glm::vec3 GetPostion() { return glm::vec3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()); };
 
 	void SetTransform(btTransform trans) {
 		this->trans = trans;
 		for (int i = 0; i < objects.size(); i++) {
 			objects.at(i)->SetTransform(trans);
+		}
+	}
+
+	void setRotation(float yaw = 0, float pitch = 0, float roll = 0) {
+		trans.setRotation(btQuaternion(yaw, pitch, roll));
+		for (int i = 0; i < objects.size(); i++) {
+			objects.at(i)->setRotation(yaw, pitch, roll);
 		}
 	}
 
@@ -36,5 +47,4 @@ private:
 	std::vector<Object*> objects;
 	Verticies boundBox;
 	btTransform trans;
-	glm::vec3 position;
 };

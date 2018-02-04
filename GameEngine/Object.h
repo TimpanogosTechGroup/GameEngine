@@ -18,14 +18,14 @@ public:
 	Object(float vert[], float norms[]) {
 		verticies.SetValues(vert);
 		normals.SetValues(norms);
-		position = glm::vec3(0, 0, 0);
+		trans.setOrigin(btVector3(0, 0, 0));
 	}
 	// this constructor is for model loading, necesarry becuase not possible to get array size using pointer
 	Object(float vert[], float norms[], float uvs[], unsigned int size, unsigned int uvSize) {
 		verticies.SetValues(vert, size);
 		normals.SetValues(norms, size);
 		uvCoords.SetValues(uvs, uvSize);
-		position = glm::vec3(0, 0, 0);
+		trans.setOrigin(btVector3(0, 0, 0));
 	}
 	Object(std::vector<float> verticies, std::vector<float> normals) {
 		
@@ -35,7 +35,7 @@ public:
 		for (auto &n : normals) {
 			this->normals.AddFloat(n);
 		}
-		position = glm::vec3(0, 0, 0);
+		trans.setOrigin(btVector3(0, 0, 0));
 	}
 	Object(std::vector<float> verticies, std::vector<float> normals, std::vector<float> uvs) {
 
@@ -49,7 +49,7 @@ public:
 			this->uvCoords.AddFloat(uv);
 		}
 
-		position = glm::vec3(0, 0, 0);
+		trans.setOrigin(btVector3(0, 0, 0));
 	}
 
 	Object();
@@ -62,7 +62,7 @@ public:
 	Verticies& GetVerticies() { return verticies; };
 	Verticies& GetNormals() { return normals; };
 	Material* GetMaterial() { return material; };
-	glm::vec3 GetPostion() { return position; };
+	glm::vec3 GetPostion() { return glm::vec3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()); };
 	Verticies& GetUVCoords() { return uvCoords; };
 	Verticies GetBoundBox() { return boundBox; };
 
@@ -73,9 +73,14 @@ public:
 
 	BoundingBox boundingBox;
 
+	// Bullet physics stuff
 	void SetTransform(btTransform trans) {
 		this->trans = trans;
 	}
+	void setRotation(float yaw = 0, float pitch = 0, float roll = 0) {
+		trans.setRotation(btQuaternion(yaw, pitch, roll));
+	}
+
 	const btTransform& GetTrasform() const { return trans; };
 
 private:
@@ -84,7 +89,6 @@ private:
 	Verticies uvCoords;
 	Verticies boundBox;
 
-	glm::vec3 position;
 	btTransform trans;
 	Material* material;
 	

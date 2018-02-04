@@ -60,7 +60,8 @@ public:
 
 		collisionObjects.push_back(shape);
 
-		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(model.GetPostion().x, model.GetPostion().y, model.GetPostion().z))));
+		motionStates.push_back(new btDefaultMotionState(model.GetTrasform()));
+		//motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(model.GetPostion().x, model.GetPostion().y, model.GetPostion().z))));
 		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1));
 		return true;
 	}
