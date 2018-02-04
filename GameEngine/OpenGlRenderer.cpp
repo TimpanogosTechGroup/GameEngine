@@ -46,7 +46,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
 		//std::string version = static_cast<std::string>(glGetString(GL_VERSION));
-		
+
 		//*Logger::GetLogStream<OpenGlRenderer>() << "OpenGl Version: " << version;
 		//Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::INFO);
 
@@ -62,7 +62,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		glewInit();
 		glClearColor(backgroundColor.r, backgroundColor.b, backgroundColor.g, 1);
 		glViewport(0, 0, width, height);
-		
+
 		// Polygon mode is the way OpenGl renders the triangles, you can change the setting here to get wireframe mode
 		if (Properties::Get<std::string>("renderMode") == "fill")
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -87,6 +87,7 @@ void OpenGlRenderer::init() {
 	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl"));
 	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
 	ResourceManager::addTexture("default", AssetManager::LoadTexture("Texture\\question.png"));
+	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader\\cubemap_vert.glsl", "Shader\\cubemap_frag.glsl"));
 }
 
 // Swaps the render buffers so we can see the changes that we have rendered
@@ -153,7 +154,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(9* sizeof(float)));
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(9 * sizeof(float)));
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -172,6 +173,36 @@ bool OpenGlRenderer::CompileModel(Model& model) {
 	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
 		renderer.CompileObject(*(model.GetObject(i)));
 	}
+	return true;
+}
+
+bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
+{
+	std::vector<float> buffer;
+	// First we need to create the buffer to send off to the GPU
+	Object* cube = cubemap.GetObject(0);
+
+	//for (int i = 0; i < cube->GetVerticies().Size(); i += 3) {
+	//	buffer.push_back(object.GetVerticies().GetValues()[i]);
+	//	buffer.push_back(object.GetVerticies().GetValues()[i + 1]);
+	//	buffer.push_back(object.GetVerticies().GetValues()[i + 2]);
+	//}
+
+	for (auto &vert : *cubemap.GetObject(0)->GetVerticies().GetValueVector()) {
+		std::cout << vert << std::endl;
+		buffer.push_back(vert);
+	}
+
+	glGenVertexArrays(1, &cube->GetID());
+	glBindVertexArray(cube->GetID());
+	glGenBuffers(1, &cube->VBO.GetID());
+	glBindBuffer(GL_ARRAY_BUFFER, cube->VBO.GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (buffer.size()), &buffer[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	std::cout << "ID: " << cubemap.GetObject(0)->GetID() << std::endl;
 	return true;
 }
 
@@ -197,7 +228,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 
 	//if (!(object.GetMaterial()->GetTexture()->GetID() < 0)) {
 	//if (Properties::Get("renderMode") == "fill")
-		glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
+	glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
 	//else
 		//glDisable(GL_TEXTURE_2D);
 		//std::cout << object.GetMaterial()->GetTexture()->GetID();
@@ -223,6 +254,28 @@ bool OpenGlRenderer::RenderModel(Camera& camera, Model& model) {
 		RenderObject(camera, *(model.GetObject(i)));
 	}
 	return true;
+}
+
+void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
+{
+
+	cube.SetPosition(camera.GetPosition());
+	glUseProgram(ResourceManager::getShader("cubemap")->GetID());
+	//glUseProgram(3);
+	//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+	SetUniformMat4(ResourceManager::getShader("cubemap"), "projection", camera.GetProjectionMatrix());
+	SetUniformMat4(ResourceManager::getShader("cubemap"), "view", glm::mat4(glm::mat3(camera.GetViewMatrix())));
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cube.getTexture()->GetID());
+
+	glDepthMask(GL_FALSE);
+
+	glBindVertexArray(cube.GetObject(0)->GetID());
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	glDepthMask(GL_TRUE);
 }
 
 void OpenGlRenderer::Clear() {

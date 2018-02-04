@@ -17,6 +17,7 @@ This is the header to manage loading assets to opengl.
 #include "Material.h"
 #include "Texture.h"
 #include "Registry.h"
+#include "CubeMap.h"
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
@@ -31,7 +32,8 @@ public:
 	static Texture* LoadTexture(const char* file);
 	// Load the model from the file pFile
 	static Model* LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
-
+	// Loads a cube map with the texture starting at pFile and adding a _dir for each face
+	static CubeMap* LoadCubeMap(const char* pFile);
 private:
 	static Material* LoadMaterial(const aiScene* scene, const aiMesh* mesh);
 };

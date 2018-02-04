@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 	PhysicsEngine physics;
 
 	OpenGlRenderer renderer;
-	renderer.CreateWindow(800, 600);
+	renderer.CreateWindow(1280, 720);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
@@ -58,16 +58,21 @@ int main(int argc, char** argv) {
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	Model liberty = *ResourceManager::getModel("statue");
 
+	CubeMap* cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
+
 	model.SetPosition(glm::vec3(0, 0, 0));
 	liberty.SetPosition(glm::vec3(0, -10, 0));
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
+	cube->CreateBoundBox();
 	renderer.CompileBoundingBox(model.boundingBox);
 	renderer.CompileBoundingBox(liberty.boundingBox);
-	
+	renderer.CompileBoundingBox(cube->boundingBox);
+
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
+	renderer.CompileCubeMap(*cube);
 
 	physics.AddModel(model);
 	physics.AddModel(liberty);
@@ -95,11 +100,12 @@ int main(int argc, char** argv) {
 				inputManager.releaseKey(event.key.keysym.sym);
 				break;
 			case SDL_MOUSEMOTION:
-				camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
+				if (inputManager.isMouseMovementEnabled())
+					camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
 				break;
 			}
 		}
-		
+
 		// Process input
 		if (inputManager.isKeyPressed(SDLK_w))
 			camera->ProcessKeyboard(FORWARD, delta);
@@ -124,10 +130,14 @@ int main(int argc, char** argv) {
 		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 			SDL_CaptureMouse(SDL_FALSE);
+			inputManager.disableMouseMovement();
 		}
-			
+
+		// Render cube map first then render the rest of the scene
+		renderer.RenderCubeMap(*camera, *cube);
 		renderer.RenderBoundingBox(*camera, model, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
+		renderer.RenderBoundingBox(*camera, *cube, glm::vec3(0, 0, 1));
 		renderer.RenderModel(*camera, liberty);
 
 		renderer.UpdateScreen();
@@ -142,6 +152,6 @@ int main(int argc, char** argv) {
 	sceneManager.CreateNewScene("testScene");
 	Scene testScene = *sceneManager.GetScene("testScene");
 	testScene.AddModel(&liberty);
-	
+
 	return 0;
 }

@@ -8,7 +8,7 @@ void PhysicsEngine::Update(Model& model, Model& liberty) {
 
 	btTransform trans;
 	rigidBodies.at(1)->getMotionState()->getWorldTransform(trans);
-	model.SetPosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+	model.SetPosition(glm::vec3(trans.getOrigin().x() / 500, trans.getOrigin().y() / 500, trans.getOrigin().z() / 500));
 
 	rigidBodies.at(2)->getMotionState()->getWorldTransform(trans);
 	liberty.SetPosition(glm::vec3(trans.getOrigin().x()/500, trans.getOrigin().y()/500, trans.getOrigin().z()/500));

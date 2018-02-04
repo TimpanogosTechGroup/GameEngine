@@ -59,6 +59,8 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
 	Registry::GetRenderEngine()->LinkShaderProgram(*shader);
 	
+	Logger::Log<AssetManager>(DEBUG, std::string("Successfully loaded shader: " + std::string(vertexPath)).c_str());
+
 	return shader;
 }
 
@@ -209,6 +211,53 @@ Model* AssetManager::LoadModel(const char* pFile) {
 
 	// Everything (assimp) will be cleaned up by the importer destructor
 	return model;
+}
+
+CubeMap * AssetManager::LoadCubeMap(const char * pFile)
+{
+	CubeMap* cube = new CubeMap(pFile);
+
+	// Load the textures
+	if (ResourceManager::hasTexture(pFile)) {
+		Logger::Log<AssetManager>(DEBUG, "Already Loaded");
+		//return ResourceManager::getTexture(pFile);
+	}
+
+	Texture* texture = new Texture(); // Create a new texture
+	 // Genereate buffers and bind
+	glGenTextures(1, &texture->GetID());
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture->GetID());
+	// load image, create texture and generate mipmaps
+	int width, height, nrChannels;
+
+	for (int i = 0; i < cube->getTextureLocations().size(); i++) {
+		unsigned char *data = stbi_load(cube->getTextureLocations().at(i).c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+			texture->SetWidth(width);
+			texture->SetHeight(height);
+		}
+		else
+		{
+			Logger::GetLogStream<AssetManager>() << "Failed to load texture: " << pFile;
+			Logger::LogClassStream<AssetManager>(LoggerLevel::ERROR);
+		}
+		stbi_image_free(data);
+	}
+
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	ResourceManager::addTexture(pFile, texture);
+	cube->SetTexture(texture);
+
+	return cube;
 }
 
 Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
