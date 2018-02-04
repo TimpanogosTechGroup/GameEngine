@@ -19,6 +19,7 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include "ResourceManager.h"
 #include "Logger.h"
 #include "Properties.h"
+#include <btBulletDynamicsCommon.h>
 
 OpenGlRenderer::OpenGlRenderer()
 {
@@ -222,9 +223,10 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
 		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
-		glm::mat4 model;
-		model = glm::translate(model, object.GetPostion());
-		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model);
+		btScalar trans[16]; // create a 4x4 array
+		object.GetTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+		glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}
 
 	//if (!(object.GetMaterial()->GetTexture()->GetID() < 0)) {
@@ -521,10 +523,13 @@ void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 
 	glUseProgram(bbShader.GetID());
 	SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
 	SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
-	glm::mat4 model;
-	model = glm::translate(model, modelO.GetPostion());
-	SetUniformMat4(&bbShader, "model", model);
-	SetUniformVec3(&bbShader, "color", color);
+	//glm::mat4 model;
+	//model = glm::translate(model, modelO.GetPostion());
+	btScalar trans[16]; // create a 4x4 array
+	modelO.GetTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+	glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+	SetUniformMat4(&bbShader, "model", model); // set the models rotation, scaling and transfom with the matrix
+	SetUniformVec3(&bbShader, "color", color); // Set color of the bounding box
 
 	glBindVertexArray(modelO.boundingBox.GetID());
 	glDrawArrays(GL_LINE_LOOP, 0, 4);

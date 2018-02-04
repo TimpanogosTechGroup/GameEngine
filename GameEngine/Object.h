@@ -10,6 +10,7 @@ This file is not complete
 #include "Verticies.h"
 #include "Material.h"
 #include "BoundingBox.h"
+#include <btBulletDynamicsCommon.h>
 
 class Object : public RenderItem {
 public:
@@ -72,6 +73,11 @@ public:
 
 	BoundingBox boundingBox;
 
+	void SetTransform(btTransform trans) {
+		this->trans = trans;
+	}
+	const btTransform& GetTrasform() const { return trans; };
+
 private:
 	Verticies verticies;
 	Verticies normals;
@@ -79,7 +85,7 @@ private:
 	Verticies boundBox;
 
 	glm::vec3 position;
-
+	btTransform trans;
 	Material* material;
 	
 };

@@ -3,6 +3,7 @@
 #include <vector>
 #include "Object.h"
 #include "Logger.h"
+#include <btBulletDynamicsCommon.h>
 
 class Model {
 public:
@@ -19,12 +20,21 @@ public:
 	}
 	glm::vec3 GetPostion() { return position; };
 
+	void SetTransform(btTransform trans) {
+		this->trans = trans;
+		for (int i = 0; i < objects.size(); i++) {
+			objects.at(i)->SetTransform(trans);
+		}
+	}
+
+	const btTransform& GetTrasform() const { return trans; };
+
 	void CreateBoundBox(); // NOTE: assumes at least 1 object that is NOT A PLANE (should work with plane, but more vertices than necessary - not tested)
 	BoundingBox boundingBox;
 
 private:
 	std::vector<Object*> objects;
 	Verticies boundBox;
-
+	btTransform trans;
 	glm::vec3 position;
 };
