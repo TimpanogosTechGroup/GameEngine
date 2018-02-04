@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 	Model liberty = *ResourceManager::getModel("statue");
 
 	model.SetPosition(glm::vec3(0, 0, 0));
-	liberty.SetPosition(glm::vec3(0, -10, 0));
+	liberty.SetPosition(glm::vec3(0, 10, 0));
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
