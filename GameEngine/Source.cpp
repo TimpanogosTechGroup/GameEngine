@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
 	CubeMap* cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
 	model.SetPosition(glm::vec3(0, 0, 0));
-	liberty.SetPosition(glm::vec3(0, -10, 0));
+	liberty.SetPosition(glm::vec3(0, 10, 0));
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
