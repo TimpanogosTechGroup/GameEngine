@@ -21,7 +21,7 @@ public:
 		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
-		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, .5, 1), btVector3(0, -50, 0))));
+		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0))));
 	
 		collisionObjects.push_back(new btStaticPlaneShape(btVector3(0, 1, 0), 1));
 		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, motionStates.at(0), collisionObjects.at(0), btVector3(0, 0, 0));

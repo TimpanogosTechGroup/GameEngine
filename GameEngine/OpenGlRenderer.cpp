@@ -75,6 +75,9 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		// Standard clear depth buffer bit and color buffer bit
 		glClearDepth(1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//glEnable(GL_CULL_FACE);
+		//glCullFace(GL_FRONT);
+		//glFrontFace(GL_CW);
 
 		SDL_CaptureMouse(SDL_TRUE);
 		//SDL_SetWindowGrab(window, SDL_TRUE);
@@ -189,7 +192,6 @@ bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
 	//}
 
 	for (auto &vert : *cubemap.GetObject(0)->GetVerticies().GetValueVector()) {
-		std::cout << vert << std::endl;
 		buffer.push_back(vert);
 	}
 
@@ -202,7 +204,6 @@ bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	std::cout << "ID: " << cubemap.GetObject(0)->GetID() << std::endl;
 	return true;
 }
 

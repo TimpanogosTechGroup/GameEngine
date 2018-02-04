@@ -60,8 +60,8 @@ int main(int argc, char** argv) {
 
 	CubeMap* cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
-	model.SetPosition(glm::vec3(0, 0, 0));
-	liberty.SetPosition(glm::vec3(0, 10, 0));
+	model.SetPosition(glm::vec3(0, 10, 0));
+	liberty.SetPosition(glm::vec3(0, 0, 0));
 
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
@@ -69,6 +69,8 @@ int main(int argc, char** argv) {
 	renderer.CompileBoundingBox(model.boundingBox);
 	renderer.CompileBoundingBox(liberty.boundingBox);
 	renderer.CompileBoundingBox(cube->boundingBox);
+
+	std::cout << "Models position: " << liberty.GetPostion().x << std::endl;
 
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
@@ -139,7 +141,9 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderBoundingBox(*camera, *cube, glm::vec3(0, 0, 1));
 		renderer.RenderModel(*camera, liberty);
+		renderer.RenderModel(*camera, model);
 
+		// Show the chnages after rendering
 		renderer.UpdateScreen();
 	}
 
