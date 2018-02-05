@@ -1,5 +1,5 @@
 #include "FontManager.h"
-
+#include "Logger.h"
 #include "FontManagerException.h"
 
 
@@ -17,6 +17,7 @@ FontManager::~FontManager()
 
 void FontManager::loadFont(std::string fontName)
 {
+	//Logger::Log<FontManager>(DEBUG, "Initializing...");
 	Font* font = new Font();
 	if (FT_New_Face(fontLibrary, fontName.c_str(), 0, &font->getFace()))
 		throw new FontManagerException();

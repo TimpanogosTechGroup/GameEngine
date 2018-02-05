@@ -3,8 +3,8 @@
 #include "Model.h"
 #include "Logger.h"
 
-void PhysicsEngine::Update(Model& model, Model& liberty) {
-	dynamicsWorld->stepSimulation(1 / 1000.f, 5);
+void PhysicsEngine::Update(double delta, Model& model, Model& liberty) {
+	dynamicsWorld->stepSimulation(delta / 2000, 5);
 
 	btTransform trans;
 	rigidBodies.at(1)->getMotionState()->getWorldTransform(trans);

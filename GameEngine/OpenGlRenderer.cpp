@@ -257,7 +257,6 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 			glm::ivec2(font.getFace()->glyph->bitmap_left, font.getFace()->glyph->bitmap_top),
 			font.getFace()->glyph->advance.x
 		};
-		std::cout << "Char: " << texture << ", width: " << font.getFace()->glyph->bitmap.width << std::endl;
 		font.addCharacter(c, character);
 	}
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -379,19 +378,8 @@ void OpenGlRenderer::RenderText(Camera* camera, Font & font, std::string text, f
 		{ xpos + w, ypos,       1.0, 1.0 },
 		{ xpos + w, ypos + h,   1.0, 0.0 }
 		};
-		//GLfloat vertices[6][4] = {
-		//{ 0,     1,   0.0, 0.0 },
-		//{ 0,     0,       0.0, 1.0 },
-		//{ 1, 0,       1.0, 1.0 },
-
-		//{ 0,     1,   0.0, 0.0 },
-		//{ 1, 0,       1.0, 1.0 },
-		//{ 1, 1,   1.0, 0.0 }
-		//};
-		//std::cout << *c;
 		// Render glyph texture over quad
 		glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-		//std::cout << ch.TextureID << " ";
 		// Update content of VBO memory
 		glBindBuffer(GL_ARRAY_BUFFER, font.getVBO().GetID());
 		//std::cout << " VBO ID: " << font.getVBO().GetID();

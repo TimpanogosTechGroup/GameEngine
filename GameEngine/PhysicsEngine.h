@@ -86,7 +86,7 @@ public:
 	}
 
 	void PhysicsTest();
-	void Update(Model& model, Model& liberty);
+	void Update(double delta, Model& model, Model& liberty);
 
 private:
 	btBroadphaseInterface * broadphase;

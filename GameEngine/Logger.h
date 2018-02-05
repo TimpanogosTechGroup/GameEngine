@@ -7,6 +7,8 @@
 #include <unordered_map>
 #include <string>
 #include <time.h>
+#include <ostream>
+#include <istream>
 
 enum LoggerLevel {
 	INFO, ERROR, SEVERE, EXPCEPTION, LOG, DEBUG, RELEASE

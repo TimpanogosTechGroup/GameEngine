@@ -48,6 +48,7 @@ int main(int argc, char** argv) {
 	FontManager fontManager;
 	try {
 		fontManager.loadFont("fonts\\arial.ttf");
+		Logger::Log<FontManager>(DEBUG, "Initializing...");
 	}
 	catch (FontManagerException& e) {
 		Logger::Log<FontManager>(ERROR, e.what());
@@ -84,8 +85,6 @@ int main(int argc, char** argv) {
 	renderer.CompileBoundingBox(liberty.boundingBox);
 	renderer.CompileBoundingBox(cube->boundingBox);
 
-	std::cout << "Models position: " << liberty.GetPostion().x << std::endl;
-
 	renderer.CompileModel(model);
 	renderer.CompileModel(liberty);
 	renderer.CompileCubeMap(*cube);
@@ -95,12 +94,15 @@ int main(int argc, char** argv) {
 
 	// Main loop
 	Logger::Log<Logger>(INFO, "Entering main loop");
+	// Stuff for FPS profiler and printing
 	int nbFrames = 0;
 	double lastTime = time(0);
 	double FPS_o = 0;
 	double timePerFrame = 0.0;
+	std::ostringstream os;
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
+		// FPS counter and profiler
 		double currentTime = time(0);
 		nbFrames++;
 		if (currentTime - lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
@@ -112,7 +114,8 @@ int main(int argc, char** argv) {
 			lastTime += 1.0;
 		}
 
-		physics.Update(model, liberty);
+		// update physics with respect to delta
+		physics.Update(timePerFrame, model, liberty);
 
 		float delta = .002f;
 
@@ -171,14 +174,15 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderBoundingBox(*camera, *cube, glm::vec3(0, 0, 1));
 		renderer.RenderModel(*camera, liberty);
-		//renderer.RenderModel(*camera, model);
-		std::ostringstream os;
+		renderer.RenderModel(*camera, model);
 		os << "FPS: " << FPS_o;
 		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
 		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		os.str("");
+		os.clear();
 		// Show the chnages after rendering
 		renderer.UpdateScreen();
 	}

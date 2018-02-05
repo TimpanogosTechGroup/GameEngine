@@ -18,7 +18,7 @@ public:
 
 	void SetPosition(glm::vec3 p) {
 		trans.setOrigin(btVector3(p.x, p.y, p.z));
-		for (int i = 0; i < objects.size(); i++) {
+		for (unsigned int i = 0; i < objects.size(); i++) {
 			objects.at(i)->SetPosition(p);
 		}
 	}
