@@ -16,6 +16,9 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
+#include "FontManager.h"
+#include "FontManagerException.h"
+#include <time.h>
 
 extern "C" {
 #include <lua\lua.hpp>
@@ -42,6 +45,15 @@ int main(int argc, char** argv) {
 	Logger::Log<InputManager>(INFO, "Initializing...");
 	InputManager inputManager;
 
+	FontManager fontManager;
+	try {
+		fontManager.loadFont("fonts\\arial.ttf");
+	}
+	catch (FontManagerException& e) {
+		Logger::Log<FontManager>(ERROR, e.what());
+	}
+	
+
 	Logger::Log<Registry>(INFO, "Initializing...");
 	Registry::SetRenderEngine(&renderer);
 	Registry::Register("renderer", &renderer);
@@ -62,7 +74,7 @@ int main(int argc, char** argv) {
 
 	model.SetPosition(glm::vec3(0, 10, 0));
 	liberty.SetPosition(glm::vec3(0, 1, 0));
-	model.setRotation(0, 10, 0);
+	model.setRotation(0, 1, 0);
 	liberty.setRotation(0, 0, 0);
 
 	model.CreateBoundBox();
@@ -83,7 +95,23 @@ int main(int argc, char** argv) {
 
 	// Main loop
 	Logger::Log<Logger>(INFO, "Entering main loop");
+	int nbFrames = 0;
+	double lastTime = time(0);
+	double FPS_o = 0;
+	double timePerFrame = 0.0;
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+
+		double currentTime = time(0);
+		nbFrames++;
+		if (currentTime - lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
+											 // printf and reset timer
+			//printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+			timePerFrame = 1000.0 / double(nbFrames);
+			FPS_o = nbFrames;
+			nbFrames = 0;
+			lastTime += 1.0;
+		}
+
 		physics.Update(model, liberty);
 
 		float delta = .002f;
@@ -143,8 +171,14 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, liberty, glm::vec3(0, 1, 0));
 		renderer.RenderBoundingBox(*camera, *cube, glm::vec3(0, 0, 1));
 		renderer.RenderModel(*camera, liberty);
-		renderer.RenderModel(*camera, model);
-
+		//renderer.RenderModel(*camera, model);
+		std::ostringstream os;
+		os << "FPS: " << FPS_o;
+		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		os.str("");
+		os.clear();
+		os << "Time: " << timePerFrame;
+		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		// Show the chnages after rendering
 		renderer.UpdateScreen();
 	}

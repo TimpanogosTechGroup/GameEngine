@@ -79,6 +79,8 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		//glEnable(GL_CULL_FACE);
 		//glCullFace(GL_FRONT);
 		//glFrontFace(GL_CW);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		SDL_CaptureMouse(SDL_TRUE);
 		//SDL_SetWindowGrab(window, SDL_TRUE);
@@ -92,6 +94,13 @@ void OpenGlRenderer::init() {
 	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
 	ResourceManager::addTexture("default", AssetManager::LoadTexture("Texture\\question.png"));
 	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader\\cubemap_vert.glsl", "Shader\\cubemap_frag.glsl"));
+	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader\\font_vert.glsl", "Shader\\font_frag.glsl"));
+}
+
+glm::mat4 OpenGlRenderer::getOrthoGraphicsProjection()
+{
+	return glm::ortho(0.0f, (float)Registry::GetRenderEngine()->GetWidth(), 0.0f, (float)Registry::GetRenderEngine()->GetHeight(), -1000.0f, 1000.0f);
+	//return glm::ortho(0, window_width, 0, window_height);
 }
 
 // Swaps the render buffers so we can see the changes that we have rendered
@@ -208,6 +217,62 @@ bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
 	return true;
 }
 
+void OpenGlRenderer::initFontBuffer(Font& font) {
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
+
+	for (GLubyte c = 0; c < 128; c++)
+	{
+		// Load character glyph 
+		int errorCode = FT_Load_Char(font.getFace(), c, FT_LOAD_RENDER);
+		if (errorCode)
+		{
+			std::cout << "ERROR::FREETYTPE: Failed to load Glyph: " << errorCode << std::endl;
+			continue;
+		}
+		// Generate texture
+		GLuint texture;
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexImage2D(
+			GL_TEXTURE_2D,
+			0,
+			GL_RED,
+			font.getFace()->glyph->bitmap.width,
+			font.getFace()->glyph->bitmap.rows,
+			0,
+			GL_RED,
+			GL_UNSIGNED_BYTE,
+			font.getFace()->glyph->bitmap.buffer
+		);
+		// Set texture options
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// Now store character for later use
+		Font::Character character = {
+			texture,
+			glm::ivec2(font.getFace()->glyph->bitmap.width, font.getFace()->glyph->bitmap.rows),
+			glm::ivec2(font.getFace()->glyph->bitmap_left, font.getFace()->glyph->bitmap_top),
+			font.getFace()->glyph->advance.x
+		};
+		std::cout << "Char: " << texture << ", width: " << font.getFace()->glyph->bitmap.width << std::endl;
+		font.addCharacter(c, character);
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glGenVertexArrays(1, &font.GetID());
+	glGenBuffers(1, &font.getVBO().GetID());
+	glBindVertexArray(font.GetID());
+	glBindBuffer(GL_ARRAY_BUFFER, font.getVBO().GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 
@@ -279,6 +344,69 @@ void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 	glDepthMask(GL_TRUE);
+}
+
+void OpenGlRenderer::RenderText(Camera* camera, Font & font, std::string text, float x, float y, float scale, glm::vec3 color)
+{
+	// Activate corresponding render state	
+	glUseProgram(ResourceManager::getShader("font_shader")->GetID());
+	//glUniform3f(glGetUniformLocation(ResourceManager::getShader("font_shader")->GetID(), "textColor"), color.x, color.y, color.z);
+	SetUniformVec3(ResourceManager::getShader("font_shader"), "textColor", color);
+	SetUniformMat4(ResourceManager::getShader("font_shader"), "projection", getOrthoGraphicsProjection());
+	glActiveTexture(GL_TEXTURE0);
+	glBindVertexArray(font.GetID());
+
+	// Iterate through all characters
+	std::string::const_iterator c;
+	for (c = text.begin(); c != text.end(); c++)
+	{
+		Font::Character ch = font.getCharacter(*c);
+
+		GLfloat xpos = x + ch.Bearing.x * scale;
+		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+		GLfloat w = ch.Size.x * scale;
+		GLfloat h = ch.Size.y * scale;
+
+		//std::cout << "Char: xpos, " << xpos << " ypos, " << ypos << " w, " << w << " h," << h << std::endl;
+		// Update VBO for each character
+		GLfloat vertices[6][4] = {
+		{ xpos,     ypos + h,   0.0, 0.0 },
+		{ xpos,     ypos,       0.0, 1.0 },
+		{ xpos + w, ypos,       1.0, 1.0 },
+
+		{ xpos,     ypos + h,   0.0, 0.0 },
+		{ xpos + w, ypos,       1.0, 1.0 },
+		{ xpos + w, ypos + h,   1.0, 0.0 }
+		};
+		//GLfloat vertices[6][4] = {
+		//{ 0,     1,   0.0, 0.0 },
+		//{ 0,     0,       0.0, 1.0 },
+		//{ 1, 0,       1.0, 1.0 },
+
+		//{ 0,     1,   0.0, 0.0 },
+		//{ 1, 0,       1.0, 1.0 },
+		//{ 1, 1,   1.0, 0.0 }
+		//};
+		//std::cout << *c;
+		// Render glyph texture over quad
+		glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+		//std::cout << ch.TextureID << " ";
+		// Update content of VBO memory
+		glBindBuffer(GL_ARRAY_BUFFER, font.getVBO().GetID());
+		//std::cout << " VBO ID: " << font.getVBO().GetID();
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		// Render quad
+		glPointSize(10);
+		glDrawArrays(GL_TRIANGLES
+			, 0, 6);
+		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+		x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64)
+	}
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 }
 
 void OpenGlRenderer::Clear() {

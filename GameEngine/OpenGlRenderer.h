@@ -5,6 +5,8 @@ Our OpenGl implementation of the RenderEngine
 */
 
 #pragma once
+#include <ft2build.h>
+#include FT_FREETYPE_H
 #include "RenderEngine.h"
 #include <SDL\SDL.h>
 #include "FrameBuffer.h"
@@ -12,6 +14,7 @@ Our OpenGl implementation of the RenderEngine
 #include "PhysicsEngine.h"
 #include <string>
 #include "CubeMap.h"
+#include "Font.h"
 
 class OpenGlRenderer :
 	public RenderEngine
@@ -30,12 +33,13 @@ public:
 	bool CompileObject(Object& object);
 	bool CompileModel(Model& model);
 	bool CompileCubeMap(CubeMap& cubemap);
+	void initFontBuffer(Font& font);
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 	bool RenderObject(Camera& camera, Object& object);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 	bool RenderModel(Camera& camera, Model& model);
 	void RenderCubeMap(Camera& camera, CubeMap& cube);
-
+	void RenderText(Camera* camera, Font& font, std::string text, float x, float y, float scale, glm::vec3 color);
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
 	// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
 	bool CompileShader(ShaderType type, unsigned int &ID, const char* source) override;
@@ -48,8 +52,10 @@ public:
 	void CompileBoundingBox(BoundingBox& boundingbox);
 	// Renders the bounding box, these are different from normal Objects becuase we render them using GL_LINE_LOOP, and we have to change up the way OpenGlRenders stuff
 	void RenderBoundingBox(Camera& camera, Model& model, glm::vec3 color);
-
+	// Initializes the renderer, this function loads default shaders and such
 	void init() override;
+
+	glm::mat4 getOrthoGraphicsProjection();
 
 	Shader bbShader;
 
