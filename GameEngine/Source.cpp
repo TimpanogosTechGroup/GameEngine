@@ -78,6 +78,9 @@ int main(int argc, char** argv) {
 	model.setRotation(0, 1, 0);
 	liberty.setRotation(0, 0, 0);
 
+	camera->SetCameraLookAtTarget(liberty.GetObject(0));
+	camera->EnableLookAt();
+
 	model.CreateBoundBox();
 	liberty.CreateBoundBox();
 	cube->CreateBoundBox();
@@ -167,6 +170,12 @@ int main(int argc, char** argv) {
 			SDL_CaptureMouse(SDL_FALSE);
 			inputManager.disableMouseMovement();
 		}
+		if (inputManager.isKeyPressed(SDLK_TAB)) {
+			camera->EnableLookAt();
+		}
+		else {
+			camera->DisableLookAt();
+		}
 
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, *cube);
@@ -175,6 +184,8 @@ int main(int argc, char** argv) {
 		renderer.RenderBoundingBox(*camera, *cube, glm::vec3(0, 0, 1));
 		renderer.RenderModel(*camera, liberty);
 		renderer.RenderModel(*camera, model);
+
+		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
 		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");

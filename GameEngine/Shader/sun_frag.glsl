@@ -37,6 +37,9 @@ void main()
 
     vec3 result = (ambient + diffuse + specular) * vertexColor;
     //FragColor = vec4(result, 1.0);
-	FragColor = texture(texture1, texCoord) * vec4(result, 1.0);
+	vec4 fragColor = texture(texture1, texCoord) * vec4(result, 1.0);
 	//FragColor = vec4(vertexColor, 1.0);
+		float gamma = 2.2;
+    FragColor.rgb = pow(fragColor.rgb, vec3(1.0/gamma));
+	FragColor.a = fragColor.a;
 }

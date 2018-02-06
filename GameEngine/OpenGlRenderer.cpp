@@ -81,6 +81,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		//glFrontFace(GL_CW);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glEnable(GL_FRAMEBUFFER_SRGB);
 
 		SDL_CaptureMouse(SDL_TRUE);
 		//SDL_SetWindowGrab(window, SDL_TRUE);
@@ -302,7 +303,7 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 	//}
 
 	SetUniformVec3(object.GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
-	SetUniformVec3(object.GetMaterial()->GetShader(), "lightColor", glm::vec3(1, 0.9, 1));
+	SetUniformVec3(object.GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
 	SetUniformVec3(object.GetMaterial()->GetShader(), "viewPos", camera.GetPosition());
 
 
@@ -349,8 +350,8 @@ void OpenGlRenderer::RenderText(Camera* camera, Font & font, std::string text, f
 {
 	// Activate corresponding render state	
 	glUseProgram(ResourceManager::getShader("font_shader")->GetID());
-	//glUniform3f(glGetUniformLocation(ResourceManager::getShader("font_shader")->GetID(), "textColor"), color.x, color.y, color.z);
 	SetUniformVec3(ResourceManager::getShader("font_shader"), "textColor", color);
+	//SetUniformMat4(ResourceManager::getShader("font_shader"), "projection", camera->GetProjectionMatrix());
 	SetUniformMat4(ResourceManager::getShader("font_shader"), "projection", getOrthoGraphicsProjection());
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(font.GetID());
