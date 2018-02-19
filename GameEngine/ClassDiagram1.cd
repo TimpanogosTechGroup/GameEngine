@@ -1,2 +1,235 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FontManagerException" Collapsed="true">
+    <Position X="20.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FontManagerException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="16.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARACMBEAAOBCBMEoEAFgEAARAikBAgwAAADQAIAAABI=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CubeMap" Collapsed="true">
+    <Position X="0.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAQAAAAAQAgAAAAAAAAAAACAAAgAAAACAAAAAAAA=</HashCode>
+      <FileName>CubeMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Material" Collapsed="true">
+    <Position X="20.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAgCAAAAAAAAQAAAAAIAACAAggCABAhABEBAAAA=</HashCode>
+      <FileName>Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="0.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAABIAAAAAAQAAAADQBAEgAgABgAAAQAAAA=</HashCode>
+      <FileName>Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Object" Collapsed="true">
+    <Position X="1.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAFAEAAABABAkAAAQAAAACABAEgAlABQAAAREAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimitiveShape" Collapsed="true">
+    <Position X="16.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>PrimitiveShape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="15" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Verticies" Collapsed="true">
+    <Position X="18.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAIAAAkgAEAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Verticies.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoundingBox" Collapsed="true">
+    <Position X="8" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAKAKCAgAAOAIoIoAAlAHgAEAAEAAAAAAAEAAE=</HashCode>
+      <FileName>BoundingBox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Font" Collapsed="true">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAABAAAQAAAAAQAAAIAAQAABAAGAAE=</HashCode>
+      <FileName>Font.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrameBuffer" Collapsed="true">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQCAAAAAYAAAAEAAAgABBAKAABAAEAAAEAAEAEAAI=</HashCode>
+      <FileName>FrameBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGlRenderer" Collapsed="true">
+    <Position X="3.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGQKUgBACIgCoAAQAAAAAAAAQAUQAAIYABIIAhBQAAA=</HashCode>
+      <FileName>OpenGlRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RenderEngine" Collapsed="true">
+    <Position X="3.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQJEABAAAAAAAAQACAAAABEQAQAAAoQAAAIAEBAAAA=</HashCode>
+      <FileName>RenderEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RenderItem" Collapsed="true">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>RenderItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shader" Collapsed="true">
+    <Position X="12.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACBAAAAAAAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture" Collapsed="true">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAABAAAQAAAAAAAIAAEAAAAQ=</HashCode>
+      <FileName>Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssetManager" Collapsed="true">
+    <Position X="15" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEAAAAAAAAAAAAAAAIgAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AssetManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FontManager" Collapsed="true">
+    <Position X="18.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAIAQAAiAAQAAA=</HashCode>
+      <FileName>FontManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputManager" Collapsed="true">
+    <Position X="15" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAASBEAAAgAAAAIAAAAQBIAEEBAAQIAIAgEA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Properties" Collapsed="true">
+    <Position X="18.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAABABAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Properties.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Registry" Collapsed="true">
+    <Position X="20.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAEAQAAAAAAAAABEBABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Registry.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RegistryEntry" Collapsed="true">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>RegistryEntry.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResourceManager" Collapsed="true">
+    <Position X="1" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAoAAAEAAAggAAAAAEAAAgAEAAEAAAAAQAAAMQgA=</HashCode>
+      <FileName>ResourceManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneManager" Collapsed="true">
+    <Position X="16.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAAAAA=</HashCode>
+      <FileName>SceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MotionState" Collapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MotionState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysicsEngine" Collapsed="true">
+    <Position X="5.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACICAAFAAABAAAAAAIAARCAgCQAAAIAQAAAFABA=</HashCode>
+      <FileName>PhysicsEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Logger" Collapsed="true">
+    <Position X="16.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAIAAAAEAAAAAgAAAAkEAAAAAAAAIAAAAgA=</HashCode>
+      <FileName>Logger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LuaScript" Collapsed="true">
+    <Position X="18.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAABAAAAAAAAAAAAEAAAAAAAAQAABAAAAAQAAAA=</HashCode>
+      <FileName>LuaScript.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Camera_Movement" Collapsed="true">
+    <Position X="15" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAgAAAAAAAAAAAAICAAAgAIAAAAAAAAA=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShaderType" Collapsed="true">
+    <Position X="18.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Shader.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LoggerLevel" Collapsed="true">
+    <Position X="16.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAhgAgAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
+      <FileName>Logger.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="STREAM" Collapsed="true">
+    <Position X="20.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Logger.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

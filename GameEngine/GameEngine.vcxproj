@@ -26,6 +26,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FontManagerException.h" />
     <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LuaScript.h" />

@@ -1,7 +1,10 @@
-#pragma once
-#include <unordered_map>
+#ifndef INPUT_MANAGER_H
+#define INPUT_MANAGER_H
 
-class InputManager
+#include <unordered_map>
+#include "RegistryEntry.h"
+
+class InputManager : public RegistryEntry
 {
 public:
 	InputManager();
@@ -30,3 +33,4 @@ private:
 	bool proccessMouse = true;
 };
 
+#endif

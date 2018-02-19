@@ -5,8 +5,10 @@
 #include <unordered_map>
 #include <string>
 #include "Font.h"
+#include "Registry.h"
+#include "FontManagerException.h"
 
-class FontManager
+class FontManager : public RegistryEntry
 {
 private:
 	FT_Library fontLibrary;
