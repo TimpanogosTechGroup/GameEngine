@@ -16,13 +16,12 @@
 class GameEngine
 {
 private:
-	PhysicsEngine* physicsEngine;
+	PhysicsEngine physicsEngine;
 	FontManager fontManager;
 	OpenGlRenderer renderer;
 	InputManager inputManager;
-	Camera* camera = nullptr;
-	Model* liberty = nullptr;
-	Model* cube1 = nullptr;
+	Camera camera;
+	Model liberty;
 	ModelManager modelManager;
 
 	CubeMap cube;

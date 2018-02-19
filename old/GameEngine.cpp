@@ -1,7 +1,7 @@
 #include "GameEngine.h"
 
 
-GameEngine::GameEngine() : cube("Texture\\cubemap\\morning")
+GameEngine::GameEngine()
 {
 
 }
@@ -14,22 +14,15 @@ GameEngine::~GameEngine()
 void GameEngine::initialize() {
 	Registry::Register("renderer", &renderer);
 	Registry::Register("fontManager", &fontManager);
-	Registry::Register("physicsEngine", physicsEngine);
+	Registry::Register("physicsEngine", &physicsEngine);
 	Registry::Register("inputManager", &inputManager);
 
-	Registry::SetRenderEngine(&renderer);
-
 	Properties::Init();
-
-	physicsEngine = new PhysicsEngine();
 
 	renderer.CreateWindow(1280, 720);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
-	renderer.init();
-
-	camera = new Camera();
 
 	try {
 		fontManager.loadFont("fonts\\arial.ttf");
@@ -39,29 +32,17 @@ void GameEngine::initialize() {
 		Logger::Log<FontManager>(ERROR, e.what());
 	}
 
-	ResourceManager::loadModel("Model\\cube.obj", "cube");
-	ResourceManager::loadModel("Model\\cube.obj", "cube1");
-
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
 	//Load models
-	liberty = ResourceManager::getModel("cube");
-	cube1 = ResourceManager::getModel("cube1");
-	liberty->SetPosition(glm::vec3(0, 0, 0));
-	cube1->SetPosition(glm::vec3(0, 0, 0));
-	liberty->CreateBoundBox();
-	cube1->CreateBoundBox();
-	renderer.CompileBoundingBox(liberty->boundingBox);
-	renderer.CompileBoundingBox(cube1->boundingBox);
-	renderer.CompileModel(*liberty);
-	renderer.CompileModel(*cube1);
-	renderer.CompileCubeMap(cube);
+	liberty = *AssetManager::LoadModel("Model\\cube.obj");
+	liberty.CreateBoundBox();
+	renderer.CompileBoundingBox(liberty.boundingBox);
+	renderer.CompileModel(liberty);
 
 	// Add to physics
-	modelManager.push_back(cube1);
-	modelManager.push_back(liberty);
-	physicsEngine->AddModel(*cube1);
-	physicsEngine->AddModel(*liberty);
+	modelManager.push_back(&liberty);
+	physicsEngine.AddModel(liberty);
 
 }
 
@@ -86,7 +67,7 @@ void GameEngine::run() {
 		}
 
 		// update physics with respect to delta
-		physicsEngine->Update(timePerFrame, modelManager);
+		physicsEngine.Update(timePerFrame, modelManager);
 
 		float delta = .002f;
 
@@ -107,59 +88,57 @@ void GameEngine::run() {
 				break;
 			case SDL_MOUSEMOTION:
 				if (inputManager.isMouseMovementEnabled())
-					camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
+					camera.ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
 				break;
 			}
 		}
 
 		// Process input
 		if (inputManager.isKeyPressed(SDLK_w))
-			camera->ProcessKeyboard(FORWARD, delta);
+			camera.ProcessKeyboard(FORWARD, delta);
 		if (inputManager.isKeyPressed(SDLK_s))
-			camera->ProcessKeyboard(BACKWARD, delta);
+			camera.ProcessKeyboard(BACKWARD, delta);
 		if (inputManager.isKeyPressed(SDLK_a))
-			camera->ProcessKeyboard(LEFT, delta);
+			camera.ProcessKeyboard(LEFT, delta);
 		if (inputManager.isKeyPressed(SDLK_d))
-			camera->ProcessKeyboard(RIGHT, delta);
+			camera.ProcessKeyboard(RIGHT, delta);
 		if (inputManager.isKeyPressed(SDLK_LSHIFT))
-			camera->ProcessKeyboard(UP, delta);
+			camera.ProcessKeyboard(UP, delta);
 		if (inputManager.isKeyPressed(SDLK_LCTRL))
-			camera->ProcessKeyboard(DOWN, delta);
+			camera.ProcessKeyboard(DOWN, delta);
 		if (inputManager.isKeyPressed(SDLK_LEFT))
-			camera->ProcessMouseMovement(0.3f, 0, true);
+			camera.ProcessMouseMovement(0.3f, 0, true);
 		if (inputManager.isKeyPressed(SDLK_RIGHT))
-			camera->ProcessMouseMovement(-0.3f, 0, true);
+			camera.ProcessMouseMovement(-0.3f, 0, true);
 		if (inputManager.isKeyPressed(SDLK_UP))
-			camera->ProcessMouseMovement(0, 0.3f, true);
+			camera.ProcessMouseMovement(0, 0.3f, true);
 		if (inputManager.isKeyPressed(SDLK_DOWN))
-			camera->ProcessMouseMovement(0, -0.3f, true);
+			camera.ProcessMouseMovement(0, -0.3f, true);
 		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 			SDL_CaptureMouse(SDL_FALSE);
 			inputManager.disableMouseMovement();
 		}
 		if (inputManager.isKeyPressed(SDLK_TAB)) {
-			camera->EnableLookAt();
+			camera.EnableLookAt();
 		}
 		else {
-			camera->DisableLookAt();
+			camera.DisableLookAt();
 		}
 
 		// Render cube map first then render the rest of the scene
-		renderer.RenderCubeMap(*camera, cube);
-		renderer.RenderBoundingBox(*camera, *liberty, glm::vec3(0, 1, 0));
-		renderer.RenderBoundingBox(*camera, *cube1, glm::vec3(1, 0, 0));
-		renderer.RenderBoundingBox(*camera, cube, glm::vec3(0, 0, 1));
-		renderer.RenderModel(*camera, *liberty);
-		renderer.RenderModel(*camera, *cube1);
+		renderer.RenderCubeMap(camera, cube);
+		renderer.RenderBoundingBox(camera, liberty, glm::vec3(0, 1, 0));
+		renderer.RenderBoundingBox(camera, cube, glm::vec3(0, 0, 1));
+		renderer.RenderModel(camera, liberty);
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
-		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(&camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
-		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(&camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		// Show the chnages after rendering

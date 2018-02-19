@@ -55,7 +55,7 @@ public:
 		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1));
 		return true;
 	}
-	bool AddModel(Model model) {
+	bool AddModel(Model& model) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(model.boundingBox.GetxDist() / 2), btScalar(model.boundingBox.GetyDist() / 2), btScalar(model.boundingBox.GetzDist() / 2)));
 
 		collisionObjects.push_back(shape);

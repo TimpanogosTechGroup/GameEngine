@@ -111,6 +111,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files\scene</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files\manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="ModelManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files\manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
