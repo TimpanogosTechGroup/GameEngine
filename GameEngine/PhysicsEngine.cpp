@@ -3,16 +3,14 @@
 #include "Model.h"
 #include "Logger.h"
 
-void PhysicsEngine::Update(double delta, Model& model, Model& liberty) {
+void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 	dynamicsWorld->stepSimulation(delta / 2000, 5);
 
-	btTransform trans;
-	rigidBodies.at(1)->getMotionState()->getWorldTransform(trans);
-	model.SetPosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
-	model.SetTransform(trans);
-
-	rigidBodies.at(2)->getMotionState()->getWorldTransform(trans);
-	liberty.SetPosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
-	liberty.SetTransform(trans);
+	for (int i = 0; i < modelManager.size(); i++) {
+		btTransform trans;
+		rigidBodies.at(i+1)->getMotionState()->getWorldTransform(trans);
+		modelManager.GetModel(i)->SetPosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+		modelManager.GetModel(i)->SetTransform(trans);
+	}
 	//std::cout << trans.getOrigin().x() << " " << trans.getOrigin().y() << " " << trans.getOrigin().z() << std::endl;
 }

@@ -6,7 +6,7 @@
 #include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
 #include "MotionState.h"
 
-#include "Model.h"
+#include "ModelManager.h"
 #include "RegistryEntry.h"
 #include "Logger.h"
 #include "Properties.h"
@@ -85,8 +85,7 @@ public:
 		return true;
 	}
 
-	void PhysicsTest();
-	void Update(double delta, Model& model, Model& liberty);
+	void Update(double delta, ModelManager& modelManager);
 
 private:
 	btBroadphaseInterface * broadphase;

@@ -111,9 +111,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files\scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -203,7 +200,7 @@
     <ClInclude Include="CubeMap.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine.h">
+    <ClInclude Include="ModelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

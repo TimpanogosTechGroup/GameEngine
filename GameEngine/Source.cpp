@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
 	Logger::Log<OpenGlRenderer>(LoggerLevel::INFO, "Initializing...");
 
 	PhysicsEngine physics;
+	ModelManager modelManager;
 
 	OpenGlRenderer renderer;
 	renderer.CreateWindow(1280, 720);
@@ -70,6 +71,8 @@ int main(int argc, char** argv) {
 	ResourceManager::loadModel("Model\\LibertStatue.obj", "statue");
 	Model model = *AssetManager::LoadModel("Model\\cube.obj");
 	Model liberty = *ResourceManager::getModel("statue");
+	modelManager.push_back(&model);
+	modelManager.push_back(&liberty);
 
 	CubeMap* cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
@@ -118,7 +121,7 @@ int main(int argc, char** argv) {
 		}
 
 		// update physics with respect to delta
-		physics.Update(timePerFrame, model, liberty);
+		physics.Update(timePerFrame, modelManager);
 
 		float delta = .002f;
 
