@@ -53,9 +53,18 @@ public:
 	void SetColor(glm::vec4 col) { this->color = col; };
 
 private:
-	float diffuse;
-	float specular;
-	Texture* texture;
-	Shader* shader;
-	glm::vec4 color; // Color of the material
+	float diffuse; // These will become reduntant
+	float specular; // These will become reduntant
+
+	Texture* texture; // Texture of the object
+
+	// These textures are needed for the PHysically Based Rendinring (PBR)
+	Texture* normalMap; // Normal map of the object
+	Texture* albedoMap; // Albedo map
+	Texture* metallicMap; // Metallic map
+	Texture* roughnessMap; // Roughness maps
+	Texture* aoMap; // Occlusion map
+
+	Shader* shader; // The pointer to the shader of the object
+	glm::vec4 color; // Color of the object
 };

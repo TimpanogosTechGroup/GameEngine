@@ -212,6 +212,7 @@ Model* AssetManager::LoadModel(const char* pFile) {
 	// Everything (assimp) will be cleaned up by the importer destructor
 	model->setRotation(0, 0, 0);
 	model->SetPosition(glm::vec3(0, 0, 0));
+	ResourceManager::addModel(pFile, model);
 	return model;
 }
 

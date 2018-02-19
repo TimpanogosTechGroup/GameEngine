@@ -11,7 +11,7 @@ GameEngine::~GameEngine()
 void GameEngine::initialize() {
 	Registry::Register("renderer", &renderer);
 	Registry::Register("fontManager", &fontManager);
-	Registry::Register("physicsEngine", physicsEngine);
+	Registry::Register("physicsEngine", physicsEngine); //We need to change the construciton of the phsyics engine
 	Registry::Register("inputManager", &inputManager);
 
 	Registry::SetRenderEngine(&renderer);
@@ -38,17 +38,16 @@ void GameEngine::initialize() {
 
 
 	//Load models and stuff
-
-	ResourceManager::loadModel("Model\\cube.obj", "cube");
-	ResourceManager::loadModel("Model\\LibertStatue.obj", "cube1");
+	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
+	AssetManager::LoadModel("Model\\LibertStatue.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
 	//Load models
-	liberty = ResourceManager::getModel("cube");
-	cube1 = ResourceManager::getModel("cube1");
-	liberty->SetPosition(glm::vec3(0, 0, 0));
-	cube1->SetPosition(glm::vec3(0, 0, 0));
+	liberty = ResourceManager::getModel("Model\\LibertStatue.obj");
+	cube1 = ResourceManager::getModel("Model\\cube.obj");
+	
+	//Create the bounding boxes to display
 	liberty->CreateBoundBox();
 	cube1->CreateBoundBox();
 	renderer.CompileBoundingBox(liberty->boundingBox);
@@ -76,9 +75,7 @@ void GameEngine::run() {
 		// FPS counter and profiler
 		double currentTime = static_cast<double> (time(0));
 		nbFrames++;
-		if (currentTime - lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
-											 // printf and reset timer
-											 //printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+		if (currentTime - lastTime >= 1.0) {
 			timePerFrame = 1000.0 / double(nbFrames);
 			FPS_o = nbFrames;
 			nbFrames = 0;

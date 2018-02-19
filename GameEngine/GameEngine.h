@@ -29,6 +29,10 @@ private:
 public:
 	GameEngine();
 	~GameEngine();
+
+	/**
+
+	*/
 	void initialize();
 	void run();
 	void shudown();
