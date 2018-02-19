@@ -1,11 +1,8 @@
 #include "GameEngine.h"
 
-
 GameEngine::GameEngine() : cube("Texture\\cubemap\\morning")
 {
-
 }
-
 
 GameEngine::~GameEngine()
 {
@@ -39,8 +36,11 @@ void GameEngine::initialize() {
 		Logger::Log<FontManager>(ERROR, e.what());
 	}
 
+
+	//Load models and stuff
+
 	ResourceManager::loadModel("Model\\cube.obj", "cube");
-	ResourceManager::loadModel("Model\\cube.obj", "cube1");
+	ResourceManager::loadModel("Model\\LibertStatue.obj", "cube1");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 

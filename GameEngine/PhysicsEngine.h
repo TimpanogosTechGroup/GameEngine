@@ -29,10 +29,10 @@ public:
 		AddRigidBodyToWorld(rigidBodies.at(rigidBodies.size() - 1));
 	}
 	~PhysicsEngine() {
-		for (int i = 0; i < collisionObjects.size(); i++) {
+		for (unsigned int i = 0; i < collisionObjects.size(); i++) {
 			delete collisionObjects.at(i);
 		}
-		for (int i = 0; i < rigidBodies.size(); i++) {
+		for (unsigned int i = 0; i < rigidBodies.size(); i++) {
 			dynamicsWorld->removeRigidBody(rigidBodies.at(i));
 			delete rigidBodies.at(i);
 		}

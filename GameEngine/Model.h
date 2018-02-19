@@ -26,14 +26,14 @@ public:
 
 	void SetTransform(btTransform trans) {
 		this->trans = trans;
-		for (int i = 0; i < objects.size(); i++) {
-			objects.at(i)->SetTransform(trans);
+		for (auto &obj : objects) {
+			obj->SetTransform(trans);
 		}
 	}
 
 	void setRotation(float yaw = 0, float pitch = 0, float roll = 0) {
 		trans.setRotation(btQuaternion(yaw, pitch, roll));
-		for (int i = 0; i < objects.size(); i++) {
+		for (unsigned int i = 0; i < objects.size(); i++) {
 			objects.at(i)->setRotation(yaw, pitch, roll);
 		}
 	}

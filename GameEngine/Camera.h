@@ -6,7 +6,7 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <vector>
-#include "Object.h"
+#include "Model.h"
 #include "Properties.h"
 
 using namespace glm;
@@ -48,7 +48,7 @@ public:
 	void Move(Camera_Movement dir, float delta);
 
 	// Sets the Cameras look at target, must use function EnableLookAt() to use
-	void SetCameraLookAtTarget(Object* target);
+	void SetCameraLookAtTarget(Model* target);
 
 	// Gets the perpective matrix of the camera
 	glm::mat4 GetProjectionMatrix();
@@ -103,7 +103,7 @@ private:
 
 	// LookAtTarget
 	bool mustLookAt = false;
-	Object* lookAtTarget = nullptr;
+	Model* lookAtTarget = nullptr;
 
 	// Prespective matrix
 	glm::mat4 projection;

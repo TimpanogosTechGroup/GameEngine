@@ -19,11 +19,9 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include "ResourceManager.h"
 #include "Logger.h"
 #include "Properties.h"
-#include <btBulletDynamicsCommon.h>
 
 OpenGlRenderer::OpenGlRenderer()
 {
-
 }
 
 
@@ -76,9 +74,13 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		// Standard clear depth buffer bit and color buffer bit
 		glClearDepth(1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//glEnable(GL_CULL_FACE);
-		//glCullFace(GL_FRONT);
-		//glFrontFace(GL_CW);
+
+		// Don't render faces that are at the back of the object
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+		glFrontFace(GL_CW);
+
+		// Enable aplha channel
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		//glEnable(GL_FRAMEBUFFER_SRGB);
@@ -135,10 +137,6 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			buffer.push_back(object.GetVerticies().GetValues()[i + 1]);
 			buffer.push_back(object.GetVerticies().GetValues()[i + 2]);
 
-			buffer.push_back(object.GetMaterial()->GetColor().r);
-			buffer.push_back(object.GetMaterial()->GetColor().g);
-			buffer.push_back(object.GetMaterial()->GetColor().b);
-
 			buffer.push_back(object.GetNormals().GetValues()[i]);
 			buffer.push_back(object.GetNormals().GetValues()[i + 1]);
 			buffer.push_back(object.GetNormals().GetValues()[i + 2]);
@@ -165,15 +163,13 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 	glBindBuffer(GL_ARRAY_BUFFER, object.VBO.GetID());
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(9 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -193,14 +189,9 @@ bool OpenGlRenderer::CompileModel(Model& model) {
 bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
 {
 	std::vector<float> buffer;
+
 	// First we need to create the buffer to send off to the GPU
 	Object* cube = cubemap.GetObject(0);
-
-	//for (int i = 0; i < cube->GetVerticies().Size(); i += 3) {
-	//	buffer.push_back(object.GetVerticies().GetValues()[i]);
-	//	buffer.push_back(object.GetVerticies().GetValues()[i + 1]);
-	//	buffer.push_back(object.GetVerticies().GetValues()[i + 2]);
-	//}
 
 	for (auto &vert : *cubemap.GetObject(0)->GetVerticies().GetValueVector()) {
 		buffer.push_back(vert);
@@ -256,7 +247,7 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 			texture,
 			glm::ivec2(font.getFace()->glyph->bitmap.width, font.getFace()->glyph->bitmap.rows),
 			glm::ivec2(font.getFace()->glyph->bitmap_left, font.getFace()->glyph->bitmap_top),
-			font.getFace()->glyph->advance.x
+			static_cast<GLuint> (font.getFace()->glyph->advance.x)
 		};
 		font.addCharacter(c, character);
 	}

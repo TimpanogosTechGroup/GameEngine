@@ -28,6 +28,7 @@
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LuaScript.h" />
     <ClInclude Include="Material.h" />

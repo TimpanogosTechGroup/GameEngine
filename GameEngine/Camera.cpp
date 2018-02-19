@@ -116,7 +116,7 @@ void Camera::Move(Camera_Movement direction, float delta) {
 }
 
 // Sets the Cameras look at target, must use function EnableLookAt() to use
-void Camera::SetCameraLookAtTarget(Object* target) {
+void Camera::SetCameraLookAtTarget(Model* target) {
 	lookAtTarget = target;
 };
 

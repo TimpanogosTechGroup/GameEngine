@@ -191,11 +191,11 @@ Model* AssetManager::LoadModel(const char* pFile) {
 					uvs.push_back(1);
 				}
 
-				if (mesh->HasVertexColors(0)) {
-					colors.push_back(mesh->mColors[face.mIndices[j]]->r);
-					colors.push_back(mesh->mColors[face.mIndices[j]]->g);
-					colors.push_back(mesh->mColors[face.mIndices[j]]->b);
-				}
+				//if (mesh->HasVertexColors(0)) {
+				//	colors.push_back(mesh->mColors[face.mIndices[j]]->r);
+				//	colors.push_back(mesh->mColors[face.mIndices[j]]->g);
+				//	colors.push_back(mesh->mColors[face.mIndices[j]]->b);
+				//}
 			}
 		}
 
@@ -232,7 +232,7 @@ CubeMap * AssetManager::LoadCubeMap(const char * pFile)
 	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
 
-	for (int i = 0; i < cube->getTextureLocations().size(); i++) {
+	for (unsigned int i = 0; i < cube->getTextureLocations().size(); i++) {
 		unsigned char *data = stbi_load(cube->getTextureLocations().at(i).c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
