@@ -91,7 +91,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 	}
 }
 
-void OpenGlRenderer::init() {
+void OpenGlRenderer::loadDefaults() {
 	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl"));
 	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl"));
 	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
@@ -141,7 +141,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			buffer.push_back(object.GetNormals().GetValues()[i + 1]);
 			buffer.push_back(object.GetNormals().GetValues()[i + 2]);
 
-			if (object.GetUVCoords().Size() < (object.GetVerticies().Size() * (2.0 / 3.0))) {
+			if (object.GetUVCoords().Size() < (object.GetVerticies().Size() * (2.0 / 3.0))) { // Check to make sure the uv and other stuff match up, if they don't we'll just push back zero's
 				buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
 				buffer.push_back(0);
 			}

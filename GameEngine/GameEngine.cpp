@@ -24,7 +24,7 @@ void GameEngine::initialize() {
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
-	renderer.init();
+	renderer.loadDefaults();
 
 	camera = new Camera();
 
@@ -67,14 +67,14 @@ void GameEngine::initialize() {
 
 void GameEngine::run() {
 	int nbFrames = 0;
-	double lastTime = time(0);
+	double lastTime = static_cast<double> (time(0));
 	double FPS_o = 0;
 	double timePerFrame = 0.0;
 	std::ostringstream os;
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 
 		// FPS counter and profiler
-		double currentTime = time(0);
+		double currentTime = static_cast<double> (time(0));
 		nbFrames++;
 		if (currentTime - lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
 											 // printf and reset timer

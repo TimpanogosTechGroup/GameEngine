@@ -37,7 +37,7 @@ public:
 	// Creates a framebuffer
 	virtual FrameBuffer* CreateFramebuffer(unsigned int width, unsigned int height) { return nullptr; };
 	// initializes the render engine AFTER calling create window
-	virtual void init() {};
+	virtual void loadDefaults() {};
 
 	// Gets the screen width and height
 	int GetWidth() { return window_width; };
