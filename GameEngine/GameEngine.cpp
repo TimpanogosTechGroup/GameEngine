@@ -9,14 +9,14 @@ GameEngine::~GameEngine()
 }
 
 void GameEngine::initialize() {
+	Properties::Init();
+
 	Registry::Register("renderer", &renderer);
 	Registry::Register("fontManager", &fontManager);
 	Registry::Register("physicsEngine", physicsEngine); //We need to change the construciton of the phsyics engine
 	Registry::Register("inputManager", &inputManager);
 
 	Registry::SetRenderEngine(&renderer);
-
-	Properties::Init();
 
 	physicsEngine = new PhysicsEngine();
 
@@ -56,11 +56,14 @@ void GameEngine::initialize() {
 	renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
 
-	// Add to physics
+	// Add to model manager
 	modelManager.push_back(cube1);
 	modelManager.push_back(liberty);
-	physicsEngine->AddModel(*cube1);
-	physicsEngine->AddModel(*liberty);
+
+	// Add every model to physics
+	for (int i = 0; i < modelManager.size(); i++) {
+		physicsEngine->AddModel(*modelManager.GetModel(i));
+	}
 
 }
 
@@ -84,6 +87,7 @@ void GameEngine::run() {
 
 		// update physics with respect to delta
 		physicsEngine->Update(timePerFrame, modelManager);
+		physicsEngine->AddForce(1, glm::vec3(0,10,0));
 
 		float delta = .002f;
 

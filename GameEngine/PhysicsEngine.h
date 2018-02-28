@@ -6,6 +6,7 @@
 #include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
 #include "MotionState.h"
 
+#include <glm/glm.hpp>
 #include "ModelManager.h"
 #include "RegistryEntry.h"
 #include "Logger.h"
@@ -89,6 +90,13 @@ public:
 	}
 
 	void Update(double delta, ModelManager& modelManager);
+	void AddForce(int i, glm::vec3 f) {
+		AddForce(i, btVector3(f.x, f.y, f.z));
+	}
+	void AddForce(int i, btVector3 force) {
+		rigidBodies.at(i)->activate(true);
+		rigidBodies.at(i)->applyCentralForce(force);
+	}
 
 private:
 	btBroadphaseInterface * broadphase;
