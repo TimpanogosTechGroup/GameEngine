@@ -92,6 +92,7 @@ void GameEngine::run() {
 		float delta = .002f;
 
 		renderer.BindDefaultFrameBuffer();
+
 		renderer.Clear();
 		// We'll take out all of this input stuff out and make an InputManager class
 		SDL_Event event;

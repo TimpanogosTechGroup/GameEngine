@@ -50,27 +50,32 @@ public:
 		delete collisionConfiguration;
 		delete broadphase;
 	}
-	bool AddObject(Object obj) {
+	bool AddObject(Object obj, double mass) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
 		
 		collisionObjects.push_back(shape);
 
 		motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(obj.GetPostion().x, obj.GetPostion().y, obj.GetPostion().z))));
-		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1));
+		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1), mass);
 		return true;
 	}
-	bool AddModel(Model& model) {
+	bool AddObject(Object obj) {
+		return AddObject(obj, 1);
+	}
+	bool AddModel(Model& model, double mass) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(model.boundingBox.GetxDist() / 2), btScalar(model.boundingBox.GetyDist() / 2), btScalar(model.boundingBox.GetzDist() / 2)));
 
 		collisionObjects.push_back(shape);
 
 		motionStates.push_back(new btDefaultMotionState(model.GetTrasform()));
-		//motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(model.GetPostion().x, model.GetPostion().y, model.GetPostion().z))));
-		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1));
+		AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1), mass);
 		return true;
 	}
-	bool AddRigidBody(btCollisionShape* collisionShape, btMotionState* motionState) {
-		btScalar mass = 1;
+	bool AddModel(Model& model) {
+		return AddModel(model, 1);
+	}
+	bool AddRigidBody(btCollisionShape* collisionShape, btMotionState* motionState, double m) {
+		btScalar mass = static_cast<btScalar>(m);
 		btVector3 fallInertia(0, 0, 0);
 		collisionShape->calculateLocalInertia(mass, fallInertia);
 		btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, motionState, collisionShape, fallInertia);
@@ -89,14 +94,17 @@ public:
 		return true;
 	}
 
-	void Update(double delta, ModelManager& modelManager);
 	void AddForce(int i, glm::vec3 f) {
 		AddForce(i, btVector3(f.x, f.y, f.z));
 	}
 	void AddForce(int i, btVector3 force) {
 		rigidBodies.at(i)->activate(true);
-		rigidBodies.at(i)->applyCentralForce(force);
+		//rigidBodies.at(i)->applyCentralForce(force);
+		rigidBodies.at(i)->applyForce(force, btVector3(0, 0, 0));
 	}
+
+
+	void Update(double delta, ModelManager& modelManager);
 
 private:
 	btBroadphaseInterface * broadphase;
