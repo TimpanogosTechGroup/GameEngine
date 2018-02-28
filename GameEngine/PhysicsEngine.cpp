@@ -12,5 +12,4 @@ void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 		modelManager.GetModel(i)->SetPosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
 		modelManager.GetModel(i)->SetTransform(trans);
 	}
-	//std::cout << trans.getOrigin().x() << " " << trans.getOrigin().y() << " " << trans.getOrigin().z() << std::endl;
 }

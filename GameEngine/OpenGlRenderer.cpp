@@ -30,7 +30,7 @@ OpenGlRenderer::~OpenGlRenderer()
 }
 
 // Creates a window
-void OpenGlRenderer::CreateWindow(int width, int height) {
+void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 
 	window_width = width;
 	window_height = height;
@@ -50,7 +50,7 @@ void OpenGlRenderer::CreateWindow(int width, int height) {
 		//Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::INFO);
 
 		// Creates a window
-		window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+		window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 		if (window == NULL) {
 			Logger::Log<OpenGlRenderer>(SEVERE, "Couldn't create window :(");
 		}

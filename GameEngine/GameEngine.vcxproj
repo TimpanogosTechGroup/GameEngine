@@ -33,6 +33,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
+    <ClCompile Include="PhysicalInstance.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PrimitiveShape.cpp" />
     <ClCompile Include="Properties.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="MotionState.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
+    <ClInclude Include="PhysicalInstance.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />
     <ClInclude Include="Properties.h" />
