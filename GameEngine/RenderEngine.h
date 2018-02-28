@@ -12,7 +12,7 @@ This is the RenderEngine class, we will have different implementations of this c
 
 class RenderEngine : public RegistryEntry {
 public:
-	void CreateWindow(int width, int height);
+	void CreateWindow(std::string name, int width, int height);
 	void UpdateScreen();
 	enum Status { RUNNING, ERROR, SHUTDOWN };
 	Status GetStatus() { return status; };

@@ -20,7 +20,7 @@ void GameEngine::initialize() {
 
 	physicsEngine = new PhysicsEngine();
 
-	renderer.CreateWindow(1280, 720);
+	renderer.CreateWindow("Andromeda", 1280, 720);
 	renderer.UpdateScreen();
 	renderer.SetStatus(RenderEngine::RUNNING);
 	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
