@@ -19,32 +19,51 @@ PhysicalInstance::~PhysicalInstance()
 {
 }
 
+/*
+	Gets the transform of instance
+*/
 btTransform PhysicalInstance::getInstanceTrasform()
 {
 	return instanceTransform;
 }
 
+/*
+	Gets the Rotation of the instance
+*/
 btQuaternion PhysicalInstance::getInstanceRotation()
 {
 	return instanceTransform.getRotation();
 }
 
+/*
+	Get position of the instance
+*/
 btVector3 PhysicalInstance::getInstancePositionbt()
 {
 	return instanceTransform.getOrigin();
 }
 
+/*
+	Get Instance position
+*/
 glm::vec3 PhysicalInstance::getInstancePosition()
 {
 	glm::vec3 pos(instanceTransform.getOrigin().getX(), instanceTransform.getOrigin().getY(), instanceTransform.getOrigin().getZ());
 	return pos;
 }
 
+/*
+	Get Instance Scale
+*/
 float PhysicalInstance::getInstanceScale()
 {
 	return instanceScale;
 }
 
+
+/*
+	Gets the model reference
+*/
 Model & PhysicalInstance::getModelReference()
 {
 	// TODO: insert return statement here
