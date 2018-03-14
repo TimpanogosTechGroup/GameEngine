@@ -11,6 +11,10 @@ PhysicalInstance::PhysicalInstance(std::string uniqueName, Model & reference, gl
 	instanceModelReference = &reference;
 	btTransform trans;
 	trans.setOrigin(btVector3(position.x, position.y, position.z));
+	trans.setRotation(btQuaternion(0, 0, 0, 0));
+	trans.getRotation().setX(rotation.x);
+	trans.getRotation().setY(rotation.y);
+	trans.getRotation().setZ(rotation.z);
 	instanceTransform = trans;
 	instanceScale = scale;
 }
@@ -70,37 +74,63 @@ Model & PhysicalInstance::getModelReference()
 	return *instanceModelReference;
 }
 
+/*
+	Set position of instance
+*/
 void PhysicalInstance::setInstancePosition(btVector3 position)
 {
 	instanceTransform.setOrigin(position);
 }
 
+/*
+	Set position of instance
+*/
 void PhysicalInstance::setInstancePosition(glm::vec3 position)
 {
 	btVector3 pos(position.x, position.y, position.z);
 	instanceTransform.setOrigin(pos);
 }
 
+/*
+	Set rotation of instance
+*/
 void PhysicalInstance::setInstanceRotation(btQuaternion rotation)
 {
 	instanceTransform.setRotation(rotation);
 }
 
+/*
+	Set instance scale
+*/
 void PhysicalInstance::setInstanceScale(float scale)
 {
 	instanceScale = scale;
 }
 
+/*
+	Set instance scale
+*/
 void PhysicalInstance::setInstanceScale(float scale, float range)
 {
 	instanceScale = normalize(scale, 0, range);
 }
 
+/*
+	Set instance Model reference
+*/
 void PhysicalInstance::setInstanceModelReference(Model& model)
 {
 	instanceModelReference = &model;
 }
 
+void PhysicalInstance::setInstanceTrasnform(btTransform tran)
+{
+	this->instanceTransform = tran;
+}
+
+/*
+	Normailizes float values
+*/
 float PhysicalInstance::normalize(float norm, float startRange, float endRange)
 {
 	return (endRange - startRange) / norm;

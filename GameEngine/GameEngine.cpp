@@ -57,12 +57,19 @@ void GameEngine::initialize() {
 	renderer.CompileCubeMap(cube);
 
 	// Add to model manager
-	modelManager.push_back(cube1);
-	modelManager.push_back(liberty);
+	//modelManager.push_back(cube1);
+	//modelManager.push_back(liberty);
+
+	modelManager.push_back_instance(PhysicalInstance(std::string("cube"), *cube1, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
+	modelManager.push_back_instance(PhysicalInstance(std::string("liberty"), *liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
 
 	// Add every model to physics
-	for (int i = 0; i < modelManager.size(); i++) {
-		physicsEngine->AddModel(*modelManager.GetModel(i));
+	//for (int i = 0; i < modelManager.size(); i++) {
+	//	physicsEngine->AddModel(*modelManager.GetModel(i));
+	//}
+
+	for (auto &iter : modelManager.getPhysicalInstances()) {
+		physicsEngine->addModelInstance(iter.second, 1);
 	}
 
 }
@@ -87,7 +94,7 @@ void GameEngine::run() {
 
 		// update physics with respect to delta
 		physicsEngine->Update(timePerFrame, modelManager);
-		physicsEngine->AddForce(1, glm::vec3(0,10,0));
+		//physicsEngine->AddForce(1, glm::vec3(0,10,0));
 
 		float delta = .002f;
 

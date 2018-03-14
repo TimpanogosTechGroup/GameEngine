@@ -30,12 +30,15 @@ public:
 	float getInstanceScale();
 	Model& getModelReference();
 
+	std::string getName() const { return instanceName; }
+
 	void setInstancePosition(btVector3 position);
 	void setInstancePosition(glm::vec3 position);
 	void setInstanceRotation(btQuaternion rotation);
 	void setInstanceScale(float scale);
 	void setInstanceScale(float scale, float range);
 	void setInstanceModelReference(Model& model);
+	void setInstanceTrasnform(btTransform tran);
 };
 
 #endif
