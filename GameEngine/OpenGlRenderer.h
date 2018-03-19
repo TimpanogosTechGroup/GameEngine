@@ -35,9 +35,10 @@ public:
 	bool CompileCubeMap(CubeMap& cubemap);
 	void initFontBuffer(Font& font);
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
-	bool RenderObject(Camera& camera, Object& object);
+	bool RenderObject(Camera& camera, Object& object, PhysicalInstance& pos);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 	bool RenderModel(Camera& camera, Model& model);
+	void RenderPhysicalInstance(Camera& camera, PhysicalInstance& model);
 	void RenderCubeMap(Camera& camera, CubeMap& cube);
 	void RenderText(Camera* camera, Font& font, std::string text, float x, float y, float scale, glm::vec3 color);
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.

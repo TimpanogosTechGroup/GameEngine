@@ -25,10 +25,11 @@ public:
 		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
-		motionStates["gournd"] = (new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0))));
+		//dynamicsWorld->setGravity(btVector3(0, 9.8, 0));
+		motionStates["ground"] = (new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0))));
 	
 		collisionObjects["ground"] = (new btStaticPlaneShape(btVector3(0, 1, 0), 1));
-		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, motionStates.at(0), collisionObjects.at(0), btVector3(0, 0, 0));
+		btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, motionStates["ground"], collisionObjects["ground"], btVector3(0, 0, 0));
 		rigidBodies["ground"] = (new btRigidBody(groundRigidBodyCI));
 		AddRigidBodyToWorld(rigidBodies["ground"]);
 	}
@@ -71,13 +72,13 @@ public:
 	//	AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1), mass);
 	//	return true;
 	//}
-	bool addModelInstance(PhysicalInstance& instance, double mass) {
-		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance.getModelReference().boundingBox.GetxDist() / 2), btScalar(instance.getModelReference().boundingBox.GetyDist() / 2), btScalar(instance.getModelReference().boundingBox.GetzDist() / 2)));
+	bool addModelInstance(PhysicalInstance* instance, double mass) {
+		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
 
-		collisionObjects[instance.getName()] = shape;
+		collisionObjects[instance->getName()] = shape;
 
-		motionStates[instance.getName()] = new btDefaultMotionState(instance.getModelReference().GetTrasform());
-		AddRigidBody(instance, collisionObjects[instance.getName()], motionStates[instance.getName()], mass);
+		motionStates[instance->getName()] = new btDefaultMotionState(instance->getInstanceTrasform());
+		AddRigidBody(*instance, collisionObjects[instance->getName()], motionStates[instance->getName()], mass);
 		return true;
 	}
 	//bool AddModel(Model& model) {
@@ -103,14 +104,14 @@ public:
 		return true;
 	}
 
-	//void AddForce(int i, glm::vec3 f) {
-	//	AddForce(i, btVector3(f.x, f.y, f.z));
-	//}
-	//void AddForce(int i, btVector3 force) {
-	//	rigidBodies.at(i)->activate(true);
-	//	//rigidBodies.at(i)->applyCentralForce(force);
-	//	rigidBodies.at(i)->applyForce(force, btVector3(0, 0, 0));
-	//}
+	void AddForce(std::string name, glm::vec3 f) {
+		AddForce(name, btVector3(f.x, f.y, f.z));
+	}
+	void AddForce(std::string i, btVector3 force) {
+		rigidBodies.at(i)->activate(true);
+		//rigidBodies.at(i)->applyCentralForce(force);
+		rigidBodies.at(i)->applyForce(force, btVector3(0, 1, 0));
+	}
 
 
 	void Update(double delta, ModelManager& modelManager);

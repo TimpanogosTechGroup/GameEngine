@@ -5,10 +5,10 @@ PhysicalInstance::PhysicalInstance()
 	instanceModelReference = nullptr;
 }
 
-PhysicalInstance::PhysicalInstance(std::string uniqueName, Model & reference, glm::vec3 position, glm::vec3 rotation, float scale)
+PhysicalInstance::PhysicalInstance(std::string uniqueName, Model * reference, glm::vec3 position, glm::vec3 rotation, float scale)
 {
 	instanceName = uniqueName;
-	instanceModelReference = &reference;
+	instanceModelReference = reference;
 	btTransform trans;
 	trans.setOrigin(btVector3(position.x, position.y, position.z));
 	trans.setRotation(btQuaternion(0, 0, 0, 0));
@@ -118,9 +118,9 @@ void PhysicalInstance::setInstanceScale(float scale, float range)
 /*
 	Set instance Model reference
 */
-void PhysicalInstance::setInstanceModelReference(Model& model)
+void PhysicalInstance::setInstanceModelReference(Model* model)
 {
-	instanceModelReference = &model;
+	instanceModelReference = model;
 }
 
 void PhysicalInstance::setInstanceTrasnform(btTransform tran)

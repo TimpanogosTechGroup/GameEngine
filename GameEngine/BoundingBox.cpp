@@ -77,7 +77,7 @@ void BoundingBox::SetMaxValues(float xMax, float yMax, float zMax) {
 }
 
 void BoundingBox::ToString() {
-	std::cout << "boudning Box: " << std::endl;
+	std::cout << "bounding Box: " << std::endl;
 	std::cout << "X Min: " << xMin << ", Y Min: " << yMin << ", Z Min " << zMin << std::endl;
 	std::cout << "X Max: " << xMax << ", Y Max: " << yMax << ", Z Max " << zMax << std::endl;
 }

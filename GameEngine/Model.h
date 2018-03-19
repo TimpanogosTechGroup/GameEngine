@@ -7,7 +7,7 @@
 
 class Model {
 public:
-	Model() {
+	Model() : boundingBox() {
 		trans.setOrigin(btVector3(0, 0, 0));
 		trans.setRotation(btQuaternion(0, 0, 0, 0));
 	}

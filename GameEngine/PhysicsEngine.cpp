@@ -15,8 +15,8 @@ void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 
 	for (auto &iter : modelManager.getPhysicalInstances()) {
 		btTransform trans;
-		rigidBodies[iter.second.getName()]->getMotionState()->getWorldTransform(trans);
-		iter.second.setInstancePosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
-		iter.second.setInstanceTrasnform(trans);
+		rigidBodies[iter.second->getName()]->getMotionState()->getWorldTransform(trans);
+		iter.second->setInstancePosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+		//iter.second->setInstanceTrasnform(trans);
 	}
 }

@@ -265,11 +265,11 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 }
 
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
-bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
+bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstance& pos) {
 
 	// Generate the model matrix
 	glm::mat4 model; // Create a indentity matrix
-	model = glm::translate(model, object.GetPostion()); // Apply a translation to the matrix
+	model = glm::translate(model, pos.getInstancePosition()); // Apply a translation to the matrix
 	//model = glm::rotate(model, 5.0f, glm::vec3(0.0, 0.0, 1.0)); // Rotate matrix
 	//model = glm::scale(model, glm::vec3(0.5, 0.5, 0.5)); // Scale Matrix
 
@@ -307,12 +307,18 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
 }
 //bool RenderObject(Object& object, char attributes);
 
-bool OpenGlRenderer::RenderModel(Camera& camera, Model& model) {
-	OpenGlRenderer renderer;
-	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
-		RenderObject(camera, *(model.GetObject(i)));
+//bool OpenGlRenderer::RenderModel(Camera& camera, Model& model) {
+//	//OpenGlRenderer renderer;
+//	for (unsigned int i = 0; i < model.NumOfObjects(); i++) {
+//		RenderObject(camera, *(model.GetObject(i)));
+//	}
+//	return true;
+//}
+
+void OpenGlRenderer::RenderPhysicalInstance(Camera& camera, PhysicalInstance& physicalInstance) {
+	for (unsigned int i = 0; i < physicalInstance.getModelReference().NumOfObjects(); i++) {
+		RenderObject(camera, *physicalInstance.getModelReference().GetObject(i), physicalInstance);
 	}
-	return true;
 }
 
 void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)

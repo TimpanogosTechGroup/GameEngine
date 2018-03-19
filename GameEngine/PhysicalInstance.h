@@ -20,7 +20,7 @@ private:
 	float normalize(float norm, float startRange, float endRange); // Nomrailzes the float
 public:
 	PhysicalInstance();
-	PhysicalInstance(std::string uniqueName, Model& reference, glm::vec3 position, glm::vec3 rotation, float scale);
+	PhysicalInstance(std::string uniqueName, Model* reference, glm::vec3 position, glm::vec3 rotation, float scale);
 	~PhysicalInstance();
 
 	btTransform getInstanceTrasform();
@@ -37,7 +37,7 @@ public:
 	void setInstanceRotation(btQuaternion rotation);
 	void setInstanceScale(float scale);
 	void setInstanceScale(float scale, float range);
-	void setInstanceModelReference(Model& model);
+	void setInstanceModelReference(Model* model);
 	void setInstanceTrasnform(btTransform tran);
 };
 

@@ -60,15 +60,10 @@ void GameEngine::initialize() {
 	//modelManager.push_back(cube1);
 	//modelManager.push_back(liberty);
 
-	modelManager.push_back_instance(PhysicalInstance(std::string("cube"), *cube1, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
-	modelManager.push_back_instance(PhysicalInstance(std::string("liberty"), *liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("liberty"), liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
 
-	// Add every model to physics
-	//for (int i = 0; i < modelManager.size(); i++) {
-	//	physicsEngine->AddModel(*modelManager.GetModel(i));
-	//}
-
-	for (auto &iter : modelManager.getPhysicalInstances()) {
+ 	for (auto &iter : modelManager.getPhysicalInstances()) {
 		physicsEngine->addModelInstance(iter.second, 1);
 	}
 
@@ -93,8 +88,9 @@ void GameEngine::run() {
 		}
 
 		// update physics with respect to delta
+		physicsEngine->AddForce("cube", glm::vec3(0, 1, 0));
 		physicsEngine->Update(timePerFrame, modelManager);
-		//physicsEngine->AddForce(1, glm::vec3(0,10,0));
+
 
 		float delta = .002f;
 
@@ -159,8 +155,9 @@ void GameEngine::run() {
 		renderer.RenderBoundingBox(*camera, *liberty, glm::vec3(0, 1, 0));
 		renderer.RenderBoundingBox(*camera, *cube1, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, cube, glm::vec3(0, 0, 1));
-		renderer.RenderModel(*camera, *liberty);
-		renderer.RenderModel(*camera, *cube1);
+		//renderer.RenderModel(*camera, *liberty);
+		//renderer.RenderModel(*camera, *cube1);
+		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube"));
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
