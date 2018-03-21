@@ -14,7 +14,7 @@
 
 class PhysicsEngine : public RegistryEntry {
 public:
-	PhysicsEngine(){
+	PhysicsEngine() {
 		// We need to change the construction of this constructor
 		// Once we implement some way to load the scenes, we'll put the ground loading in the initialization instead of the constructor and then the problem will resolve itself
 

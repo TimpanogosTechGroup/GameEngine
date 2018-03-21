@@ -266,7 +266,6 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstance& pos) {
-
 	// Generate the model matrix
 	glm::mat4 model; // Create a indentity matrix
 	model = glm::translate(model, pos.getInstancePosition()); // Apply a translation to the matrix
@@ -280,8 +279,8 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstan
 		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
 		btScalar trans[16]; // create a 4x4 array
-		object.GetTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
-		glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+	//	object.GetTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+//		glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
 		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}
 

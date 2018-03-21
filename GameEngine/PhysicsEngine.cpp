@@ -3,6 +3,8 @@
 #include "Model.h"
 #include "Logger.h"
 
+using namespace std;
+
 void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 	dynamicsWorld->stepSimulation(delta / 2000, 5);
 
@@ -16,6 +18,7 @@ void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 	for (auto &iter : modelManager.getPhysicalInstances()) {
 		btTransform trans;
 		rigidBodies[iter.second->getName()]->getMotionState()->getWorldTransform(trans);
+		//std::cout << rigidBodies[iter.second->getName()]->getMotionState()->getWorldTransform(trans) << endl;
 		iter.second->setInstancePosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
 		//iter.second->setInstanceTrasnform(trans);
 	}

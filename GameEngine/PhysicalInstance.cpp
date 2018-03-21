@@ -1,5 +1,8 @@
 #include "PhysicalInstance.h"
 
+#include <iostream>
+using namespace std;
+
 PhysicalInstance::PhysicalInstance()
 {
 	instanceModelReference = nullptr;
@@ -11,10 +14,7 @@ PhysicalInstance::PhysicalInstance(std::string uniqueName, Model * reference, gl
 	instanceModelReference = reference;
 	btTransform trans;
 	trans.setOrigin(btVector3(position.x, position.y, position.z));
-	trans.setRotation(btQuaternion(0, 0, 0, 0));
-	trans.getRotation().setX(rotation.x);
-	trans.getRotation().setY(rotation.y);
-	trans.getRotation().setZ(rotation.z);
+	trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, 0));
 	instanceTransform = trans;
 	instanceScale = scale;
 }
@@ -88,7 +88,8 @@ void PhysicalInstance::setInstancePosition(btVector3 position)
 void PhysicalInstance::setInstancePosition(glm::vec3 position)
 {
 	btVector3 pos(position.x, position.y, position.z);
-	instanceTransform.setOrigin(pos);
+	setInstancePosition(pos);
+	//instanceTransform.setOrigin(pos);
 }
 
 /*

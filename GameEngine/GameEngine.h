@@ -23,6 +23,7 @@ private:
 	Camera* camera = nullptr;
 	Model* liberty = nullptr;
 	Model* cube1 = nullptr;
+	Model* barrel = nullptr;
 	ModelManager modelManager;
 
 	CubeMap cube;

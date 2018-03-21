@@ -39,20 +39,25 @@ void GameEngine::initialize() {
 
 	//Load models and stuff
 	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
-	AssetManager::LoadModel("Model\\LibertStatue.obj");
+	//AssetManager::LoadModel("Model\\LibertStatue.obj");
+	//AssetManager::LoadModel("Model\\Barrel.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 
 	//Load models
-	liberty = ResourceManager::getModel("Model\\LibertStatue.obj");
+	//liberty = ResourceManager::getModel("Model\\LibertStatue.obj");
 	cube1 = ResourceManager::getModel("Model\\cube.obj");
+	//barrel = ResourceManager::getModel("Model\\Barrel.obj");
 	
 	//Create the bounding boxes to display
-	liberty->CreateBoundBox();
+	//liberty->CreateBoundBox();
 	cube1->CreateBoundBox();
-	renderer.CompileBoundingBox(liberty->boundingBox);
+	//barrel->CreateBoundBox();
+	//renderer.CompileBoundingBox(liberty->boundingBox);
 	renderer.CompileBoundingBox(cube1->boundingBox);
-	renderer.CompileModel(*liberty);
+	//renderer.CompileBoundingBox(barrel->boundingBox);
+	//renderer.CompileModel(*barrel);
+	//renderer.CompileModel(*liberty);
 	renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
 
@@ -61,12 +66,13 @@ void GameEngine::initialize() {
 	//modelManager.push_back(liberty);
 
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("liberty"), liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	//modelManager.push_back_instance(new PhysicalInstance(std::string("liberty"), liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
+	//modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), barrel, glm::vec3(-10, 0, 0), glm::vec3(0, 0, 0), 1.0));
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {
 		physicsEngine->addModelInstance(iter.second, 1);
 	}
-
 }
 
 void GameEngine::run() {
@@ -88,7 +94,8 @@ void GameEngine::run() {
 		}
 
 		// update physics with respect to delta
-		physicsEngine->AddForce("cube", glm::vec3(0, 1, 0));
+		physicsEngine->AddForce("cube", glm::vec3(0, 10, 0));
+		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
 		physicsEngine->Update(timePerFrame, modelManager);
 
 
@@ -152,12 +159,16 @@ void GameEngine::run() {
 
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, cube);
-		renderer.RenderBoundingBox(*camera, *liberty, glm::vec3(0, 1, 0));
+		//renderer.RenderBoundingBox(*camera, *barrel, glm::vec3(0, 1, 0));
+		//renderer.RenderBoundingBox(*camera, *liberty, glm::vec3(0, 1, 0));
 		renderer.RenderBoundingBox(*camera, *cube1, glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, cube, glm::vec3(0, 0, 1));
 		//renderer.RenderModel(*camera, *liberty);
 		//renderer.RenderModel(*camera, *cube1);
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube"));
+		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube1"));
+		//renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("liberty"));
+		//renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
