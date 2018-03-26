@@ -70,8 +70,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	if (ResourceManager::hasTexture(file)) {
 		Logger::Log<AssetManager>(DEBUG, "Already Loaded");
 		return ResourceManager::getTexture(file);
-	}
-		
+	}	
 
 	Texture* texture = new Texture(); // Create a new texture
 	// Genereate buffers and bind
@@ -86,7 +85,9 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
 
+	stbi_set_flip_vertically_on_load(true);
 	unsigned char *data = stbi_load(file, &width, &height, &nrChannels, 0);
+
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -98,6 +99,7 @@ Texture* AssetManager::LoadTexture(const char* file) {
 	else
 	{
 		Logger::GetLogStream<AssetManager>() << "Failed to load texture: " << file;
+		Logger::GetLogStream<AssetManager>() << "\n" << stbi_failure_reason();
 		Logger::LogClassStream<AssetManager>(LoggerLevel::ERROR);
 	}
 	stbi_image_free(data);
@@ -234,6 +236,7 @@ CubeMap * AssetManager::LoadCubeMap(const char * pFile)
 	int width, height, nrChannels;
 
 	for (unsigned int i = 0; i < cube->getTextureLocations().size(); i++) {
+		stbi_set_flip_vertically_on_load(false); // This is just a quick fix, but it should not work.
 		unsigned char *data = stbi_load(cube->getTextureLocations().at(i).c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
@@ -270,8 +273,12 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 
 	aiTextureType textureType = aiTextureType_DIFFUSE;
 	aiString texturePath;
+	aiString textureAmbient;
+	aiString textureSpec;
 
 	Texture* texture;
+	Texture* textureAO;
+	Texture* textureSpecular;
 
 	bool containsText = true;
 
@@ -283,6 +290,7 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
 		//*Logger::GetLogStream<AssetManager>() << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << " ";
 	}
+	// Load Diffuse texture map
 	if (mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath) == AI_SUCCESS) {
 		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << texturePath.C_Str();
 		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
@@ -292,6 +300,34 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	else {
 		texture = ResourceManager::getTexture("default");
 	}
+
+	// Load ambient texture map
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_AMBIENT, 0), textureAmbient) == AI_SUCCESS) {
+		textureAO = LoadTexture(textureAmbient.C_Str());
+	}
+	else {
+		std::cout << "No Ambient Texture." << std::endl;
+		textureAO = ResourceManager::getTexture("default");
+	}
+
+	// Load acclusion texture map
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SPECULAR, 0), textureSpec) == AI_SUCCESS) {
+		textureSpecular = LoadTexture(textureSpec.C_Str());
+	}
+	else {
+		std::cout << "No Specular Texture." << std::endl;
+		textureAO = ResourceManager::getTexture("default");
+	}
+
+	// Load roughness texture map
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SHININESS, 0), textureSpec) == AI_SUCCESS) {
+		textureSpecular = LoadTexture(textureSpec.C_Str());
+	}
+	else {
+		std::cout << "No Specular Texture." << std::endl;
+		textureAO = ResourceManager::getTexture("default");
+	}
+
 	//Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
 	Material* tmp = new Material(1, 1, texture, containsText ? ResourceManager::getShader("color_shader") : ResourceManager::getShader("texture_shader"), glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;

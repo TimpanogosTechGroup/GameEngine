@@ -144,11 +144,14 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 			if (object.GetUVCoords().Size() < (object.GetVerticies().Size() * (2.0 / 3.0))) { // Check to make sure the uv and other stuff match up, if they don't we'll just push back zero's
 				buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
 				buffer.push_back(0);
+				std::cout << "No Texture Coords" << std::endl;
 			}
 			else {
 				int x = static_cast<int>(i * (2.0 / 3.0));
 				buffer.push_back(object.GetUVCoords().GetValues()[x]);
 				buffer.push_back(object.GetUVCoords().GetValues()[x + 1]);
+				//std::cout << "Texture Coords: " << object.GetUVCoords().GetValues()[x] << ", " << object.GetUVCoords().GetValues()[x + 1] << std::endl;
+
 			}
 		}
 	}

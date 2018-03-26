@@ -39,6 +39,7 @@ void GameEngine::initialize() {
 
 	//Load models and stuff
 	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
+	AssetManager::LoadModel("Model\\Barrel.obj");
 	//AssetManager::LoadModel("Model\\LibertStatue.obj");
 	//AssetManager::LoadModel("Model\\Barrel.obj");
 
@@ -52,14 +53,17 @@ void GameEngine::initialize() {
 	//Create the bounding boxes to display
 	//liberty->CreateBoundBox();
 	cube1->CreateBoundBox();
+	ResourceManager::getModel("Model\\Barrel.obj")->CreateBoundBox();
 	//barrel->CreateBoundBox();
 	//renderer.CompileBoundingBox(liberty->boundingBox);
 	renderer.CompileBoundingBox(cube1->boundingBox);
+	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
 	//renderer.CompileBoundingBox(barrel->boundingBox);
 	//renderer.CompileModel(*barrel);
 	//renderer.CompileModel(*liberty);
 	renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
+	renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
 
 	// Add to model manager
 	//modelManager.push_back(cube1);
@@ -67,6 +71,7 @@ void GameEngine::initialize() {
 
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	//modelManager.push_back_instance(new PhysicalInstance(std::string("liberty"), liberty, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.0));
 	//modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), barrel, glm::vec3(-10, 0, 0), glm::vec3(0, 0, 0), 1.0));
 
@@ -167,6 +172,7 @@ void GameEngine::run() {
 		//renderer.RenderModel(*camera, *cube1);
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube"));
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube1"));
+		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
 		//renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("liberty"));
 		//renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
 

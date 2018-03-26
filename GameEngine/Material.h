@@ -52,6 +52,12 @@ public:
 	};
 	void SetColor(glm::vec4 col) { this->color = col; };
 
+	void SetAmbientOcclusionMap(Texture* text) { aoMap = text; };
+	void SetAlbedoMap(Texture* text) { albedoMap = text; };
+	void SetMetallicMap(Texture* text) { metallicMap = text; };
+	void SetRoughnessMap(Texture* text) { roughnessMap = text; };
+	void SetNormalMap(Texture* text) { normalMap = text; };
+
 private:
 	float diffuse; // These will become reduntant
 	float specular; // These will become reduntant
