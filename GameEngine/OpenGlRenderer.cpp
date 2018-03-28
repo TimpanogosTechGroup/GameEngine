@@ -24,7 +24,6 @@ OpenGlRenderer::OpenGlRenderer()
 {
 }
 
-
 OpenGlRenderer::~OpenGlRenderer()
 {
 }
@@ -270,8 +269,8 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstance& pos) {
 	// Generate the model matrix
-	glm::mat4 model; // Create a indentity matrix
-	model = glm::translate(model, pos.getInstancePosition()); // Apply a translation to the matrix
+	//glm::mat4 model; // Create a indentity matrix
+	//model = glm::translate(model, pos.getInstancePosition()); // Apply a translation to the matrix
 	//model = glm::rotate(model, 5.0f, glm::vec3(0.0, 0.0, 1.0)); // Rotate matrix
 	//model = glm::scale(model, glm::vec3(0.5, 0.5, 0.5)); // Scale Matrix
 
@@ -282,8 +281,8 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstan
 		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
 		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
 		btScalar trans[16]; // create a 4x4 array
-	//	object.GetTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
-//		glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+		pos.getInstanceTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+		glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
 		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}
 
@@ -648,6 +647,30 @@ void OpenGlRenderer::RenderBoundingBox(Camera& camera, Model& modelO, glm::vec3 
 	SetUniformVec3(&bbShader, "color", color); // Set color of the bounding box
 
 	glBindVertexArray(modelO.boundingBox.GetID());
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
+	glDrawArrays(GL_LINE_LOOP, 4, 4);
+	glDrawArrays(GL_LINES, 8, 8);
+	glBindVertexArray(0);
+}
+
+// Renderes the bounding box with the view of the camera and color given in
+void OpenGlRenderer::RenderBoundingBox(Camera& camera, PhysicalInstance& physicalInstance, glm::vec3 color) {
+	//glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(1, 0);
+	glLineWidth(Properties::Get<float>("glLineWidth"));
+
+	glUseProgram(bbShader.GetID());
+	SetUniformMat4(&bbShader, "projection", camera.GetProjectionMatrix());
+	SetUniformMat4(&bbShader, "view", camera.GetViewMatrix());
+	//glm::mat4 model;
+	//model = glm::translate(model, modelO.GetPostion());
+	btScalar trans[16]; // create a 4x4 array
+	physicalInstance.getInstanceTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+	glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+	SetUniformMat4(&bbShader, "model", model); // set the models rotation, scaling and transfom with the matrix
+	SetUniformVec3(&bbShader, "color", color); // Set color of the bounding box
+
+	glBindVertexArray(physicalInstance.getModelReference().boundingBox.GetID());
 	glDrawArrays(GL_LINE_LOOP, 0, 4);
 	glDrawArrays(GL_LINE_LOOP, 4, 4);
 	glDrawArrays(GL_LINES, 8, 8);

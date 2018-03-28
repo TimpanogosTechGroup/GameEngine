@@ -68,7 +68,7 @@ private:
 	Texture* normalMap; // Normal map of the object
 	Texture* albedoMap; // Albedo map
 	Texture* metallicMap; // Metallic map
-	Texture* roughnessMap; // Roughness maps
+	Texture* roughnessMap; // Roughness/specular map
 	Texture* aoMap; // Occlusion map
 
 	Shader* shader; // The pointer to the shader of the object

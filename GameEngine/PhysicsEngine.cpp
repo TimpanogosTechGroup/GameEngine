@@ -19,7 +19,8 @@ void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
 		btTransform trans;
 		rigidBodies[iter.second->getName()]->getMotionState()->getWorldTransform(trans);
 		//std::cout << rigidBodies[iter.second->getName()]->getMotionState()->getWorldTransform(trans) << endl;
-		iter.second->setInstancePosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+		//iter.second->setInstancePosition(glm::vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+		iter.second->setInstanceTrasnform(trans);
 		//iter.second->setInstanceTrasnform(trans);
 	}
 }

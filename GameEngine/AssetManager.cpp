@@ -215,6 +215,7 @@ Model* AssetManager::LoadModel(const char* pFile) {
 	model->setRotation(0, 0, 0);
 	model->SetPosition(glm::vec3(0, 0, 0));
 	ResourceManager::addModel(pFile, model);
+	model->CreateBoundBox();
 	return model;
 }
 
@@ -271,14 +272,15 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	aiString name;
 	aiColor4D diffuse;
 
-	aiTextureType textureType = aiTextureType_DIFFUSE;
 	aiString texturePath;
 	aiString textureAmbient;
 	aiString textureSpec;
+	aiString textureNormalPath;
 
 	Texture* texture;
 	Texture* textureAO;
 	Texture* textureSpecular;
+	Texture* textureNormal;
 
 	bool containsText = true;
 
@@ -288,21 +290,23 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	}
 	else {
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
-		//*Logger::GetLogStream<AssetManager>() << "Diffuse Color: " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << " ";
 	}
-	// Load Diffuse texture map
-	if (mat->Get(AI_MATKEY_TEXTURE(textureType, 0), texturePath) == AI_SUCCESS) {
+	// Load Diffuse texture map ALBEDO
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), texturePath) == AI_SUCCESS) {
 		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << texturePath.C_Str();
 		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
 		containsText = false;
 		texture = LoadTexture(texturePath.C_Str());
 	}
 	else {
+		std::cout << "No Diffuse Texture" << std::endl;
 		texture = ResourceManager::getTexture("default");
 	}
 
-	// Load ambient texture map
+	// Load ambient texture map AMBIENT
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_AMBIENT, 0), textureAmbient) == AI_SUCCESS) {
+		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureAmbient.C_Str();
+		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
 		textureAO = LoadTexture(textureAmbient.C_Str());
 	}
 	else {
@@ -310,22 +314,37 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 		textureAO = ResourceManager::getTexture("default");
 	}
 
-	// Load acclusion texture map
+	// Load specular/rougness texture map
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SPECULAR, 0), textureSpec) == AI_SUCCESS) {
+		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureSpec.C_Str();
+		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
 		textureSpecular = LoadTexture(textureSpec.C_Str());
 	}
 	else {
 		std::cout << "No Specular Texture." << std::endl;
-		textureAO = ResourceManager::getTexture("default");
+		textureSpecular = ResourceManager::getTexture("default");
 	}
 
-	// Load roughness texture map
-	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SHININESS, 0), textureSpec) == AI_SUCCESS) {
-		textureSpecular = LoadTexture(textureSpec.C_Str());
+	// Load normals texture map
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_NORMALS, 0), textureNormalPath) == AI_SUCCESS) {
+		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
+		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+		textureNormal = LoadTexture(textureNormalPath.C_Str());
 	}
 	else {
-		std::cout << "No Specular Texture." << std::endl;
-		textureAO = ResourceManager::getTexture("default");
+		std::cout << "No Nomrmal Texture." << std::endl;
+		textureNormal = ResourceManager::getTexture("default");
+	}
+
+	// Load metallic texture map
+	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SHININESS, 0), textureNormalPath) == AI_SUCCESS) {
+		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
+		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+		textureNormal = LoadTexture(textureNormalPath.C_Str());
+	}
+	else {
+		std::cout << "No Shinniness Texture." << std::endl;
+		textureNormal = ResourceManager::getTexture("default");
 	}
 
 	//Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
