@@ -1,5 +1,11 @@
 #include "GameEngine.h"
 
+#define LOG(message, level) \
+	Logger::Log<GameEngine>(level, message);
+
+#define LOG(message) \
+	Logger::Log<GameEngine>(DEBUG, message);
+
 GameEngine::GameEngine() : cube("Texture\\cubemap\\morning")
 {
 }
@@ -40,18 +46,18 @@ void GameEngine::initialize() {
 	//Load models and stuff
 	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
 	AssetManager::LoadModel("Model\\Barrel.obj");
-	AssetManager::LoadModel("Model\\spherepb.obj");
+	AssetManager::LoadModel("Model\\spherepbr.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 	cube1 = ResourceManager::getModel("Model\\cube.obj");
 	
 	renderer.CompileBoundingBox(cube1->boundingBox);
 	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
-	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepb.obj")->boundingBox);
+	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepbr.obj")->boundingBox);
 	renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
 	renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
-	renderer.CompileModel(*ResourceManager::getModel("Model\\spherepb.obj"));
+	renderer.CompileModel(*ResourceManager::getModel("Model\\spherepbr.obj"));
 
 	// Add to model manager
 	//modelManager.push_back(cube1);
@@ -60,7 +66,7 @@ void GameEngine::initialize() {
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepb.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {
@@ -75,6 +81,8 @@ void GameEngine::run() {
 	double FPS_o = 0;
 	double timePerFrame = 0.0;
 	std::ostringstream os;
+	LOG("Starting the main loop");
+	LOG("Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.", DEBUG);
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 		cir += 0.005;
 
