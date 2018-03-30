@@ -2,7 +2,8 @@
 #include<string>
 #include<unordered_map>
 
-void SceneManager::CreateNewScene(std::string sceneName)
+void SceneManager::Create
+Scene(std::string sceneName)
 {
 	sceneMap[sceneName] = new Scene;
 	

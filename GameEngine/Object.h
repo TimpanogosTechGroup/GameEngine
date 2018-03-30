@@ -53,6 +53,9 @@ public:
 	}
 
 	Object();
+
+	~Object() { delete material; }
+
 	RenderItem VBO;
 
 	// TODO: Create 3d object to test the order of vertices for rendering purposes - assuming order matters (check bullet)

@@ -11,6 +11,7 @@ public:
 		trans.setOrigin(btVector3(0, 0, 0));
 		trans.setRotation(btQuaternion(0, 0, 0, 0));
 	}
+	~Model() { for (auto const& x : objects) delete x; }
 	Object* GetObject(unsigned int n) { return this->objects.at(n); }
 	void AddObject(Object* obj) { this->objects.push_back(obj); }
 	unsigned int NumOfObjects() { return this->objects.size(); }

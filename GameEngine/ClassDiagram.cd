@@ -57,7 +57,8 @@
     <NestedTypes>
       <Enum Name="RenderEngine::Status" Collapsed="true">
         <TypeIdentifier>
-          <NewMemberFileName>RenderEngine.h</NewMemberFileName>
+          <
+            MemberFileName>RenderEngine.h</NewMemberFileName>
         </TypeIdentifier>
       </Enum>
     </NestedTypes>

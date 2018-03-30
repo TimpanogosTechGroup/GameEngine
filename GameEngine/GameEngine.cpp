@@ -6,12 +6,16 @@
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
 
-GameEngine::GameEngine() : cube("Texture\\cubemap\\morning")
-{
+GameEngine::GameEngine() : cube("Texture\\cubemap\\morning") {
+
 }
 
-GameEngine::~GameEngine()
-{
+GameEngine::~GameEngine() {
+	delete physicsEngine;
+	delete camera;
+	delete liberty;
+	delete cube1;
+	delete barrel;
 }
 
 void GameEngine::initialize() {
@@ -62,7 +66,7 @@ void GameEngine::initialize() {
 	// Add to model manager
 	//modelManager.push_back(cube1);
 	//modelManager.push_back(liberty);
-
+	
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
@@ -180,7 +184,7 @@ void GameEngine::run() {
 		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
-		// Show the chnages after rendering
+		// Show the changes after rendering
 		renderer.UpdateScreen();
 	}
 }

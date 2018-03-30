@@ -11,6 +11,9 @@ private:
 	std::unordered_map<std::string, PhysicalInstance*> physicalInstances;
 public:
 	ModelManager() {}
+	~ModelManager() {
+		for (auto const& x : physicalInstances) delete x.second;
+	}
 	void push_back(Model* model) { models.push_back(model); }
 	int size() { return models.size(); }
 	Model* GetModel(int i) { return models.at(i); }
