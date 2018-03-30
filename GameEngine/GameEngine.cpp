@@ -40,18 +40,18 @@ void GameEngine::initialize() {
 	//Load models and stuff
 	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
 	AssetManager::LoadModel("Model\\Barrel.obj");
-	AssetManager::LoadModel("Model\\spherepbr.obj");
+	AssetManager::LoadModel("Model\\spherepb.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 	cube1 = ResourceManager::getModel("Model\\cube.obj");
 	
 	renderer.CompileBoundingBox(cube1->boundingBox);
 	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
-	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepbr.obj")->boundingBox);
+	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepb.obj")->boundingBox);
 	renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
 	renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
-	renderer.CompileModel(*ResourceManager::getModel("Model\\spherepbr.obj"));
+	renderer.CompileModel(*ResourceManager::getModel("Model\\spherepb.obj"));
 
 	// Add to model manager
 	//modelManager.push_back(cube1);
@@ -60,7 +60,7 @@ void GameEngine::initialize() {
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepb.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {

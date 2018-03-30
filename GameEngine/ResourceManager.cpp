@@ -33,7 +33,7 @@ Texture* ResourceManager::getTexture(std::string name) {
 		return texture->second;
 	}
 	else {
-		return nullptr;
+		return textures["default"];
 	}
 }
 
@@ -44,7 +44,7 @@ Model * ResourceManager::getModel(std::string name)
 		return model->second;
 	}
 	else {
-		return nullptr;
+		return models["default"];
 	}
 }
 

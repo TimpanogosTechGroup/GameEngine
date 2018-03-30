@@ -97,6 +97,10 @@ void OpenGlRenderer::loadDefaults() {
 	ResourceManager::addTexture("default", AssetManager::LoadTexture("Texture\\question.png"));
 	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader\\cubemap_vert.glsl", "Shader\\cubemap_frag.glsl"));
 	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader\\font_vert.glsl", "Shader\\font_frag.glsl"));
+	ResourceManager::addModel("default", AssetManager::LoadModel("Model\\default.obj"));
+	ResourceManager::getModel("default")->CreateBoundBox();
+	CompileBoundingBox(ResourceManager::getModel("default")->boundingBox);
+	CompileModel(*ResourceManager::getModel("default"));
 }
 
 glm::mat4 OpenGlRenderer::getOrthoGraphicsProjection()
