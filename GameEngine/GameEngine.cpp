@@ -61,6 +61,7 @@ void GameEngine::initialize() {
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {
 		physicsEngine->addModelInstance(iter.second, 1);
@@ -68,12 +69,14 @@ void GameEngine::initialize() {
 }
 
 void GameEngine::run() {
+	double cir = 0;
 	int nbFrames = 0;
 	double lastTime = static_cast<double> (time(0));
 	double FPS_o = 0;
 	double timePerFrame = 0.0;
 	std::ostringstream os;
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+		cir += 0.005;
 
 		// FPS counter and profiler
 		double currentTime = static_cast<double> (time(0));
@@ -86,7 +89,7 @@ void GameEngine::run() {
 		}
 
 		// update physics with respect to delta
-		physicsEngine->AddForce("cube", glm::vec3(0, 10, 0));
+		physicsEngine->AddForce("cube", glm::vec3(20 * sin(cir), 20 * sin(cir), 20 * cos(cir)));
 		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
 		physicsEngine->Update(timePerFrame, modelManager);
 
@@ -158,6 +161,7 @@ void GameEngine::run() {
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube1"));
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere"));
+		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere1"));
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
