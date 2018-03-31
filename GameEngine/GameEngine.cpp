@@ -48,20 +48,20 @@ void GameEngine::initialize() {
 
 
 	//Load models and stuff
-	AssetManager::LoadModel("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
-	AssetManager::LoadModel("Model\\Barrel.obj");
-	AssetManager::LoadModel("Model\\spherepbr.obj");
+	AssetManager::LoadModelFull("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
+	AssetManager::LoadModelFull("Model\\Barrel.obj");
+	AssetManager::LoadModelFull("Model\\spherepbr.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
 	cube1 = ResourceManager::getModel("Model\\cube.obj");
 	
-	renderer.CompileBoundingBox(cube1->boundingBox);
-	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
-	renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepbr.obj")->boundingBox);
-	renderer.CompileModel(*cube1);
+	//renderer.CompileBoundingBox(cube1->boundingBox);
+	//renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
+	//renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepbr.obj")->boundingBox);
+	//renderer.CompileModel(*cube1);
 	renderer.CompileCubeMap(cube);
-	renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
-	renderer.CompileModel(*ResourceManager::getModel("Model\\spherepbr.obj"));
+	//renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
+	//renderer.CompileModel(*ResourceManager::getModel("Model\\spherepbr.obj"));
 
 	// Add to model manager
 	//modelManager.push_back(cube1);

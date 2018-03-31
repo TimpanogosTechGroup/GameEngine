@@ -54,6 +54,8 @@ public:
 	*/
 	static Model* LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
 
+	static void LoadModelFull(const char* pFile);
+
 	/**
 		Loads a cube map with the texture starting at pFile and adding a _dir for each face
 
