@@ -53,28 +53,71 @@ void GameEngine::initialize() {
 	AssetManager::LoadModelFull("Model\\spherepbr.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
-	cube1 = ResourceManager::getModel("Model\\cube.obj");
 	
-	//renderer.CompileBoundingBox(cube1->boundingBox);
-	//renderer.CompileBoundingBox(ResourceManager::getModel("Model\\Barrel.obj")->boundingBox);
-	//renderer.CompileBoundingBox(ResourceManager::getModel("Model\\spherepbr.obj")->boundingBox);
-	//renderer.CompileModel(*cube1);
-	renderer.CompileCubeMap(cube);
-	//renderer.CompileModel(*ResourceManager::getModel("Model\\Barrel.obj"));
-	//renderer.CompileModel(*ResourceManager::getModel("Model\\spherepbr.obj"));
-
-	// Add to model manager
-	//modelManager.push_back(cube1);
-	//modelManager.push_back(liberty);
-	
-	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), cube1, glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), cube1, glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {
 		physicsEngine->addModelInstance(iter.second, 1);
+	}
+}
+
+void GameEngine::proccessInput(double delta) {
+	// We'll take out all of this input stuff out and make an InputManager class
+	
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+		case  SDL_QUIT:
+			renderer.SetStatus(RenderEngine::SHUTDOWN);
+			break;
+		case SDL_KEYDOWN:
+			inputManager.pressKey(event.key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			inputManager.releaseKey(event.key.keysym.sym);
+			break;
+		case SDL_MOUSEMOTION:
+			if (inputManager.isMouseMovementEnabled())
+				camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
+			break;
+		}
+	}
+
+	// Process input
+	if (inputManager.isKeyPressed(SDLK_w))
+		camera->ProcessKeyboard(FORWARD, delta);
+	if (inputManager.isKeyPressed(SDLK_s))
+		camera->ProcessKeyboard(BACKWARD, delta);
+	if (inputManager.isKeyPressed(SDLK_a))
+		camera->ProcessKeyboard(LEFT, delta);
+	if (inputManager.isKeyPressed(SDLK_d))
+		camera->ProcessKeyboard(RIGHT, delta);
+	if (inputManager.isKeyPressed(SDLK_LSHIFT))
+		camera->ProcessKeyboard(UP, delta);
+	if (inputManager.isKeyPressed(SDLK_LCTRL))
+		camera->ProcessKeyboard(DOWN, delta);
+	if (inputManager.isKeyPressed(SDLK_LEFT))
+		camera->ProcessMouseMovement(0.3f, 0, true);
+	if (inputManager.isKeyPressed(SDLK_RIGHT))
+		camera->ProcessMouseMovement(-0.3f, 0, true);
+	if (inputManager.isKeyPressed(SDLK_UP))
+		camera->ProcessMouseMovement(0, 0.3f, true);
+	if (inputManager.isKeyPressed(SDLK_DOWN))
+		camera->ProcessMouseMovement(0, -0.3f, true);
+	if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		SDL_CaptureMouse(SDL_FALSE);
+		inputManager.disableMouseMovement();
+	}
+	if (inputManager.isKeyPressed(SDLK_TAB)) {
+		camera->EnableLookAt();
+	}
+	else {
+		camera->DisableLookAt();
 	}
 }
 
@@ -107,63 +150,11 @@ void GameEngine::run() {
 
 
 		float delta = .002f;
+		proccessInput(delta); // proccess input
+
 
 		renderer.BindDefaultFrameBuffer();
-
 		renderer.Clear();
-		// We'll take out all of this input stuff out and make an InputManager class
-		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
-			case  SDL_QUIT:
-				renderer.SetStatus(RenderEngine::SHUTDOWN);
-				break;
-			case SDL_KEYDOWN:
-				inputManager.pressKey(event.key.keysym.sym);
-				break;
-			case SDL_KEYUP:
-				inputManager.releaseKey(event.key.keysym.sym);
-				break;
-			case SDL_MOUSEMOTION:
-				if (inputManager.isMouseMovementEnabled())
-					camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
-				break;
-			}
-		}
-
-		// Process input
-		if (inputManager.isKeyPressed(SDLK_w))
-			camera->ProcessKeyboard(FORWARD, delta);
-		if (inputManager.isKeyPressed(SDLK_s))
-			camera->ProcessKeyboard(BACKWARD, delta);
-		if (inputManager.isKeyPressed(SDLK_a))
-			camera->ProcessKeyboard(LEFT, delta);
-		if (inputManager.isKeyPressed(SDLK_d))
-			camera->ProcessKeyboard(RIGHT, delta);
-		if (inputManager.isKeyPressed(SDLK_LSHIFT))
-			camera->ProcessKeyboard(UP, delta);
-		if (inputManager.isKeyPressed(SDLK_LCTRL))
-			camera->ProcessKeyboard(DOWN, delta);
-		if (inputManager.isKeyPressed(SDLK_LEFT))
-			camera->ProcessMouseMovement(0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_RIGHT))
-			camera->ProcessMouseMovement(-0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_UP))
-			camera->ProcessMouseMovement(0, 0.3f, true);
-		if (inputManager.isKeyPressed(SDLK_DOWN))
-			camera->ProcessMouseMovement(0, -0.3f, true);
-		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
-			SDL_SetRelativeMouseMode(SDL_FALSE);
-			SDL_CaptureMouse(SDL_FALSE);
-			inputManager.disableMouseMovement();
-		}
-		if (inputManager.isKeyPressed(SDLK_TAB)) {
-			camera->EnableLookAt();
-		}
-		else {
-			camera->DisableLookAt();
-		}
-
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, cube);
 		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("cube1"), glm::vec3(1, 0, 0));

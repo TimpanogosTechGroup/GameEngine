@@ -282,6 +282,8 @@ CubeMap * AssetManager::LoadCubeMap(const char * pFile)
 	ResourceManager::addTexture(pFile, texture);
 	cube->SetTexture(texture);
 
+	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->CompileCubeMap(*cube);
+
 	return cube;
 }
 

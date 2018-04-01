@@ -37,6 +37,7 @@ public:
 	void initialize();
 	void run();
 	void shudown();
+	void proccessInput(double delta);
 };
 
 #endif
