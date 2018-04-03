@@ -11,6 +11,7 @@
 #include "RegistryEntry.h"
 #include "Logger.h"
 #include "Properties.h"
+#include "GarbageCollector.h"
 
 class PhysicsEngine : public RegistryEntry {
 public:
@@ -42,14 +43,27 @@ public:
 		//	delete rigidBodies.at(i);
 		//}
 
+		for (auto obj : collisionObjects) {
+			delete obj.second;
+		}
+
+		for (auto obj : rigidBodies) {
+			delete obj.second;
+		}
+
+		for (auto obj : motionStates) {
+			delete obj.second;
+		}
+
+		//delete dynamicsWorld;
 		delete groundMotionState;
 		delete fallMotionState;
-
-		delete dynamicsWorld;
 		delete solver;
 		delete dispatcher;
 		delete collisionConfiguration;
 		delete broadphase;
+
+		//gc.collectGarbage();
 	}
 	//bool AddObject(Object obj, double mass) {
 	//	btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
@@ -74,7 +88,7 @@ public:
 	//}
 	bool addModelInstance(PhysicalInstance* instance, double mass) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
-
+		//gc.addMemoryToGarbageCollector(shape);
 		collisionObjects[instance->getName()] = shape;
 
 		motionStates[instance->getName()] = new btDefaultMotionState(instance->getInstanceTrasform());
@@ -133,6 +147,8 @@ private:
 	std::unordered_map<std::string, btRigidBody*> rigidBodies;
 	std::unordered_map<std::string, btCollisionShape*> collisionObjects;
 	std::unordered_map<std::string, btMotionState*> motionStates;
+
+	//GarbageCollector gc;
 };
 
 #endif

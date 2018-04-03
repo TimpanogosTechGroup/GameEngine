@@ -45,6 +45,7 @@ public:
 
 	*/
 	static Texture* LoadTexture(const char* file);
+	static Texture* LoadTexture(const char* name, const char* file);
 
 	/**
 		Load the model from the file pFile

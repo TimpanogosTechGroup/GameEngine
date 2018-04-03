@@ -22,9 +22,9 @@ void GameEngine::initialize() {
 	Properties::Init();
 
 	Registry::Register("renderer", &renderer);
-	Registry::Register("fontManager", &fontManager);
-	Registry::Register("physicsEngine", physicsEngine); //We need to change the construciton of the phsyics engine
-	Registry::Register("inputManager", &inputManager);
+	//Registry::Register("fontManager", &fontManager);
+	Registry::Register("physicsEngine", physicsEngine); // We need to change the construciton of the phsyics engine
+	//Registry::Register("inputManager", &inputManager);
 
 	Registry::SetRenderEngine(&renderer);
 
@@ -39,7 +39,7 @@ void GameEngine::initialize() {
 	camera = new Camera();
 
 	try {
-		fontManager.loadFont("fonts\\arial.ttf");
+		fontManager.loadFont(ARIAL);
 		Logger::Log<FontManager>(DEBUG, "Initializing...");
 	}
 	catch (FontManagerException& e) {
@@ -130,9 +130,9 @@ void GameEngine::run() {
 	std::ostringstream os;
 	LOG("Starting the main loop");
 	LOG("Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.", DEBUG);
-	while (renderer.GetStatus() == RenderEngine::RUNNING) {
-		cir += 0.005;
 
+
+	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 		// FPS counter and profiler
 		double currentTime = static_cast<double> (time(0));
 		nbFrames++;
@@ -143,16 +143,15 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		// update physics with respect to delta
+		// update physics with respect to timeperframe
+		cir += 0.005;
 		physicsEngine->AddForce("cube", glm::vec3(20 * sin(cir), 20 * sin(cir), 20 * cos(cir)));
 		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
 		physicsEngine->Update(timePerFrame, modelManager);
 
-
 		float delta = .002f;
 		proccessInput(delta); // proccess input
-
-
+		
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
 		// Render cube map first then render the rest of the scene
@@ -168,11 +167,11 @@ void GameEngine::run() {
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
-		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
-		renderer.RenderText(camera, fontManager.getFont("fonts\\arial.ttf"), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		// Show the changes after rendering
@@ -181,5 +180,7 @@ void GameEngine::run() {
 }
 
 void GameEngine::shudown() {
-
+	LOG("Shuting down Game Engine");
+	LOG("Cleaning up ResourceManager");
+	ResourceManager::clean();
 }

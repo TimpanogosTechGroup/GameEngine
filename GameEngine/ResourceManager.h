@@ -31,6 +31,8 @@ public:
 	static void loadModel(const char* pFile, std::string name);
 	static void loadModel(const char* pFile);
 
+	static void clean();
+
 private:
 	static std::unordered_map<std::string, Texture*> textures;
 	static std::unordered_map<std::string, Shader*> shaders;

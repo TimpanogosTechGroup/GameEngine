@@ -29,6 +29,7 @@ public:
 	RenderItem& getVBO() { return VBO; };
 	void addCharacter(const char glyph, Character character);
 	Character& getCharacter(const char glyph);
+	void clean();
 private:
 	std::map<const char, Character> Characters;
 };

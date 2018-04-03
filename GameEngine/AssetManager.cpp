@@ -76,14 +76,19 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 // basic version, eventually edit wrapping and filtering parameters
 Texture* AssetManager::LoadTexture(const char* file) {
+	return LoadTexture(file, file);
+}
 
-	if (ResourceManager::hasTexture(file)) {
+Texture * AssetManager::LoadTexture(const char * name, const char * file)
+{
+
+	if (ResourceManager::hasTexture(file) || ResourceManager::hasTexture(name)) {
 		LOG("Already Loaded", DEBUG);
-		return ResourceManager::getTexture(file);
-	}	
+		return ResourceManager::getTexture(name);
+	}
 
 	Texture* texture = new Texture(); // Create a new texture
-	// Genereate buffers and bind
+									  // Genereate buffers and bind
 	glGenTextures(1, &texture->GetID());
 	glBindTexture(GL_TEXTURE_2D, texture->GetID());
 	// set the texture wrapping parameters
@@ -105,16 +110,17 @@ Texture* AssetManager::LoadTexture(const char* file) {
 
 		texture->SetWidth(width);
 		texture->SetHeight(height);
+
+		ResourceManager::addTexture(name, texture);
 	}
 	else
 	{
 		LOGS << "Failed to load texture: " << file;
 		Logger::LogClassStream<AssetManager>(DEBUG);
 		LOG(stbi_failure_reason(), DEBUG);
+		delete texture;
 	}
 	stbi_image_free(data);
-
-	ResourceManager::addTexture(file, texture);
 
 	return texture;
 }

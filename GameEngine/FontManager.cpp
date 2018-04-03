@@ -13,6 +13,10 @@ FontManager::FontManager()
 FontManager::~FontManager()
 {
 	FT_Done_FreeType(fontLibrary);
+	for (auto font : fonts) {
+		font.second->clean();
+		delete font.second;
+	}
 }
 
 void FontManager::loadFont(std::string fontName)

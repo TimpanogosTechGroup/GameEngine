@@ -8,6 +8,9 @@
 #include "Registry.h"
 #include "FontManagerException.h"
 
+// Define the basic fonts and such
+#define ARIAL "fonts\\arial.ttf"
+
 class FontManager : public RegistryEntry
 {
 private:
