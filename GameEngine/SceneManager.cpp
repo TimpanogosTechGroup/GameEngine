@@ -5,7 +5,6 @@
 void SceneManager::CreateNewScene(std::string sceneName)
 {
 	sceneMap[sceneName] = new Scene;
-	
 	return;
 }
 

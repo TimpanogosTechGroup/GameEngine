@@ -1,5 +1,9 @@
-#include "ResourceManager.h"
+#include <string>
 #include "Logger.h"
+#include "ResourceManager.h"
+
+#define LOG(message) \
+	Logger::Log<ResourceManager>(DEBUG, message);
 
 std::unordered_map<std::string, Texture*> ResourceManager::textures;
 std::unordered_map<std::string, Shader*> ResourceManager::shaders;
@@ -12,9 +16,28 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
+}
+
+void ResourceManager::clean() {
+	LOG("Deleting Textures: ");
 	for (auto pointer : textures) {
+		std::cout << pointer.second->GetID() << ", ";
+		delete pointer.second; // A nullptr is being added to the map, we need to get rid of it or not add a nullptr
+	}
+	std::cout << std::endl;
+	LOG("Deleting Shaders: ");
+	for (auto pointer : shaders) {
+		std::cout << pointer.second->GetID() << ", ";
+		delete pointer.second;
+
+	}
+	std::cout << std::endl;
+	LOG("Deleting Textures: ");
+	for (auto pointer : models) {
+		std::cout << pointer.second->GetObject(0)->GetID() << ", ";
 		delete pointer.second;
 	}
+	std::cout << std::endl;
 }
 
 Shader* ResourceManager::getShader(std::string name) {
@@ -54,6 +77,8 @@ void ResourceManager::addShader(std::string name, Shader* shader) {
 
 void ResourceManager::addTexture(std::string name, Texture* texture) {
 	textures[name] = texture;
+	LOG("Added Texture: ");
+	std::cout << texture->GetID() << std::endl;
 }
 
 void ResourceManager::addModel(std::string name, Model * model)

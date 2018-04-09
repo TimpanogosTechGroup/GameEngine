@@ -11,6 +11,7 @@
 #include "RegistryEntry.h"
 #include "Logger.h"
 #include "Properties.h"
+#include "GarbageCollector.h"
 
 class PhysicsEngine : public RegistryEntry {
 public:
@@ -25,6 +26,7 @@ public:
 		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
+		//dynamicsWorld->setGravity(btVector3(0, 9.8, 0));
 		motionStates["ground"] = (new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0))));
 	
 		collisionObjects["ground"] = (new btStaticPlaneShape(btVector3(0, 1, 0), 1));
@@ -41,27 +43,61 @@ public:
 		//	delete rigidBodies.at(i);
 		//}
 
-		//for (auto x : collisionObjects) delete x.second;
-		//for (auto x : rigidBodies) delete x.second;
+		for (auto obj : collisionObjects) {
+			delete obj.second;
+		}
 
+		for (auto obj : rigidBodies) {
+			delete obj.second;
+		}
+
+		for (auto obj : motionStates) {
+			delete obj.second;
+		}
+
+		//delete dynamicsWorld;
 		delete groundMotionState;
 		delete fallMotionState;
-
-		delete dynamicsWorld;
 		delete solver;
 		delete dispatcher;
 		delete collisionConfiguration;
 		delete broadphase;
+
+		//gc.collectGarbage();
 	}
+	//bool AddObject(Object obj, double mass) {
+	//	btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
+	//	
+	//	collisionObjects.push_back(shape);
+
+	//	motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(obj.GetPostion().x, obj.GetPostion().y, obj.GetPostion().z))));
+	//	AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1), mass);
+	//	return true;
+	//}
+	//bool AddObject(Object obj) {
+	//	return AddObject(obj, 1);
+	//}
+	//bool AddModel(Model& model, double mass) {
+	//	btBoxShape* shape = new btBoxShape(btVector3(btScalar(model.boundingBox.GetxDist() / 2), btScalar(model.boundingBox.GetyDist() / 2), btScalar(model.boundingBox.GetzDist() / 2)));
+
+	//	collisionObjects.push_back(shape);
+
+	//	motionStates.push_back(new btDefaultMotionState(model.GetTrasform()));
+	//	AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1), mass);
+	//	return true;
+	//}
 	bool addModelInstance(PhysicalInstance* instance, double mass) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
-
+		//gc.addMemoryToGarbageCollector(shape);
 		collisionObjects[instance->getName()] = shape;
 
 		motionStates[instance->getName()] = new btDefaultMotionState(instance->getInstanceTrasform());
 		AddRigidBody(*instance, collisionObjects[instance->getName()], motionStates[instance->getName()], mass);
 		return true;
 	}
+	//bool AddModel(Model& model) {
+	//	return AddModel(model, 1);
+	//}
 	bool AddRigidBody(PhysicalInstance& instance, btCollisionShape* collisionShape, btMotionState* motionState, double m) {
 		btScalar mass = static_cast<btScalar>(m);
 		btVector3 fallInertia(0, 0, 0);
@@ -111,6 +147,8 @@ private:
 	std::unordered_map<std::string, btRigidBody*> rigidBodies;
 	std::unordered_map<std::string, btCollisionShape*> collisionObjects;
 	std::unordered_map<std::string, btMotionState*> motionStates;
+
+	//GarbageCollector gc;
 };
 
 #endif
