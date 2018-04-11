@@ -1,7 +1,7 @@
-#pragma once
+#ifndef EXCEPTION_TEMPLATE_H
+#define EXCEPTION_TEMPLATE_H
 #include <string>
-#include "ErrorCode.cpp"
-using std::string;
+#include "ErrorCode.h"
 
 /*
  * Author: Jon Meilstrup
@@ -15,8 +15,10 @@ using std::string;
 class ExceptionTemplate
 {
 public:
-	ExceptionTemplate(void) {}
-	~ExceptionTemplate(void) {}
-	static const string errorMessage;
-	static const ErrorCode* errorCode;
+	ExceptionTemplate() : errorCode('A', 120, "Example", "Example") {};
+	~ExceptionTemplate(void){};
+	std::string errorMessage;
+	ErrorCode errorCode;
 };
+
+#endif

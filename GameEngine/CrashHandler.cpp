@@ -7,7 +7,7 @@
  *	-string displayErrorMsg()
  */
 
-string CrashHandler::displayErrorMsg()
+std::string CrashHandler::displayErrorMsg()
 {
 	/*
 	 * Logs error message for whatever error was thrown.
@@ -16,8 +16,10 @@ string CrashHandler::displayErrorMsg()
 	 *
 	 *		This is an example error. You will never actually get an A101.
 	 */
-	cout << e->errorCode << " -:- " << e->errorMessage << endl << endl;
-	cout << e->errorCode->example << endl;
+	std::cout << e->errorCode << " -:- " << e->errorMessage << std::endl << std::endl;
+	std::cout << e->errorCode.example << std::endl;
+
+	return std::string();
 }
 
 void CrashHandler::setError(ExceptionTemplate*& e)

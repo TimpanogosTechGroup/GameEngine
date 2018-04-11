@@ -1,5 +1,4 @@
 #include "ExceptionTemplate.h"
-#include "ErrorCode.cpp"
 
 /*
  * Author: Jon Meilstrup
@@ -18,7 +17,7 @@
 class ExampleException : public ExceptionTemplate
 {
 public:
-	string errorMessage;
+	std::string errorMessage;
 	ErrorCode* errorCode;
 	ExampleException()
 	{

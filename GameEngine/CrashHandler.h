@@ -1,10 +1,10 @@
-#pragma once
-#include "ExceptionTemplate.h"
+#ifndef CRASH_HANDLER_H
+#define CRASH_HANDLER_H
+
 #include <string>
 #include <iostream>
-using std::cout;
-using std::endl;
-using std::string;
+
+#include "ExceptionTemplate.h"
 
 /*
  * Author: Jon Meilstrup
@@ -28,6 +28,8 @@ private:
 public:
 	CrashHandler(ExceptionTemplate*& e) : e(e){}
 	~CrashHandler() {}
-	string displayErrorMsg() {};
-	void setError(ExceptionTemplate*& e) {};
+	std::string displayErrorMsg();
+	void setError(ExceptionTemplate*& e);
 };
+
+#endif

@@ -1,9 +1,8 @@
-#pragma once
+#ifndef ERROR_CODE_H
+#define ERROR_CODE_H
+
 #include <string>
 #include <sstream>
-using std::ostream;
-using std::stringstream;
-using std::string;
 
 /*
  * Author: Jon Meilstrup
@@ -29,15 +28,19 @@ class ErrorCode
 private:
 	char type;
 	int code;
-	string summary;
+	std::string summary;
 public:
-	string example;
-	ErrorCode(char type, int code, string summary, string example) : type(type), code(code), summary(summary), example(example){};
+	std::string example;
+	ErrorCode(char type, int code, std::string summary, std::string example) : type(type), code(code), summary(summary), example(example){};
 	~ErrorCode() {};
-	string toString() const {};
-	friend ostream& operator<<(ostream& os, const ErrorCode& e)
+
+	std::string getErrorCode() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const ErrorCode& e)
 	{
-		os << e->toString();
+		os << e.getErrorCode();
 		return os;
 	}
 };
+
+#endif
