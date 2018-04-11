@@ -26,7 +26,6 @@ public:
 		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
 		dynamicsWorld->setGravity(btVector3(0, Properties::Get<float>("gravity"), 0));
-		//dynamicsWorld->setGravity(btVector3(0, 9.8, 0));
 		motionStates["ground"] = (new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0))));
 	
 		collisionObjects["ground"] = (new btStaticPlaneShape(btVector3(0, 1, 0), 1));
@@ -43,15 +42,6 @@ public:
 		//	delete rigidBodies.at(i);
 		//}
 
-
-		delete dynamicsWorld;
-		delete solver;
-		delete collisionConfiguration;
-		delete dispatcher;
-		delete broadphase;
-		delete groundMotionState;
-		delete fallMotionState;
-
 		for (auto obj : collisionObjects) {
 			delete obj.second;
 		}
@@ -63,6 +53,14 @@ public:
 		for (auto obj : motionStates) {
 			delete obj.second;
 		}
+
+		//delete dynamicsWorld;
+		delete groundMotionState;
+		delete fallMotionState;
+		delete solver;
+		delete dispatcher;
+		delete collisionConfiguration;
+		delete broadphase;
 
 		//gc.collectGarbage();
 	}
