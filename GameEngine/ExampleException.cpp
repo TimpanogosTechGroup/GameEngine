@@ -18,13 +18,11 @@ class ExampleException : public ExceptionTemplate
 {
 public:
 	std::string errorMessage;
-	ErrorCode* errorCode;
-	ExampleException()
+	ErrorCode errorCode;
+	ExampleException() : errorCode('A', 101, "Example error", "This is an example error. You will never actually get an A101.")
 	{
-		errorCode = new ErrorCode('A', 101, "Example error", "This is an example error. You will never actually get an A101.");
 	};
 	~ExampleException()
 	{
-		delete errorCode;
 	};
 };
