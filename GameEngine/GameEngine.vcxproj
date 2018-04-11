@@ -25,6 +25,8 @@
     <ClCompile Include="CrashHandler.cpp" />
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="ErrorCode.cpp" />
+    <ClCompile Include="ExampleException.cpp" />
+    <ClCompile Include="ExceptionInclude.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
