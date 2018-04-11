@@ -43,6 +43,15 @@ public:
 		//	delete rigidBodies.at(i);
 		//}
 
+
+		delete dynamicsWorld;
+		delete solver;
+		delete collisionConfiguration;
+		delete dispatcher;
+		delete broadphase;
+		delete groundMotionState;
+		delete fallMotionState;
+
 		for (auto obj : collisionObjects) {
 			delete obj.second;
 		}
@@ -55,37 +64,8 @@ public:
 			delete obj.second;
 		}
 
-		//delete dynamicsWorld;
-		delete groundMotionState;
-		delete fallMotionState;
-		delete solver;
-		delete dispatcher;
-		delete collisionConfiguration;
-		delete broadphase;
-
 		//gc.collectGarbage();
 	}
-	//bool AddObject(Object obj, double mass) {
-	//	btBoxShape* shape = new btBoxShape(btVector3(btScalar(obj.boundingBox.GetxDist() / 2), btScalar(obj.boundingBox.GetyDist() / 2), btScalar(obj.boundingBox.GetzDist() / 2)));
-	//	
-	//	collisionObjects.push_back(shape);
-
-	//	motionStates.push_back(new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(obj.GetPostion().x, obj.GetPostion().y, obj.GetPostion().z))));
-	//	AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() -1), mass);
-	//	return true;
-	//}
-	//bool AddObject(Object obj) {
-	//	return AddObject(obj, 1);
-	//}
-	//bool AddModel(Model& model, double mass) {
-	//	btBoxShape* shape = new btBoxShape(btVector3(btScalar(model.boundingBox.GetxDist() / 2), btScalar(model.boundingBox.GetyDist() / 2), btScalar(model.boundingBox.GetzDist() / 2)));
-
-	//	collisionObjects.push_back(shape);
-
-	//	motionStates.push_back(new btDefaultMotionState(model.GetTrasform()));
-	//	AddRigidBody(collisionObjects.at(collisionObjects.size() - 1), motionStates.at(motionStates.size() - 1), mass);
-	//	return true;
-	//}
 	bool addModelInstance(PhysicalInstance* instance, double mass) {
 		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
 		//gc.addMemoryToGarbageCollector(shape);
@@ -95,9 +75,6 @@ public:
 		AddRigidBody(*instance, collisionObjects[instance->getName()], motionStates[instance->getName()], mass);
 		return true;
 	}
-	//bool AddModel(Model& model) {
-	//	return AddModel(model, 1);
-	//}
 	bool AddRigidBody(PhysicalInstance& instance, btCollisionShape* collisionShape, btMotionState* motionState, double m) {
 		btScalar mass = static_cast<btScalar>(m);
 		btVector3 fallInertia(0, 0, 0);
