@@ -11,4 +11,3 @@ public:
 	void CreateNewScene(std::string sceneName);
 	Scene* GetScene(std::string sceneName);
 };
-

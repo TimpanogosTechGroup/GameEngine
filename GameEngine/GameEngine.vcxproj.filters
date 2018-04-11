@@ -43,6 +43,12 @@
     <Filter Include="Header Files\physics">
       <UniqueIdentifier>{c3394337-cbb3-48cc-9ac7-49b1daa20dfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\exceptions">
+      <UniqueIdentifier>{3588fe84-15c3-4722-8a1f-46f0ace03cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\exceptions">
+      <UniqueIdentifier>{6749a727-8b1e-4e88-90c8-c8755b17f4d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -122,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="Source1.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrashHandler.cpp">
+      <Filter>Source Files\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorCode.cpp">
+      <Filter>Source Files\exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +238,15 @@
     </ClInclude>
     <ClInclude Include="GarbageCollector.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrashHandler.h">
+      <Filter>Header Files\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ExceptionTemplate.h">
+      <Filter>Header Files\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorCode.h">
+      <Filter>Header Files\exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

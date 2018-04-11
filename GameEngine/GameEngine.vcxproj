@@ -22,7 +22,9 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CrashHandler.cpp" />
     <ClCompile Include="CubeMap.cpp" />
+    <ClCompile Include="ErrorCode.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -50,7 +52,10 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="ErrorCode.h" />
+    <ClInclude Include="ExceptionTemplate.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FontManagerException.h" />
