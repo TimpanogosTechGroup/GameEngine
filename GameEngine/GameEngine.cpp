@@ -51,14 +51,17 @@ void GameEngine::initialize() {
 	AssetManager::LoadModelFull("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
 	AssetManager::LoadModelFull("Model\\Barrel.obj");
 	AssetManager::LoadModelFull("Model\\spherepbr.obj");
+	AssetManager::LoadModelFull("Model\\Gladius.obj");
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
-	
+
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
 	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	modelManager.push_back_instance(new PhysicalInstance(std::string("Gladius"), ResourceManager::getModel("Model\\Gladius.obj"), glm::vec3(0, 0, -20), glm::vec3(0, 5, 0), 1.0));
+	
 
  	for (auto &iter : modelManager.getPhysicalInstances()) {
 		physicsEngine->addModelInstance(iter.second, 1);
@@ -143,19 +146,21 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		// update physics with respect to timeperframe
-		cir += 0.005;
+		// update physics with respect to delta
 		physicsEngine->AddForce("cube", glm::vec3(20 * sin(cir), 20 * sin(cir), 20 * cos(cir)));
 		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
+		physicsEngine->AddForce("Gladius", glm::vec3(0, 50 / ((*modelManager.getPhysicalInstance("Gladius")).getInstancePosition().y*2 + 1), 0));
 		physicsEngine->Update(timePerFrame, modelManager);
 
 		float delta = .002f;
 		proccessInput(delta); // proccess input
-		
+
+
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, cube);
+		
 		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("cube1"), glm::vec3(1, 0, 0));
 		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("cube"), glm::vec3(0, 0, 1));
 		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("barrel"), glm::vec3(0, 0, 1));
@@ -164,6 +169,8 @@ void GameEngine::run() {
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere"));
 		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere1"));
+		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("Gladius"));
+		
 
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
