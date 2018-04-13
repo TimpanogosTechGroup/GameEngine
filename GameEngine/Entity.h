@@ -1,0 +1,34 @@
+#ifndef ENTITY_H
+#define ENTITY_H
+
+#include "PhysicalInstance.h"
+
+/*
+Author: Ben Brenkman aka JustBremkman
+
+Description:
+This is the base entity class. Has the abstract methods update() and onWorldTickUpdate()
+These functions will be inhereted by the inherited classes and define game logic
+*/
+
+class Entity {
+private:
+	PhysicalInstance mPhsyicalInstance; // This contains the model reference and some basic properties
+										//std::string GUID;
+										// Add some kind of input management here. Can also use an empty or null one
+	bool isTangeable = true; // Sets the property for collision detection
+
+public:
+	virtual void update(void) = 0; // This is the entity update function, is called every frame.
+	virtual void onWorldTickUpdate() = 0; // This is the world tick update. All Entities that want this to be called are added to a queue that runs every so often
+
+	// Member functions
+	void setIsTangeable(bool val) {
+		isTangeable = val;
+	}
+	bool isEntityTangeable() {
+		return isTangeable;
+	}
+};
+
+#endif

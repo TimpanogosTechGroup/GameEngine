@@ -56,6 +56,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="DynamicEntity.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="ErrorCode.h" />
     <ClInclude Include="ExceptionTemplate.h" />
     <ClInclude Include="Font.h" />
@@ -72,6 +74,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="MotionState.h" />
+    <ClInclude Include="Moveable.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
     <ClInclude Include="PhysicalInstance.h" />
@@ -80,14 +83,19 @@
     <ClInclude Include="Properties.h" />
     <ClInclude Include="Registry.h" />
     <ClInclude Include="RegistryEntry.h" />
+    <ClInclude Include="Renderable.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="RenderItem.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="StaticEntity.h" />
+    <ClInclude Include="Terrian.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Throwable.h" />
     <ClInclude Include="Verticies.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

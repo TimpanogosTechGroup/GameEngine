@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include "World.h"
 
 #define LOG(message, level) \
 	Logger::Log<GameEngine>(level, message);
@@ -151,6 +152,8 @@ void GameEngine::run() {
 		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
 		physicsEngine->AddForce("Gladius", glm::vec3(0, 50 / ((*modelManager.getPhysicalInstance("Gladius")).getInstancePosition().y*2 + 1), 0));
 		physicsEngine->Update(timePerFrame, modelManager);
+
+		World::getInstance().update();
 
 		float delta = .002f;
 		proccessInput(delta); // proccess input
