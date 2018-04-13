@@ -8,18 +8,12 @@
 #define VS_MEM_CHECK;
 #endif
 
-#include "World.h"
-#include "Entity.h"
-#include "Terrian.h"
-
 int main(int argc, char** argv) {
 	VS_MEM_CHECK;
 
 	GameEngine gameEngine;
 
 	gameEngine.initialize();
-	Terrian* terrian = new Terrian();
-	World::getInstance().addEntityToWorld(terrian);
 	gameEngine.run();
 	gameEngine.shudown();
 

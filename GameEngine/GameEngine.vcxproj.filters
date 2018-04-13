@@ -281,6 +281,12 @@
     <ClInclude Include="Moveable.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="InputControlled.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomEntity.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

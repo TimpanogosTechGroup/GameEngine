@@ -52,7 +52,7 @@
   <Class Name="World" Collapsed="true">
     <Position X="14.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAEAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAEAAAABBAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAA=</HashCode>
       <FileName>World.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -190,7 +190,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CubeMap" Collapsed="true">
-    <Position X="7.25" Y="11.75" Width="1.5" />
+    <Position X="14.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAQAAAAAQAgAAAAAAAAAAACAAAgAAAACAAAAAAAA=</HashCode>
       <FileName>CubeMap.h</FileName>
@@ -204,7 +204,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Model" Collapsed="true">
-    <Position X="7.25" Y="10.5" Width="1.5" />
+    <Position X="14.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ASAAAAAAAAABIAAAAAAQAAAADQBAEgAgABgAAAQAAAA=</HashCode>
       <FileName>Model.h</FileName>

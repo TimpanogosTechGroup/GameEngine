@@ -66,6 +66,7 @@
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GarbageCollector.h" />
+    <ClInclude Include="InputControlled.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Logger.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />
     <ClInclude Include="Properties.h" />
+    <ClInclude Include="RandomEntity.h" />
     <ClInclude Include="Registry.h" />
     <ClInclude Include="RegistryEntry.h" />
     <ClInclude Include="Renderable.h" />

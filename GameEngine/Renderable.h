@@ -13,6 +13,12 @@ class Renderable : public virtual Entity {
 private:
 	//Render profile goes here
 public:
+	Renderable() {
+
+	}
+	~Renderable() {
+
+	}
 	virtual void render() = 0; // function called when the game wants to render and entity
 };
 

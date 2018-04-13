@@ -11,12 +11,21 @@ This is the base entity class. Has the abstract methods update() and onWorldTick
 These functions will be inhereted by the inherited classes and define game logic
 */
 
+typedef std::string guid;
+
 class Entity {
 private:
 	PhysicalInstance mPhsyicalInstance; // This contains the model reference and some basic properties
 										//std::string GUID;
 										// Add some kind of input management here. Can also use an empty or null one
 	bool isTangeable = true; // Sets the property for collision detection
+
+	static const guid ENTITY_STATIC_GUID;
+
+protected:
+	void setPhysicalInstance(PhysicalInstance physicalInstance) {
+		mPhsyicalInstance = physicalInstance;
+	}
 
 public:
 	virtual void update(void) = 0; // This is the entity update function, is called every frame.
@@ -28,6 +37,10 @@ public:
 	}
 	bool isEntityTangeable() {
 		return isTangeable;
+	}
+
+	PhysicalInstance& getPhysicalInstance() {
+		return mPhsyicalInstance;
 	}
 };
 

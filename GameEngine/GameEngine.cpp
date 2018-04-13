@@ -1,8 +1,8 @@
 #include "GameEngine.h"
 #include "World.h"
-
-#define LOG(message, level) \
-	Logger::Log<GameEngine>(level, message);
+#include "Entity.h"
+#include "Terrian.h"
+#include "RandomEntity.h"
 
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
@@ -54,19 +54,15 @@ void GameEngine::initialize() {
 	AssetManager::LoadModelFull("Model\\spherepbr.obj");
 	AssetManager::LoadModelFull("Model\\Gladius.obj");
 
-	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");
+	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
 
-	modelManager.push_back_instance(new PhysicalInstance(std::string("cube"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 10, 0), glm::vec3(0, 10, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("cube1"), ResourceManager::getModel("Model\\cube.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("sphere1"), ResourceManager::getModel("Model\\spherepbr.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
-	modelManager.push_back_instance(new PhysicalInstance(std::string("Gladius"), ResourceManager::getModel("Model\\Gladius.obj"), glm::vec3(0, 0, -20), glm::vec3(0, 5, 0), 1.0));
-	
+	World::getInstance().initialize();
 
- 	for (auto &iter : modelManager.getPhysicalInstances()) {
-		physicsEngine->addModelInstance(iter.second, 1);
-	}
+	Terrian* terrian = new Terrian();
+	RandomEntity* rand = new RandomEntity(PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	World::getInstance().addEntityToWorld(terrian);
+	World::getInstance().addEntityToWorld(rand);
+
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -123,6 +119,8 @@ void GameEngine::proccessInput(double delta) {
 	else {
 		camera->DisableLookAt();
 	}
+
+	World::getInstance().setCamera(camera);
 }
 
 void GameEngine::run() {
@@ -147,12 +145,6 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		// update physics with respect to delta
-		physicsEngine->AddForce("cube", glm::vec3(20 * sin(cir), 20 * sin(cir), 20 * cos(cir)));
-		physicsEngine->AddForce("cube1", glm::vec3(0, 10, 0));
-		physicsEngine->AddForce("Gladius", glm::vec3(0, 50 / ((*modelManager.getPhysicalInstance("Gladius")).getInstancePosition().y*2 + 1), 0));
-		physicsEngine->Update(timePerFrame, modelManager);
-
 		World::getInstance().update();
 
 		float delta = .002f;
@@ -163,16 +155,8 @@ void GameEngine::run() {
 		renderer.Clear();
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, cube);
-		
-		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("cube1"), glm::vec3(1, 0, 0));
-		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("cube"), glm::vec3(0, 0, 1));
-		renderer.RenderBoundingBox(*camera, *modelManager.getPhysicalInstance("barrel"), glm::vec3(0, 0, 1));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube"));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("cube1"));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("barrel"));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere"));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("sphere1"));
-		renderer.RenderPhysicalInstance(*camera, *modelManager.getPhysicalInstance("Gladius"));
+
+		World::getInstance().render();
 		
 
 		// Render the FPS and time per frame variables
