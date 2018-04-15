@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #include "PrimitiveShape.h"
 
 Object* PrimitiveShape::GenerateSquare(float width, float height, Material* material) {

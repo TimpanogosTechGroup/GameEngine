@@ -1,3 +1,13 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
+
 /*
 Author: Ben Brenkman
 Notes: This is the rendering class for OpenGl, all calls related to OpenGl should be located in here. But for now do what you can.

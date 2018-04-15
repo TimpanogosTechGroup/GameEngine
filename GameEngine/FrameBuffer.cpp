@@ -1,3 +1,13 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
+
 /*
 Author: Ben Brenkman
 Notes: We can use this class to render different scences at the same time, or create mulitple views for multiplayer mode. Also very helpfull in adding post-proccessing effects

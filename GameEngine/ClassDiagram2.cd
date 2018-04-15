@@ -52,7 +52,7 @@
   <Class Name="World" Collapsed="true">
     <Position X="14.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAEAAAABBAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAgAECAAAhBAAAIhAAUAAAAAAAAAAAQgAAAAAAAUAAA=</HashCode>
       <FileName>World.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -276,7 +276,7 @@
   <Class Name="Entity" Collapsed="true">
     <Position X="3.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAAgAQAAAIAAAAIAAAAEAAA=</HashCode>
+      <HashCode>AAAABABAAAAAAAAAABAAAAAgAQAAAIAAAAIAAgAEAAA=</HashCode>
       <FileName>Entity.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -297,7 +297,7 @@
   <Class Name="Renderable" Collapsed="true">
     <Position X="5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAA=</HashCode>
       <FileName>Renderable.h</FileName>
     </TypeIdentifier>
   </Class>

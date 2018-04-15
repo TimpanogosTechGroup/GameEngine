@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef WORLD_H
 #define WORLD_H
 
@@ -8,6 +17,7 @@
 #include "Logger.h"
 #include <vector>
 #include "PhysicsEngine.h"
+#include "InputManager.h"
 
 #define LOG(message) \
 	Logger::Log<World>(DEBUG, message);
@@ -51,7 +61,7 @@ public:
 
 	void update() {
 
-		mPhysicsEngine->Update(1, mManager);
+		mPhysicsEngine->Update(2, mManager);
 
 		for (auto &entity : mWorldEntities) {
 			entity->update();

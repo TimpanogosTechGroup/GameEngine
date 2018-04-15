@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #include "Font.h"
 #include "Registry.h"
 #include "OpenGlRenderer.h"

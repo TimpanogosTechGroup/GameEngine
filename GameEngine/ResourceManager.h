@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
 

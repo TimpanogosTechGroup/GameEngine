@@ -60,6 +60,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ErrorCode.h" />
     <ClInclude Include="ExceptionTemplate.h" />
+    <ClInclude Include="FileSystemManager.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FontManagerException.h" />
@@ -67,7 +68,10 @@
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GarbageCollector.h" />
     <ClInclude Include="InputControlled.h" />
+    <ClInclude Include="InputEvent.h" />
+    <ClInclude Include="InputInterface.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="KeyBoardInput.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LuaScript.h" />
@@ -103,6 +107,7 @@
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="GameEngine.licenseheader" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

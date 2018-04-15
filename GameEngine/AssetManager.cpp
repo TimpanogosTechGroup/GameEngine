@@ -1,3 +1,13 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
+
 /*
 Isaac Draper
 
@@ -11,6 +21,7 @@ NOT COMPLETE
 #include "ResourceManager.h"
 #include "Logger.h"
 #include "OpenGlRenderer.h"
+#include "FileSystemManager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm\stb_image.h>
@@ -235,9 +246,9 @@ Model* AssetManager::LoadModel(const char* pFile) {
 	return model;
 }
 
-void AssetManager::LoadModelFull(const char * pFile)
+void AssetManager::LoadModelFull(const char * pFile, const char* folderName)
 {
-	Model* model = LoadModel(pFile);
+	Model* model = LoadModel(FileSystemManager::getInstance().getModelPathString(pFile, folderName).c_str());
 
 	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->CompileModel(*model);
 	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->CompileBoundingBox(model->boundingBox);

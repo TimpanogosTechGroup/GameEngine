@@ -1,4 +1,14 @@
 /**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
+
+/**
 	This is the header to manage loading assets to opengl.
 	
 	@author Isaac Draper, Ben Brenkman
@@ -55,7 +65,7 @@ public:
 	*/
 	static Model* LoadModel(const char* pFile); // not complete, currently working on getting assimp to work
 
-	static void LoadModelFull(const char* pFile);
+	static void LoadModelFull(const char* pFile, const char* folderName = "Andromeda");
 
 	/**
 		Loads a cube map with the texture starting at pFile and adding a _dir for each face

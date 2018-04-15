@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef LOGGER_H
 #define LOGGER_H
 #pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS

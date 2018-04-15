@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef EXCEPTION_TEMPLATE_H
 #define EXCEPTION_TEMPLATE_H
 #include <string>

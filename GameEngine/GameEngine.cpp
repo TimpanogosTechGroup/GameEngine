@@ -1,8 +1,18 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #include "GameEngine.h"
 #include "World.h"
 #include "Entity.h"
 #include "Terrian.h"
 #include "RandomEntity.h"
+#include "FileSystemManager.h"
 
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
@@ -49,17 +59,21 @@ void GameEngine::initialize() {
 
 
 	//Load models and stuff
-	AssetManager::LoadModelFull("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
-	AssetManager::LoadModelFull("Model\\Barrel.obj");
-	AssetManager::LoadModelFull("Model\\spherepbr.obj");
-	AssetManager::LoadModelFull("Model\\Gladius.obj");
+	//AssetManager::LoadModelFull("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
+	//AssetManager::LoadModelFull("Model\\spherepbr.obj");
+	//AssetManager::LoadModelFull("Model\\Gladius.obj");
+
+	FileSystemManager::getInstance().initialize();
+
+	AssetManager::LoadModelFull("Gladius");
+	
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
 
 	World::getInstance().initialize();
 
 	Terrian* terrian = new Terrian();
-	RandomEntity* rand = new RandomEntity(PhysicalInstance(std::string("barrel"), ResourceManager::getModel("Model\\Barrel.obj"), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+	RandomEntity* rand = new RandomEntity("Gladius");
 	World::getInstance().addEntityToWorld(terrian);
 	World::getInstance().addEntityToWorld(rand);
 
@@ -158,7 +172,6 @@ void GameEngine::run() {
 
 		World::getInstance().render();
 		
-
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
 		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));

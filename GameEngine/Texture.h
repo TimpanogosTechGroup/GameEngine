@@ -1,3 +1,13 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
+
 /*
 Isaac Draper:
 This class does not include the actual texture information, perhaps it would be good to store the

@@ -1,7 +1,17 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef ENTITY_H
 #define ENTITY_H
 
 #include "PhysicalInstance.h"
+#include "FileSystemManager.h"
 
 /*
 Author: Ben Brenkman aka JustBremkman
@@ -18,13 +28,17 @@ private:
 	PhysicalInstance mPhsyicalInstance; // This contains the model reference and some basic properties
 										//std::string GUID;
 										// Add some kind of input management here. Can also use an empty or null one
-	bool isTangeable = true; // Sets the property for collision detection
 
+	bool isTangeable = true; // Sets the property for collision detection
 	static const guid ENTITY_STATIC_GUID;
 
 protected:
 	void setPhysicalInstance(PhysicalInstance physicalInstance) {
 		mPhsyicalInstance = physicalInstance;
+	}
+
+	std::string getModelLocation(std::string modelName, std::string folderName = "Andromeda") {
+		return FileSystemManager::getInstance().getModelPathString(modelName, folderName);
 	}
 
 public:

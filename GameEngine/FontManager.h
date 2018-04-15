@@ -1,3 +1,12 @@
+/**
+	File:
+    Purpose: 
+
+    @author 
+    @version 1.0
+
+	Copyright (c) 2018 All Rights Reserved
+*/
 #ifndef FONT_MANAGER_H
 #define FONT_MANAGER_H
 #include <ft2build.h>
