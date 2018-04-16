@@ -13,6 +13,12 @@
 #include "Terrian.h"
 #include "RandomEntity.h"
 #include "FileSystemManager.h"
+#include "Profiler.h"
+
+#ifdef CreateWindow
+#define temp_Create CreateWindow
+#undef CreateWindow
+#endif
 
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
@@ -24,9 +30,6 @@ GameEngine::GameEngine() : cube("Texture\\cubemap\\morning") {
 GameEngine::~GameEngine() {
 	delete physicsEngine;
 	delete camera;
-	delete liberty;
-	delete cube1;
-	delete barrel;
 }
 
 void GameEngine::initialize() {
@@ -54,7 +57,13 @@ void GameEngine::initialize() {
 		Logger::Log<FontManager>(DEBUG, "Initializing...");
 	}
 	catch (FontManagerException& e) {
-		Logger::Log<FontManager>(ERROR, e.what());
+#ifdef ERROR
+#define temp ERROR
+#undef ERROR
+		Logger::Log<FontManager>(LoggerLevel::ERROR, e.what());
+#define ERROR
+#undef temp
+#endif
 	}
 
 
@@ -76,7 +85,6 @@ void GameEngine::initialize() {
 	RandomEntity* rand = new RandomEntity("Gladius");
 	World::getInstance().addEntityToWorld(terrian);
 	World::getInstance().addEntityToWorld(rand);
-
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -149,6 +157,7 @@ void GameEngine::run() {
 
 
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
+		PROFILE_PUSH("framestart");
 		// FPS counter and profiler
 		double currentTime = static_cast<double> (time(0));
 		nbFrames++;
@@ -172,6 +181,7 @@ void GameEngine::run() {
 
 		World::getInstance().render();
 		
+		PROFILE_PUSH("render text");
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
 		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
@@ -181,8 +191,13 @@ void GameEngine::run() {
 		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
+		PROFILE_POP;
 		// Show the changes after rendering
+		PROFILE_PUSH("buffer swap");
 		renderer.UpdateScreen();
+		PROFILE_POP;
+
+		PROFILE_POP;
 	}
 }
 

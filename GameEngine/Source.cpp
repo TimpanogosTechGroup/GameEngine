@@ -8,6 +8,7 @@
 	Copyright (c) 2018 All Rights Reserved
 */
 #include "GameEngine.h"
+#include "Profiler.h"
 
 #ifdef _MSC_VER
 #define _CRTDBG_MAP_ALLOC  
@@ -21,10 +22,14 @@ int main(int argc, char** argv) {
 	VS_MEM_CHECK;
 
 	GameEngine gameEngine;
-
+	Profiler::init();
+	PROFILE_PUSH("Initialize");
 	gameEngine.initialize();
+	PROFILE_POP;
 	gameEngine.run();
 	gameEngine.shudown();
+
+	Profiler::dump();
 
 	return 0;
 }

@@ -143,7 +143,7 @@
   <Class Name="InputManager" Collapsed="true">
     <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAASBEAAAgAAAAIAAAAQBIAEEBAAQIAIAgEA=</HashCode>
+      <HashCode>AAACAAAAAASBEAAAgAAAAIAAAAQBIAEEBAAQIAIAgEA=</HashCode>
       <FileName>InputManager.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -276,12 +276,19 @@
   <Class Name="Entity" Collapsed="true">
     <Position X="3.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABABAAAAAAAAAABAAAAAgAQAAAIAAAAIAAgAEAAA=</HashCode>
+      <HashCode>AAAABABAAAAAAAAAABAAAAAgAQAAAJAAAAIAAgAEAAA=</HashCode>
       <FileName>Entity.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DynamicEntity" Collapsed="true">
     <Position X="0.5" Y="10.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DynamicEntity::RIGIDBODY_TYPE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>DynamicEntity.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AABAgAgACAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicEntity.h</FileName>

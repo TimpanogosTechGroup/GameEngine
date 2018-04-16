@@ -40,6 +40,7 @@
     <ClCompile Include="PhysicalInstance.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PrimitiveShape.cpp" />
+    <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="Properties.cpp" />
     <ClCompile Include="Registry.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="PhysicalInstance.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />
+    <ClInclude Include="Profiler.h" />
     <ClInclude Include="Properties.h" />
     <ClInclude Include="RandomEntity.h" />
     <ClInclude Include="Registry.h" />

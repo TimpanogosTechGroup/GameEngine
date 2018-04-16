@@ -18,6 +18,7 @@
 #include <vector>
 #include "PhysicsEngine.h"
 #include "InputManager.h"
+#include "Profiler.h"
 
 #define LOG(message) \
 	Logger::Log<World>(DEBUG, message);
@@ -60,19 +61,23 @@ public:
 	}
 
 	void update() {
-
+		PROFILE_PUSH("physics update");
 		mPhysicsEngine->Update(2, mManager);
+		PROFILE_POP;
 
+		PROFILE_PUSH("entity update");
 		for (auto &entity : mWorldEntities) {
 			entity->update();
 		}
+		PROFILE_POP;
 	}
 
 	void render() {
-
+		PROFILE_PUSH("render update");
 		for (auto &entity : mRenderableEntities) {
 			entity->render();
 		}
+		PROFILE_POP;
 	}
 
 	Camera& getCamera() {

@@ -147,6 +147,9 @@
     <ClCompile Include="ExceptionInclude.cpp">
       <Filter>Source Files\exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="Profiler.cpp">
+      <Filter>Source Files\profiler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="InputEvent.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiler.h">
+      <Filter>Header Files\profiler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
