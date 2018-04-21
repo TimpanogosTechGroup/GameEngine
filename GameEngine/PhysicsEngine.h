@@ -43,13 +43,13 @@ public:
 		AddRigidBodyToWorld(rigidBodies["ground"]);
 	}
 	~PhysicsEngine() {
-		//for (unsigned int i = 0; i < collisionObjects.size(); i++) {
-		//	delete collisionObjects.at(i);
-		//}
-		//for (unsigned int i = 0; i < rigidBodies.size(); i++) {
-		//	dynamicsWorld->removeRigidBody(rigidBodies.at(i));
-		//	delete rigidBodies.at(i);
-		//}
+		delete dynamicsWorld;
+		delete groundMotionState;
+		delete fallMotionState;
+		delete solver;
+		delete dispatcher;
+		delete collisionConfiguration;
+		delete broadphase;
 
 		for (auto obj : collisionObjects) {
 			delete obj.second;
@@ -62,14 +62,6 @@ public:
 		for (auto obj : motionStates) {
 			delete obj.second;
 		}
-
-		//delete dynamicsWorld;
-		delete groundMotionState;
-		delete fallMotionState;
-		delete solver;
-		delete dispatcher;
-		delete collisionConfiguration;
-		delete broadphase;
 
 		//gc.collectGarbage();
 	}
