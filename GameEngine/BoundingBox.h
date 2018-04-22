@@ -7,7 +7,8 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
-#pragma once
+#ifndef BOUNDING_BOX_H
+#define BOUDNING_BOX_H
 #include "RenderItem.h"
 #include <math.h>
 #include <cmath>
@@ -51,3 +52,4 @@ private:
 	float xMin, yMin, zMin, xMax, yMax, zMax;
 };
 
+#endif

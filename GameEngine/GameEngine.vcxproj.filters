@@ -150,6 +150,9 @@
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files\profiler</Filter>
     </ClCompile>
+    <ClCompile Include="PerlinGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -307,6 +310,12 @@
     </ClInclude>
     <ClInclude Include="Profiler.h">
       <Filter>Header Files\profiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>Header Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinGenerator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

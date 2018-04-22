@@ -65,6 +65,7 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 		}
 		context = SDL_GL_CreateContext(window);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "0");
 
 		// Setsup glew and sets the clear color (background color)
 		glewInit();

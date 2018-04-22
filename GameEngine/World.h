@@ -2,7 +2,7 @@
 	File:
     Purpose: 
 
-    @author 
+    @author Ben Brenkman
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
@@ -73,11 +73,9 @@ public:
 	}
 
 	void render() {
-		PROFILE_PUSH("render update");
 		for (auto &entity : mRenderableEntities) {
 			entity->render();
 		}
-		PROFILE_POP;
 	}
 
 	Camera& getCamera() {

@@ -104,6 +104,7 @@ std::vector<float> Object::BoundingBoxMinMaxValues() {
 
 	values.push_back(xmin); values.push_back(ymin); values.push_back(zmin);
 	values.push_back(xmax); values.push_back(ymax); values.push_back(zmax);
+	std::cout << xmin << " " << xmax << " " << ymin << " " << ymax << " " << zmin << " " << zmax << std::endl;
 	return values;
 }
 

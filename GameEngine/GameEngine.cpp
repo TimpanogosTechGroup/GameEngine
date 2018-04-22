@@ -2,7 +2,7 @@
 	File:
     Purpose: 
 
-    @author 
+    @author Ben Brenkman
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
@@ -14,6 +14,7 @@
 #include "RandomEntity.h"
 #include "FileSystemManager.h"
 #include "Profiler.h"
+#include "PerlinGenerator.h"
 
 #ifdef CreateWindow
 #define temp_Create CreateWindow
@@ -66,15 +67,9 @@ void GameEngine::initialize() {
 #endif
 	}
 
-
-	//Load models and stuff
-	//AssetManager::LoadModelFull("Model\\cube.obj"); // Use the asset manager to load the model and add it to the resource manager
-	//AssetManager::LoadModelFull("Model\\spherepbr.obj");
-	//AssetManager::LoadModelFull("Model\\Gladius.obj");
-
 	FileSystemManager::getInstance().initialize();
 
-	AssetManager::LoadModelFull("Gladius");
+	AssetManager::LoadModelFull("Caltrop");
 	
 
 	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
@@ -82,7 +77,7 @@ void GameEngine::initialize() {
 	World::getInstance().initialize();
 
 	Terrian* terrian = new Terrian();
-	RandomEntity* rand = new RandomEntity("Gladius");
+	RandomEntity* rand = new RandomEntity("Caltrop");
 	World::getInstance().addEntityToWorld(terrian);
 	World::getInstance().addEntityToWorld(rand);
 }
@@ -156,6 +151,18 @@ void GameEngine::run() {
 	LOG("Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.", DEBUG);
 
 
+	PerlinGenerator perlin;
+
+	std::cout << "Perlin Noise Generation Test: " << std::endl;
+	std::cout << "Seed: 0, " << "Octaves 1" << std::endl;
+	std::cout << perlin.perlin(1.0, 1.0, 1.1) << std::endl;
+	std::cout << perlin.perlin(2.0, 1.0, 1.1) << std::endl;
+	std::cout << perlin.perlin(3.0, 1.0, 1.1) << std::endl;
+	std::cout << perlin.perlin(4.0, 1.0, 1.1) << std::endl;
+	std::cout << perlin.perlin(5.0, 1.0, 1.1) << std::endl;
+	std::cout << perlin.perlin(12121, 123.23, 894.973) << std::endl;
+	std::cout << perlin.perlin(1, 1, 1) << std::endl;
+
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 		PROFILE_PUSH("framestart");
 		// FPS counter and profiler
@@ -173,15 +180,18 @@ void GameEngine::run() {
 		float delta = .002f;
 		proccessInput(delta); // proccess input
 
-
+		PROFILE_PUSH("render update");
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
+
 		// Render cube map first then render the rest of the scene
 		renderer.RenderCubeMap(*camera, cube);
 
 		World::getInstance().render();
+
+		PROFILE_POP;
 		
-		PROFILE_PUSH("render text");
+		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
 		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
@@ -194,7 +204,7 @@ void GameEngine::run() {
 		PROFILE_POP;
 		// Show the changes after rendering
 		PROFILE_PUSH("buffer swap");
-		renderer.UpdateScreen();
+		renderer.UpdateScreen(); // Shouuld take less than 2 milliseconds
 		PROFILE_POP;
 
 		PROFILE_POP;

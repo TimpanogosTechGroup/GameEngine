@@ -2,7 +2,7 @@
 	File:
     Purpose: 
 
-    @author 
+    @author Isaac Draper, Ben Brenkman
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved

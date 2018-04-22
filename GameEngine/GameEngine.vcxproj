@@ -37,6 +37,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGlRenderer.cpp" />
+    <ClCompile Include="PerlinGenerator.cpp" />
     <ClCompile Include="PhysicalInstance.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PrimitiveShape.cpp" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Axis.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CrashHandler.h" />
@@ -83,6 +85,7 @@
     <ClInclude Include="Moveable.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGlRenderer.h" />
+    <ClInclude Include="PerlinGenerator.h" />
     <ClInclude Include="PhysicalInstance.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PrimitiveShape.h" />

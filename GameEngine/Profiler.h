@@ -1,10 +1,10 @@
 /**
-File: Prfiler
+File: Profiler
 Purpose: This class profiles the game engine, can be used to keep track of every function and how they perform
 
 Check https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process for more information
 
-@author
+@author Ben Brenkman
 @version 1.0
 
 Copyright (c) 2018 All Rights Reserved
@@ -90,10 +90,12 @@ private:
 
 	static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
 	static int numProcessors;
+	static double lastPercent;
 	static HANDLE self;
 
 	static double getCPULoadPercent();
 	static Profile endProfile(std::string name);
+	static void addToLog(Profile prof);
 
 public:
 
