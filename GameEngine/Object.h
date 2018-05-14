@@ -1,5 +1,5 @@
 /**
-	File:
+	File: This is essentailly a mesh class
     Purpose: 
 
     @author 
@@ -13,7 +13,8 @@ Isaac Draper:
 This file is not complete
 */
 
-#pragma once
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include <vector>
 
@@ -106,3 +107,5 @@ private:
 	Material* material;
 	
 };
+
+#endif

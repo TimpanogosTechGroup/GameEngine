@@ -153,6 +153,9 @@
     <ClCompile Include="PerlinGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="PerlinGenerator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Header Files\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

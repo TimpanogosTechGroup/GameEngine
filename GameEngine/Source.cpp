@@ -12,7 +12,6 @@
 
 #include "GameEngine.h"
 #include "Profiler.h"
-#include "PerlinGenerator.h"
 
 #ifdef _MSC_VER
 #define _CRTDBG_MAP_ALLOC  
@@ -27,17 +26,14 @@ int main(int argc, char** argv) {
 
 	GameEngine gameEngine;
 	Profiler::init();
+	Chunk chunk;
+	PerlinGenerator perlin;
+	chunk.populate(perlin);
 	PROFILE_PUSH("Initialize");
 	gameEngine.initialize();
 	PROFILE_POP;
 	gameEngine.run();
 	gameEngine.shudown();
-
-	PerlinGenerator perlin;
-
-	for (double i = 0; i < 100; i++) {
-		std::cout << perlin.perlin(i, i, i) << ", ";
-	}
 
 	Profiler::dump();
 

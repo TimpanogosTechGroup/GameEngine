@@ -1,17 +1,11 @@
 /**
-	File:
-    Purpose: 
+	File: An OpenGL render implementation
+    Purpose: This is an OpenGL implementation of the render engine. Will habndle all rendering in the game
 
-    @author 
+    @author Ben Brenkman
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
-*/
-
-/*
-Author: Ben Brenkman
-
-Our OpenGl implementation of the RenderEngine
 */
 
 #pragma once
@@ -25,6 +19,7 @@ Our OpenGl implementation of the RenderEngine
 #include <string>
 #include "CubeMap.h"
 #include "Font.h"
+#include "Chunk.h"
 
 class OpenGlRenderer :
 	public RenderEngine
@@ -66,6 +61,8 @@ public:
 	void RenderBoundingBox(Camera& camera, PhysicalInstance& physicalInstance, glm::vec3 color);
 	// Initializes the renderer, this function loads default shaders and such
 	void loadDefaults() override;
+	// Renders the chunk, if the chunk has not been modified use the static index array
+	void renderChunk(Camera* camera, Chunk* chunk);
 
 	glm::mat4 getOrthoGraphicsProjection();
 

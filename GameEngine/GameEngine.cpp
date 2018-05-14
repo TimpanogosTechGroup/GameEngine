@@ -14,7 +14,6 @@
 #include "RandomEntity.h"
 #include "FileSystemManager.h"
 #include "Profiler.h"
-#include "PerlinGenerator.h"
 
 #ifdef CreateWindow
 #define temp_Create CreateWindow
@@ -149,19 +148,6 @@ void GameEngine::run() {
 	std::ostringstream os;
 	LOG("Starting the main loop");
 	LOG("Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.", DEBUG);
-
-
-	PerlinGenerator perlin;
-
-	std::cout << "Perlin Noise Generation Test: " << std::endl;
-	std::cout << "Seed: 0, " << "Octaves 1" << std::endl;
-	std::cout << perlin.perlin(1.0, 1.0, 1.1) << std::endl;
-	std::cout << perlin.perlin(2.0, 1.0, 1.1) << std::endl;
-	std::cout << perlin.perlin(3.0, 1.0, 1.1) << std::endl;
-	std::cout << perlin.perlin(4.0, 1.0, 1.1) << std::endl;
-	std::cout << perlin.perlin(5.0, 1.0, 1.1) << std::endl;
-	std::cout << perlin.perlin(12121, 123.23, 894.973) << std::endl;
-	std::cout << perlin.perlin(1, 1, 1) << std::endl;
 
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
 		PROFILE_PUSH("framestart");
