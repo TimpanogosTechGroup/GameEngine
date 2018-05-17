@@ -26,9 +26,6 @@ int main(int argc, char** argv) {
 
 	GameEngine gameEngine;
 	Profiler::init();
-	Chunk chunk;
-	PerlinGenerator perlin;
-	chunk.populate(perlin);
 	PROFILE_PUSH("Initialize");
 	gameEngine.initialize();
 	PROFILE_POP;

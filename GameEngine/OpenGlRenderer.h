@@ -63,6 +63,7 @@ public:
 	void loadDefaults() override;
 	// Renders the chunk, if the chunk has not been modified use the static index array
 	void renderChunk(Camera* camera, Chunk* chunk);
+	void compileChunk(Chunk* chunk);
 
 	glm::mat4 getOrthoGraphicsProjection();
 

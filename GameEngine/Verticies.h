@@ -13,7 +13,8 @@ Isaac Draper:
 This file is not complete, simple storage class right now
 */
 
-#pragma once
+#ifndef VERTICIES_H
+#define VERTICIES_H
 
 #include <vector>
 #include <iostream>
@@ -39,6 +40,7 @@ public:
 
 	// Adds a float to the vertecies vector
 	Verticies* AddFloat(float a);
+	void addDouble(double a);
 
 	int Size() { return values.size(); };
 
@@ -48,3 +50,5 @@ public:
 private:
 	std::vector<float> values;
 };
+
+#endif

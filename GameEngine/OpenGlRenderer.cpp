@@ -312,12 +312,153 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstan
 }
 
 void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
+	//// Render the chunk with the normal shaders
+	//if (chunk) {
+	//	glUseProgram(ResourceManager::getShader("texture_shader")->GetID());
+	//	SetUniformMat4(ResourceManager::getShader("texture_shader"), "projection", camera->GetProjectionMatrix());
+	//	SetUniformMat4(ResourceManager::getShader("texture_shader"), "view", camera->GetViewMatrix());
+	//	btScalar trans[16]; // create a 4x4 array
+	//	chunk->getPhysicalIstance().getInstanceTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+	//	glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+	//	SetUniformMat4(ResourceManager::getShader("texture_shader"), "model", model); // set the models rotation, scaling and transfom with the matrix
 
-	// Render the chunk with the normal shaders
-	if (chunk) {
+	//	glBindTexture(GL_TEXTURE_2D, 0);
 
+	//	glBindVertexArray(chunk->GetID());
+	//	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
+	//	glBindVertexArray(0);
+	//}
+
+	if (chunk->getMesh().GetMaterial()->GetShader() != nullptr) {
+		glUseProgram(chunk->getMesh().GetMaterial()->GetShader()->GetID());
+		//glUseProgram(3);
+		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "projection", camera->GetProjectionMatrix());
+		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "view", camera->GetViewMatrix());
+		//btScalar trans[16]; // create a 4x4 array
+		//pos.getInstanceTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
+		//glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
+
+		glm::mat4 model;
+		model = glm::translate(model, glm::vec3(0, 0, 0));
+
+		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}
 
+	glBindTexture(GL_TEXTURE_2D, chunk->getMesh().GetMaterial()->GetTexture()->GetID());
+
+	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
+	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
+	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "viewPos", camera->GetPosition());
+
+	glBindVertexArray(chunk->getMesh().GetID());
+	//glDrawArrays(GL_TRIANGLES, 0, chunk->getMesh().GetVerticies().Size() / 3);
+	glDrawElements(GL_TRIANGLES, chunk->getIndecies().size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	//RenderObject(*camera, chunk->getMesh(), chunk->getPhysicalInstance());
+}
+
+void OpenGlRenderer::compileChunk(Chunk * chunk)
+{
+
+	//CompileObject(chunk->getMesh());
+
+	// First we need to create the buffer to send off to the GPU
+	std::vector<float> buffer;
+
+	if (chunk->getMesh().GetVerticies().Size() == chunk->getMesh().GetNormals().Size()) {
+		for (int i = 0; i < chunk->getMesh().GetVerticies().Size(); i += 3) {
+			buffer.push_back(chunk->getMesh().GetVerticies().GetValues()[i]);
+			buffer.push_back(chunk->getMesh().GetVerticies().GetValues()[i + 1]);
+			buffer.push_back(chunk->getMesh().GetVerticies().GetValues()[i + 2]);
+
+			buffer.push_back(chunk->getMesh().GetNormals().GetValues()[i]);
+			buffer.push_back(chunk->getMesh().GetNormals().GetValues()[i + 1]);
+			buffer.push_back(chunk->getMesh().GetNormals().GetValues()[i + 2]);
+
+			if (chunk->getMesh().GetUVCoords().Size() < (chunk->getMesh().GetVerticies().Size() * (2.0 / 3.0))) { // Check to make sure the uv and other stuff match up, if they don't we'll just push back zero's
+				buffer.push_back(0); // Need to cast it to int, because we need to use float for the calculation
+				buffer.push_back(0);
+				std::cout << "No Texture Coords" << std::endl;
+			}
+			else {
+				int x = static_cast<int>(i * (2.0 / 3.0));
+				buffer.push_back(chunk->getMesh().GetUVCoords().GetValues()[x]);
+				buffer.push_back(chunk->getMesh().GetUVCoords().GetValues()[x + 1]);
+				//std::cout << "Texture Coords: " << object.GetUVCoords().GetValues()[x] << ", " << object.GetUVCoords().GetValues()[x + 1] << std::endl;
+
+			}
+		}
+	}
+	else {
+		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
+	}
+
+	glGenVertexArrays(1, &chunk->getMesh().GetID());
+	glBindVertexArray(chunk->getMesh().GetID());
+	glGenBuffers(1, &chunk->getMesh().VBO.GetID());
+	glGenBuffers(1, &chunk->EBO.GetID());
+
+	glBindBuffer(GL_ARRAY_BUFFER, chunk->getMesh().VBO.GetID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, chunk->EBO.GetID());
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, chunk->getIndecies().size() * sizeof(unsigned int), &chunk->getIndecies()[0], GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	//// First we need to create the buffer to send off to the GPU
+	//std::vector<float> buffer;
+
+	//if (chunk->getVerticies().Size() > 0) {
+	//	for (int i = 0; i < chunk->getVerticies().Size(); i += 3) {
+	//		buffer.push_back(chunk->getVerticies().GetValues()[i]);
+	//		buffer.push_back(chunk->getVerticies().GetValues()[i + 1]);
+	//		buffer.push_back(chunk->getVerticies().GetValues()[i + 2]);
+
+	//		buffer.push_back(1);
+	//		buffer.push_back(1);
+	//		buffer.push_back(1);
+
+	//		buffer.push_back(0);
+	//		buffer.push_back(0);
+	//	}
+	//}
+	//else {
+	//	Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
+	//}
+
+	//glGenVertexArrays(1, &chunk->GetID());
+	//glBindVertexArray(chunk->GetID());
+	//glGenBuffers(1, &chunk->VBO.GetID());
+
+	//glBindBuffer(GL_ARRAY_BUFFER, chunk->VBO.GetID());
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.size(), &buffer[0], GL_STATIC_DRAW);
+
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, chunk->EBO.GetID());
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, 8 * sizeof(unsigned int), chunk->getLODIndexArrayPtr(), GL_STATIC_DRAW);
+
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+	//glEnableVertexAttribArray(0);
+	//glEnableVertexAttribArray(1);
+	//glEnableVertexAttribArray(2);
+
+	//glBindVertexArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void OpenGlRenderer::RenderPhysicalInstance(Camera& camera, PhysicalInstance& physicalInstance) {

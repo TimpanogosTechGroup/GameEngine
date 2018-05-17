@@ -14,6 +14,10 @@ Verticies* Verticies::AddFloat(float a) {
 	return this;
 }
 
+void Verticies::addDouble(double a) {
+	values.push_back(a);
+}
+
 // Debug function
 void Verticies::ToString() {
 	for (auto &i : values) {

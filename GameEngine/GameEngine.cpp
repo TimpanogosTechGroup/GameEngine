@@ -14,6 +14,7 @@
 #include "RandomEntity.h"
 #include "FileSystemManager.h"
 #include "Profiler.h"
+#include "Chunk.h"
 
 #ifdef CreateWindow
 #define temp_Create CreateWindow
@@ -23,7 +24,7 @@
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
 
-GameEngine::GameEngine() : cube("Texture\\cubemap\\morning") {
+GameEngine::GameEngine() : cube("Texture\\cubemap\\morning"), chunk() {
 
 }
 
@@ -79,6 +80,12 @@ void GameEngine::initialize() {
 	RandomEntity* rand = new RandomEntity("Caltrop");
 	World::getInstance().addEntityToWorld(terrian);
 	World::getInstance().addEntityToWorld(rand);
+
+	chunk = new Chunk();
+
+	PerlinGenerator perlin;
+	chunk->populate(perlin);
+	renderer.compileChunk(chunk);
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -174,6 +181,7 @@ void GameEngine::run() {
 		renderer.RenderCubeMap(*camera, cube);
 
 		World::getInstance().render();
+		renderer.renderChunk(camera, chunk);
 
 		PROFILE_POP;
 		
