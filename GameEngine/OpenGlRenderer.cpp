@@ -109,6 +109,7 @@ void OpenGlRenderer::loadDefaults() {
 	AssetManager::LoadTexture("default", "Texture\\question.png");
 	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader\\cubemap_vert.glsl", "Shader\\cubemap_frag.glsl"));
 	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader\\font_vert.glsl", "Shader\\font_frag.glsl"));
+	ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader\\chunk_vert.glsl", "Shader\\chunk_frag.glsl"));
 	//ResourceManager::addModel("default", AssetManager::LoadModel("Model\\default.obj"));
 	//ResourceManager::getModel("default")->CreateBoundBox();
 	//CompileBoundingBox(ResourceManager::getModel("default")->boundingBox);
@@ -340,7 +341,8 @@ void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
 		//glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
 
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0, 0, 0));
+		model = glm::translate(model, glm::vec3(chunk->getChunkXOffset() * (Chunk::CHUNK_SIZE - 1), 0, chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1)));
+		//model = glm::translate(model, chunk->getPhysicalInstance().getInstancePosition());
 
 		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}

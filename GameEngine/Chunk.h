@@ -10,19 +10,23 @@
 #include <vector>
 
 class Chunk : public RenderItem {
+public:
+	static const unsigned int CHUNK_SIZE = 32; // has to be multiples of the LOD
 private:
 	// Create a 32 x 32 square
-	static const unsigned int CHUNK_SIZE = 8; // has to be multiples of the LOD
 	static const unsigned int CHUNK_LOD = 8;
 	static const unsigned int INDEX_ARRAY[];
 	Verticies verts;
 	Object mesh;
 	PhysicalInstance physicalInstance;
 	std::vector<unsigned int> indecies;
+	int x_offset = 0, y_offset = 0;
 
 public:
-	Chunk() : physicalInstance(), verts() {
+	Chunk(int xoff, int yoff) : physicalInstance(), verts() {
 		physicalInstance.setInstancePosition(glm::vec3(0, 0, 0));
+		x_offset = xoff;
+		y_offset = yoff;
 	}
 	~Chunk() {
 
@@ -35,25 +39,30 @@ public:
 	PhysicalInstance& getPhysicalInstance() { return physicalInstance; }
 
 	void populate(PerlinGenerator& generator) {
+
+		std::vector<glm::vec3> verticies(CHUNK_SIZE * CHUNK_SIZE);
+		std::vector<glm::vec3> normals(CHUNK_SIZE * CHUNK_SIZE);
+
+		int count = 0;
+
 		for (int i = 0; i < CHUNK_SIZE; i++) {
 			for (int j = 0; j < CHUNK_SIZE; j++) {
-				//verts.addDouble(i);
-				//verts.addDouble(j);
-				//verts.addDouble(0);
+
+				float height = generator.perlin(i + (x_offset * (CHUNK_SIZE - 1)), j + (y_offset * (CHUNK_SIZE - 1)), 1.1);
+
 				mesh.GetVerticies().AddFloat(i);
-				mesh.GetVerticies().AddFloat(generator.perlin(i, j, 1.1));
+				mesh.GetVerticies().AddFloat(height);
 				mesh.GetVerticies().AddFloat(j);
 
-				mesh.GetNormals().AddFloat(1);
-				mesh.GetNormals().AddFloat(1);
-				mesh.GetNormals().AddFloat(1);
+				mesh.GetUVCoords().AddFloat(0);
+				mesh.GetUVCoords().AddFloat(0);
 
-				mesh.GetUVCoords().AddFloat(0);
-				mesh.GetUVCoords().AddFloat(0);
-				//verts.addDouble(generator.perlin(i, j, 1.1));
+				verticies.at(count) = glm::vec3(i + (x_offset * (CHUNK_SIZE - 1)), height, j + (y_offset * (CHUNK_SIZE - 1)));
+				count++;
 			}
 		}
 
+		// Always remains the same
 		for (int i = 0; i < CHUNK_SIZE - 1; i++) {
 			for (int j = 0; j < CHUNK_SIZE - 1; j++) {
 				indecies.push_back((j * CHUNK_SIZE) + i);
@@ -66,7 +75,30 @@ public:
 			}
 		}
 
-		Material* tmp = new Material(1, 1, ResourceManager::getTexture("default"), ResourceManager::getShader("color_shader"), glm::vec4(1, 1, 1, 1));
+		for (int k = 0; k < indecies.size(); k += 3) {
+
+			glm::vec3 vert1 = verticies.at(indecies.at(k));
+			glm::vec3 vert2 = verticies.at(indecies.at(k + 1));
+			glm::vec3 vert3 = verticies.at(indecies.at(k + 2));
+
+			glm::vec3 normal = glm::cross(vert2 - vert1, vert3 - vert1);
+			glm::normalize(normal);
+
+			normals.at(indecies.at(k)) = normal;
+			normals.at(indecies.at(k + 1)) = normal;
+			normals.at(indecies.at(k + 2)) = normal;
+		}
+
+		//std::cout << "Normals" << std::endl;
+		for (auto n : normals) {
+			mesh.GetNormals().AddFloat(n.x);
+			mesh.GetNormals().AddFloat(n.z);
+			mesh.GetNormals().AddFloat(n.y);
+
+			//std::cout << n.x << ", " << n.y << ", " << n.z << std::endl;
+		}
+
+		Material* tmp = new Material(1, 1, ResourceManager::getTexture("default"), ResourceManager::getShader("chunk_shader"), glm::vec4(1, 1, 1, 1));
 		mesh.SetMaterial(tmp);
 
 		std::cout << "Genertated Chunk:" << std::endl;
@@ -74,6 +106,14 @@ public:
 	}
 
 	std::vector<unsigned int>& getIndecies() { return indecies; }
+
+	int getChunkXOffset() {
+		return x_offset;
+	}
+
+	int getChunkYOffset() {
+		return y_offset;
+	}
 
 	Verticies& getVerticies() {
 		return verts;

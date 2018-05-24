@@ -35,6 +35,9 @@ private:
 	Model* barrel = nullptr;
 	ModelManager modelManager;
 	Chunk* chunk;
+	Chunk* chunk2;
+	Chunk* chunk3;
+	Chunk* chunk4;
 	CubeMap cube;
 public:
 	GameEngine();

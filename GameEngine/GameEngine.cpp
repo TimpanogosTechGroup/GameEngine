@@ -81,11 +81,20 @@ void GameEngine::initialize() {
 	World::getInstance().addEntityToWorld(terrian);
 	World::getInstance().addEntityToWorld(rand);
 
-	chunk = new Chunk();
+	chunk = new Chunk(0, 0);
+	chunk2 = new Chunk(1, 0);
+	chunk3 = new Chunk(0, 1);
+	chunk4 = new Chunk(1, 1);
 
 	PerlinGenerator perlin;
 	chunk->populate(perlin);
 	renderer.compileChunk(chunk);
+	chunk2->populate(perlin);
+	renderer.compileChunk(chunk2);
+	chunk3->populate(perlin);
+	renderer.compileChunk(chunk3);
+	chunk4->populate(perlin);
+	renderer.compileChunk(chunk4);	
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -182,6 +191,9 @@ void GameEngine::run() {
 
 		World::getInstance().render();
 		renderer.renderChunk(camera, chunk);
+		renderer.renderChunk(camera, chunk2);
+		renderer.renderChunk(camera, chunk3);
+		renderer.renderChunk(camera, chunk4);
 
 		PROFILE_POP;
 		
