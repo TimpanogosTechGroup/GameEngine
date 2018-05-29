@@ -323,6 +323,9 @@
     <ClInclude Include="Chunk.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
+    <ClInclude Include="ChunkManager.h">
+      <Filter>Header Files\manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

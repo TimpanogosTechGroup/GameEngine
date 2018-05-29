@@ -22,6 +22,9 @@ private:
 	std::vector<unsigned int> indecies;
 	int x_offset = 0, y_offset = 0;
 
+	// Loading and unloading markers
+	bool markUnload;
+
 public:
 	Chunk(int xoff, int yoff) : physicalInstance(), verts() {
 		physicalInstance.setInstancePosition(glm::vec3(0, 0, 0));
@@ -47,8 +50,9 @@ public:
 
 		for (int i = 0; i < CHUNK_SIZE; i++) {
 			for (int j = 0; j < CHUNK_SIZE; j++) {
-
-				float height = generator.perlin(i + (x_offset * (CHUNK_SIZE - 1)), j + (y_offset * (CHUNK_SIZE - 1)), 1.1);
+				int x = i + (x_offset * (CHUNK_SIZE - 1));
+				int y = j + (y_offset * (CHUNK_SIZE - 1));
+				float height = generator.perlin(x, y, 1.1);
 
 				mesh.GetVerticies().AddFloat(i);
 				mesh.GetVerticies().AddFloat(height);
@@ -57,7 +61,7 @@ public:
 				mesh.GetUVCoords().AddFloat(0);
 				mesh.GetUVCoords().AddFloat(0);
 
-				verticies.at(count) = glm::vec3(i + (x_offset * (CHUNK_SIZE - 1)), height, j + (y_offset * (CHUNK_SIZE - 1)));
+				verticies.at(count) = glm::vec3(x, height, y);
 				count++;
 			}
 		}
@@ -121,6 +125,10 @@ public:
 
 	static const unsigned int* getLODIndexArrayPtr() {
 		return INDEX_ARRAY;
+	}
+
+	void update() {
+
 	}
 };
 

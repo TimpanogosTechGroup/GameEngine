@@ -82,9 +82,9 @@ void GameEngine::initialize() {
 	World::getInstance().addEntityToWorld(rand);
 
 	chunk = new Chunk(0, 0);
-	chunk2 = new Chunk(1, 0);
-	chunk3 = new Chunk(0, 1);
-	chunk4 = new Chunk(1, 1);
+	chunk2 = new Chunk(-1, 0);
+	chunk3 = new Chunk(0, -1);
+	chunk4 = new Chunk(-1, -1);
 
 	PerlinGenerator perlin;
 	chunk->populate(perlin);

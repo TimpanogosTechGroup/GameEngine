@@ -341,7 +341,10 @@ void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
 		//glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
 
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(chunk->getChunkXOffset() * (Chunk::CHUNK_SIZE - 1), 0, chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1)));
+		//model = glm::translate(model, glm::vec3(chunk->getChunkXOffset() * (Chunk::CHUNK_SIZE - 1), 0, chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1)));
+		int x = (Chunk::CHUNK_SIZE - 1) * chunk->getChunkXOffset();
+		int y = chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1);
+		model = glm::translate(model, glm::vec3(x, 0, y));
 		//model = glm::translate(model, chunk->getPhysicalInstance().getInstancePosition());
 
 		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix

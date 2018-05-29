@@ -59,6 +59,7 @@
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkManager.h" />
     <ClInclude Include="CrashHandler.h" />
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="DynamicEntity.h" />
