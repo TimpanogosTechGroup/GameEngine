@@ -29,6 +29,10 @@ GameEngine::GameEngine() : cube("Texture\\cubemap\\morning"), chunk() {
 }
 
 GameEngine::~GameEngine() {
+	delete chunk;
+	delete chunk2;
+	delete chunk3;
+	delete chunk4;
 	delete physicsEngine;
 	delete camera;
 }
@@ -94,7 +98,7 @@ void GameEngine::initialize() {
 	chunk3->populate(perlin);
 	renderer.compileChunk(chunk3);
 	chunk4->populate(perlin);
-	renderer.compileChunk(chunk4);	
+	renderer.compileChunk(chunk4);
 }
 
 void GameEngine::proccessInput(double delta) {

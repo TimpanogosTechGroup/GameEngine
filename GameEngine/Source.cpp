@@ -14,7 +14,7 @@
 #include "Profiler.h"
 
 #ifdef _MSC_VER
-#define _CRTDBG_MAP_ALLOC  
+#define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #define VS_MEM_CHECK _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
 #else

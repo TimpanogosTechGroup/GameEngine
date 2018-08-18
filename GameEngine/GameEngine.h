@@ -30,9 +30,6 @@ private:
 	OpenGlRenderer renderer;
 	InputManager inputManager;
 	Camera* camera = nullptr;
-	Model* liberty = nullptr;
-	Model* cube1 = nullptr;
-	Model* barrel = nullptr;
 	ModelManager modelManager;
 	Chunk* chunk;
 	Chunk* chunk2;
