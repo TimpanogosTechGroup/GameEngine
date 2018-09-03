@@ -8,10 +8,12 @@
 #include "Object.h"
 #include "ResourceManager.h"
 #include <vector>
+#include "MemoryManager.h"
 
-class Chunk : public RenderItem {
+class Chunk : public RenderItem, MemoryManager {
 public:
 	static const unsigned int CHUNK_SIZE = 32; // has to be multiples of the LOD
+	Material* tmp;
 private:
 	// Create a 32 x 32 square
 	static const unsigned int CHUNK_LOD = 8;
@@ -32,7 +34,7 @@ public:
 		y_offset = yoff;
 	}
 	~Chunk() {
-
+		//clean();
 	}
 
 	RenderItem VBO;
@@ -102,7 +104,7 @@ public:
 			//std::cout << n.x << ", " << n.y << ", " << n.z << std::endl;
 		}
 
-		Material* tmp = new Material(1, 1, ResourceManager::getTexture("default"), ResourceManager::getShader("chunk_shader"), glm::vec4(1, 1, 1, 1));
+		tmp = new Material(1, 1, ResourceManager::getTexture("default"), ResourceManager::getShader("chunk_shader"), glm::vec4(1, 1, 1, 1));
 		mesh.SetMaterial(tmp);
 
 		std::cout << "Genertated Chunk:" << std::endl;
@@ -129,6 +131,15 @@ public:
 
 	void update() {
 
+	}
+
+	// Memory Management
+	void setup() {
+
+	}
+
+	void clean() {
+		delete tmp;
 	}
 };
 

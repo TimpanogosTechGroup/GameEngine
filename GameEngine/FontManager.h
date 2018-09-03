@@ -16,6 +16,7 @@
 #include "Font.h"
 #include "Registry.h"
 #include "FontManagerException.h"
+#include "MemoryManager.h"
 
 // Define the basic fonts and such
 #define ARIAL "fonts\\arial.ttf"
@@ -30,6 +31,9 @@ public:
 	~FontManager();
 	void loadFont(std::string fontName);
 	Font& getFont(std::string fontname);
+
+	void clean();
+	void setup();
 };
 
 #endif

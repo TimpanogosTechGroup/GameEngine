@@ -9,9 +9,6 @@
 */
 #include "GameEngine.h"
 #include "World.h"
-#include "Entity.h"
-#include "Terrian.h"
-#include "RandomEntity.h"
 #include "FileSystemManager.h"
 #include "Profiler.h"
 #include "Chunk.h"
@@ -24,30 +21,20 @@
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
 
-GameEngine::GameEngine() : cube("Texture\\cubemap\\morning"), chunk() {
+GameEngine::GameEngine() : chunk() {
 
 }
 
 GameEngine::~GameEngine() {
-	delete chunk;
-	delete chunk2;
-	delete chunk3;
-	delete chunk4;
-	delete physicsEngine;
-	delete camera;
+
 }
 
 void GameEngine::initialize() {
 	Properties::Init();
 
 	Registry::Register("renderer", &renderer);
-	//Registry::Register("fontManager", &fontManager);
-	Registry::Register("physicsEngine", physicsEngine); // We need to change the construciton of the phsyics engine
-	//Registry::Register("inputManager", &inputManager);
 
 	Registry::SetRenderEngine(&renderer);
-
-	physicsEngine = new PhysicsEngine();
 
 	renderer.CreateWindow("Andromeda", 1280, 720);
 	renderer.UpdateScreen();
@@ -58,7 +45,7 @@ void GameEngine::initialize() {
 	camera = new Camera();
 
 	try {
-		fontManager.loadFont(ARIAL);
+		//fontManager.loadFont(ARIAL);
 		Logger::Log<FontManager>(DEBUG, "Initializing...");
 	}
 	catch (FontManagerException& e) {
@@ -71,34 +58,34 @@ void GameEngine::initialize() {
 #endif
 	}
 
-	FileSystemManager::getInstance().initialize();
+	//FileSystemManager::getInstance().initialize();
 
 	AssetManager::LoadModelFull("Caltrop");
 	
 
-	cube = *AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
+	cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
 
 	World::getInstance().initialize();
 
-	Terrian* terrian = new Terrian();
-	RandomEntity* rand = new RandomEntity("Caltrop");
-	World::getInstance().addEntityToWorld(terrian);
-	World::getInstance().addEntityToWorld(rand);
+	//terrian = new Terrian();
+	//rand = new RandomEntity("Caltrop");
+	//World::getInstance().addEntityToWorld(terrian);
+	//World::getInstance().addEntityToWorld(rand);
 
-	chunk = new Chunk(0, 0);
-	chunk2 = new Chunk(-1, 0);
-	chunk3 = new Chunk(0, -1);
-	chunk4 = new Chunk(-1, -1);
+	//chunk = new Chunk(0, 0);
+	//chunk2 = new Chunk(-1, 0);
+	//chunk3 = new Chunk(0, -1);
+	//chunk4 = new Chunk(-1, -1);
 
-	PerlinGenerator perlin;
-	chunk->populate(perlin);
-	renderer.compileChunk(chunk);
-	chunk2->populate(perlin);
-	renderer.compileChunk(chunk2);
-	chunk3->populate(perlin);
-	renderer.compileChunk(chunk3);
-	chunk4->populate(perlin);
-	renderer.compileChunk(chunk4);
+	//PerlinGenerator perlin;
+	//chunk->populate(perlin);
+	//renderer.compileChunk(chunk);
+	//chunk2->populate(perlin);
+	//renderer.compileChunk(chunk2);
+	//chunk3->populate(perlin);
+	//renderer.compileChunk(chunk3);
+	//chunk4->populate(perlin);
+	//renderer.compileChunk(chunk4);
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -191,24 +178,24 @@ void GameEngine::run() {
 		renderer.Clear();
 
 		// Render cube map first then render the rest of the scene
-		renderer.RenderCubeMap(*camera, cube);
+		renderer.RenderCubeMap(*camera, *cube);
 
 		World::getInstance().render();
-		renderer.renderChunk(camera, chunk);
-		renderer.renderChunk(camera, chunk2);
-		renderer.renderChunk(camera, chunk3);
-		renderer.renderChunk(camera, chunk4);
+		//renderer.renderChunk(camera, chunk);
+		//renderer.renderChunk(camera, chunk2);
+		//renderer.renderChunk(camera, chunk3);
+		//renderer.renderChunk(camera, chunk4);
 
 		PROFILE_POP;
 		
 		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
-		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
-		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		PROFILE_POP;
@@ -225,4 +212,20 @@ void GameEngine::shudown() {
 	LOG("Shuting down Game Engine");
 	LOG("Cleaning up ResourceManager");
 	ResourceManager::clean();
+	World::getInstance().shutdown();
+	//World::getInstance().destroy();
+	clean();
+}
+
+void GameEngine::clean() {
+	//delete chunk, chunk2, chunk3, chunk4;
+	delete camera;
+	delete cube;
+
+	FileSystemManager::getInstance().clean();
+	fontManager.clean();
+}
+
+void GameEngine::setup() {
+
 }

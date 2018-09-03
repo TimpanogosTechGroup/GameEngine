@@ -326,6 +326,9 @@
     <ClInclude Include="ChunkManager.h">
       <Filter>Header Files\manager</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryManager.h">
+      <Filter>Header Files\manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

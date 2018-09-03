@@ -33,6 +33,11 @@ public:
 		return *world;
 	}
 
+	static void destroy() {
+		if (world)
+			delete world;
+	}
+
 	World() : mWorldEntities(), mRenderableEntities() {}
 
 	void addEntityToWorld(Entity* e) {
@@ -57,7 +62,12 @@ public:
 	}
 
 	void shutdown() {
+		for (int i = 0; i < mWorldEntities.size(); i++) {
+			Entity* m = mWorldEntities.at(i);
+			delete m;
+		}
 
+		delete mPhysicsEngine;
 	}
 
 	void update() {

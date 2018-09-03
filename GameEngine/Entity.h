@@ -44,6 +44,7 @@ protected:
 public:
 	virtual void update(void) = 0; // This is the entity update function, is called every frame.
 	virtual void onWorldTickUpdate() = 0; // This is the world tick update. All Entities that want this to be called are added to a queue that runs every so often
+	virtual ~Entity() {};
 
 	// Member functions
 	void setIsTangeable(bool val) {

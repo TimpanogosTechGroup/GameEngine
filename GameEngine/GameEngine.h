@@ -20,12 +20,15 @@
 #include "AssetManager.h"
 #include "ResourceManager.h"
 #include "ModelManager.h"
+#include "MemoryManager.h"
+#include "Entity.h"
+#include "Terrian.h"
+#include "RandomEntity.h"
 
 
-class GameEngine
+class GameEngine: public MemoryManager
 {
 private:
-	PhysicsEngine* physicsEngine;
 	FontManager fontManager;
 	OpenGlRenderer renderer;
 	InputManager inputManager;
@@ -35,7 +38,9 @@ private:
 	Chunk* chunk2;
 	Chunk* chunk3;
 	Chunk* chunk4;
-	CubeMap cube;
+	CubeMap* cube;
+	Terrian* terrian;
+	RandomEntity* rand;
 public:
 	GameEngine();
 	~GameEngine();
@@ -47,6 +52,8 @@ public:
 	void run();
 	void shudown();
 	void proccessInput(double delta);
+	void clean();
+	void setup();
 };
 
 #endif

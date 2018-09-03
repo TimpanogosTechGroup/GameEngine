@@ -31,7 +31,7 @@ Font::Character & Font::getCharacter(const char glyph)
 }
 
 void Font::clean() {
-	//FT_Done_Face(face);
+	FT_Done_Face(face);
 }
 
 Font::~Font()

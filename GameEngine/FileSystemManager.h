@@ -11,6 +11,7 @@
 #define FILE_SYSTEM_MANAGER_H
 
 #include <string>
+#include "MemoryManager.h"
 
 class FileSystemManager {
 private:
@@ -49,6 +50,14 @@ public:
 			fileSystem = new FileSystemManager();
 		}
 		return *fileSystem;
+	}
+
+	void clean() {
+		delete this;
+	}
+
+	void setup() {
+
 	}
 };
 

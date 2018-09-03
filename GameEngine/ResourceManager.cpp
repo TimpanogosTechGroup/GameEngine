@@ -30,23 +30,20 @@ ResourceManager::~ResourceManager()
 void ResourceManager::clean() {
 	LOG("Deleting Textures: ");
 	for (auto pointer : textures) {
-		std::cout << pointer.second->GetID() << ", ";
 		delete pointer.second; // A nullptr is being added to the map, we need to get rid of it or not add a nullptr
 	}
 	std::cout << std::endl;
 	LOG("Deleting Shaders: ");
 	for (auto pointer : shaders) {
-		std::cout << pointer.second->GetID() << ", ";
 		delete pointer.second;
 
 	}
 	std::cout << std::endl;
-	LOG("Deleting Textures: ");
+	LOG("Deleting Models: ");
 	for (auto pointer : models) {
-		std::cout << pointer.second->GetObject(0)->GetID() << ", ";
+		std::cout << "Deleting model" << std::endl;
 		delete pointer.second;
 	}
-	std::cout << std::endl;
 }
 
 Shader* ResourceManager::getShader(std::string name) {

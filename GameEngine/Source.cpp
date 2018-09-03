@@ -31,7 +31,6 @@ int main(int argc, char** argv) {
 	PROFILE_POP;
 	gameEngine.run();
 	gameEngine.shudown();
-
 	Profiler::dump();
 
 	return 0;
