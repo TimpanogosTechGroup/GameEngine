@@ -19,6 +19,7 @@
 #include "PhysicsEngine.h"
 #include "InputManager.h"
 #include "Profiler.h"
+#include "CubeMap.h"
 
 #define LOG(message) \
 	Logger::Log<World>(DEBUG, message);
@@ -83,6 +84,9 @@ public:
 	}
 
 	void render() {
+		if (cube) // If there is a set cubemap render it
+			Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderCubeMap(*camera, *cube);
+
 		for (auto &entity : mRenderableEntities) {
 			entity->render();
 		}
@@ -96,6 +100,15 @@ public:
 		this->camera = camera;
 	}
 
+	void setCubeMap(CubeMap* cubemap) {
+		if (cubemap) {
+			this->cube = cubemap;
+			return;
+		}
+
+		Logger::Log<World>(LoggerLevel::SEVERE, "The added cube map was a nullptr");
+	}
+
 private:
 	static World* world;
 	std::vector<Entity*> mWorldEntities;
@@ -103,6 +116,7 @@ private:
 	Camera* camera;
 	PhysicsEngine* mPhysicsEngine;
 	ModelManager mManager;
+	CubeMap* cube;
 };
 
 #endif

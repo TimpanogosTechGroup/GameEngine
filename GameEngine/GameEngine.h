@@ -34,21 +34,35 @@ private:
 	InputManager inputManager;
 	Camera* camera = nullptr;
 	ModelManager modelManager;
-	Chunk* chunk;
-	Chunk* chunk2;
-	Chunk* chunk3;
-	Chunk* chunk4;
 	CubeMap* cube;
-	Terrian* terrian;
-	RandomEntity* rand;
+		static GameEngine* engine;
 public:
 	GameEngine();
 	~GameEngine();
 
+	static GameEngine& getInstance() {
+		static GameEngine* engine = nullptr;
+		if (!engine) {
+			engine = new GameEngine();
+		}
+		return *engine;
+	}
+
+	static void destroy() {
+		if (engine)
+			delete engine;
+	}
+
+	static const char GAME_ENGINE_ALL_SUBSYSTEMS = 0;
+	static const char GAME_ENGINE_SUBSYSTEM_RENDERER = 1;
+	static const char GAME_ENGINE_SUBSYSTEM_AUDIO = 2;
+	static const char GAME_ENGINE_SUBSYSTEM_FONT = 4;
+	static const char GAME_ENGINE_SUBSYSTEM_WORLD = 6;
+
 	/**
 
 	*/
-	void initialize();
+	void initialize(const char subystems);
 	void run();
 	void shudown();
 	void proccessInput(double delta);

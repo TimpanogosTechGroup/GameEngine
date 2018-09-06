@@ -21,7 +21,7 @@
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
 
-GameEngine::GameEngine() : chunk() {
+GameEngine::GameEngine() {
 
 }
 
@@ -29,7 +29,7 @@ GameEngine::~GameEngine() {
 
 }
 
-void GameEngine::initialize() {
+void GameEngine::initialize(const char subystems) {
 	Properties::Init();
 
 	Registry::Register("renderer", &renderer);
@@ -49,43 +49,12 @@ void GameEngine::initialize() {
 		Logger::Log<FontManager>(DEBUG, "Initializing...");
 	}
 	catch (FontManagerException& e) {
-#ifdef ERROR
-#define temp ERROR
-#undef ERROR
-		Logger::Log<FontManager>(LoggerLevel::ERROR, e.what());
-#define ERROR
-#undef temp
-#endif
+		Logger::Log<FontManager>(LoggerLevel::SEVERE, e.what());
 	}
 
 	//FileSystemManager::getInstance().initialize();
 
-	AssetManager::LoadModelFull("Caltrop");
-	
-
-	cube = AssetManager::LoadCubeMap("Texture\\cubemap\\morning");	
-
 	World::getInstance().initialize();
-
-	//terrian = new Terrian();
-	//rand = new RandomEntity("Caltrop");
-	//World::getInstance().addEntityToWorld(terrian);
-	//World::getInstance().addEntityToWorld(rand);
-
-	//chunk = new Chunk(0, 0);
-	//chunk2 = new Chunk(-1, 0);
-	//chunk3 = new Chunk(0, -1);
-	//chunk4 = new Chunk(-1, -1);
-
-	//PerlinGenerator perlin;
-	//chunk->populate(perlin);
-	//renderer.compileChunk(chunk);
-	//chunk2->populate(perlin);
-	//renderer.compileChunk(chunk2);
-	//chunk3->populate(perlin);
-	//renderer.compileChunk(chunk3);
-	//chunk4->populate(perlin);
-	//renderer.compileChunk(chunk4);
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -177,14 +146,7 @@ void GameEngine::run() {
 		renderer.BindDefaultFrameBuffer();
 		renderer.Clear();
 
-		// Render cube map first then render the rest of the scene
-		renderer.RenderCubeMap(*camera, *cube);
-
 		World::getInstance().render();
-		//renderer.renderChunk(camera, chunk);
-		//renderer.renderChunk(camera, chunk2);
-		//renderer.renderChunk(camera, chunk3);
-		//renderer.renderChunk(camera, chunk4);
 
 		PROFILE_POP;
 		
