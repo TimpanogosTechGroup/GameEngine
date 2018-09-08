@@ -21,6 +21,10 @@ public:
 		for (int i = 0; i < 256; i++) p[256 + i] = p[i] = permutation[i];
 	}
 
+	~PerlinGenerator() {
+		delete p;
+	}
+
 	double perlin(double x, double y, double z) {
 		int X = static_cast<int>(floor(x)) & 255, 
 			Y = static_cast<int>(floor(y)) & 255, 

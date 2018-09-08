@@ -35,6 +35,7 @@ public:
 	}
 
 	static void destroy() {
+		static World* world;
 		if (world)
 			delete world;
 	}

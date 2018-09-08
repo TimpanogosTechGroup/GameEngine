@@ -35,7 +35,25 @@ private:
 	Camera* camera = nullptr;
 	ModelManager modelManager;
 	CubeMap* cube;
-		static GameEngine* engine;
+	static GameEngine* engine;
+
+	char excludedSubystems = 0;
+	char initializedSystem = 0;
+
+	bool shouldInitialize(const char paramInput, const char testCase) {
+		if (paramInput == GAME_ENGINE_ALL_SUBSYSTEMS)
+			return true;
+
+		if ((paramInput & testCase) == testCase)
+			return true;
+
+		return false;
+	}
+
+	void setInitializedSystem(const char system) {
+		initializedSystem = initializedSystem | system;
+	}
+	
 public:
 	GameEngine();
 	~GameEngine();
@@ -49,15 +67,26 @@ public:
 	}
 
 	static void destroy() {
+		static GameEngine* engine;
 		if (engine)
 			delete engine;
+	}
+
+	void excludeSubsystems(const char subsystems) {
+		excludedSubystems = excludedSubystems | subsystems;
+	};
+
+	bool isSubSystemInitialized(const char system) {
+		return (initializedSystem & system) == system;
 	}
 
 	static const char GAME_ENGINE_ALL_SUBSYSTEMS = 0;
 	static const char GAME_ENGINE_SUBSYSTEM_RENDERER = 1;
 	static const char GAME_ENGINE_SUBSYSTEM_AUDIO = 2;
 	static const char GAME_ENGINE_SUBSYSTEM_FONT = 4;
-	static const char GAME_ENGINE_SUBSYSTEM_WORLD = 6;
+	static const char GAME_ENGINE_SUBSYSTEM_WORLD = 8;
+	static const char GAME_ENGINE_SUBSYSTEM_CAMERA = 16;
+	static const char GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM = 32;
 
 	/**
 

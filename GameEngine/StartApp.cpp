@@ -43,6 +43,8 @@ void StartApp::initialize() {
 	GameEngine::getInstance().initialize(GameEngine::GAME_ENGINE_ALL_SUBSYSTEMS);
 
 	World::getInstance().setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning"));
+	//AssetManager::LoadModelFull("Caltrop");
+	//World::getInstance().addEntityToWorld(new RandomEntity("Caltrop"));
 }
 
 /*
@@ -56,6 +58,7 @@ void StartApp::run() {
 
 void StartApp::shutdown() {
 	GameEngine::getInstance().shudown();
+	GameEngine::destroy();
 }
 
 /*

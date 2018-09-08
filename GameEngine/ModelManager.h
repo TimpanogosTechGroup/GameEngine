@@ -22,6 +22,7 @@ public:
 	ModelManager() {}
 	~ModelManager() {
 		for (auto const& x : physicalInstances) delete x.second;
+		//for (auto const& y : models) delete y;
 	}
 	void push_back(Model* model) { models.push_back(model); }
 	int size() { return models.size(); }

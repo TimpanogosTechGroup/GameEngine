@@ -32,29 +32,43 @@ GameEngine::~GameEngine() {
 void GameEngine::initialize(const char subystems) {
 	Properties::Init();
 
-	Registry::Register("renderer", &renderer);
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_RENDERER)) {
+		Registry::Register("renderer", &renderer);
 
-	Registry::SetRenderEngine(&renderer);
+		Registry::SetRenderEngine(&renderer);
 
-	renderer.CreateWindow("Andromeda", 1280, 720);
-	renderer.UpdateScreen();
-	renderer.SetStatus(RenderEngine::RUNNING);
-	renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
-	renderer.loadDefaults();
-
-	camera = new Camera();
-
-	try {
-		//fontManager.loadFont(ARIAL);
-		Logger::Log<FontManager>(DEBUG, "Initializing...");
+		renderer.CreateWindow("Andromeda", 1280, 720);
+		renderer.UpdateScreen();
+		renderer.SetStatus(RenderEngine::RUNNING);
+		renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
+		renderer.loadDefaults();
+		Logger::Log<GameEngine>(DEBUG, "Initialized the rendering engine");
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_RENDERER);
 	}
-	catch (FontManagerException& e) {
-		Logger::Log<FontManager>(LoggerLevel::SEVERE, e.what());
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FONT)) {
+		try {
+			fontManager.loadFont(ARIAL);
+			Logger::Log<FontManager>(DEBUG, "Initializing...");
+			setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FONT);
+		}
+		catch (FontManagerException& e) {
+			Logger::Log<FontManager>(LoggerLevel::SEVERE, e.what());
+		}
+	}
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_CAMERA)) {
+		camera = new Camera();
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_CAMERA);
+	}
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_WORLD)) {
+		World::getInstance().initialize();
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_WORLD);
+	}
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM)) {
+		FileSystemManager::getInstance().initialize();
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
 	}
 
-	//FileSystemManager::getInstance().initialize();
 
-	World::getInstance().initialize();
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -73,46 +87,59 @@ void GameEngine::proccessInput(double delta) {
 			inputManager.releaseKey(event.key.keysym.sym);
 			break;
 		case SDL_MOUSEMOTION:
-			if (inputManager.isMouseMovementEnabled())
+			if (inputManager.isMouseMovementEnabled() && isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 				camera->ProcessMouseMovement(static_cast<float>(event.motion.xrel), static_cast<float>(-event.motion.yrel));
 			break;
 		}
 	}
 
 	// Process input
-	if (inputManager.isKeyPressed(SDLK_w))
-		camera->ProcessKeyboard(FORWARD, delta);
-	if (inputManager.isKeyPressed(SDLK_s))
-		camera->ProcessKeyboard(BACKWARD, delta);
-	if (inputManager.isKeyPressed(SDLK_a))
-		camera->ProcessKeyboard(LEFT, delta);
-	if (inputManager.isKeyPressed(SDLK_d))
-		camera->ProcessKeyboard(RIGHT, delta);
-	if (inputManager.isKeyPressed(SDLK_LSHIFT))
-		camera->ProcessKeyboard(UP, delta);
-	if (inputManager.isKeyPressed(SDLK_LCTRL))
-		camera->ProcessKeyboard(DOWN, delta);
-	if (inputManager.isKeyPressed(SDLK_LEFT))
-		camera->ProcessMouseMovement(0.3f, 0, true);
-	if (inputManager.isKeyPressed(SDLK_RIGHT))
-		camera->ProcessMouseMovement(-0.3f, 0, true);
-	if (inputManager.isKeyPressed(SDLK_UP))
-		camera->ProcessMouseMovement(0, 0.3f, true);
-	if (inputManager.isKeyPressed(SDLK_DOWN))
-		camera->ProcessMouseMovement(0, -0.3f, true);
-	if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
-		SDL_SetRelativeMouseMode(SDL_FALSE);
-		SDL_CaptureMouse(SDL_FALSE);
-		inputManager.disableMouseMovement();
-	}
-	if (inputManager.isKeyPressed(SDLK_TAB)) {
-		camera->EnableLookAt();
-	}
-	else {
-		camera->DisableLookAt();
-	}
+		if (inputManager.isKeyPressed(SDLK_w))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(FORWARD, delta);
+		if (inputManager.isKeyPressed(SDLK_s))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(BACKWARD, delta);
+		if (inputManager.isKeyPressed(SDLK_a))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(LEFT, delta);
+		if (inputManager.isKeyPressed(SDLK_d))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(RIGHT, delta);
+		if (inputManager.isKeyPressed(SDLK_LSHIFT))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(UP, delta);
+		if (inputManager.isKeyPressed(SDLK_LCTRL))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessKeyboard(DOWN, delta);
+		if (inputManager.isKeyPressed(SDLK_LEFT))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessMouseMovement(0.3f, 0, true);
+		if (inputManager.isKeyPressed(SDLK_RIGHT))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessMouseMovement(-0.3f, 0, true);
+		if (inputManager.isKeyPressed(SDLK_UP))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessMouseMovement(0, 0.3f, true);
+		if (inputManager.isKeyPressed(SDLK_DOWN))
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->ProcessMouseMovement(0, -0.3f, true);
+		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
+			SDL_SetRelativeMouseMode(SDL_FALSE);
+			SDL_CaptureMouse(SDL_FALSE);
+			inputManager.disableMouseMovement();
+		}
+		if (inputManager.isKeyPressed(SDLK_TAB)) {
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->EnableLookAt();
+		}
+		else {
+			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+			camera->DisableLookAt();
+		}
 
-	World::getInstance().setCamera(camera);
+	if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+		World::getInstance().setCamera(camera);
 }
 
 void GameEngine::run() {
@@ -137,32 +164,37 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		World::getInstance().update();
+		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+			World::getInstance().update();
 
 		float delta = .002f;
 		proccessInput(delta); // proccess input
 
 		PROFILE_PUSH("render update");
-		renderer.BindDefaultFrameBuffer();
-		renderer.Clear();
+		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_RENDERER)) {
+			renderer.BindDefaultFrameBuffer();
+			renderer.Clear();
+		}
 
-		World::getInstance().render();
+		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+			World::getInstance().render();
 
 		PROFILE_POP;
 		
 		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
-		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
-		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		PROFILE_POP;
 		// Show the changes after rendering
 		PROFILE_PUSH("buffer swap");
+		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_RENDERER))
 		renderer.UpdateScreen(); // Shouuld take less than 2 milliseconds
 		PROFILE_POP;
 
@@ -174,8 +206,10 @@ void GameEngine::shudown() {
 	LOG("Shuting down Game Engine");
 	LOG("Cleaning up ResourceManager");
 	ResourceManager::clean();
-	World::getInstance().shutdown();
-	//World::getInstance().destroy();
+	if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD)) {
+		World::getInstance().shutdown();
+		World::destroy();
+	}
 	clean();
 }
 
