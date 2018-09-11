@@ -86,10 +86,10 @@ public:
 
 	void render() {
 		if (cube) // If there is a set cubemap render it
-			Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderCubeMap(*camera, *cube);
+			Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderCubeMap(*activeCamera, *cube);
 
 		for (auto &entity : mRenderableEntities) {
-			entity->render();
+			entity->render(activeCamera);
 		}
 	}
 
@@ -99,6 +99,14 @@ public:
 
 	void setCamera(Camera* camera) {
 		this->camera = camera;
+	}
+
+	void setActiveCamera(Camera* camera) {
+		this->activeCamera = camera;
+	}
+
+	Camera* getActiveCamera() {
+		return activeCamera;
 	}
 
 	void setCubeMap(CubeMap* cubemap) {
@@ -115,6 +123,7 @@ private:
 	std::vector<Entity*> mWorldEntities;
 	std::vector<Renderable*> mRenderableEntities;
 	Camera* camera;
+	Camera* activeCamera;
 	PhysicsEngine* mPhysicsEngine;
 	ModelManager mManager;
 	CubeMap* cube;

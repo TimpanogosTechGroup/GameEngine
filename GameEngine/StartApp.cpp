@@ -1,4 +1,5 @@
 #include "StartApp.h"
+#include "World.h"
 
 /*
 	This constructor is for your own personal use
@@ -42,9 +43,13 @@ StartApp::~StartApp()
 void StartApp::initialize() {
 	GameEngine::getInstance().initialize(GameEngine::GAME_ENGINE_ALL_SUBSYSTEMS);
 
-	World::getInstance().setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning"));
-	//AssetManager::LoadModelFull("Caltrop");
-	//World::getInstance().addEntityToWorld(new RandomEntity("Caltrop"));
+	World* world = new World();
+	world->initialize();
+	world->setActiveCamera(new Camera());
+	world->setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning"));
+	GameEngine::getInstance().setWorld(world);
+	AssetManager::LoadModelFull("Caltrop");
+	world->addEntityToWorld(new RandomEntity("Caltrop"));
 }
 
 /*

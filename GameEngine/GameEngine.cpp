@@ -8,10 +8,6 @@
 	Copyright (c) 2018 All Rights Reserved
 */
 #include "GameEngine.h"
-#include "World.h"
-#include "FileSystemManager.h"
-#include "Profiler.h"
-#include "Chunk.h"
 
 #ifdef CreateWindow
 #define temp_Create CreateWindow
@@ -59,10 +55,10 @@ void GameEngine::initialize(const char subystems) {
 		camera = new Camera();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_CAMERA);
 	}
-	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_WORLD)) {
-		World::getInstance().initialize();
-		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_WORLD);
-	}
+	//if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_WORLD)) {
+	//	World::getInstance().initialize();
+	//	setInitializedSystem(GAME_ENGINE_SUBSYSTEM_WORLD);
+	//}
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM)) {
 		FileSystemManager::getInstance().initialize();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
@@ -138,8 +134,8 @@ void GameEngine::proccessInput(double delta) {
 			camera->DisableLookAt();
 		}
 
-	if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-		World::getInstance().setCamera(camera);
+	//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+	//	World::getInstance().setCamera(camera);
 }
 
 void GameEngine::run() {
@@ -164,8 +160,8 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-			World::getInstance().update();
+		//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+		//	World::getInstance().update();
 
 		float delta = .002f;
 		proccessInput(delta); // proccess input
@@ -176,8 +172,13 @@ void GameEngine::run() {
 			renderer.Clear();
 		}
 
-		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-			World::getInstance().render();
+		if (currentWorld) {
+			currentWorld->update();
+			currentWorld->render();
+		}
+
+		//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
+		//	World::getInstance().render();
 
 		PROFILE_POP;
 		
