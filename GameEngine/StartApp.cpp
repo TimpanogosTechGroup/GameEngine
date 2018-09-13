@@ -1,5 +1,13 @@
 #include "StartApp.h"
-#include "World.h"
+//#include "World.h"
+//#include "Logger.h"
+
+// Memory detection
+#ifdef _MSC_VER
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#define VS_MEM_CHECK _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
+#endif
 
 /*
 	This constructor is for your own personal use
@@ -19,6 +27,7 @@ StartApp::StartApp()
 */
 StartApp::~StartApp()
 {
+	delete camera, world;
 }
 
 /*
@@ -41,15 +50,14 @@ StartApp::~StartApp()
 	Fifth register proccess that need to take place, eg. final resource laoding
 */
 void StartApp::initialize() {
-	GameEngine::getInstance().initialize(GameEngine::GAME_ENGINE_ALL_SUBSYSTEMS);
+	engine.initialize(GameEngine::GAME_ENGINE_ALL_SUBSYSTEMS);
 
-	World* world = new World();
-	world->initialize();
-	world->setActiveCamera(new Camera());
-	world->setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning"));
-	GameEngine::getInstance().setWorld(world);
-	AssetManager::LoadModelFull("Caltrop");
-	world->addEntityToWorld(new RandomEntity("Caltrop"));
+	world = new World(); // Create a new world instance
+	world->initialize(); // Initialize the world
+	camera = new Camera();
+	world->setActiveCamera(camera); // Set the active camera, TODO create more controls to change camera etc.
+	world->setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning")); // Load cube map and such into engine and set World's cubemap
+	engine.setWorld(world); // Set the current world in Game Engine, will recieve updates, events, rendering calls etc.
 }
 
 /*
@@ -58,12 +66,12 @@ void StartApp::initialize() {
 	Have fun with that one hahahaha
 */
 void StartApp::run() {
-	GameEngine::getInstance().run();
+	engine.run();
 }
 
 void StartApp::shutdown() {
-	GameEngine::getInstance().shudown();
-	GameEngine::destroy();
+	world->shutdown();
+	engine.shudown();
 }
 
 /*
@@ -73,6 +81,8 @@ void StartApp::shutdown() {
 	These call back functions can be used to start up the game engine and set up your game
 */
 int main(int argc, char** argv) {
+
+	VS_MEM_CHECK;
 	
 	StartApp app;
 	app.launch();

@@ -52,19 +52,12 @@ void GameEngine::initialize(const char subystems) {
 		}
 	}
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_CAMERA)) {
-		camera = new Camera();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_CAMERA);
 	}
-	//if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_WORLD)) {
-	//	World::getInstance().initialize();
-	//	setInitializedSystem(GAME_ENGINE_SUBSYSTEM_WORLD);
-	//}
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM)) {
 		FileSystemManager::getInstance().initialize();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
-	}
-
-
+	}	
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -133,9 +126,6 @@ void GameEngine::proccessInput(double delta) {
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->DisableLookAt();
 		}
-
-	//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-	//	World::getInstance().setCamera(camera);
 }
 
 void GameEngine::run() {
@@ -160,9 +150,6 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-		//	World::getInstance().update();
-
 		float delta = .002f;
 		proccessInput(delta); // proccess input
 
@@ -177,19 +164,16 @@ void GameEngine::run() {
 			currentWorld->render();
 		}
 
-		//if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD))
-		//	World::getInstance().render();
-
 		PROFILE_POP;
 		
 		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
-		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
+		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		os << "Time: " << timePerFrame;
-		renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
+		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
 		PROFILE_POP;
@@ -208,17 +192,11 @@ void GameEngine::shudown() {
 	LOG("Cleaning up ResourceManager");
 	ResourceManager::clean();
 	if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD)) {
-		World::getInstance().shutdown();
-		World::destroy();
 	}
 	clean();
 }
 
 void GameEngine::clean() {
-	//delete chunk, chunk2, chunk3, chunk4;
-	delete camera;
-	delete cube;
-
 	FileSystemManager::getInstance().clean();
 	fontManager.clean();
 }

@@ -12,6 +12,10 @@ public:
 	void run();
 	void initialize();
 	void shutdown();
+
+	GameEngine engine;
+	World* world;
+	Camera* camera;
 };
 
 #endif

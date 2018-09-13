@@ -26,20 +26,6 @@
 
 class World {
 public:
-	static World& getInstance() {
-		static World* world = nullptr;
-		if (!world) {
-			world = new World();
-		}
-		return *world;
-	}
-
-	static void destroy() {
-		static World* world;
-		if (world)
-			delete world;
-	}
-
 	World() : mWorldEntities(), mRenderableEntities() {}
 
 	void addEntityToWorld(Entity* e) {
@@ -93,14 +79,6 @@ public:
 		}
 	}
 
-	Camera& getCamera() {
-		return *camera;
-	}
-
-	void setCamera(Camera* camera) {
-		this->camera = camera;
-	}
-
 	void setActiveCamera(Camera* camera) {
 		this->activeCamera = camera;
 	}
@@ -119,10 +97,8 @@ public:
 	}
 
 private:
-	static World* world;
 	std::vector<Entity*> mWorldEntities;
 	std::vector<Renderable*> mRenderableEntities;
-	Camera* camera;
 	Camera* activeCamera;
 	PhysicsEngine* mPhysicsEngine;
 	ModelManager mManager;

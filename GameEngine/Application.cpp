@@ -22,8 +22,6 @@ Application::~Application()
 
 void Application::launch() {
 
-	VS_MEM_CHECK;
-
 	/*
 	This function is designed to start up and initialize evrything
 	There is a very specific order that the subsystems must be initialized in
