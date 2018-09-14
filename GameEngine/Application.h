@@ -2,19 +2,7 @@
 #define APPLICATION_H
 
 #include "GameEngine.h"
-#include "Profiler.h"
-
-#ifdef _MSC_VER
-#define _CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
-#define VS_MEM_CHECK _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
-#else
-#define VS_MEM_CHECK
-#endif
+//#include "Profiler.h"
 
 class Application
 {

@@ -16,7 +16,7 @@
 class Terrian : public virtual Renderable, public virtual StaticEntity {
 private:
 public:
-	void render() override {
+	void render(Camera* camera) override {
 
 	}
 

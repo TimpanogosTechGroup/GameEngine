@@ -12,8 +12,8 @@
 
 #include "DynamicEntity.h"
 #include "Renderable.h"
-#include "OpenGlRenderer.h"
-#include "World.h"
+//#include "OpenGlRenderer.h"
+//#include "World.h"
 
 /*
 Author: Ben Brenkman aka JustBremkman
@@ -34,9 +34,9 @@ public:
 
 	}
 
-	void render() override { // Render the entity
-		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderPhysicalInstance(World::getInstance().getCamera(), getPhysicalInstance());
-		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderBoundingBox(World::getInstance().getCamera(), getPhysicalInstance(), glm::vec3(1, 1, 1));
+	void render(Camera* camera) override { // Render the entity
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderPhysicalInstance(*camera, getPhysicalInstance());
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderBoundingBox(*camera, getPhysicalInstance(), glm::vec3(1, 1, 1));
 	}
 
 	void onWorldTickUpdate() override {
