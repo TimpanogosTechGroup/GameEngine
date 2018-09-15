@@ -20,6 +20,8 @@
 #include "InputManager.h"
 #include "Profiler.h"
 #include "CubeMap.h"
+#include "Registry.h"
+#include "OpenGlRenderer.h"
 
 #define LOG(message) \
 	Logger::Log<World>(DEBUG, message);

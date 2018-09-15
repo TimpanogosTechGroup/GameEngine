@@ -22,9 +22,9 @@ This is the RenderEngine class, we will have different implementations of this c
 
 class RenderEngine : public RegistryEntry {
 public:
-	void CreateWindow(std::string name, int width, int height);
+	void CreateDisplay(std::string name, int width, int height);
 	void UpdateScreen();
-	enum Status { RUNNING, ERROR, SHUTDOWN };
+	enum Status { RUNNING, ENGINE_ERROR, SHUTDOWN };
 	Status GetStatus() { return status; };
 	void SetStatus(Status stat) { status = stat; };
 	void Clear();

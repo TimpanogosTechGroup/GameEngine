@@ -9,11 +9,6 @@
 */
 #include "GameEngine.h"
 
-#ifdef CreateWindow
-#define temp_Create CreateWindow
-#undef CreateWindow
-#endif
-
 #define LOG(message) \
 	Logger::Log<GameEngine>(DEBUG, message);
 
@@ -33,7 +28,7 @@ void GameEngine::initialize(const char subystems) {
 
 		Registry::SetRenderEngine(&renderer);
 
-		renderer.CreateWindow("Andromeda", 1280, 720);
+		renderer.CreateDisplay("Andromeda", 1280, 720);
 		renderer.UpdateScreen();
 		renderer.SetStatus(RenderEngine::RUNNING);
 		renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));

@@ -40,7 +40,7 @@ OpenGlRenderer::~OpenGlRenderer()
 }
 
 // Creates a window
-void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
+void OpenGlRenderer::CreateDisplay(std::string name, int width, int height) {
 
 	window_width = width;
 	window_height = height;

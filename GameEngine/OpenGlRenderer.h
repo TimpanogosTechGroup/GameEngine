@@ -28,7 +28,7 @@ public:
 	OpenGlRenderer();
 	~OpenGlRenderer();
 
-	void CreateWindow(std::string name, int width, int height);
+	void CreateDisplay(std::string name, int width, int height);
 	void UpdateScreen();
 	void BindFramBuffer(FrameBuffer* frame);
 	void BindDefaultFrameBuffer();
