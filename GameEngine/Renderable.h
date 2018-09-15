@@ -11,6 +11,7 @@
 #define RENDERABLE_H
 
 #include "Entity.h"
+#include "Camera.h"
 
 /*
 * Author: Ben Brenknan aka JustBrenkman
@@ -28,7 +29,7 @@ public:
 	~Renderable() {
 
 	}
-	virtual void render() = 0; // function called when the game wants to render and entity
+	virtual void render(Camera* camera) = 0; // function called when the game wants to render and entity
 };
 
 #endif

@@ -24,6 +24,9 @@
 #include "Entity.h"
 #include "Terrian.h"
 #include "RandomEntity.h"
+#include "World.h"
+#include "FileSystemManager.h"
+#include "Profiler.h"
 
 
 class GameEngine: public MemoryManager
@@ -35,6 +38,7 @@ private:
 	Camera* camera = nullptr;
 	ModelManager modelManager;
 	CubeMap* cube;
+	World* currentWorld;
 	static GameEngine* engine;
 
 	char excludedSubystems = 0;
@@ -78,6 +82,15 @@ public:
 
 	bool isSubSystemInitialized(const char system) {
 		return (initializedSystem & system) == system;
+	}
+
+	void setWorld(World* world) {
+		currentWorld = world;
+		camera = world->getActiveCamera();
+	}
+
+	World* getCurrentWorld() {
+		return currentWorld;
 	}
 
 	static const char GAME_ENGINE_ALL_SUBSYSTEMS = 0;
