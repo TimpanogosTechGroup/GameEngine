@@ -74,6 +74,10 @@ void StartApp::shutdown() {
 	engine.shudown();
 }
 
+void test() {
+
+}
+
 /*
 	This is the start up template script, this just creates a new StartApp instance
 	And then hands over the proccess to the application.
@@ -84,8 +88,11 @@ int main(int argc, char** argv) {
 
 	VS_MEM_CHECK;
 	
-	//StartApp app;
+	StartApp app;
 	//app.launch();
+
+	ThreadManager threadManager;
+
 
 	return 0;
 }

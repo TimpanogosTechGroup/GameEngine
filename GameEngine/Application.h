@@ -2,6 +2,7 @@
 #define APPLICATION_H
 
 #include "GameEngine.h"
+#include "ThreadManager.h"
 //#include "Profiler.h"
 
 class Application

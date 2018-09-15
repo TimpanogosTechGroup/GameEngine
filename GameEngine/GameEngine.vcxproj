@@ -53,6 +53,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Source1.cpp" />
     <ClCompile Include="StartApp.cpp" />
+    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="Verticies.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +113,7 @@
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Terrian.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Throwable.h" />
     <ClInclude Include="Verticies.h" />
     <ClInclude Include="World.h" />
