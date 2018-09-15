@@ -84,8 +84,8 @@ int main(int argc, char** argv) {
 
 	VS_MEM_CHECK;
 	
-	StartApp app;
-	app.launch();
+	//StartApp app;
+	//app.launch();
 
 	return 0;
 }
