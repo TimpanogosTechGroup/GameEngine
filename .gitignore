@@ -260,5 +260,5 @@ __pycache__/
 *.pyc
 
 # Files that we don't want shared between everyone
-StartApp.h
-StartApp.cpp
+GameEngine/StartApp.h
+GameEngine/StartApp.cpp
