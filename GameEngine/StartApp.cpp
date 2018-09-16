@@ -99,11 +99,5 @@ int main(int argc, char** argv) {
 	StartApp app;
 	//app.launch();
 
-	ThreadPool threadPool;
-	threadPool.addToThread(test);
-	threadPool.addToThread(test2);
-	printf("Started thread test\n");
-	threadPool.joinThreadsToMain();
-
 	return 0;
 }

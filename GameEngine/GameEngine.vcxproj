@@ -53,7 +53,6 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Source1.cpp" />
     <ClCompile Include="StartApp.cpp" />
-    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="Verticies.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +81,7 @@
     <ClInclude Include="InputInterface.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyBoardInput.h" />
+    <ClInclude Include="KMTask.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LuaScript.h" />
@@ -113,7 +113,6 @@
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Terrian.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Throwable.h" />
     <ClInclude Include="Verticies.h" />
     <ClInclude Include="World.h" />

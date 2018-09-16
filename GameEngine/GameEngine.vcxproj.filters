@@ -162,9 +162,6 @@
     <ClCompile Include="StartApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
@@ -344,7 +341,7 @@
     <ClInclude Include="StartApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadPool.h">
+    <ClInclude Include="KMTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
