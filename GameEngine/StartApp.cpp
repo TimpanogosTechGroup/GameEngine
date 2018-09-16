@@ -75,7 +75,7 @@ void StartApp::shutdown() {
 }
 
 void test() {
-	printf("test");
+	printf("test\n");
 	system("pause");
 }
 
@@ -94,8 +94,8 @@ int main(int argc, char** argv) {
 
 	ThreadManager threadManager;
 	threadManager.addToThread(test);
+	printf("Started thread test\n");
 	threadManager.joinThreadsToMain();
-
 
 	return 0;
 }

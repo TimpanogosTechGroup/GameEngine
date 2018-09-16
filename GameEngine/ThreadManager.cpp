@@ -10,7 +10,6 @@ ThreadManager::~ThreadManager() {
 }
 
 bool ThreadManager::joinThreadsToMain() {
-	printf("%lu", this->threads.size());
 	try {
 		for (int i = 0; i < this->threads.size(); i++)
 			this->threads[i].join();

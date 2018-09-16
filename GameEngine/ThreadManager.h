@@ -13,7 +13,9 @@ class ThreadManager {
 
 		template <typename T>
 		bool addToThread(T(*f)) {
-			if (this->threads.push_back(std::thread f))
+			int size = this->threads.size();
+			this->threads.push_back(std::thread(*f));
+			if (size + 1 == this->threads.size())
 				return true;
 			else
 				return false;
