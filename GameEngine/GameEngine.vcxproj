@@ -113,6 +113,7 @@
     <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Terrian.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Throwable.h" />
     <ClInclude Include="Verticies.h" />
     <ClInclude Include="World.h" />

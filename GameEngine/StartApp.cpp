@@ -74,16 +74,9 @@ void StartApp::shutdown() {
 	engine.shudown();
 }
 
-void test() {
-	printf("test\n");
+void test(std::string i) {
 	system("pause");
-	printf("test thread completed\n");
-}
-
-void test2() {
-	printf("test2\n");
-	system("pause");
-	printf("test2 thread completed\n");
+	std::cout << "test thread " << i << " completed" << std::endl;
 }
 
 /*
@@ -98,6 +91,12 @@ int main(int argc, char** argv) {
 	
 	StartApp app;
 	//app.launch();
+
+	ThreadPool pool(4);
+
+	for (int i = 0; i < 8; i++) {
+		pool.enqueue(test, std::to_string(i));
+	}
 
 	return 0;
 }
