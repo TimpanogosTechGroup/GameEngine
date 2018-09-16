@@ -11,10 +11,11 @@
 #include<string>
 #include<unordered_map>
 
+// Creates a new scene and gives the reference
 Scene* SceneManager::createNewScene(std::string sceneName)
 {
 	if (sceneMap.find(sceneName) != sceneMap.end()) {
-		//Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + sceneName + " already exists.").c_str());
+		Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + sceneName + " already exists.").c_str());
 		return sceneMap[sceneName];
 	}
 
@@ -22,21 +23,31 @@ Scene* SceneManager::createNewScene(std::string sceneName)
 	return sceneMap[sceneName];
 }
 
+
+// Gets an insatance of a scene
 Scene * SceneManager::getScene(std::string sceneName)
 {
 	if (sceneMap.find(sceneName) != sceneMap.end()) {
 		return sceneMap[sceneName];
 	}
 
-	//Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + sceneName + " does not exist. Returning nullptr").c_str());
+	Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + sceneName + " does not exist. Returning nullptr").c_str());
 	return nullptr;
 }
 
+// Adds scene to the SceneManager. This lets us load the scene into the world.
 void SceneManager::addScene(std::string name, Scene* scene) {
 	if (sceneMap.find("name") != sceneMap.end()) {
-		//Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + name + " already exists.").c_str());
+		Logger::Log<SceneManager>(INFO, std::string("Scene with name: " + name + " already exists.").c_str());
 		return;
 	}
 
 	sceneMap[name] = scene;
+}
+
+void SceneManager::cleanup() {
+	for (auto v : sceneMap) {
+		v.second->clean();
+		delete v.second;  // Deletes the memory
+	}
 }

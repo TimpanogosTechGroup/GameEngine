@@ -7,15 +7,22 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
-#pragma once
+#ifndef SCENE_H
+#define SCENE_H
+
 #include"Model.h"
 #include<vector>
+#include "MemoryManager.h"
 
-class Scene
+class Scene : MemoryManager
 {
 public:
 	std::vector<Model*> models;
-	void AddModel(Model* newModel);
-	void RemoveModel(Model* modelToRemove);
+	void addEntity(Model* newModel);
+	void removeEntity(Model* modelToRemove);
+
+	void setup() {}
+	void clean() {}
 };
 
+#endif

@@ -18,7 +18,10 @@ class SceneManager
 {
 public:
 	SceneManager() {};
-	~SceneManager() { for (auto scene : sceneMap) delete scene.second; }
+	~SceneManager() { 
+		//for (auto scene : sceneMap) delete scene.second; 
+	}
+
 	std::unordered_map<std::string, Scene*> sceneMap;
 	Scene* createNewScene(std::string sceneName);
 	Scene* getScene(std::string sceneName);
@@ -26,6 +29,8 @@ public:
 
 	void loadSceneIntoWorld(World* world);
 	void unloadScene(World* world);
+
+	void cleanup();
 };
 
 #endif

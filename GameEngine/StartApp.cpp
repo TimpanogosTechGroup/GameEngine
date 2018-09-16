@@ -1,4 +1,5 @@
 #include "StartApp.h"
+#include "RandomEntity.h"
 //#include "World.h"
 //#include "Logger.h"
 
@@ -57,7 +58,10 @@ void StartApp::initialize() {
 	camera = new Camera();
 	world->setActiveCamera(camera); // Set the active camera, TODO create more controls to change camera etc.
 	world->setCubeMap(AssetManager::LoadCubeMap("Texture\\cubemap\\morning")); // Load cube map and such into engine and set World's cubemap
+	AssetManager::LoadModelFull("Caltrop");
+	world->addEntityToWorld(new RandomEntity("Caltrop"));
 	engine.setWorld(world); // Set the current world in Game Engine, will recieve updates, events, rendering calls etc.
+	Logger::Log<StartApp>(DEBUG, "Asdasdasdasd");
 }
 
 /*

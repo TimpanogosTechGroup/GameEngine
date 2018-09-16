@@ -27,6 +27,7 @@
 #include "World.h"
 #include "FileSystemManager.h"
 #include "Profiler.h"
+#include "SceneManager.h"
 
 
 class GameEngine: public MemoryManager
@@ -39,11 +40,13 @@ private:
 	ModelManager modelManager;
 	CubeMap* cube;
 	World* currentWorld;
-	static GameEngine* engine;
+	//static GameEngine* engine;
+	SceneManager sceneManager;
 
 	char excludedSubystems = 0;
 	char initializedSystem = 0;
 
+	// Checks if the subsystem should be initialized
 	bool shouldInitialize(const char paramInput, const char testCase) {
 		if (paramInput == GAME_ENGINE_ALL_SUBSYSTEMS)
 			return true;
@@ -52,8 +55,11 @@ private:
 			return true;
 
 		return false;
+
+		// TODO add check to see if the subsystem needs to be excluded
 	}
 
+	// Sets the initiliazed subsystem as initialized.
 	void setInitializedSystem(const char system) {
 		initializedSystem = initializedSystem | system;
 	}
@@ -62,19 +68,19 @@ public:
 	GameEngine();
 	~GameEngine();
 
-	static GameEngine& getInstance() {
-		static GameEngine* engine = nullptr;
-		if (!engine) {
-			engine = new GameEngine();
-		}
-		return *engine;
-	}
+	//static GameEngine& getInstance() {
+	//	static GameEngine* engine = nullptr;
+	//	if (!engine) {
+	//		engine = new GameEngine();
+	//	}
+	//	return *engine;
+	//}
 
-	static void destroy() {
-		static GameEngine* engine;
-		if (engine)
-			delete engine;
-	}
+	//static void destroy() {
+	//	static GameEngine* engine;
+	//	if (engine)
+	//		delete engine;
+	//}
 
 	void excludeSubsystems(const char subsystems) {
 		excludedSubystems = excludedSubystems | subsystems;
@@ -93,6 +99,10 @@ public:
 		return currentWorld;
 	}
 
+	SceneManager& getSceneManager() {
+		return sceneManager;
+	}
+
 	static const char GAME_ENGINE_ALL_SUBSYSTEMS = 0;
 	static const char GAME_ENGINE_SUBSYSTEM_RENDERER = 1;
 	static const char GAME_ENGINE_SUBSYSTEM_AUDIO = 2;
@@ -100,6 +110,7 @@ public:
 	static const char GAME_ENGINE_SUBSYSTEM_WORLD = 8;
 	static const char GAME_ENGINE_SUBSYSTEM_CAMERA = 16;
 	static const char GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM = 32;
+	static const char GAME_ENGINE_SUBSYSTEM_CRASH_HANDLER = 64;
 
 	/**
 

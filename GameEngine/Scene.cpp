@@ -9,14 +9,14 @@
 */
 #include "Scene.h"
 
-void Scene::AddModel(Model * newModel)
+void Scene::addEntity(Model * newModel)
 {
 	models.push_back(newModel);
 
 	return;
 }
 
-void Scene::RemoveModel(Model * modelToRemove)
+void Scene::removeEntity(Model * modelToRemove)
 {
 	for (int i = 0; i < models.size(); i++)
 	{
