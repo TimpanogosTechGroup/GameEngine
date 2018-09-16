@@ -79,6 +79,11 @@ void test() {
 	system("pause");
 }
 
+void test2() {
+	printf("test2\n");
+	system("pause");
+}
+
 /*
 	This is the start up template script, this just creates a new StartApp instance
 	And then hands over the proccess to the application.
@@ -94,6 +99,7 @@ int main(int argc, char** argv) {
 
 	ThreadManager threadManager;
 	threadManager.addToThread(test);
+	threadManager.addToThread(test2);
 	printf("Started thread test\n");
 	threadManager.joinThreadsToMain();
 
