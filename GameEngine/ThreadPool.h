@@ -4,10 +4,10 @@
 #include <thread>
 #include <vector>
 
-class ThreadManager {
+class ThreadPool {
 	public:
-		ThreadManager();
-		~ThreadManager();
+		ThreadPool();
+		~ThreadPool();
 
 		bool joinThreadsToMain();
 
@@ -20,6 +20,8 @@ class ThreadManager {
 			else
 				return false;
 		}
+
+
 	private:
 		std::vector<std::thread> threads;
 };

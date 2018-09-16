@@ -77,11 +77,13 @@ void StartApp::shutdown() {
 void test() {
 	printf("test\n");
 	system("pause");
+	printf("test thread completed\n");
 }
 
 void test2() {
 	printf("test2\n");
 	system("pause");
+	printf("test2 thread completed\n");
 }
 
 /*
@@ -97,11 +99,11 @@ int main(int argc, char** argv) {
 	StartApp app;
 	//app.launch();
 
-	ThreadManager threadManager;
-	threadManager.addToThread(test);
-	threadManager.addToThread(test2);
+	ThreadPool threadPool;
+	threadPool.addToThread(test);
+	threadPool.addToThread(test2);
 	printf("Started thread test\n");
-	threadManager.joinThreadsToMain();
+	threadPool.joinThreadsToMain();
 
 	return 0;
 }

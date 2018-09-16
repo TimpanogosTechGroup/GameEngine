@@ -1,15 +1,15 @@
-#include "ThreadManager.h"
+#include "ThreadPool.h"
 #include <stdexcept>
 
-ThreadManager::ThreadManager() {
+ThreadPool::ThreadPool() {
 
 }
 
-ThreadManager::~ThreadManager() {
+ThreadPool::~ThreadPool() {
 
 }
 
-bool ThreadManager::joinThreadsToMain() {
+bool ThreadPool::joinThreadsToMain() {
 	try {
 		for (int i = 0; i < this->threads.size(); i++)
 			this->threads[i].join();
