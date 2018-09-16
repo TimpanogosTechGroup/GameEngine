@@ -94,6 +94,7 @@ int main(int argc, char** argv) {
 
 	ThreadManager threadManager;
 	threadManager.addToThread(test);
+	threadManager.joinThreadsToMain();
 
 
 	return 0;

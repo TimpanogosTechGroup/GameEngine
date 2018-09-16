@@ -9,14 +9,13 @@ class ThreadManager {
 		ThreadManager();
 		~ThreadManager();
 
+		bool joinThreadsToMain();
+
 		template <typename T>
 		bool addToThread(T(*f)) {
-			std::thread thr(f);
-			/*
 			if (this->threads.push_back(std::thread f))
 				return true;
 			else
-			*/
 				return false;
 		}
 	private:
