@@ -75,7 +75,8 @@ void StartApp::shutdown() {
 }
 
 void test() {
-
+	printf("test");
+	system("pause");
 }
 
 /*
@@ -92,6 +93,7 @@ int main(int argc, char** argv) {
 	//app.launch();
 
 	ThreadManager threadManager;
+	threadManager.addToThread(test);
 
 
 	return 0;

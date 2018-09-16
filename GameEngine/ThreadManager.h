@@ -11,12 +11,13 @@ class ThreadManager {
 
 		template <typename T>
 		bool addToThread(T(*f)) {
-			bool ThreadManager::addToThread(T(*f)) {
-				if (this->threads.push_back(std::thread f))
-					return true;
-				else
-					return false;
-			}
+			std::thread thr(f);
+			/*
+			if (this->threads.push_back(std::thread f))
+				return true;
+			else
+			*/
+				return false;
 		}
 	private:
 		std::vector<std::thread> threads;
