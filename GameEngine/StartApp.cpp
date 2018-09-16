@@ -79,7 +79,7 @@ void test(std::string i) {
 	std::cout << "test thread " << i << " completed" << std::endl;
 }
 
-void startapp() {
+void startApp() {
 	StartApp app;
 	app.launch();
 }
@@ -101,9 +101,7 @@ int main(int argc, char** argv) {
 		pool.enqueue(test, std::to_string(i));
 	}
 
-	std::cout << "test below" << std::endl;
-
-	pool.enqueue(startapp);
+	pool.enqueue(startApp);
 
 	return 0;
 }
