@@ -79,6 +79,11 @@ void test(std::string i) {
 	std::cout << "test thread " << i << " completed" << std::endl;
 }
 
+void startapp() {
+	StartApp app;
+	app.launch();
+}
+
 /*
 	This is the start up template script, this just creates a new StartApp instance
 	And then hands over the proccess to the application.
@@ -89,14 +94,16 @@ int main(int argc, char** argv) {
 
 	VS_MEM_CHECK;
 	
-	StartApp app;
-	//app.launch();
 
 	ThreadPool pool(4);
 
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 3; i++) {
 		pool.enqueue(test, std::to_string(i));
 	}
+
+	std::cout << "test below" << std::endl;
+
+	pool.enqueue(startapp);
 
 	return 0;
 }
