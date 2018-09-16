@@ -341,6 +341,12 @@
     <ClInclude Include="StartApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KMTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
