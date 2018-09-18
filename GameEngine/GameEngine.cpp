@@ -25,6 +25,7 @@ void GameEngine::initialize(const char subystems) {
 
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_RENDERER)) {
 		Registry::Register("renderer", &renderer);
+		Registry::Register("game_engine", this);
 
 		Registry::SetRenderEngine(&renderer);
 

@@ -12,6 +12,8 @@
 
 #include "RenderEngine.h"
 #include "RegistryEntry.h"
+#include "Logger.h"
+#include "ClassCastMismatchExeption.h"
 #include <unordered_map>
 
 class Registry
@@ -40,7 +42,19 @@ private:
 // Gets a restiry entry and attempts to cast it to the template T
 template <typename T>
 inline T* Registry::GetRegistryEntry(const char* name) {
-	return static_cast<T*>(registry[name]);
+	if (registry.find(name) == registry.end()) {
+		Logger::Log<Registry>(LoggerLevel::SEVERE, "Unable to find the name of the entry");
+		throw new std::string("No registry entry with that name");
+	}
+
+	if (T* entry = static_cast<T*>(registry[name])) {
+		return static_cast<T*>(registry[name]);
+	}
+	else {
+		Logger::Log<Registry>(LoggerLevel::SEVERE, "Incorrect class type, class mismatch.");
+		throw new ClassCastMismatchException();
+	}
+
 }
 
 #endif REGISTRY_H

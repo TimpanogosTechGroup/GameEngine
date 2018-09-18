@@ -28,9 +28,10 @@
 #include "FileSystemManager.h"
 #include "Profiler.h"
 #include "SceneManager.h"
+#include "RegistryEntry.h"
 
 
-class GameEngine: public MemoryManager
+class GameEngine: public MemoryManager, RegistryEntry
 {
 private:
 	FontManager fontManager;

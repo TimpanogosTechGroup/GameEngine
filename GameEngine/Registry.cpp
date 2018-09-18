@@ -15,6 +15,7 @@
 */
 
 #include "Registry.h"
+#include <string>
 
 // Initialize the variables
 RenderEngine* Registry::renderEngine = nullptr;
@@ -24,6 +25,18 @@ Registry::Registry() {}
 
 // Registers an object by storing the pointer to the object and storing it in a hash map with a string as the key
 void Registry::Register(std::string name, RegistryEntry* objectPointer) {
+	if (registry.find(name) != registry.end()) {
+		Logger::Log<Registry>(LoggerLevel::SEVERE, "The entry already exists, if you have replaced the entry there might be unexpected code behaviors in the code.");
+	}
+	else {
+		std::string message("Registered class: ");
+		message.append(typeid(objectPointer).name());
+		message.append(" as ");
+		message.append(name);
+
+		Logger::Log<Registry>(LoggerLevel::INFO, message.c_str());
+	}
+
 	registry[name] = objectPointer;
 }
 
