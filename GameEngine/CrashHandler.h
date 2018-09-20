@@ -2,7 +2,7 @@
 	File:
     Purpose: 
 
-    @author 
+    @author Jon Meilstrup
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
@@ -11,9 +11,13 @@
 #define CRASH_HANDLER_H
 
 #include <string>
+#include <sstream>
 #include <iostream>
+#include "Logger.h"
 
 #include "ExceptionTemplate.h"
+
+using std::stringstream;
 
 /*
  * Author: Jon Meilstrup
