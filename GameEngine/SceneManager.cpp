@@ -45,9 +45,29 @@ void SceneManager::addScene(std::string name, Scene* scene) {
 	sceneMap[name] = scene;
 }
 
+void SceneManager::loadSceneIntoWorld(std::string name) {
+	if (world) {
+		Scene* scene = getScene(name);
+		// Load every entity in to the world and translate the coordinate system
+	}
+}
+
+void SceneManager::unloadScene(std::string name) {
+
+}
+
+void SceneManager::setContext(World* context) {
+	if (context) {
+		this->world = world;
+	}
+	else {
+		// Throw an pointer null exception
+	}
+}
+
 void SceneManager::cleanup() {
 	for (auto v : sceneMap) {
-		v.second->clean();
+		//v.second->clean();
 		delete v.second;  // Deletes the memory
 	}
 }

@@ -16,6 +16,9 @@
 
 class SceneManager
 {
+private:
+	World * world; // World context
+
 public:
 	SceneManager() {};
 	~SceneManager() { 
@@ -27,8 +30,10 @@ public:
 	Scene* getScene(std::string sceneName);
 	void addScene(std::string name, Scene* scene);
 
-	void loadSceneIntoWorld(World* world);
-	void unloadScene(World* world);
+	void loadSceneIntoWorld(std::string sceneName);
+	void unloadScene(std::string sceneName);
+
+	void setContext(World* world);
 
 	void cleanup();
 };

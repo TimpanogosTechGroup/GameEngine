@@ -9,22 +9,15 @@
 */
 #include "Scene.h"
 
-void Scene::addEntity(Model * newModel)
+void Scene::addEntity(Entity * newModel, glm::vec3 entityPosition)
 {
-	models.push_back(newModel);
+	entities.push_back(newModel);
 
 	return;
 }
 
-void Scene::removeEntity(Model * modelToRemove)
+void Scene::removeEntity(Entity * modelToRemove)
 {
-	for (int i = 0; i < models.size(); i++)
-	{
-		if (models.at(i) == modelToRemove)
-		{
-			models.erase(models.begin() + i);
-		}
-	}
 
 	return;
 }

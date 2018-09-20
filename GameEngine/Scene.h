@@ -10,19 +10,18 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include"Model.h"
+#include"Entity.h"
 #include<vector>
-#include "MemoryManager.h"
+#include <glm\glm.hpp>
 
-class Scene : MemoryManager
-{
+class Scene{
 public:
-	std::vector<Model*> models;
-	void addEntity(Model* newModel);
-	void removeEntity(Model* modelToRemove);
+	std::vector<Entity*> entities;
+	void addEntity(Entity* entityToAdd, glm::vec3 entityPosition);
+	void removeEntity(Entity* entity);
 
-	void setup() {}
-	void clean() {}
+private:
+	glm::vec3 worldLocation;
 };
 
 #endif
