@@ -16,7 +16,7 @@
  *	-string displayErrorMsg()
  */
 
-std::string CrashHandler::displayErrorMsg()
+void CrashHandler::displayErrorMsg()
 {
 	/*
 	 * Logs error message for whatever error was thrown.
@@ -34,7 +34,7 @@ std::string CrashHandler::displayErrorMsg()
 
 	Logger::Log<CrashHandler>(ERROR, c);
 
-	return result;
+	//return result;
 }
 
 void CrashHandler::setError(ExceptionTemplate*& e)

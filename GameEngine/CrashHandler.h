@@ -41,7 +41,7 @@ private:
 public:
 	CrashHandler(ExceptionTemplate*& e) : e(e){}
 	~CrashHandler() {}
-	std::string displayErrorMsg();
+	void displayErrorMsg();
 	void setError(ExceptionTemplate*& e);
 };
 
