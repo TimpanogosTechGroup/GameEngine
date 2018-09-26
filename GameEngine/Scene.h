@@ -15,13 +15,17 @@
 #include <glm\glm.hpp>
 
 class Scene{
-public:
-	std::vector<Entity*> entities;
-	void addEntity(Entity* entityToAdd, glm::vec3 entityPosition);
-	void removeEntity(Entity* entity);
-
 private:
 	glm::vec3 worldLocation;
+	struct entity_pos {
+		glm::vec3 position;
+		Entity* entity;
+	};
+public:
+	//std::vector<Entity*> entities;
+	std::vector<entity_pos> entries;
+	void addEntity(Entity* entityToAdd, glm::vec3 entityPosition);
+	void removeEntity(Entity* entity);
 };
 
 #endif

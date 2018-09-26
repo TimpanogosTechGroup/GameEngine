@@ -1,21 +1,27 @@
 /**
-	File:
-    Purpose: 
+	File: Scene.cpp
+    Purpose: This class is to help with the coordinate system. It uses local coordinates with entities 
+	and then translates those coordinates into world coordinates
 
-    @author 
+    @author Ben Brenkman
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
 */
 #include "Scene.h"
 
-void Scene::addEntity(Entity * newModel, glm::vec3 entityPosition)
+// Adds entity to the scene with a position. Will be added to the world and the coordinates translated.
+void Scene::addEntity(Entity * entity, glm::vec3 entityPosition)
 {
-	entities.push_back(newModel);
+	entity_pos entry;
+	entry.entity = entity;
+	entry.position = entityPosition;
+	entries.push_back(entry);
 
 	return;
 }
 
+// Isn't used
 void Scene::removeEntity(Entity * modelToRemove)
 {
 
