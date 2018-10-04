@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -33,6 +33,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="FontManagerException.h" />
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="Gamepad.h" />
     <ClInclude Include="GarbageCollector.h" />
     <ClInclude Include="InputControlled.h" />
     <ClInclude Include="InputEvent.h" />

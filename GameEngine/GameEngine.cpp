@@ -57,7 +57,11 @@ void GameEngine::initialize(const char subystems) {
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM)) {
 		FileSystemManager::getInstance().initialize();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
-	}	
+	}
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_INPUT)) {
+		inputManager.initialize();
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
+	}
 }
 
 void GameEngine::proccessInput(double delta) {
@@ -83,37 +87,48 @@ void GameEngine::proccessInput(double delta) {
 	}
 
 	// Process input
-		if (inputManager.isKeyPressed(SDLK_w))
+	/*if (inputManager.gamepadLX() != 0) {
+		std::cout << "Left Stick X: " << inputManager.gamepadLX() << std::endl;
+	}*/
+		bool cameraRotate = false;
+		
+		if (inputManager.isKeyPressed(SDLK_w) || inputManager.gamepadLY() > 0)
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(FORWARD, delta);
-		if (inputManager.isKeyPressed(SDLK_s))
+		if (inputManager.isKeyPressed(SDLK_s) || inputManager.gamepadLY() < 0)
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(BACKWARD, delta);
-		if (inputManager.isKeyPressed(SDLK_a))
+		if (inputManager.isKeyPressed(SDLK_a) || inputManager.gamepadLX() < 0)
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(LEFT, delta);
-		if (inputManager.isKeyPressed(SDLK_d))
+		if (inputManager.isKeyPressed(SDLK_d) || inputManager.gamepadLX() > 0)
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(RIGHT, delta);
-		if (inputManager.isKeyPressed(SDLK_LSHIFT))
+		if (inputManager.isKeyPressed(SDLK_LSHIFT) || inputManager.gamepadA())
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(UP, delta);
-		if (inputManager.isKeyPressed(SDLK_LCTRL))
+		if (inputManager.isKeyPressed(SDLK_LCTRL) || inputManager.gamepadB())
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->ProcessKeyboard(DOWN, delta);
-		if (inputManager.isKeyPressed(SDLK_LEFT))
+		if (inputManager.isGamepadEnabled()) {
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
-			camera->ProcessMouseMovement(0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_RIGHT))
-			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
-			camera->ProcessMouseMovement(-0.3f, 0, true);
-		if (inputManager.isKeyPressed(SDLK_UP))
-			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
-			camera->ProcessMouseMovement(0, 0.3f, true);
-		if (inputManager.isKeyPressed(SDLK_DOWN))
-			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
-			camera->ProcessMouseMovement(0, -0.3f, true);
-		if (inputManager.isKeyPressed(SDLK_ESCAPE)) {
+				camera->ProcessMouseMovement(stof(inputManager.gamepadRX()), stof(inputManager.gamepadRY()), true);
+		}
+		else {
+			if (inputManager.isKeyPressed(SDLK_LEFT))
+				if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+					camera->ProcessMouseMovement(0.3f, 0, true);
+			if (inputManager.isKeyPressed(SDLK_RIGHT))
+				if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+					camera->ProcessMouseMovement(-0.3f, 0, true);
+			if (inputManager.isKeyPressed(SDLK_UP))
+				if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+					camera->ProcessMouseMovement(0, 0.3f, true);
+			if (inputManager.isKeyPressed(SDLK_DOWN))
+				if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
+					camera->ProcessMouseMovement(0, -0.3f, true);
+		}
+		if (inputManager.isKeyPressed(SDLK_ESCAPE) || inputManager.isGamepadEnabled()) {
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 			SDL_CaptureMouse(SDL_FALSE);
 			inputManager.disableMouseMovement();
@@ -126,6 +141,17 @@ void GameEngine::proccessInput(double delta) {
 			if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_CAMERA))
 			camera->DisableLookAt();
 		}
+}
+
+float GameEngine::stof(short s) {
+	if (s == 0) {
+		return s;
+	}
+	int sign = (s > 0) ? 1 : -1;
+	s = abs(s) - 1000;
+	s /= 5295;
+	float f = (float)(s * 0.1 * sign);
+	return f;
 }
 
 void GameEngine::run() {
@@ -152,6 +178,11 @@ void GameEngine::run() {
 
 		float delta = .002f;
 		proccessInput(delta); // proccess input
+		
+		// Delete this later
+		if (inputManager.isGamepadEnabled() && inputManager.gamepadSelect()) {
+			return;
+		}
 
 		PROFILE_PUSH("render update");
 		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_RENDERER)) {
@@ -188,6 +219,7 @@ void GameEngine::run() {
 }
 
 void GameEngine::shudown() {
+	inputManager.deleteGamepad();
 	LOG("Shuting down Game Engine");
 	LOG("Cleaning up ResourceManager");
 	ResourceManager::clean();
