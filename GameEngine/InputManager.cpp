@@ -20,6 +20,24 @@ InputManager::~InputManager()
 {
 }
 
+void InputManager::initialize() {
+	Player1 = new Gamepad(1);
+	if (Player1->IsConnected()) {
+		enableGamepad();
+		disableMouseMovement();
+		disableMouseProccessing();
+	}
+	else {
+		disableGamepad();
+	}
+}
+
+void InputManager::deleteGamepad() {
+	if (Player1 != NULL) {
+		delete Player1;
+	}
+}
+
 void InputManager::pressKey(unsigned int keyID) {
 	_keyMap[keyID] = true;
 }

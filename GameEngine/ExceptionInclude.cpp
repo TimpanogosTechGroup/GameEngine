@@ -20,4 +20,4 @@
  */
 
 #include "ExampleException.cpp"
-#include "CrashHandler.cpp"
+#include "CrashHandler.h"

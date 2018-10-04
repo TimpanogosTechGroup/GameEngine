@@ -108,6 +108,7 @@ public:
 	void run();
 	void shudown();
 	void proccessInput(double delta);
+	float stof(short s);
 	void clean();
 	void setup();
 };
