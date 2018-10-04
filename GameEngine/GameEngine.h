@@ -100,6 +100,7 @@ public:
 	static const char GAME_ENGINE_SUBSYSTEM_WORLD = 8;
 	static const char GAME_ENGINE_SUBSYSTEM_CAMERA = 16;
 	static const char GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM = 32;
+	static const char GAME_ENGINE_SUBSYSTEM_INPUT = 64;
 
 	/**
 

@@ -58,7 +58,10 @@ void GameEngine::initialize(const char subystems) {
 		FileSystemManager::getInstance().initialize();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
 	}
-	inputManager.initialize();
+	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_INPUT)) {
+		inputManager.initialize();
+		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
+	}
 }
 
 void GameEngine::proccessInput(double delta) {
