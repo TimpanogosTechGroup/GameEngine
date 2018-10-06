@@ -3,6 +3,8 @@ project(GameEngine)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(include/bullet)
+
 set(SOURCE_FILES
         GameEngine/AssetManager.cpp
         GameEngine/AssetManager.h
