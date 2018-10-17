@@ -24,15 +24,15 @@ NOT COMPLETE
 #include "FileSystemManager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <glm\stb_image.h>
+#include <glm/stb_image.h>
 
-#define LOG(message, level) \
+#define LOG(message, level) /
 	Logger::Log<AssetManager>(level, message);
 
-#define LOG(message) \
+#define LOG(message) /
 	Logger::Log<AssetManager>(DEBUG, message);
 
-#define LOGS \
+#define LOGS /
 	Logger::GetLogStream<AssetManager>()
 
 // ID is the id of the program the shader will be linked to - initial value will be changed
@@ -384,7 +384,7 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 		textureNormal = ResourceManager::getTexture("default");
 	}
 
-	//Shader* other = LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl");
+	//Shader* other = LoadShader("Shader//color_vert.glsl", "Shader//color_frag.glsl");
 	Material* tmp = new Material(1, 1, texture, containsText ? ResourceManager::getShader("color_shader") : ResourceManager::getShader("texture_shader"), glm::vec4(diffuse.r, diffuse.g, diffuse.b, diffuse.a));
 	return tmp;
 }

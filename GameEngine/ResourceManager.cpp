@@ -11,7 +11,7 @@
 #include "Logger.h"
 #include "ResourceManager.h"
 
-#define LOG(message) \
+#define LOG(message) /
 	Logger::Log<ResourceManager>(DEBUG, message);
 
 std::unordered_map<std::string, Texture*> ResourceManager::textures;

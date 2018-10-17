@@ -9,50 +9,50 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\Render">
+    <Filter Include="Source Files/Render">
       <UniqueIdentifier>{8759e1e8-5f70-4a62-b8c4-63d811507e86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render">
+    <Filter Include="Header Files/Render">
       <UniqueIdentifier>{211210b0-7902-43b1-b92b-b668189000cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\manager">
+    <Filter Include="Header Files/manager">
       <UniqueIdentifier>{83f3fa99-a1ea-4762-88c1-43b4547ff405}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\manager">
+    <Filter Include="Source Files/manager">
       <UniqueIdentifier>{1ef9016f-f416-4675-8665-8322ef1727c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\scene">
+    <Filter Include="Source Files/scene">
       <UniqueIdentifier>{1778b9c6-61ce-4fc2-a2dc-d65c31da980b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\scene">
+    <Filter Include="Header Files/scene">
       <UniqueIdentifier>{f91e87a5-4b52-4349-b0ba-d3460b8bd2d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\profiler">
+    <Filter Include="Source Files/profiler">
       <UniqueIdentifier>{2db7e06e-17ee-42ba-875f-6106b21357fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\profiler">
+    <Filter Include="Header Files/profiler">
       <UniqueIdentifier>{51439163-7424-4353-82f8-ccf7aedd5e1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\physics">
+    <Filter Include="Source Files/physics">
       <UniqueIdentifier>{2ccb60ea-8f5e-49ba-863d-724f3fa3ae3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\physics">
+    <Filter Include="Header Files/physics">
       <UniqueIdentifier>{c3394337-cbb3-48cc-9ac7-49b1daa20dfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\exceptions">
+    <Filter Include="Header Files/exceptions">
       <UniqueIdentifier>{3588fe84-15c3-4722-8a1f-46f0ace03cb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\exceptions">
+    <Filter Include="Source Files/exceptions">
       <UniqueIdentifier>{6749a727-8b1e-4e88-90c8-c8755b17f4d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entity">
+    <Filter Include="Header Files/Entity">
       <UniqueIdentifier>{64513a26-8399-4b17-8797-03f580ea74f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Input">
+    <Filter Include="Header Files/Input">
       <UniqueIdentifier>{17da8e2d-a4bb-4a28-b521-74681d795ba2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -61,70 +61,70 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="OpenGlRenderer.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="FrameBuffer.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="Registry.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="Verticies.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="PrimitiveShape.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Source Files\profiler</Filter>
+      <Filter>Source Files/profiler</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsEngine.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="Properties.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="CubeMap.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Source Files\Render</Filter>
+      <Filter>Source Files/Render</Filter>
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Source Files</Filter>
@@ -136,25 +136,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CrashHandler.cpp">
-      <Filter>Source Files\manager</Filter>
+      <Filter>Source Files/manager</Filter>
     </ClCompile>
     <ClCompile Include="ErrorCode.cpp">
-      <Filter>Source Files\exceptions</Filter>
+      <Filter>Source Files/exceptions</Filter>
     </ClCompile>
     <ClCompile Include="ExampleException.cpp">
-      <Filter>Source Files\exceptions</Filter>
+      <Filter>Source Files/exceptions</Filter>
     </ClCompile>
     <ClCompile Include="ExceptionInclude.cpp">
-      <Filter>Source Files\exceptions</Filter>
+      <Filter>Source Files/exceptions</Filter>
     </ClCompile>
     <ClCompile Include="Profiler.cpp">
-      <Filter>Source Files\profiler</Filter>
+      <Filter>Source Files/profiler</Filter>
     </ClCompile>
     <ClCompile Include="PerlinGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Chunk.cpp">
-      <Filter>Source Files\scene</Filter>
+      <Filter>Source Files/scene</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
@@ -165,94 +165,94 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="RenderItem.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="OpenGlRenderer.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="FrameBuffer.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Registry.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="PrimitiveShape.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="Verticies.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="LuaScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Header Files\profiler</Filter>
+      <Filter>Header Files/profiler</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine.h">
-      <Filter>Header Files\physics</Filter>
+      <Filter>Header Files/physics</Filter>
     </ClInclude>
     <ClInclude Include="RegistryEntry.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Properties.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="FontManagerException.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="MotionState.h">
-      <Filter>Header Files\physics</Filter>
+      <Filter>Header Files/physics</Filter>
     </ClInclude>
     <ClInclude Include="FontManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="CubeMap.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="ModelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files</Filter>
@@ -264,76 +264,76 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CrashHandler.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="ExceptionTemplate.h">
-      <Filter>Header Files\exceptions</Filter>
+      <Filter>Header Files/exceptions</Filter>
     </ClInclude>
     <ClInclude Include="ErrorCode.h">
-      <Filter>Header Files\exceptions</Filter>
+      <Filter>Header Files/exceptions</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="DynamicEntity.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="StaticEntity.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="Renderable.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="Throwable.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="Terrian.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="Moveable.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="InputControlled.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="RandomEntity.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files/Entity</Filter>
     </ClInclude>
     <ClInclude Include="FileSystemManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="InputInterface.h">
-      <Filter>Header Files\Input</Filter>
+      <Filter>Header Files/Input</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Input</Filter>
+      <Filter>Header Files/Input</Filter>
     </ClInclude>
     <ClInclude Include="KeyBoardInput.h">
-      <Filter>Header Files\Input</Filter>
+      <Filter>Header Files/Input</Filter>
     </ClInclude>
     <ClInclude Include="InputEvent.h">
-      <Filter>Header Files\Input</Filter>
+      <Filter>Header Files/Input</Filter>
     </ClInclude>
     <ClInclude Include="Profiler.h">
-      <Filter>Header Files\profiler</Filter>
+      <Filter>Header Files/profiler</Filter>
     </ClInclude>
     <ClInclude Include="Axis.h">
-      <Filter>Header Files\Render</Filter>
+      <Filter>Header Files/Render</Filter>
     </ClInclude>
     <ClInclude Include="PerlinGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Chunk.h">
-      <Filter>Header Files\scene</Filter>
+      <Filter>Header Files/scene</Filter>
     </ClInclude>
     <ClInclude Include="ChunkManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="MemoryManager.h">
-      <Filter>Header Files\manager</Filter>
+      <Filter>Header Files/manager</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>

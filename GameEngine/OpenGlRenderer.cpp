@@ -18,9 +18,9 @@ Notes: This is the rendering class for OpenGl, all calls related to OpenGl shoul
 #include <iostream>
 #include <vector>
 #include <string>
-#include <GLEW\glew.h>
-#include <glm\gtc\matrix_transform.hpp>
-#include <glm\gtc\type_ptr.hpp>
+#include <GLEW/glew.h>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Camera.h"
 #include <iterator>
 #include <ostream>
@@ -103,13 +103,13 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 }
 
 void OpenGlRenderer::loadDefaults() {
-	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("Shader\\light_vert.glsl", "Shader\\sun_frag.glsl"));
-	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader\\color_vert.glsl", "Shader\\color_frag.glsl"));
-	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader\\transform_vert.glsl", "Shader\\transform_frag.glsl"));
-	AssetManager::LoadTexture("default", "Texture\\question.png");
-	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader\\cubemap_vert.glsl", "Shader\\cubemap_frag.glsl"));
-	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader\\font_vert.glsl", "Shader\\font_frag.glsl"));
-	ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader\\chunk_vert.glsl", "Shader\\chunk_frag.glsl"));
+	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("Shader//light_vert.glsl", "Shader//sun_frag.glsl"));
+	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader//color_vert.glsl", "Shader//color_frag.glsl"));
+	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader//transform_vert.glsl", "Shader//transform_frag.glsl"));
+	AssetManager::LoadTexture("default", "Texture//question.png");
+	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader//cubemap_vert.glsl", "Shader//cubemap_frag.glsl"));
+	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader//font_vert.glsl", "Shader//font_frag.glsl"));
+	ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader//chunk_vert.glsl", "Shader//chunk_frag.glsl"));
 }
 
 glm::mat4 OpenGlRenderer::getOrthoGraphicsProjection()
@@ -598,7 +598,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
-			Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "/n" << infoLog << "/n -- --------------------------------------------------- -- ";
 			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
@@ -608,7 +608,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		if (!success)
 		{
 			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
-			Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- ";
+			Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "/n" << infoLog << "/n -- --------------------------------------------------- -- ";
 			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
 		}
 	}
@@ -679,7 +679,7 @@ void OpenGlRenderer::SetUniformMat4(Shader* shader, const GLchar* name, glm::mat
 
 // Creates the bounding box mesh based on the info from the bounding box and loads it to the GPU, notice if you change the values in the bounding box you must recompile it!
 void OpenGlRenderer::CompileBoundingBox(BoundingBox& boundingbox) {
-	bbShader = *AssetManager::LoadShader("Shader\\bb_vert.glsl", "Shader\\bb_frag.glsl");
+	bbShader = *AssetManager::LoadShader("Shader//bb_vert.glsl", "Shader//bb_frag.glsl");
 	// First we need to create the buffer to send off to the GPU
 	std::vector<float> buffer;
 	// First 8 verticies are rendered to produce to squares

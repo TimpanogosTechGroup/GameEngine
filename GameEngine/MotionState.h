@@ -11,7 +11,7 @@
 #define MOTIONSTATE_H
 
 #include <btBulletDynamicsCommon.h>
-#include <bullet\BulletDynamics\Dynamics\btRigidBody.h>
+#include <bullet/BulletDynamics/Dynamics/btRigidBody.h>
 
 
 class MotionState : public btMotionState {

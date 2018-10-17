@@ -48,4 +48,4 @@ private:
 	static std::unordered_map<std::string, Model*> models;
 };
 
-#endif RESOURCE_MANAGER_H
+#endif

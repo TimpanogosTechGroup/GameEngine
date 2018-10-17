@@ -16,8 +16,8 @@ Notes: Just some framebuffer stuff
 
 #pragma once
 #include "Texture.h"
-#include <GLEW\glew.h>
-#include <glm\glm.hpp>
+#include <GLEW/glew.h>
+#include <glm/glm.hpp>
 
 class FrameBuffer : public RenderItem
 {

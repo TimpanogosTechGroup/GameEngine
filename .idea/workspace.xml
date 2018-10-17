@@ -14,19 +14,33 @@
     <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/AssetManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/AssetManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/AssetManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/AssetManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FileSystemManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/FileSystemManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Font.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FontManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/FontManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FrameBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/FrameBuffer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/FrameBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/FrameBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/GameEngine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj.filters" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Logger.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Logger.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/LuaScript.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/LuaScript.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Material.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Material.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Barrel.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Model/Barrel.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Model/rocket.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/spherepbr.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Model/spherepbr.mtl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/MotionState.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/MotionState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Profiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Profiler.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Profiler.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Profiler.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Properties.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Properties.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/Registry.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Registry.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/ResourceManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/ResourceManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ResourceManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/ResourceManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/World.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/World.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,8 +66,8 @@
           <entry key="Makefile" value="1" />
           <entry key="cbp" value="1" />
           <entry key="cmake" value="2" />
-          <entry key="cpp" value="4" />
-          <entry key="h" value="26" />
+          <entry key="cpp" value="6" />
+          <entry key="h" value="30" />
           <entry key="inl" value="3" />
           <entry key="txt" value="6" />
         </counts>
@@ -62,7 +76,7 @@
         <counts>
           <entry key="CMakeCache.txt" value="1" />
           <entry key="CMakeLists.txt" value="7" />
-          <entry key="ObjectiveC" value="33" />
+          <entry key="ObjectiveC" value="39" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
@@ -70,12 +84,12 @@
         <counts>
           <entry key="cpp" value="2" />
           <entry key="h" value="145" />
-          <entry key="txt" value="389" />
+          <entry key="txt" value="397" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CMakeLists.txt" value="389" />
+          <entry key="CMakeLists.txt" value="397" />
           <entry key="ObjectiveC" value="147" />
         </counts>
       </usages-collector>
@@ -85,32 +99,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameEngine/Camera.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/MotionState.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
-              <folding>
-                <element signature="e#145#180#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/freetype/config/ftoption.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4665">
-              <caret line="311" selection-start-line="311" selection-end-line="311" />
+            <state relative-caret-position="75">
+              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -118,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/Logger.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="118" column="6" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
+            <state relative-caret-position="689">
+              <caret line="118" selection-start-line="118" selection-end-line="118" />
             </state>
           </provider>
         </entry>
@@ -127,43 +138,69 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/Registry.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
+            <state relative-caret-position="645">
               <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameEngine/ResourceManager.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
+            <state relative-caret-position="645">
               <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/Profiler.h">
+        <entry file="file://$PROJECT_DIR$/GameEngine/Properties.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="118" column="6" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
-              <folding>
-                <element signature="e#384#408#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="600">
+              <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/Verticies.h">
+        <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+            <state relative-caret-position="270">
+              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/glm/detail/type_vec4_simd.inl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1170">
+              <caret line="155" selection-start-line="155" selection-end-line="155" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameEngine/AssetManager.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>\</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>/</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/GameEngine</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -171,21 +208,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GameEngine/Properties.h" />
         <option value="$PROJECT_DIR$/GameEngine/Material.h" />
         <option value="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" />
         <option value="$PROJECT_DIR$/GameEngine/Font.h" />
         <option value="$PROJECT_DIR$/GameEngine/FrameBuffer.h" />
-        <option value="$PROJECT_DIR$/GameEngine/Camera.h" />
         <option value="$PROJECT_DIR$/GameEngine/OpenGlRenderer.h" />
         <option value="$PROJECT_DIR$/GameEngine/AssetManager.h" />
         <option value="$PROJECT_DIR$/GameEngine/StartApp.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/GameEngine/MotionState.h" />
+        <option value="$PROJECT_DIR$/GameEngine/Profiler.h" />
+        <option value="$PROJECT_DIR$/GameEngine/Camera.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/GameEngine/Logger.h" />
+        <option value="$PROJECT_DIR$/GameEngine/Properties.h" />
         <option value="$PROJECT_DIR$/GameEngine/Registry.h" />
         <option value="$PROJECT_DIR$/GameEngine/ResourceManager.h" />
-        <option value="$PROJECT_DIR$/GameEngine/Profiler.h" />
       </list>
     </option>
   </component>
@@ -213,17 +250,6 @@
             <path>
               <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-              <item name="bullet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -289,13 +315,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5319000" />
+    <option name="totallyTimeSpent" value="5543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="2562" height="1385" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.261753" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27848604" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -354,8 +380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        <state relative-caret-position="90">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -397,13 +423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Camera.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -413,8 +432,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/AssetManager.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+        <state relative-caret-position="510">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -422,20 +441,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="599">
           <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Properties.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
@@ -462,15 +467,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/glm/detail/type_vec4_simd.inl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="154" column="42" selection-start-line="154" selection-start-column="42" selection-end-line="154" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+        <state relative-caret-position="1170">
+          <caret line="155" selection-start-line="155" selection-end-line="155" />
         </state>
       </provider>
     </entry>
@@ -491,27 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Logger.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="118" column="6" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Registry.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/ResourceManager.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/Profiler.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
@@ -526,6 +503,83 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bullet/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/Camera.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/DynamicEntity.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/Properties.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/Logger.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="689">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicalInstance.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/Registry.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicalInstance.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/ResourceManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
         </state>
       </provider>
     </entry>

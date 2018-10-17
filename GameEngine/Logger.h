@@ -116,4 +116,4 @@ std::ostringstream& Logger::GetLogStream() {
 		return *stream->second;
 	}
 }
-#endif LOGGER_H
+#endif

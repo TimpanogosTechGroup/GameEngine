@@ -20,7 +20,7 @@ Most of this class is not used right now, primarily just the texture right now.
 
 #include "Texture.h"
 #include "Shader.h"
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 
 class Material {
 public:

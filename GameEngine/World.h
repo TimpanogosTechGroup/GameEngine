@@ -21,7 +21,7 @@
 #include "Profiler.h"
 #include "CubeMap.h"
 
-#define LOG(message) \
+#define LOG(message) /
 	Logger::Log<World>(DEBUG, message);
 
 class World {

@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Model\\BarrelDiffuse.jpg
+map_Kd Model//BarrelDiffuse.jpg
 map_Bump -bm 2.000000 BarrelNormal.png
 map_Ks BarrelSpecular.png
 map_Ns BarrelDiffuse.jpg

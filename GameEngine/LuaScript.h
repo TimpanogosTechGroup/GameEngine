@@ -15,10 +15,10 @@
 #include <stdarg.h>
 
 extern "C" {
-#include <lua\lua.hpp>
-#include <lua\lua.h>
-#include <lua\lauxlib.h>
-#include <lua\lualib.h>
+#include <lua/lua.hpp>
+#include <lua/lua.h>
+#include <lua/lauxlib.h>
+#include <lua/lualib.h>
 }
 
 class LuaScript {
@@ -52,7 +52,7 @@ public:
 		lua_pcall(L, 0, 0, 0);
 		lua_getglobal(L, function);
 
-		for (int i = 0; szTypes[i] != '\0'; ++i) {
+		for (int i = 0; szTypes[i] != '/0'; ++i) {
 			union data_t {
 				bool	b;
 				int     i;
@@ -107,7 +107,7 @@ public:
 		lua_pcall(L, 0, 0, 0);
 		lua_getglobal(L, function);
 
-		for (int i = 0; szTypes[i] != '\0'; ++i) {
+		for (int i = 0; szTypes[i] != '/0'; ++i) {
 			union data_t {
 				bool	b;
 				int     i;
@@ -162,7 +162,7 @@ public:
 		lua_pcall(L, 0, 0, 0);
 		lua_getglobal(L, function);
 
-		for (int i = 0; szTypes[i] != '\0'; ++i) {
+		for (int i = 0; szTypes[i] != '/0'; ++i) {
 			union data_t {
 				bool	b;
 				int     i;
@@ -217,7 +217,7 @@ public:
 		lua_pcall(L, 0, 0, 0);
 		lua_getglobal(L, function);
 
-		for (int i = 0; szTypes[i] != '\0'; ++i) {
+		for (int i = 0; szTypes[i] != '/0'; ++i) {
 			union data_t {
 				bool	b;
 				int     i;

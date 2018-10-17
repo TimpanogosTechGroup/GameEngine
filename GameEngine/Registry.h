@@ -43,4 +43,4 @@ inline T* Registry::GetRegistryEntry(const char* name) {
 	return static_cast<T*>(registry[name]);
 }
 
-#endif REGISTRY_H
+#endif

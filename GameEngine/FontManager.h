@@ -19,7 +19,7 @@
 #include "MemoryManager.h"
 
 // Define the basic fonts and such
-#define ARIAL "fonts\\arial.ttf"
+#define ARIAL "fonts//arial.ttf"
 
 class FontManager : public RegistryEntry
 {

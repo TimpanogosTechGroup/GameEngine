@@ -13,8 +13,8 @@
 #include FT_FREETYPE_H
 #include "RenderItem.h"
 #include <map>
-#include <glm\glm.hpp>
-#include <GLEW\glew.h>
+#include <glm/glm.hpp>
+#include <GLEW/glew.h>
 
 class Font : public RenderItem
 {

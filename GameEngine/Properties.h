@@ -39,4 +39,4 @@ inline T Properties::Get(std::string key) {
 	return NULL;
 }
 
-#endif PROPERTIES_H
+#endif

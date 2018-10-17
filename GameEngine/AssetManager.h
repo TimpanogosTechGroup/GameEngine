@@ -18,7 +18,7 @@
 #ifndef ASSET_MANAGER_H
 #define ASSET_MANAGER_H
 
-#include <GLEW\glew.h>
+#include <GLEW/glew.h>
 
 #include <iostream>
 #include <fstream>
@@ -31,10 +31,10 @@
 #include "Registry.h"
 #include "CubeMap.h"
 
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\cimport.h>
-#include <assimp\postprocess.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/cimport.h>
+#include <assimp/postprocess.h>
 
 class AssetManager {
 public:

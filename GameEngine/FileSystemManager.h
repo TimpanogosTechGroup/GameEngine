@@ -16,7 +16,7 @@
 class FileSystemManager {
 private:
 	std::string pathToHome;
-	std::string modelPathLocation = "Model\\";
+	std::string modelPathLocation = "Model//";
 	std::string materialPathLocation;
 
 	const std::string folderName = "Andromeda";
@@ -24,7 +24,7 @@ public:
 	std::string getModelPathString(std::string modelName, std::string folderName = "Andromeda") {
 		std::string path = modelPathLocation;
 		path.append(folderName);
-		path.append("\\");
+		path.append("//");
 		path.append(modelName);
 		path.append(".obj");
 		return path;

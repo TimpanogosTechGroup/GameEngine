@@ -16,7 +16,7 @@ Notes: We can use this class to render different scences at the same time, or cr
 #include "FrameBuffer.h"
 #include <SDL/SDL.h>
 #include <iostream>
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 
 FrameBuffer::FrameBuffer(unsigned int width, unsigned int height, unsigned char type)
 {

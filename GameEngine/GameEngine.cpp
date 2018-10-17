@@ -14,7 +14,7 @@
 #undef CreateWindow
 #endif
 
-#define LOG(message) \
+#define LOG(message) /
 	Logger::Log<GameEngine>(DEBUG, message);
 
 GameEngine::GameEngine() {

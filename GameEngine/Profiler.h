@@ -17,10 +17,10 @@ Copyright (c) 2018 All Rights Reserved
 #include <stack>
 #include "windows.h"
 
-#define PROFILE_PUSH(name) \
+#define PROFILE_PUSH(name) /
 Profiler::push_back(name)
 
-#define PROFILE_POP \
+#define PROFILE_POP /
 Profiler::pop()
 
 // This is a static class

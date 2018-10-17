@@ -11,7 +11,7 @@ Copyright (c) 2018 All Rights Reserved
 #include "Profiler.h"
 #include <iomanip>
 #include <string>
-#include <SDL\SDL.h>
+#include <SDL/SDL.h>
 #include <time.h>
 #include <sstream>
 #include <iostream>
@@ -137,13 +137,13 @@ void Profiler::dump() {
 	localtime_s(&timec, &timev);
 
 	// Format the time
-	std::ostringstream timeStamp("log\\");
+	std::ostringstream timeStamp("log//");
 	// year-month-day
 	timeStamp << timec.tm_year + 1900 << "-" << timec.tm_mon + 1 << "-" << timec.tm_mday;
 	// hour:minute:second
 	timeStamp << " " << std::right << std::setw(2) << std::setfill('0') << timec.tm_hour << ":" << std::right << std::setw(2) << std::setfill('0') << timec.tm_min << ":" << std::right << std::setw(2) << std::setfill('0') << timec.tm_sec;
 
-	std::ofstream out("log\\text.txt");
+	std::ofstream out("log//text.txt");
 	std::cout << timeStamp.str() << std::endl;
 
 	out << "Name:," << "start_time," << "end_time," << "average," << "start_percent_cpu_usage," << "end_percent_cpu_usage," << "start_percent_memory_usage," << "end_percent_memory_usage" << std::endl;

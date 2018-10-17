@@ -12,7 +12,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include "RenderEngine.h"
-#include <SDL\SDL.h>
+#include <SDL/SDL.h>
 #include "FrameBuffer.h"
 #include "RegistryEntry.h"
 #include "PhysicsEngine.h"

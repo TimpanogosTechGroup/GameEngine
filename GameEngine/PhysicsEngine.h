@@ -12,7 +12,7 @@
 
 #include <vector>
 #include <btBulletDynamicsCommon.h>
-#include <BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h>
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include "MotionState.h"
 
 #include <glm/glm.hpp>
