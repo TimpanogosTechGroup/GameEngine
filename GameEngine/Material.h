@@ -21,13 +21,14 @@ Most of this class is not used right now, primarily just the texture right now.
 #include "Texture.h"
 #include "Shader.h"
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 class Material {
 public:
 	Material() {
 		this->diffuse = 0;
 		this->specular = 0;
-		this->texture = NULL;
+		this->texture = nullptr;
 		this->color = glm::vec4(1, 1, 1, 1);
 	};
 	Material(float diff, float spec, Texture* tex, Shader* sh) {

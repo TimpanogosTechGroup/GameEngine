@@ -7,6 +7,7 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
+#ifdef FONT_MANAGER_ENABLED
 #include "Font.h"
 #include "Registry.h"
 #include "OpenGlRenderer.h"
@@ -37,3 +38,4 @@ void Font::clean() {
 Font::~Font()
 {
 }
+#endif

@@ -9,8 +9,11 @@
 */
 
 #pragma once
+#ifdef FONT_MANAGER_ENABLED
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include "Font.h"
+#endif
 #include "RenderEngine.h"
 #include <SDL/SDL.h>
 #include "FrameBuffer.h"
@@ -18,7 +21,6 @@
 #include "PhysicsEngine.h"
 #include <string>
 #include "CubeMap.h"
-#include "Font.h"
 #include "Chunk.h"
 
 class OpenGlRenderer :
@@ -38,14 +40,16 @@ public:
 	bool CompileObject(Object& object);
 	bool CompileModel(Model& model);
 	bool CompileCubeMap(CubeMap& cubemap);
+#ifdef FONT_MANAGER_ENABLED
 	void initFontBuffer(Font& font);
+	void RenderText(Camera* camera, Font& font, std::string text, float x, float y, float scale, glm::vec3 color);
+#endif
 	//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 	bool RenderObject(Camera& camera, Object& object, PhysicalInstance& pos);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 	bool RenderModel(Camera& camera, Model& model);
 	void RenderPhysicalInstance(Camera& camera, PhysicalInstance& model);
 	void RenderCubeMap(Camera& camera, CubeMap& cube);
-	void RenderText(Camera* camera, Font& font, std::string text, float x, float y, float scale, glm::vec3 color);
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
 	// This function does not link the programs together, for that call LinkShaderProgram(Shader shader)
 	bool CompileShader(ShaderType type, unsigned int &ID, const char* source) override;

@@ -12,7 +12,9 @@
 
 #include "Properties.h"
 #include "PhysicsEngine.h"
+#ifdef FONT_MANAGER_ENABLED
 #include "FontManager.h"
+#endif
 #include "OpenGlRenderer.h"
 #include "InputManager.h"
 #include "Registry.h"
@@ -32,7 +34,9 @@
 class GameEngine: public MemoryManager
 {
 private:
+#ifdef FONT_MANAGER_ENABLED
 	FontManager fontManager;
+#endif
 	OpenGlRenderer renderer;
 	InputManager inputManager;
 	Camera* camera = nullptr;
@@ -48,10 +52,8 @@ private:
 		if (paramInput == GAME_ENGINE_ALL_SUBSYSTEMS)
 			return true;
 
-		if ((paramInput & testCase) == testCase)
-			return true;
+		return (paramInput & testCase) == testCase;
 
-		return false;
 	}
 
 	void setInitializedSystem(const char system) {

@@ -27,4 +27,4 @@ private:
 	btTransform mInitialPosition;
 };
 
-#endif MOTIONSTATE_H
+#endif

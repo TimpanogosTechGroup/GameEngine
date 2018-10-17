@@ -7,6 +7,7 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
+#ifdef FONT_MANAGER_ENABLED
 #include "FontManager.h"
 #include "Logger.h"
 #include "FontManagerException.h"
@@ -54,3 +55,5 @@ void FontManager::clean() {
 void FontManager::setup() {
 
 }
+
+#endif

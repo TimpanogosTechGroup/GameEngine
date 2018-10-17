@@ -21,8 +21,6 @@
 #include "Profiler.h"
 #include "CubeMap.h"
 
-#define LOG(message) /
-	Logger::Log<World>(DEBUG, message);
 
 class World {
 public:
@@ -30,12 +28,12 @@ public:
 
 	void addEntityToWorld(Entity* e) {
 		if (DynamicEntity* entityptr = dynamic_cast<DynamicEntity*>(e)) {
-			LOG("Dynamic Entity Added to world");
+            Logger::Log<World>(Logger::LoggerLevel::DEBUG, "Dynamic Entity Added to world");
 			mPhysicsEngine->addModelInstance(&e->getPhysicalInstance(), 1.0);
 			mManager.push_back_instance(&e->getPhysicalInstance());
 		}
 		else if (StaticEntity* entityptr = dynamic_cast<StaticEntity*>(e)) {
-			LOG("StaticBody entity added to the world.");
+            Logger::Log<World>(Logger::LoggerLevel::DEBUG, "StaticBody entity added to the world.");
 		}
 
 		if (Renderable* entityptr = dynamic_cast<Renderable*>(e)) {
@@ -59,15 +57,15 @@ public:
 	}
 
 	void update() {
-		PROFILE_PUSH("physics update");
+//		PROFILE_PUSH("physics update");
 		mPhysicsEngine->Update(2, mManager);
-		PROFILE_POP;
+//		PROFILE_POP;
 
-		PROFILE_PUSH("entity update");
+//		PROFILE_PUSH("entity update");
 		for (auto &entity : mWorldEntities) {
 			entity->update();
 		}
-		PROFILE_POP;
+//		PROFILE_POP;
 	}
 
 	void render() {
@@ -93,7 +91,7 @@ public:
 			return;
 		}
 
-		Logger::Log<World>(LoggerLevel::SEVERE, "The added cube map was a nullptr");
+		Logger::Log<World>(Logger::LoggerLevel::SEVERE, "The added cube map was a nullptr");
 	}
 
 private:

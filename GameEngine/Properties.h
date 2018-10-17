@@ -20,13 +20,13 @@ public:
 	static bool Init();
 	static bool Set(std::string key, std::string value);
 	template <typename T>
-	static T Get(std::string key);
+	static T Get(const std::string &key);
 private:
 	static std::unordered_map<std::string, std::string> properties;
 };
 
 template <typename T>
-inline T Properties::Get(std::string key) {
+inline T Properties::Get(const std::string &key) {
 	std::unordered_map<std::string, std::string>::const_iterator var = properties.find(key);
 	if (var != properties.end()) {
 		std::string val = var->second;
@@ -36,7 +36,7 @@ inline T Properties::Get(std::string key) {
 		return rtnVal;
 	}
 
-	return NULL;
+	return T();
 }
 
 #endif

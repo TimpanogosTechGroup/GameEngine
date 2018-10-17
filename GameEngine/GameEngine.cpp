@@ -14,9 +14,6 @@
 #undef CreateWindow
 #endif
 
-#define LOG(message) /
-	Logger::Log<GameEngine>(DEBUG, message);
-
 GameEngine::GameEngine() {
 
 }
@@ -38,9 +35,10 @@ void GameEngine::initialize(const char subystems) {
 		renderer.SetStatus(RenderEngine::RUNNING);
 		renderer.SetBackgroundColor(glm::vec3(0.3, 0.3, 0.3));
 		renderer.loadDefaults();
-		Logger::Log<GameEngine>(DEBUG, "Initialized the rendering engine");
+		Logger::Log<GameEngine>(Logger::LoggerLevel::DEBUG, "Initialized the rendering engine");
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_RENDERER);
 	}
+#ifdef FONT_MANAGER_ENABLED
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FONT)) {
 		try {
 			fontManager.loadFont(ARIAL);
@@ -51,6 +49,7 @@ void GameEngine::initialize(const char subystems) {
 			Logger::Log<FontManager>(LoggerLevel::SEVERE, e.what());
 		}
 	}
+#endif
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_CAMERA)) {
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_CAMERA);
 	}
@@ -135,11 +134,11 @@ void GameEngine::run() {
 	double FPS_o = 0;
 	double timePerFrame = 0.0;
 	std::ostringstream os;
-	LOG("Starting the main loop");
-	LOG("Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.", DEBUG);
+	Logger::Log<GameEngine>(Logger::LoggerLevel::DEBUG, "Starting the main loop");
+	Logger::Log<GameEngine>(Logger::LoggerLevel::DEBUG, "Tesing the log macro, we need to add it to every file that uses the logging class to simplify the code.");
 
 	while (renderer.GetStatus() == RenderEngine::RUNNING) {
-		PROFILE_PUSH("framestart");
+//		PROFILE_PUSH("framestart");
 		// FPS counter and profiler
 		double currentTime = static_cast<double> (time(0));
 		nbFrames++;
@@ -153,7 +152,7 @@ void GameEngine::run() {
 		float delta = .002f;
 		proccessInput(delta); // proccess input
 
-		PROFILE_PUSH("render update");
+//		PROFILE_PUSH("render update");
 		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_RENDERER)) {
 			renderer.BindDefaultFrameBuffer();
 			renderer.Clear();
@@ -164,9 +163,9 @@ void GameEngine::run() {
 			currentWorld->render();
 		}
 
-		PROFILE_POP;
+//		PROFILE_POP;
 		
-		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
+//		PROFILE_PUSH("render text"); // Text rendering so far is the most expensive operation
 		// Render the FPS and time per frame variables
 		os << "FPS: " << FPS_o;
 		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 10, 690, 0.5f, glm::vec3(1, 1, 1));
@@ -176,20 +175,20 @@ void GameEngine::run() {
 		//renderer.RenderText(camera, fontManager.getFont(ARIAL), os.str(), 120, 690, 0.5f, glm::vec3(1, 1, 1));
 		os.str("");
 		os.clear();
-		PROFILE_POP;
+//		PROFILE_POP;
 		// Show the changes after rendering
-		PROFILE_PUSH("buffer swap");
+//		PROFILE_PUSH("buffer swap");
 		if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_RENDERER))
 		renderer.UpdateScreen(); // Shouuld take less than 2 milliseconds
-		PROFILE_POP;
+//		PROFILE_POP;
 
-		PROFILE_POP;
+//		PROFILE_POP;
 	}
 }
 
 void GameEngine::shudown() {
-	LOG("Shuting down Game Engine");
-	LOG("Cleaning up ResourceManager");
+	Logger::Log<GameEngine>(Logger::LoggerLevel::DEBUG, "Shuting down Game Engine");
+	Logger::Log<GameEngine>(Logger::LoggerLevel::DEBUG, "Cleaning up ResourceManager");
 	ResourceManager::clean();
 	if (isSubSystemInitialized(GAME_ENGINE_SUBSYSTEM_WORLD)) {
 	}
@@ -198,7 +197,10 @@ void GameEngine::shudown() {
 
 void GameEngine::clean() {
 	FileSystemManager::getInstance().clean();
+
+#ifdef FONT_MANAGER_ENABLED
 	fontManager.clean();
+#endif
 }
 
 void GameEngine::setup() {

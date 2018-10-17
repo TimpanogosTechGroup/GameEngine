@@ -22,9 +22,9 @@ This file is not complete, simple storage class right now
 class Verticies {
 public:
 	void SetValues(float vert[]) {
-		for (unsigned int i = 0; i < sizeof(vert) / sizeof(vert[0]); i++) {
-			values.push_back(vert[i]);
-		}
+//		for (unsigned int i = 0; i < sizeof(vert) / sizeof(vert[0]); i++) {
+//			values.push_back(vert[i]);
+//		}
 	};
 	void SetValues(float vert[], unsigned int size) {
 		for (unsigned int i = 0; i < size; i++) {
@@ -42,7 +42,7 @@ public:
 	Verticies* AddFloat(float a);
 	void addDouble(double a);
 
-	int Size() { return values.size(); };
+	int Size() { return static_cast<int>(values.size()); };
 
 	// Debug function
 	void ToString();

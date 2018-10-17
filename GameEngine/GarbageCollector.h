@@ -22,10 +22,10 @@ public:
 	}
 
 	void collectGarbage() {
-		for (auto v : memoryBlock) {
-			delete v;
-		}
-		memoryBlock.clear();
+//		for (auto v : memoryBlock) {
+//			delete v;
+//		}
+//		memoryBlock.clear();
 	}
 };
 

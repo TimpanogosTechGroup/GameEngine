@@ -18,10 +18,7 @@
 #include <time.h>
 #include <ostream>
 #include <istream>
-
-enum LoggerLevel {
-	INFO, ERROR, SEVERE, EXPCEPTION, LOG, DEBUG, RELEASE
-};
+#include <sstream>
 
 enum STREAM {
 	ENDL, ENDLOG
@@ -31,6 +28,9 @@ class Logger
 {
 public:
 	Logger() {};
+    enum LoggerLevel {
+        INFO, ERROR, SEVERE, EXPCEPTION, LOG, DEBUG, RELEASE
+    };
 	template <class T>
 	static void Log(LoggerLevel level, const char* printLine);
 	template <class T>
@@ -96,7 +96,7 @@ inline void Logger::Log(LoggerLevel level, const char* printLine)
 }
 
 template <class T>
-inline void Logger::LogClassStream(LoggerLevel level = LoggerLevel::DEBUG)
+inline void Logger::LogClassStream(LoggerLevel level)
 {
 	// Log and print out
 	Log<T>(level, GetLogStream<T>().str().c_str());
@@ -108,7 +108,7 @@ template <class T>
 std::ostringstream& Logger::GetLogStream() {
 	auto stream = logStreams.find(typeid(T).name());
 	if (stream == logStreams.end()) {
-		std::ostringstream* sstream = new std::ostringstream;
+		std::ostringstream* sstream = new std::ostringstream();
 		logStreams[typeid(T).name()] = sstream;
 		return *sstream;
 	}

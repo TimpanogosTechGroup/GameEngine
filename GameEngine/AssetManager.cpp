@@ -26,15 +26,6 @@ NOT COMPLETE
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm/stb_image.h>
 
-#define LOG(message, level) /
-	Logger::Log<AssetManager>(level, message);
-
-#define LOG(message) /
-	Logger::Log<AssetManager>(DEBUG, message);
-
-#define LOGS /
-	Logger::GetLogStream<AssetManager>()
-
 // ID is the id of the program the shader will be linked to - initial value will be changed
 Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPath) {
 	// 1. retrieve the vertex/fragment source code from filePath
@@ -66,8 +57,8 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	}
 	catch (std::ifstream::failure e)
 	{
-		LOGS << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
-		Logger::LogClassStream<AssetManager>(LoggerLevel::ERROR);
+		Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
 		
 	}
 	const char* vShaderCode = vertexCode.c_str();
@@ -79,8 +70,8 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 	Registry::GetRenderEngine()->CompileShader(SHADER_VERTEX, shader->vertex.GetID(), vShaderCode);
 	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
 	Registry::GetRenderEngine()->LinkShaderProgram(*shader);
-	
-	LOG(std::string("Successfully loaded shader: " + std::string(vertexPath)).c_str(), DEBUG);
+
+    Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, std::string("Successfully loaded shader: " + std::string(vertexPath)).c_str());
 
 	return shader;
 }
@@ -94,7 +85,7 @@ Texture * AssetManager::LoadTexture(const char * name, const char * file)
 {
 
 	if (ResourceManager::hasTexture(file) || ResourceManager::hasTexture(name)) {
-		LOG("Already Loaded", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, "Already Loaded");
 		return ResourceManager::getTexture(name);
 	}
 
@@ -126,9 +117,9 @@ Texture * AssetManager::LoadTexture(const char * name, const char * file)
 	}
 	else
 	{
-		LOGS << "Failed to load texture: " << file;
-		Logger::LogClassStream<AssetManager>(DEBUG);
-		LOG(stbi_failure_reason(), DEBUG);
+        Logger::GetLogStream<AssetManager>() << "Failed to load texture: " << file;
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, stbi_failure_reason());
 		delete texture;
 	}
 	stbi_image_free(data);
@@ -139,7 +130,7 @@ Texture * AssetManager::LoadTexture(const char * name, const char * file)
 Model* AssetManager::LoadModel(const char* pFile) {
 	// not finished
 	if (ResourceManager::hasModel(pFile)) {
-		LOG("Model already loaded.....might need to double check your code", DEBUG);
+		Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, "Model already loaded.....might need to double check your code");
 	}
 
 	Model* model = new Model();
@@ -153,10 +144,10 @@ Model* AssetManager::LoadModel(const char* pFile) {
 		fin.close();
 	}
 	else {
-		LOGS << "Couldn't open this file : " << pFile;
-		Logger::LogClassStream<AssetManager>(LoggerLevel::SEVERE);
-		LOGS << importer.GetErrorString();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::SEVERE);
+        Logger::GetLogStream<AssetManager>() << "Couldn't open this file : " << pFile;
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::SEVERE);
+        Logger::GetLogStream<AssetManager>() << importer.GetErrorString();
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::SEVERE);
 	}
 
 	// And have it read the given file with some example postprocessing
@@ -174,8 +165,8 @@ Model* AssetManager::LoadModel(const char* pFile) {
 		return nullptr;
 	}
 	else {
-		LOGS << pFile << ": Loaded";
-		Logger::LogClassStream<AssetManager>(LoggerLevel::INFO);
+        Logger::GetLogStream<AssetManager>() << pFile << ": Loaded";
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::INFO);
 	}
 
 	std::vector<float> vertices;
@@ -260,7 +251,7 @@ CubeMap * AssetManager::LoadCubeMap(const char * pFile)
 
 	// Load the textures
 	if (ResourceManager::hasTexture(pFile)) {
-		LOG("Already Loaded", DEBUG);
+		Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"Already Loaded");
 		//return ResourceManager::getTexture(pFile);
 	}
 
@@ -284,7 +275,7 @@ CubeMap * AssetManager::LoadCubeMap(const char * pFile)
 		else
 		{
 			Logger::GetLogStream<AssetManager>() << "Failed to load texture: " << pFile;
-			Logger::LogClassStream<AssetManager>(LoggerLevel::ERROR);
+			Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
 		}
 		stbi_image_free(data);
 	}
@@ -322,8 +313,8 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	bool containsText = true;
 
 	if (AI_SUCCESS != mat->Get(AI_MATKEY_NAME, name)) {
-		LOGS << "Didn't load model properly... :(";
-		Logger::LogClassStream<AssetManager>(LoggerLevel::ERROR);
+        Logger::GetLogStream<AssetManager>() << "Didn't load model properly... :(";
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
 	}
 	else {
 		aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &diffuse);
@@ -331,56 +322,56 @@ Material* AssetManager::LoadMaterial(const aiScene* scene, const aiMesh* mesh) {
 	// Load Diffuse texture map ALBEDO
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_DIFFUSE, 0), texturePath) == AI_SUCCESS) {
 		Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << texturePath.C_Str();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
 		containsText = false;
 		texture = LoadTexture(texturePath.C_Str());
 	}
 	else {
-		LOG("No Diffuse Texture", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"No Diffuse Texture");
 		texture = ResourceManager::getTexture("default");
 	}
 
 	// Load ambient texture map AMBIENT
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_AMBIENT, 0), textureAmbient) == AI_SUCCESS) {
-		LOGS << "Loaded LOAD_MATERIAL: " << textureAmbient.C_Str();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+        Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureAmbient.C_Str();
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
 		textureAO = LoadTexture(textureAmbient.C_Str());
 	}
 	else {
-		LOG("No Ambient Texture.", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"No Ambient Texture.");
 		textureAO = ResourceManager::getTexture("default");
 	}
 
 	// Load specular/rougness texture map
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SPECULAR, 0), textureSpec) == AI_SUCCESS) {
-		LOGS << "Loaded LOAD_MATERIAL: " << textureSpec.C_Str();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+        Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureSpec.C_Str();
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
 		textureSpecular = LoadTexture(textureSpec.C_Str());
 	}
 	else {
-		LOG("No Specular Texture.", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"No Specular Texture.");
 		textureSpecular = ResourceManager::getTexture("default");
 	}
 
 	// Load normals texture map
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_NORMALS, 0), textureNormalPath) == AI_SUCCESS) {
-		LOGS << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+        Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
 		textureNormal = LoadTexture(textureNormalPath.C_Str());
 	}
 	else {
-		LOG("No Nomrmal Texture.", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"No Nomrmal Texture.");
 		textureNormal = ResourceManager::getTexture("default");
 	}
 
 	// Load metallic texture map
 	if (mat->Get(AI_MATKEY_TEXTURE(aiTextureType_SHININESS, 0), textureNormalPath) == AI_SUCCESS) {
-		LOGS << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
-		Logger::LogClassStream<AssetManager>(LoggerLevel::DEBUG);
+        Logger::GetLogStream<AssetManager>() << "Loaded LOAD_MATERIAL: " << textureNormalPath.C_Str();
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::DEBUG);
 		textureNormal = LoadTexture(textureNormalPath.C_Str());
 	}
 	else {
-		LOG("No Shinniness Texture.", DEBUG);
+        Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG,"No Shinniness Texture.");
 		textureNormal = ResourceManager::getTexture("default");
 	}
 

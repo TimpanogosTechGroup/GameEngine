@@ -7,6 +7,7 @@ Purpose: This is the cpp file to the Profiler class. This class is used to profi
 
 Copyright (c) 2018 All Rights Reserved
 */
+#ifdef PROFILER_ENABLED
 
 #include "Profiler.h"
 #include <iomanip>
@@ -161,3 +162,5 @@ void Profiler::dump() {
 
 	out.close();
 }
+
+#endif

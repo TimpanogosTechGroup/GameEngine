@@ -46,7 +46,7 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 	window_height = height;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		Logger::Log<OpenGlRenderer>(SEVERE, "SDL could not initialize... :(");
+		Logger::Log<OpenGlRenderer>(Logger::LoggerLevel::SEVERE, "SDL could not initialize... :(");
 	}
 	else {
 
@@ -62,7 +62,7 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 		// Creates a window
 		window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 		if (window == NULL) {
-			Logger::Log<OpenGlRenderer>(SEVERE, "Couldn't create window :(");
+			Logger::Log<OpenGlRenderer>(Logger::LoggerLevel::SEVERE, "Couldn't create window :(");
 		}
 		context = SDL_GL_CreateContext(window);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -168,7 +168,7 @@ bool OpenGlRenderer::CompileObject(Object& object) {
 		}
 	}
 	else {
-		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
+		Logger::Log<OpenGlRenderer>(Logger::LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
 	}
 
 	glGenVertexArrays(1, &object.GetID());
@@ -224,6 +224,7 @@ bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
 	return true;
 }
 
+#ifdef FONT_MANAGER_ENABLED
 void OpenGlRenderer::initFontBuffer(Font& font) {
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
@@ -278,6 +279,7 @@ void OpenGlRenderer::initFontBuffer(Font& font) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
+#endif
 
 //bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
 bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstance& pos) {
@@ -394,7 +396,7 @@ void OpenGlRenderer::compileChunk(Chunk * chunk)
 		}
 	}
 	else {
-		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
+		Logger::Log<OpenGlRenderer>(Logger::LoggerLevel::ERROR, "Not enough normals -> CompileObject()");
 	}
 
 	glGenVertexArrays(1, &chunk->getMesh().GetID());
@@ -490,6 +492,7 @@ void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
 	glDepthMask(GL_TRUE);
 }
 
+#ifdef FONT_MANAGER_ENABLED
 void OpenGlRenderer::RenderText(Camera* camera, Font & font, std::string text, float x, float y, float scale, glm::vec3 color)
 {
 	// Activate corresponding render state	
@@ -541,6 +544,7 @@ void OpenGlRenderer::RenderText(Camera* camera, Font & font, std::string text, f
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 }
+#endif
 
 void OpenGlRenderer::Clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -599,7 +603,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		{
 			glGetShaderInfoLog(shaderID, 1024, NULL, infoLog);
 			Logger::GetLogStream<OpenGlRenderer>() << "SHADER_COMPILATION_ERROR of type: " << type << "/n" << infoLog << "/n -- --------------------------------------------------- -- ";
-			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
+			Logger::LogClassStream<OpenGlRenderer>(Logger::LoggerLevel::ERROR);
 		}
 	}
 	else
@@ -609,7 +613,7 @@ bool OpenGlRenderer::CheckCompileErrors(GLuint shaderID, std::string type)
 		{
 			glGetProgramInfoLog(shaderID, 1024, NULL, infoLog);
 			Logger::GetLogStream<OpenGlRenderer>() << "PROGRAM_LINKING_ERROR of type: " << type << "/n" << infoLog << "/n -- --------------------------------------------------- -- ";
-			Logger::LogClassStream<OpenGlRenderer>(LoggerLevel::ERROR);
+			Logger::LogClassStream<OpenGlRenderer>(Logger::LoggerLevel::ERROR);
 		}
 	}
 	return true;
@@ -640,7 +644,7 @@ FrameBuffer* OpenGlRenderer::CreateFramebuffer(unsigned int width, unsigned int 
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, framebuffer->GetRbo()->GetID()); // now actually attach it
 																										  // now that we actually created the framebuffer and added all attachments we want to check if it is actually complete now
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		Logger::Log<OpenGlRenderer>(LoggerLevel::ERROR, "ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
+		Logger::Log<OpenGlRenderer>(Logger::LoggerLevel::ERROR, "ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

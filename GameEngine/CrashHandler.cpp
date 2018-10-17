@@ -32,7 +32,7 @@ void CrashHandler::displayErrorMsg()
 	os >> result;
 	const char* c = result.c_str();
 
-	Logger::Log<CrashHandler>(ERROR, c);
+	Logger::Log<CrashHandler>(Logger::LoggerLevel::ERROR, c);
 
 	//return result;
 }
