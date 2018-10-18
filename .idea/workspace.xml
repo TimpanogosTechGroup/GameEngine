@@ -11,11 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added OpenGL and GLEW libraries to the cmake for linux compiling.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added bullet3 libs and sources under /lib/bullet3/ I havent changed the include files to bullet3 yet.&#10;&#10;Added #define BT_USE_DOUBLE_PRECISION 1 before including bullet. Won't compile with g++ otherwise.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,15 +61,15 @@
         <counts>
           <entry key="cpp" value="564" />
           <entry key="h" value="525" />
-          <entry key="txt" value="1334" />
+          <entry key="txt" value="1571" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CMakeLists.txt" value="1001" />
+          <entry key="CMakeLists.txt" value="1032" />
           <entry key="Doxygen file" value="4" />
           <entry key="ObjectiveC" value="1085" />
-          <entry key="PLAIN_TEXT" value="333" />
+          <entry key="PLAIN_TEXT" value="539" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.cidr.testingFrameworks.usages" />
@@ -92,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="90">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -122,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="97" selection-start-line="12" selection-start-column="97" selection-end-line="12" selection-end-column="97" />
+            <state relative-caret-position="1275">
+              <caret line="85" column="24" lean-forward="true" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
               <folding>
                 <element signature="e#149#166#0" expanded="true" />
               </folding>
@@ -237,8 +235,8 @@
         <option value="$PROJECT_DIR$/GameEngine/main.cpp" />
         <option value="$PROJECT_DIR$/GameEngine/CrashHandler.cpp" />
         <option value="$PROJECT_DIR$/GameEngine/CrashHandler.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -340,7 +338,7 @@
       <workItem from="1538793520275" duration="53000" />
       <workItem from="1538794156762" duration="22000" />
       <workItem from="1539807514492" duration="1847000" />
-      <workItem from="1539814245409" duration="11725000" />
+      <workItem from="1539814245409" duration="11901000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file path locations to UNIX standard. Need to replace glm, not compiling.">
       <created>1539798117892</created>
@@ -363,11 +361,18 @@
       <option name="project" value="LOCAL" />
       <updated>1539825509122</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added bullet3 libs and sources under /lib/bullet3/ I havent changed the include files to bullet3 yet.&#10;&#10;Added #define BT_USE_DOUBLE_PRECISION 1 before including bullet. Won't compile with g++ otherwise.">
+      <created>1539828718640</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1539828718640</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20151000" />
+    <option name="totallyTimeSpent" value="20327000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -415,7 +420,8 @@
     <MESSAGE value="Fixed file path locations to UNIX standard. Need to replace glm, not compiling." />
     <MESSAGE value="Made a lot of fixes to the code, specifically fixing Logger issues and adding a pre-proccesor variable whether or not to include Fonts." />
     <MESSAGE value="Added OpenGL and GLEW libraries to the cmake for linux compiling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added OpenGL and GLEW libraries to the cmake for linux compiling." />
+    <MESSAGE value="Added bullet3 libs and sources under /lib/bullet3/ I havent changed the include files to bullet3 yet.&#10;&#10;Added #define BT_USE_DOUBLE_PRECISION 1 before including bullet. Won't compile with g++ otherwise." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added bullet3 libs and sources under /lib/bullet3/ I havent changed the include files to bullet3 yet.&#10;&#10;Added #define BT_USE_DOUBLE_PRECISION 1 before including bullet. Won't compile with g++ otherwise." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.cpp">
@@ -805,20 +811,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="97" selection-start-line="12" selection-start-column="97" selection-end-line="12" selection-end-column="97" />
+        <state relative-caret-position="1275">
+          <caret line="85" column="24" lean-forward="true" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
           <folding>
             <element signature="e#149#166#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
         </state>
       </provider>
     </entry>
