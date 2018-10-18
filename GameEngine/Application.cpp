@@ -20,7 +20,11 @@ Application::~Application()
 {
 }
 
-void Application::launch() {
+void Application::launch(int argc, char** argv) {
+
+
+	Logger::Log<Application>(Logger::LoggerLevel::DEBUG, std::string("Setting the main directory path to " + std::string(argv[0])).c_str());
+	FileSystemManager::setMainDirPath(argv[0]);
 
 	/*
 	This function is designed to start up and initialize evrything

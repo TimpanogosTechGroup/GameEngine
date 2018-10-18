@@ -47,7 +47,7 @@ public:
 	*/
 	virtual void shutdown() {}
 
-	void launch();
+	void launch(int argc, char** argv);
 };
 
 #endif

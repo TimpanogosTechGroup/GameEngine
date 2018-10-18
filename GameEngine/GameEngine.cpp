@@ -54,7 +54,6 @@ void GameEngine::initialize(const char subystems) {
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_CAMERA);
 	}
 	if (shouldInitialize(subystems, GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM)) {
-		FileSystemManager::getInstance().initialize();
 		setInitializedSystem(GAME_ENGINE_SUBSYSTEM_FILE_SYSTEM);
 	}	
 }
@@ -196,8 +195,6 @@ void GameEngine::shudown() {
 }
 
 void GameEngine::clean() {
-	FileSystemManager::getInstance().clean();
-
 #ifdef FONT_MANAGER_ENABLED
 	fontManager.clean();
 #endif

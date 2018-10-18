@@ -15,49 +15,36 @@
 
 class FileSystemManager {
 private:
-	std::string pathToHome;
-	std::string modelPathLocation = "Model//";
-	std::string materialPathLocation;
+	static std::string pathToHome;
+	static std::string modelPathLocation;
+	static std::string materialPathLocation;
+	static std::string mainDirPath;
 
-	const std::string folderName = "Andromeda";
+//	static const std::string folderName = "Andromeda";
 public:
-	std::string getModelPathString(std::string modelName, std::string folderName = "Andromeda") {
-		std::string path = modelPathLocation;
+	static std::string getModelPathString(std::string modelName, std::string folderName = "Andromeda") {
+		std::string path = mainDirPath + "/Model/";
 		path.append(folderName);
-		path.append("//");
+		path.append("/");
 		path.append(modelName);
 		path.append(".obj");
 		return path;
 	}
 
-	std::string getFolderName() const {
-		return folderName;
+	static void setMainDirPath(std::string pathname) {
+		mainDirPath = pathname;
 	}
 
-	/*
-	* Starts up the File System Manager, used to find all the model and other folders
-	*/
-	void initialize() {
+//	static std::string getFolderName() const {
+//		return folderName;
+//	}
 
+    static std::string getModelPathString() {
+	    return mainDirPath + "/Model/";
 	}
 
-	/*
-	* Returns the file system instance running.
-	*/
-	static FileSystemManager& getInstance() {
-		static FileSystemManager* fileSystem = nullptr;
-		if (!fileSystem) {
-			fileSystem = new FileSystemManager();
-		}
-		return *fileSystem;
-	}
-
-	void clean() {
-		delete this;
-	}
-
-	void setup() {
-
+	static std::string getMainDirPath() {
+		return mainDirPath;
 	}
 };
 

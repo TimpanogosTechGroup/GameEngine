@@ -38,7 +38,7 @@ protected:
 	}
 
 	std::string getModelLocation(std::string modelName, std::string folderName = "Andromeda") {
-		return FileSystemManager::getInstance().getModelPathString(modelName, folderName);
+		return FileSystemManager::getModelPathString(modelName, folderName);
 	}
 
 public:

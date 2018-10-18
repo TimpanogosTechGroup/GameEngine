@@ -22,6 +22,7 @@ NOT COMPLETE
 #include "Logger.h"
 #include "OpenGlRenderer.h"
 #include "FileSystemManager.h"
+#include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <glm/stb_image.h>
@@ -36,36 +37,73 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 	std::ofstream output;
 
-	// ensure ifstream objects can throw exceptions:
-	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try
-	{
-		// open files
-		vShaderFile.open(vertexPath);
-		fShaderFile.open(fragmentPath);
-		std::stringstream vShaderStream, fShaderStream;
-		// read file's buffer contents into streams
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
-		vShaderFile.close();
-		fShaderFile.close();
-		// convert stream into string
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-	}
-	catch (std::ifstream::failure e)
-	{
-		Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
-		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
-		
-	}
+	Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, vertexPath);
+
+//	try
+//	{
+        std::string path(vertexPath);
+        // Create a file stream to pull in the file data
+        std::ifstream vextexFile(path);
+
+        if (!vextexFile)
+            Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, "File couldn't be opened");
+
+        //std::cout << "Opening File: " << argv[FILE_INPUT] << std::endl;
+
+        std::string str;
+        // Copy over the whole file into the string we just created
+        vextexFile.seekg(0, std::ios::end);
+        str.reserve(static_cast<unsigned long>((int)vextexFile.tellg()));
+        vextexFile.seekg(0, std::ios::beg);
+
+        //std::cout << "Copying file over..." << std::endl;
+        str.assign((std::istreambuf_iterator<char>(vextexFile)), std::istreambuf_iterator<char>());
+
+        // Create a file stream to pull in the file data
+        std::ifstream shaderFile(fragmentPath);
+
+        //std::cout << "Opening File: " << argv[FILE_INPUT] << std::endl;
+
+        std::string shaderStr;
+        // Copy over the whole file into the string we just created
+        shaderFile.seekg(0, std::ios::end);
+        shaderStr.reserve(static_cast<unsigned long>((int)shaderFile.tellg()));
+        shaderFile.seekg(0, std::ios::beg);
+
+        //std::cout << "Copying file over..." << std::endl;
+        str.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
+
+
+//		// open files
+//		vShaderFile.open(vertexPath);
+//		fShaderFile.open(fragmentPath);
+//		std::stringstream vShaderStream, fShaderStream;
+//		// read file's buffer contents into streams
+//		vShaderStream << vShaderFile.rdbuf();
+//		fShaderStream << fShaderFile.rdbuf();
+//		// close file handlers
+//		vShaderFile.close();
+//		fShaderFile.close();
+//		// convert stream into string
+//		vertexCode = vShaderStream.str();
+//		fragmentCode = fShaderStream.str();
+
+        vertexCode = str;
+        fragmentCode = shaderStr;
+
+//	}
+//	catch (std::length_error& e)
+//	{
+//		Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
+//		Logger::GetLogStream<AssetManager>() << e.what() << std::endl;
+//		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
+//
+//	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
 
 	// 2. compile shaders
-	Shader* shader = new Shader();
+    auto shader = new Shader();
 
 	Registry::GetRenderEngine()->CompileShader(SHADER_VERTEX, shader->vertex.GetID(), vShaderCode);
 	Registry::GetRenderEngine()->CompileShader(SHADER_FRAGMENT, shader->fragment.GetID(), fShaderCode);
@@ -239,7 +277,8 @@ Model* AssetManager::LoadModel(const char* pFile) {
 
 void AssetManager::LoadModelFull(const char * pFile, const char* folderName)
 {
-	Model* model = LoadModel(FileSystemManager::getInstance().getModelPathString(pFile, folderName).c_str());
+//	Model* model = LoadModel(FileSystemManager::getInstance().getModelPathString(pFile, folderName).c_str());
+	Model* model = LoadModel(FileSystemManager::getModelPathString(pFile, folderName).c_str());
 
 	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->CompileModel(*model);
 	Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->CompileBoundingBox(model->boundingBox);
