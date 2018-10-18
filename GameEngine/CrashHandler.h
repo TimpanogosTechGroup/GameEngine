@@ -7,17 +7,17 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
+#ifdef CRASH_HANDLER_ENABLED
 #ifndef CRASH_HANDLER_H
 #define CRASH_HANDLER_H
+#pragma once
 
 #include <string>
 #include <sstream>
 #include <iostream>
-#include "Logger.h"
+//#include "Logger.h"
 
 #include "ExceptionTemplate.h"
-
-using std::stringstream;
 
 /*
  * Author: Jon Meilstrup
@@ -42,7 +42,8 @@ public:
 	CrashHandler(ExceptionTemplate*& e) : e(e){}
 	~CrashHandler() {}
 	void displayErrorMsg();
-	void setError(ExceptionTemplate*& e);
+	void setError(ExceptionTemplate* e);
 };
 
+#endif
 #endif

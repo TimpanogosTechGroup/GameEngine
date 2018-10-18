@@ -7,8 +7,8 @@
 
 	Copyright (c) 2018 All Rights Reserved
 */
+#ifdef CRASH_HANDLER_ENABLED
 #include "CrashHandler.h"
-
 /*
  * Author: Jon Meilstrup
  *
@@ -25,20 +25,21 @@ void CrashHandler::displayErrorMsg()
 	 *
 	 *		This is an example error. You will never actually get an A101.
 	 */
-	stringstream os;
+	std::stringstream os;
 	os << e->errorCode; // Because of the way the insertion operator is overridden, you can't insert anything into the stream after it, unless you're on a new line
 	os << " -:- " << e->errorMessage << std::endl << std::endl << e->errorCode.example << std::endl;
 	std::string result;
 	os >> result;
 	const char* c = result.c_str();
 
-	Logger::Log<CrashHandler>(Logger::LoggerLevel::ERROR, c);
+//	Logger::Log<CrashHandler>(Logger::LoggerLevel::ERROR, c);
 
 	//return result;
 }
 
-void CrashHandler::setError(ExceptionTemplate*& e)
+void CrashHandler::setError(ExceptionTemplate* e)
 {
 	// This is really simple. Just sets the CrashHandler's current exception to the one thrown.
 	this->e = e;
 }
+#endif
