@@ -10,6 +10,7 @@
 #ifndef PHYSICSENGINE_H
 #define PHYSICSENGINE_H
 
+#define BT_USE_DOUBLE_PRECISION 1 //Won't compile unless this is added before the bullet includes
 #include <vector>
 #include <btBulletDynamicsCommon.h>
 #include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
