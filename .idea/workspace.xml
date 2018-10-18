@@ -11,17 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added bullet3 folder.">
-      <change afterPath="$PROJECT_DIR$/GameEngine/FileSystemManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added Assimp and finished compilation issues.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Application.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/AssetManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/AssetManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/Entity.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/FileSystemManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/FileSystemManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/GameEngine.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -36,28 +28,30 @@
     <session id="-177585940">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
-          <entry key="project.open.time.0" value="6" />
+          <entry key="project.closed" value="15" />
+          <entry key="project.open.time.0" value="7" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="3" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="GameEngine (disassembly)" value="12" />
+          <entry key="GameEngine (disassembly)" value="14" />
           <entry key="Makefile" value="1" />
           <entry key="cbp" value="1" />
           <entry key="cmake" value="7" />
-          <entry key="cpp" value="30" />
+          <entry key="cpp" value="31" />
           <entry key="glsl" value="4" />
           <entry key="h" value="70" />
           <entry key="hpp" value="3" />
           <entry key="inl" value="4" />
+          <entry key="istream" value="1" />
           <entry key="md" value="1" />
           <entry key="ostream" value="1" />
+          <entry key="tcc" value="1" />
           <entry key="txt" value="8" />
         </counts>
       </usages-collector>
@@ -65,18 +59,18 @@
         <counts>
           <entry key="CMakeCache.txt" value="1" />
           <entry key="CMakeLists.txt" value="13" />
-          <entry key="Disassembly" value="12" />
+          <entry key="Disassembly" value="14" />
           <entry key="GLSL shader file" value="3" />
-          <entry key="ObjectiveC" value="108" />
+          <entry key="ObjectiveC" value="111" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="1266" />
+          <entry key="cpp" value="1533" />
           <entry key="glsl" value="2" />
           <entry key="h" value="826" />
-          <entry key="txt" value="1789" />
+          <entry key="txt" value="1837" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -84,8 +78,8 @@
           <entry key="CMakeLists.txt" value="1167" />
           <entry key="Doxygen file" value="4" />
           <entry key="GLSL shader file" value="1" />
-          <entry key="ObjectiveC" value="2088" />
-          <entry key="PLAIN_TEXT" value="623" />
+          <entry key="ObjectiveC" value="2355" />
+          <entry key="PLAIN_TEXT" value="671" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.cidr.testingFrameworks.usages" />
@@ -94,11 +88,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/AssetManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+            <state relative-caret-position="289">
+              <caret line="41" column="7" lean-forward="true" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
               <folding>
                 <element signature="e#198#215#0" expanded="true" />
               </folding>
@@ -107,9 +101,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="2009">
               <caret line="160" selection-start-line="160" selection-end-line="160" />
             </state>
           </provider>
@@ -118,8 +121,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="290">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
+              <folding>
+                <element signature="e#102#229#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,7 +133,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/Application.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
+            <state relative-caret-position="795">
               <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
@@ -137,16 +143,16 @@
         <entry file="file://$PROJECT_DIR$/GameEngine/FileSystemManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+              <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="105" column="67" lean-forward="true" selection-start-line="105" selection-start-column="67" selection-end-line="105" selection-end-column="67" />
+            <state relative-caret-position="434">
+              <caret line="108" column="49" selection-start-line="108" selection-start-column="49" selection-end-line="108" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -154,8 +160,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameEngine/World.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="225">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -164,7 +170,7 @@
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/sun_frag.glsl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="30" column="57" lean-forward="true" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+              <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -214,7 +220,6 @@
         <option value="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/GameEngine/Application.h" />
-        <option value="$PROJECT_DIR$/GameEngine/StartApp.cpp" />
         <option value="$PROJECT_DIR$/GameEngine/Entity.h" />
         <option value="$PROJECT_DIR$/GameEngine/Application.cpp" />
         <option value="$PROJECT_DIR$/GameEngine/GameEngine.cpp" />
@@ -222,8 +227,10 @@
         <option value="$PROJECT_DIR$/GameEngine/FileSystemManager.cpp" />
         <option value="$PROJECT_DIR$/cmake-build-debug/Shader/light_vert.glsl" />
         <option value="$PROJECT_DIR$/cmake-build-debug/Shader/sun_frag.glsl" />
-        <option value="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" />
+        <option value="$PROJECT_DIR$/GameEngine/StartApp.cpp" />
         <option value="$PROJECT_DIR$/GameEngine/AssetManager.cpp" />
+        <option value="$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp" />
+        <option value="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" />
       </list>
     </option>
   </component>
@@ -246,7 +253,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,17 +263,13 @@
             <path>
               <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
+              <item name="Shader" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,7 +334,9 @@
       <workItem from="1539833554917" duration="1621000" />
       <workItem from="1539835192424" duration="219000" />
       <workItem from="1539835426162" duration="642000" />
-      <workItem from="1539836086154" duration="1202000" />
+      <workItem from="1539836086154" duration="1434000" />
+      <workItem from="1539900715802" duration="85000" />
+      <workItem from="1539900819615" duration="1171000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file path locations to UNIX standard. Need to replace glm, not compiling.">
       <created>1539798117892</created>
@@ -369,11 +373,18 @@
       <option name="project" value="LOCAL" />
       <updated>1539828893240</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added Assimp and finished compilation issues.">
+      <created>1539837487794</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1539837487794</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25659000" />
+    <option name="totallyTimeSpent" value="27147000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -388,7 +399,7 @@
     <frame x="-1" y="28" width="2562" height="1385" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3003984" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3059761" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -424,23 +435,11 @@
     <MESSAGE value="Added OpenGL and GLEW libraries to the cmake for linux compiling." />
     <MESSAGE value="Added bullet3 libs and sources under /lib/bullet3/ I havent changed the include files to bullet3 yet.&#10;&#10;Added #define BT_USE_DOUBLE_PRECISION 1 before including bullet. Won't compile with g++ otherwise." />
     <MESSAGE value="Added library source codes including their .a, .so objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added library source codes including their .a, .so objects" />
+    <MESSAGE value="Added Assimp and" />
+    <MESSAGE value="Added Assimp and finished compilation issues." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Assimp and finished compilation issues." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/include/glm/detail/type_vec4_simd.inl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="155" selection-start-line="155" selection-end-line="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/glm/detail/setup.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="455" selection-start-line="455" selection-end-line="455" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/glm/glm.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -696,9 +695,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="35" />
-          <folding>
-            <element signature="e#161#178#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -713,75 +709,89 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
-          <folding>
-            <element signature="e#204#223#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/sun_frag.glsl">
+    <entry file="file://$PROJECT_DIR$/GameEngine/Application.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="57" lean-forward="true" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        <state relative-caret-position="795">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/FileSystemManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/World.h">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/sun_frag.glsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="450">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.cpp">
+    <entry file="file:///usr/include/c++/7/istream">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="160" selection-start-line="160" selection-end-line="160" />
+        <state relative-caret-position="674">
+          <caret line="594" column="47" lean-forward="true" selection-start-line="594" selection-start-column="47" selection-end-line="594" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/7/bits/istream.tcc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="851" column="36" lean-forward="true" selection-start-line="851" selection-start-column="36" selection-end-line="851" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="290">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#102#229#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Application.cpp">
+    <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="2009">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/World.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="105" column="67" lean-forward="true" selection-start-line="105" selection-start-column="67" selection-end-line="105" selection-end-column="67" />
+        <state relative-caret-position="195">
+          <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GameEngine/AssetManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+        <state relative-caret-position="289">
+          <caret line="41" column="7" lean-forward="true" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
           <folding>
             <element signature="e#198#215#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="108" column="49" selection-start-line="108" selection-start-column="49" selection-end-line="108" selection-end-column="49" />
         </state>
       </provider>
     </entry>

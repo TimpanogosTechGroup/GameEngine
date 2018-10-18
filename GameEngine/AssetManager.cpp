@@ -39,16 +39,14 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
 
 	Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, vertexPath);
 
-//	try
-//	{
+	try
+	{
         std::string path(vertexPath);
         // Create a file stream to pull in the file data
         std::ifstream vextexFile(path);
 
         if (!vextexFile)
             Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, "File couldn't be opened");
-
-        //std::cout << "Opening File: " << argv[FILE_INPUT] << std::endl;
 
         std::string str;
         // Copy over the whole file into the string we just created
@@ -71,7 +69,7 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
         shaderFile.seekg(0, std::ios::beg);
 
         //std::cout << "Copying file over..." << std::endl;
-        str.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
+        shaderStr.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 
 
 //		// open files
@@ -91,14 +89,14 @@ Shader* AssetManager::LoadShader(const char* vertexPath, const char* fragmentPat
         vertexCode = str;
         fragmentCode = shaderStr;
 
-//	}
-//	catch (std::length_error& e)
-//	{
-//		Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
-//		Logger::GetLogStream<AssetManager>() << e.what() << std::endl;
-//		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
-//
-//	}
+	}
+	catch (std::length_error& e)
+	{
+		Logger::GetLogStream<AssetManager>() << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ :: " << vertexPath;
+		Logger::GetLogStream<AssetManager>() << e.what() << std::endl;
+		Logger::LogClassStream<AssetManager>(Logger::LoggerLevel::ERROR);
+
+	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
 
