@@ -2,7 +2,7 @@
 	File:
     Purpose: 
 
-    @author 
+    @author Jon Meilstrup
     @version 1.0
 
 	Copyright (c) 2018 All Rights Reserved
