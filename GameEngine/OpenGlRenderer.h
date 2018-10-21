@@ -22,6 +22,7 @@
 #include <string>
 #include "CubeMap.h"
 #include "Chunk.h"
+#include "Cube.h"
 
 class OpenGlRenderer :
 	public RenderEngine
@@ -29,6 +30,14 @@ class OpenGlRenderer :
 public:
 	OpenGlRenderer();
 	~OpenGlRenderer();
+
+    struct model_pos {
+        glm::vec3 position;
+        glm::vec3 rotation;
+        float scale;
+        Model* modelReference;
+    };
+
 
 	void CreateWindow(std::string name, int width, int height);
 	void UpdateScreen();
@@ -48,6 +57,7 @@ public:
 	bool RenderObject(Camera& camera, Object& object, PhysicalInstance& pos);
 	//bool RenderObject(Object& object, char attributes); // TODO send in the RenderItem and then specify how to render through the attributes char
 	bool RenderModel(Camera& camera, Model& model);
+	bool RenderObject(Camera& camera, Object& object);
 	void RenderPhysicalInstance(Camera& camera, PhysicalInstance& model);
 	void RenderCubeMap(Camera& camera, CubeMap& cube);
 	// Compiles a shader and puts it onto the GPU, expects the ShaderType is it a fragment, vertex or geometry shader, and it needs the source code of that shader.
@@ -69,6 +79,12 @@ public:
 	void renderChunk(Camera* camera, Chunk* chunk);
 	void compileChunk(Chunk* chunk);
 
+	void renderModel(Camera* camera, model_pos& pos_model);
+    void renderObject(Camera* camera, Object* object, model_pos& pos_model);
+
+    void compileCube(Cube* cube);
+    void renderCube(Camera* camera, Cube* cube);
+
 	glm::mat4 getOrthoGraphicsProjection();
 
 	Shader bbShader;
@@ -86,7 +102,7 @@ public:
 	// Sets a unifmor int
 	void SetUniformInt(Shader* shader, const GLchar* name, int value);
 	// Sets a unifmor mat4
-	void SetUniformMat4(Shader* shader, const GLchar* name, glm::mat4 value);
+	void SetUniformMat4(Shader* shader, const GLchar* name, glm::mat4 value);;
 
 
 private:

@@ -169,7 +169,7 @@ Model* AssetManager::LoadModel(const char* pFile) {
 		Logger::Log<AssetManager>(Logger::LoggerLevel::DEBUG, "Model already loaded.....might need to double check your code");
 	}
 
-	Model* model = new Model();
+    auto model = new Model();
 
 	// Create an instance of the Importer class
 	Assimp::Importer importer;

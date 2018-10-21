@@ -148,7 +148,7 @@ void GameEngine::run() {
 			lastTime += 1.0;
 		}
 
-		float delta = .002f;
+		float delta = .02f;
 		proccessInput(delta); // proccess input
 
 //		PROFILE_PUSH("render update");

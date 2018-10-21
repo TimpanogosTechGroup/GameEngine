@@ -67,12 +67,15 @@ public:
 		//gc.collectGarbage();
 	}
 	bool addModelInstance(PhysicalInstance* instance, double mass) {
-		btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
-		//gc.addMemoryToGarbageCollector(shape);
-		collisionObjects[instance->getName()] = shape;
+		if (false) {
+			btBoxShape* shape = new btBoxShape(btVector3(btScalar(instance->getModelReference().boundingBox.GetxDist() / 2), btScalar(instance->getModelReference().boundingBox.GetyDist() / 2), btScalar(instance->getModelReference().boundingBox.GetzDist() / 2)));
+			//gc.addMemoryToGarbageCollector(shape);
+			collisionObjects[instance->getName()] = shape;
 
-		motionStates[instance->getName()] = new btDefaultMotionState(instance->getInstanceTrasform());
-		AddRigidBody(*instance, collisionObjects[instance->getName()], motionStates[instance->getName()], mass);
+			motionStates[instance->getName()] = new btDefaultMotionState(instance->getInstanceTrasform());
+			AddRigidBody(*instance, collisionObjects[instance->getName()], motionStates[instance->getName()], mass);
+		}
+
 		return true;
 	}
 	bool AddRigidBody(PhysicalInstance& instance, btCollisionShape* collisionShape, btMotionState* motionState, double m) {

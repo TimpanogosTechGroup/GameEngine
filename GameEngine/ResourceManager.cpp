@@ -67,7 +67,8 @@ Model * ResourceManager::getModel(std::string name)
 {
 	auto model = models.find(name);
 	if (model != models.end()) {
-		return model->second;
+	    auto modelPtr = model->second;
+		return modelPtr;
 	}
 	else {
 		return models["default"];
@@ -80,8 +81,8 @@ void ResourceManager::addShader(std::string name, Shader* shader) {
 
 void ResourceManager::addTexture(std::string name, Texture* texture) {
 	textures[name] = texture;
-	Logger::Log<ResourceManager>(Logger::LoggerLevel::DEBUG, "Added Texture: ");
-	std::cout << texture->GetID() << std::endl;
+//	Logger::Log<ResourceManager>(Logger::LoggerLevel::DEBUG, "Added Texture: ");
+//	std::cout << texture->GetID() << std::endl;
 }
 
 void ResourceManager::addModel(std::string name, Model * model)

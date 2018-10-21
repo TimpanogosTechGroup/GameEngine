@@ -27,7 +27,11 @@ private:
 
 public:
 	RandomEntity(std::string modelName) { // Change this to get a better way to handle the model reference
-		this->setPhysicalInstance(PhysicalInstance(std::string("modelName"), ResourceManager::getModel(getModelLocation(modelName)), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+//		this->setPhysicalInstance(PhysicalInstance(std::string("modelName"), ResourceManager::getModel(getModelLocation(modelName)), glm::vec3(0, 0, 0), glm::vec3(0, 5, 0), 1.0));
+		pos_model.position = glm::vec3(10, 10, 0);
+		pos_model.modelReference = ResourceManager::getModel(getModelLocation(modelName));
+		pos_model.rotation = glm::vec3(0, 0, 0);
+		pos_model.scale = 1;
 	}
 	~RandomEntity() {};
 	void update() override {
@@ -35,8 +39,8 @@ public:
 	}
 
 	void render(Camera* camera) override { // Render the entity
-		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderPhysicalInstance(*camera, getPhysicalInstance());
-		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderBoundingBox(*camera, getPhysicalInstance(), glm::vec3(1, 1, 1));
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderModel(camera, this->pos_model);
+//		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderBoundingBox(*camera, getPhysicalInstance(), glm::vec3(1, 1, 1));
 	}
 
 	void onWorldTickUpdate() override {

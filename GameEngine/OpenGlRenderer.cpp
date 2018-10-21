@@ -70,6 +70,7 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 
 		// Setsup glew and sets the clear color (background color)
 		glewInit();
+
 		glClearColor(backgroundColor.r, backgroundColor.b, backgroundColor.g, 1);
 		glViewport(0, 0, width, height);
 
@@ -79,6 +80,9 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 		else if (Properties::Get<std::string>("renderMode") == "wireframe") {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
+
+		glPointSize(100);
+		glLineWidth(100);
 		// Sets depth test so pixels rendererd underneath other pixels don't overrite those pixels (you get a really weird looking picture if you don't do this
 		glEnable(GL_DEPTH_TEST);
 
@@ -87,9 +91,9 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Don't render faces that are at the back of the object
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
-		glFrontFace(GL_CW);
+//		glEnable(GL_CULL_FACE);
+//		glCullFace(GL_FRONT);
+//		glFrontFace(GL_CW);
 
 		// Enable aplha channel
 		glEnable(GL_BLEND);
@@ -109,7 +113,8 @@ void OpenGlRenderer::loadDefaults() {
 	AssetManager::LoadTexture("default", "Texture/question.png");
 	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader/cubemap_vert.glsl", "Shader/cubemap_frag.glsl"));
 	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader/font_vert.glsl", "Shader/font_frag.glsl"));
-	ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader/chunk_vert.glsl", "Shader/chunk_frag.glsl"));
+    ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader/chunk_vert.glsl", "Shader/chunk_frag.glsl"));
+    ResourceManager::addShader("cube", AssetManager::LoadShader("Shader/cube_vert.glsl", "Shader/cube_frag.glsl"));
 }
 
 glm::mat4 OpenGlRenderer::getOrthoGraphicsProjection()
@@ -201,7 +206,7 @@ bool OpenGlRenderer::CompileModel(Model& model) {
 	return true;
 }
 
-bool OpenGlRenderer::CompileCubeMap(CubeMap & cubemap)
+bool OpenGlRenderer::CompileCubeMap(CubeMap& cubemap)
 {
 	std::vector<float> buffer;
 
@@ -310,7 +315,37 @@ bool OpenGlRenderer::RenderObject(Camera& camera, Object& object, PhysicalInstan
 	return true;
 }
 
+//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
+bool OpenGlRenderer::RenderObject(Camera& camera, Object& object) {
+
+	if (object.GetMaterial()->GetShader() != nullptr) {
+		glUseProgram(object.GetMaterial()->GetShader()->GetID());
+		//glUseProgram(3);
+		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+		SetUniformMat4(object.GetMaterial()->GetShader(), "projection", camera.GetProjectionMatrix());
+		SetUniformMat4(object.GetMaterial()->GetShader(), "view", camera.GetViewMatrix());
+		btScalar trans[16]; // create a 4x4 array
+
+		glm::mat4 model = glm::translate(model, glm::vec3(0, 0, 0));
+		SetUniformMat4(object.GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
+	}
+
+	glBindTexture(GL_TEXTURE_2D, object.GetMaterial()->GetTexture()->GetID());
+
+	SetUniformVec3(object.GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
+	SetUniformVec3(object.GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
+	SetUniformVec3(object.GetMaterial()->GetShader(), "viewPos", camera.GetPosition());
+
+	glBindVertexArray(object.GetID());
+	glDrawArrays(GL_TRIANGLES, 0, object.GetVerticies().Size() / 3);
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return true;
+}
+
 void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
+//	std::cout << "Rendering Chunk" << std::endl;
 	//// Render the chunk with the normal shaders
 	//if (chunk) {
 	//	glUseProgram(ResourceManager::getShader("texture_shader")->GetID());
@@ -329,34 +364,38 @@ void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
 	//}
 
 	if (chunk->getMesh().GetMaterial()->GetShader() != nullptr) {
-		glUseProgram(chunk->getMesh().GetMaterial()->GetShader()->GetID());
+		glUseProgram(ResourceManager::getShader("chunk_shader")->GetID());
+//		glUseProgram(chunk->getMesh().GetMaterial()->GetShader()->GetID());
 		//glUseProgram(3);
 		//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
-		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "projection", camera->GetProjectionMatrix());
-		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "view", camera->GetViewMatrix());
+		SetUniformMat4(ResourceManager::getShader("chunk_shader"), "projection", camera->GetProjectionMatrix());
+		SetUniformMat4(ResourceManager::getShader("chunk_shader"), "view", glm::mat4(glm::mat3(camera->GetViewMatrix())));
 		//btScalar trans[16]; // create a 4x4 array
 		//pos.getInstanceTrasform().getOpenGLMatrix(trans); // fill the array with the rotation and transformations and scaling
 		//glm::mat4 model = glm::make_mat4(trans); // convert to glm::mat4 
 
 		glm::mat4 model;
 		//model = glm::translate(model, glm::vec3(chunk->getChunkXOffset() * (Chunk::CHUNK_SIZE - 1), 0, chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1)));
-		int x = (Chunk::CHUNK_SIZE - 1) * chunk->getChunkXOffset();
-		int y = chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1);
+//		int x = (Chunk::CHUNK_SIZE - 1) * chunk->getChunkXOffset();
+//		int y = chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1);
+		int x = 10;
+		int y = 10;
 		model = glm::translate(model, glm::vec3(x, 0, y));
 		//model = glm::translate(model, chunk->getPhysicalInstance().getInstancePosition());
 
-		SetUniformMat4(chunk->getMesh().GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
+		SetUniformMat4(ResourceManager::getShader("chunk_shader"), "model", model); // set the models rotation, scaling and transfom with the matrix
 	}
 
 	glBindTexture(GL_TEXTURE_2D, chunk->getMesh().GetMaterial()->GetTexture()->GetID());
 
-	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
-	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
-	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "viewPos", camera->GetPosition());
+//	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
+//	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
+//	SetUniformVec3(chunk->getMesh().GetMaterial()->GetShader(), "viewPos", camera->GetPosition());
 
 	glBindVertexArray(chunk->getMesh().GetID());
 	//glDrawArrays(GL_TRIANGLES, 0, chunk->getMesh().GetVerticies().Size() / 3);
-	glDrawElements(GL_TRIANGLES, chunk->getIndecies().size(), GL_UNSIGNED_INT, 0);
+//	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(chunk->getIndecies().size()), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 1000, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -468,6 +507,40 @@ void OpenGlRenderer::RenderPhysicalInstance(Camera& camera, PhysicalInstance& ph
 	for (unsigned int i = 0; i < physicalInstance.getModelReference().NumOfObjects(); i++) {
 		RenderObject(camera, *physicalInstance.getModelReference().GetObject(i), physicalInstance);
 	}
+}
+
+void OpenGlRenderer::renderModel(Camera* camera, model_pos& pos_model) {
+    for (unsigned int i = 0; i < pos_model.modelReference->NumOfObjects(); i++) {
+        renderObject(camera, pos_model.modelReference->GetObject(i), pos_model);
+    }
+}
+
+//bool CompileObjectAtt(Object& object, char attributes); // Get this to work somehow, make a very flexible rendering function
+void OpenGlRenderer::renderObject(Camera* camera, Object* object, model_pos& pos_model) {
+
+    if (object->GetMaterial()->GetShader() != nullptr) {
+        glUseProgram(object->GetMaterial()->GetShader()->GetID());
+        //glUseProgram(3);
+        //std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+        SetUniformMat4(object->GetMaterial()->GetShader(), "projection", camera->GetProjectionMatrix());
+        SetUniformMat4(object->GetMaterial()->GetShader(), "view", glm::mat4(glm::mat3(camera->GetViewMatrix())));
+        btScalar trans[16]; // create a 4x4 array
+
+        glm::mat4 model = glm::translate(model, pos_model.position);
+        SetUniformMat4(object->GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
+    }
+
+    glBindTexture(GL_TEXTURE_2D, object->GetMaterial()->GetTexture()->GetID());
+
+    SetUniformVec3(object->GetMaterial()->GetShader(), "lightPos", glm::vec3(0, 10, 0));
+    SetUniformVec3(object->GetMaterial()->GetShader(), "lightColor", glm::vec3(0.3, 0.3, 0.3));
+//    SetUniformVec3(object->GetMaterial()->GetShader(), "viewPos", camera->GetPosition());
+    SetUniformVec3(object->GetMaterial()->GetShader(), "viewPos", glm::vec3(1, 10, 1));
+
+    glBindVertexArray(object->GetID());
+    glDrawArrays(GL_TRIANGLES, 0, object->GetVerticies().Size() / 3);
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
@@ -825,4 +898,54 @@ void OpenGlRenderer::RenderBoundingBox(Camera& camera, PhysicalInstance& physica
 	glDrawArrays(GL_LINE_LOOP, 4, 4);
 	glDrawArrays(GL_LINES, 8, 8);
 	glBindVertexArray(0);
+}
+
+void OpenGlRenderer::compileCube(Cube *cube) {
+    std::vector<float> buffer;
+
+    // First we need to create the buffer to send off to the GPU
+    Object* cube1 = cube->GetObject(0);
+
+    for (auto &vert : *cube->GetObject(0)->GetVerticies().GetValueVector()) {
+        buffer.push_back(vert);
+    }
+
+    glGenVertexArrays(1, &cube1->GetID());
+    glBindVertexArray(cube1->GetID());
+    glGenBuffers(1, &cube1->VBO.GetID());
+    glBindBuffer(GL_ARRAY_BUFFER, cube1->VBO.GetID());
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * (buffer.size()), &buffer[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void OpenGlRenderer::renderCube(Camera *camera, Cube *cube) {
+
+    cube->SetPosition(glm::vec3(0, 0, 0));
+    glUseProgram(ResourceManager::getShader("cube")->GetID());
+    //glUseProgram(3);
+    //std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+    SetUniformMat4(ResourceManager::getShader("cube"), "projection", camera->GetProjectionMatrix());
+    glm::mat4 view;
+//    glm::translate(view, camera->GetPosition());
+//    SetUniformMat4(ResourceManager::getShader("cube"), "view", view);
+    SetUniformMat4(ResourceManager::getShader("cube"), "view", glm::mat4(glm::mat3(camera->GetViewMatrix())));
+
+
+    glm::mat4 model = glm::translate(model, glm::vec3(0, 0, 10)); // convert to glm::mat4
+    glm::translate(model, camera->GetPosition());
+    SetUniformMat4(ResourceManager::getShader("cube"), "model", model); // set the models rotation, scaling and transfom with the matrix
+
+//    glBindTexture(GL_TEXTURE_CUBE_MAP, cube->getTexture()->GetID());
+
+    glDepthMask(GL_FALSE);
+
+    glBindVertexArray(cube->GetObject(0)->GetID());
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+    glDepthMask(GL_TRUE);
 }

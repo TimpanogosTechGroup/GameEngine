@@ -38,7 +38,7 @@ public:
 	}
 
 	void push_back_instance(PhysicalInstance* physicalInstance) {
-		physicalInstances.insert({ physicalInstance->getName(), physicalInstance });
+//		physicalInstances.insert({ physicalInstance->getName(), physicalInstance });
 	}
 
 	std::unordered_map<std::string, PhysicalInstance*>& getPhysicalInstances() {

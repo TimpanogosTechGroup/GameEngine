@@ -15,7 +15,7 @@
 using namespace std;
 
 void PhysicsEngine::Update(double delta, ModelManager& modelManager) {
-//	dynamicsWorld->stepSimulation(delta / 2000, 5);
+	dynamicsWorld->stepSimulation(delta / 2000, 5);
 //
 //	//for (int i = 0; i < modelManager.size(); i++) {
 //	//	btTransform trans;

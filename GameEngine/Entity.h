@@ -12,6 +12,7 @@
 
 #include "PhysicalInstance.h"
 #include "FileSystemManager.h"
+#include "OpenGlRenderer.h"
 
 /*
 Author: Ben Brenkman aka JustBremkman
@@ -41,6 +42,7 @@ protected:
 		return FileSystemManager::getModelPathString(modelName, folderName);
 	}
 
+    OpenGlRenderer::model_pos pos_model;
 public:
 	virtual void update(void) = 0; // This is the entity update function, is called every frame.
 	virtual void onWorldTickUpdate() = 0; // This is the world tick update. All Entities that want this to be called are added to a queue that runs every so often
@@ -57,6 +59,7 @@ public:
 	PhysicalInstance& getPhysicalInstance() {
 		return mPhsyicalInstance;
 	}
+
 };
 
 #endif

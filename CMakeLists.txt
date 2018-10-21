@@ -18,7 +18,7 @@ file(GLOB SOURCE_FILES
         "GameEngine/*.h"
         "GameEngine/*.cpp")
 
-add_executable(GameEngine ${SOURCE_FILES} GameEngine/FileSystemManager.cpp)
+add_executable(GameEngine ${SOURCE_FILES} GameEngine/FileSystemManager.cpp GameEngine/Cube.cpp GameEngine/Cube.h)
 
 # adding all the libraries
 target_link_libraries( GameEngine ${OPENGL_LIBRARY} ${PROJECT_SOURCE_DIR}/lib/glew-2.1.0/lib/libGLEW.so ${SDL2_LIBRARIES}

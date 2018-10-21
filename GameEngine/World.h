@@ -20,6 +20,8 @@
 #include "InputManager.h"
 #include "Profiler.h"
 #include "CubeMap.h"
+#include "Chunk.h"
+#include "PerlinGenerator.h"
 
 
 class World {
@@ -45,6 +47,21 @@ public:
 
 	void initialize() {
 		mPhysicsEngine = new PhysicsEngine();
+
+        PerlinGenerator perlinGenerator;
+        chunk = new Chunk(0, 0);
+        chunk1 = new Chunk(1, 0);
+        chunk2 = new Chunk(1, 1);
+		chunk->populate(perlinGenerator);
+		chunk1->populate(perlinGenerator);
+		chunk2->populate(perlinGenerator);
+
+        cube1 = new Cube();
+
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->compileChunk(chunk);
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->compileChunk(chunk1);
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->compileChunk(chunk2);
+		Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->compileCube(cube1);
 	}
 
 	void shutdown() {
@@ -75,6 +92,13 @@ public:
 		for (auto &entity : mRenderableEntities) {
 			entity->render(activeCamera);
 		}
+
+        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk);
+        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderCube(activeCamera, cube1);
+//        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk1);
+//        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk2);
+
+        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderObject(*activeCamera, *ResourceManager::getModel(FileSystemManager::getModelPathString("Caltrop"))->GetObject(0));
 	}
 
 	void setActiveCamera(Camera* camera) {
@@ -101,6 +125,10 @@ private:
 	PhysicsEngine* mPhysicsEngine;
 	ModelManager mManager;
 	CubeMap* cube;
+	Chunk* chunk;
+	Chunk* chunk1;
+	Chunk* chunk2;
+	Cube* cube1;
 };
 
 #endif

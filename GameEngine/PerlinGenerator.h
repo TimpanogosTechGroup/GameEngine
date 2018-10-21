@@ -1,5 +1,5 @@
 #ifndef PERLIN_GENERATOR_H
-#define PERLIN_GERERATOR_H
+#define PERLIN_GENERATOR_H
 
 #include <cmath>
 
