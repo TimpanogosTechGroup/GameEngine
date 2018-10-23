@@ -378,9 +378,9 @@ void OpenGlRenderer::renderChunk(Camera* camera, Chunk* chunk) {
 		//model = glm::translate(model, glm::vec3(chunk->getChunkXOffset() * (Chunk::CHUNK_SIZE - 1), 0, chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1)));
 //		int x = (Chunk::CHUNK_SIZE - 1) * chunk->getChunkXOffset();
 //		int y = chunk->getChunkYOffset() * (Chunk::CHUNK_SIZE - 1);
-		int x = 10;
-		int y = 10;
-		model = glm::translate(model, glm::vec3(x, 0, y));
+		int x = 0;
+		int y = 0;
+		model = glm::translate(model, glm::vec3(x, -1, y));
 		//model = glm::translate(model, chunk->getPhysicalInstance().getInstancePosition());
 
 		SetUniformMat4(ResourceManager::getShader("chunk_shader"), "model", model); // set the models rotation, scaling and transfom with the matrix

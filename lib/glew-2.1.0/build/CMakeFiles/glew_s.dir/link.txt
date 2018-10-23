@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libGLEW.a  CMakeFiles/glew_s.dir/users/guest/b/bbrenk/Documents/GitHub/Repositories/glew-2.1.0/src/glew.c.o
-/usr/bin/ranlib lib/libGLEW.a

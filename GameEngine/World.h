@@ -95,8 +95,8 @@ public:
 
         Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk);
         Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderCube(activeCamera, cube1);
-//        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk1);
-//        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk2);
+        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk1);
+        Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->renderChunk(activeCamera, chunk2);
 
         Registry::GetRegistryEntry<OpenGlRenderer>("renderer")->RenderObject(*activeCamera, *ResourceManager::getModel(FileSystemManager::getModelPathString("Caltrop"))->GetObject(0));
 	}
