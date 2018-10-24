@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(GameEngine)
+project(Andromeda)
 
 # sets the C++ version
 set(CMAKE_CXX_STANDARD 11)
@@ -33,12 +33,12 @@ include_directories(include)
 
 # adding all the source files
 file(GLOB SOURCE_FILES
-        "GameEngine/*.h"
-        "GameEngine/*.cpp")
+        "src/*.h"
+        "src/*.cpp")
 
 # this creates our executable
 # cool feature latter on might be to add multiple executables
-add_executable(GameEngine ${SOURCE_FILES})
+add_executable(Andromeda ${SOURCE_FILES})
 
 # adding all the libraries
 if (LINUX)
@@ -66,5 +66,5 @@ elseif(WIN32)
             ${PROJECT_SOURCE_DIR}/lib/win32/freetype271MT.lib)
 endif(LINUX)
 
-target_link_libraries(GameEngine ${ENGINE_LIBRARIES})
-target_compile_options(GameEngine PRIVATE -Werror)
+target_link_libraries(Andromeda ${ENGINE_LIBRARIES})
+target_compile_options(Andromeda PRIVATE -Werror)

@@ -108,13 +108,13 @@ void OpenGlRenderer::CreateWindow(std::string name, int width, int height) {
 
 void OpenGlRenderer::loadDefaults() {
 	ResourceManager::addShader("texture_shader", AssetManager::LoadShader("light_vert.glsl", "sun_frag.glsl"));
-	ResourceManager::addShader("color_shader", AssetManager::LoadShader("Shader/color_vert.glsl", "Shader/color_frag.glsl"));
-	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("Shader/transform_vert.glsl", "Shader/transform_frag.glsl"));
-	AssetManager::LoadTexture("default", "Texture/question.png");
-	ResourceManager::addShader("cubemap", AssetManager::LoadShader("Shader/cubemap_vert.glsl", "Shader/cubemap_frag.glsl"));
-	ResourceManager::addShader("font_shader", AssetManager::LoadShader("Shader/font_vert.glsl", "Shader/font_frag.glsl"));
-    ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("Shader/chunk_vert.glsl", "Shader/chunk_frag.glsl"));
-    ResourceManager::addShader("cube", AssetManager::LoadShader("Shader/cube_vert.glsl", "Shader/cube_frag.glsl"));
+	ResourceManager::addShader("color_shader", AssetManager::LoadShader("resources/Shader/color_vert.glsl", "resources/Shader/color_frag.glsl"));
+	ResourceManager::addShader("framebuffer", AssetManager::LoadShader("resources/Shader/transform_vert.glsl", "resources/Shader/transform_frag.glsl"));
+	AssetManager::LoadTexture("default", "resources/Texture/question.png");
+	ResourceManager::addShader("cubemap", AssetManager::LoadShader("resources/Shader/cubemap_vert.glsl", "resources/Shader/cubemap_frag.glsl"));
+	ResourceManager::addShader("font_shader", AssetManager::LoadShader("resources/Shader/font_vert.glsl", "resources/Shader/font_frag.glsl"));
+    ResourceManager::addShader("chunk_shader", AssetManager::LoadShader("resources/Shader/chunk_vert.glsl", "resources/Shader/chunk_frag.glsl"));
+    ResourceManager::addShader("cube", AssetManager::LoadShader("resources/Shader/cube_vert.glsl", "resources/Shader/cube_frag.glsl"));
 }
 
 glm::mat4 OpenGlRenderer::getOrthoGraphicsProjection()

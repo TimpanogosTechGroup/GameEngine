@@ -24,7 +24,7 @@
 //int main(int argc, char** argv) {
 //	VS_MEM_CHECK;
 //
-//	GameEngine gameEngine;
+//	src gameEngine;
 //	Profiler::init();
 //	PROFILE_PUSH("Initialize");
 //	gameEngine.initialize();

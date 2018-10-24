@@ -23,7 +23,7 @@ private:
 //	static const std::string folderName = "Andromeda";
 public:
 	static std::string getModelPathString(std::string modelName, std::string folderName = "Andromeda") {
-		std::string path = "Model/";
+		std::string path = "resources/Model/";
 		path.append(folderName);
 		path.append("/");
 		path.append(modelName);

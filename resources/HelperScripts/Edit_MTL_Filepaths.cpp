@@ -11,7 +11,7 @@ void getDir(const char* d, vector<string> & f);
 
 // current filepaths for files:
 // Send From:
-// ..\GameEngine\Model
+// ..\src\Model
 // Send to:
 // Model\
 

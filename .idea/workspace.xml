@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="GameEngine" targetName="GameEngine" />
+      <config projectName="Andromeda" targetName="Andromeda" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -11,9 +11,342 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added windows libs to the target link libraries">
+    <list default="true" id="2ea6e459-b3c3-4dac-b9be-91f647b8a867" name="Default" comment="Added SDL to windows compile">
+      <change afterPath="$PROJECT_DIR$/src/StartApp.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StartApp.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/AssetManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/AssetManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Axis.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Axis.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/BoundingBox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoundingBox.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/BoundingBox.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoundingBox.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Chunk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chunk.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Chunk.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chunk.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ChunkManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChunkManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ClassDiagram.cd" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassDiagram.cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ClassDiagram1.cd" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassDiagram1.cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ClassDiagram2.cd" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassDiagram2.cd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/CrashHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/CrashHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/CrashHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/CrashHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Cube.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Cube.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/CubeMap.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubeMap.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/CubeMap.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubeMap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/DynamicEntity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/DynamicEntity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Entity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ErrorCode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ErrorCode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ErrorCode.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ErrorCode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ExampleException.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExampleException.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ExceptionInclude.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExceptionInclude.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ExceptionTemplate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExceptionTemplate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FileSystemManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileSystemManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FileSystemManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileSystemManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Font.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Font.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Font.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FontManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FontManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FontManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FontManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FontManagerException.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FontManagerException.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FrameBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameBuffer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/FrameBuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameBuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameEngine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameEngine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.licenseheader" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameEngine.licenseheader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameEngine.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameEngine.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GameEngine.vcxproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/GarbageCollector.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GarbageCollector.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/InputControlled.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputControlled.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/InputEvent.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputEvent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/InputInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputInterface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/InputManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/InputManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/KMTask.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/KMTask.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/KeyBoardInput.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/KeyBoardInput.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/LUA_TEST.lua" beforeDir="false" afterPath="$PROJECT_DIR$/src/LUA_TEST.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Liberty-DecorazioniMarmo-2.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Liberty-DecorazioniMarmo-2.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Liberty-GreenBronze-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Liberty-GreenBronze-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Liberty-MattoniBasamento-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Liberty-MattoniBasamento-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Liberty-Pavimentazione-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Liberty-Pavimentazione-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Liberty-PortaBronzo-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Liberty-PortaBronzo-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Light.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Light.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Light.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Logger.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logger.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Logger.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logger.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Logger_OLD.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logger_OLD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/LuaScript.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/LuaScript.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Material.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Material.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/MemoryManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Andromeda/Buckler.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Andromeda/Buckler.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Andromeda/Caltrop.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Andromeda/Caltrop.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Andromeda/Crossbow.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Andromeda/Crossbow.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Andromeda/Gladius.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Andromeda/Gladius.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Andromeda/Javelin.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Andromeda/Javelin.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Barrel.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Barrel.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Barrel.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Barrel.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/BarrelDiffuse.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/BarrelDiffuse.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/BarrelDiffuse.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/BarrelDiffuse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/BarrelNormal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/BarrelNormal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/BarrelSpecular.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/BarrelSpecular.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Buckler.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Buckler.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Buckler.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Buckler.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Caltrop.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Caltrop.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Caltrop.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Caltrop.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Crossbow.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Crossbow.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Crossbow.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Crossbow.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Gladius.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Gladius.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Gladius.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Gladius.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Javelin.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Javelin.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Javelin.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/Javelin.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/LibertStatue.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/LibertStatue.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/LibertStatue.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/LibertStatue.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Liberty-DecorazioniMarmo-2.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Liberty-DecorazioniMarmo-2.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Liberty-GreenBronze-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/Liberty-GreenBronze-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Liberty-MattoniBasamento-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Liberty-MattoniBasamento-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Liberty-Pavimentazione-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Liberty-Pavimentazione-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/Liberty-PortaBronzo-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Liberty-PortaBronzo-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/bench.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/bench.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/bench.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/bench.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/capsule.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/capsule.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/capsule.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/capsule.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/capsule0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/capsule0.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/cube.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/cube.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/cube.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/default.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/default.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/default.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/default.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket2.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket2.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket2.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket3.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket3.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rocket3.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rocket3.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron1-alt2-Unreal-Engine/About these PBR files.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron1-alt2-Unreal-Engine/About these PBR files.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron1-alt2-Unreal-Engine/rustediron2_metallic.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron1-alt2-Unreal-Engine/rustediron2_metallic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron1-alt2-Unreal-Engine/rustediron2_normal.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron1-alt2-Unreal-Engine/rustediron2_normal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron1-alt2-Unreal-Engine/rustediron2_roughness.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron1-alt2-Unreal-Engine/rustediron2_roughness.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron2_basecolor-old.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron2_basecolor-old.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron2_basecolor.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron2_basecolor.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/rustediron2_basecolor_old.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/rustediron2_basecolor_old.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/sphere.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/sphere.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/sphere.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/sphere.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/spherepbr.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/spherepbr.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/spherepbr.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/spherepbr.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/textured.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/textured.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Model/textured.obj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Model/textured.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ModelManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ModelManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/MotionState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MotionState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Moveable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Moveable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Object.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenGlRenderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/OpenGlRenderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OpenGlRenderer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PerlinGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerlinGenerator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PerlinGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerlinGenerator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PhysicalInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhysicalInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PhysicalInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhysicalInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhysicsEngine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhysicsEngine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PrimitiveShape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PrimitiveShape.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/PrimitiveShape.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PrimitiveShape.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Profiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Profiler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Profiler.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Profiler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Properties.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Properties.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Properties.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Properties.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/RandomEntity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/RandomEntity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Registry.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registry.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Registry.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registry.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/RegistryEntry.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegistryEntry.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/RenderEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/RenderEngine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/RenderItem.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/RenderItem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Renderable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ResourceManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResourceManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ResourceManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResourceManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/SDL2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/SDL2.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/SceneManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/SceneManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/SceneManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/SceneManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/grayscale_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/grayscale_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/grayscale_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/grayscale_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/kernel_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/kernel_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/kernel_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/kernel_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/transform_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/transform_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/Framebuffer/transform_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/Framebuffer/transform_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/PBR/pbr_frag.glsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/PBR/pbr_frag.glsl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/PBR/pbr_vert.glsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/PBR/pbr_vert.glsl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/bb_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/bb_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/bb_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/bb_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/chunk_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/chunk_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/chunk_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/chunk_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/color_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/color_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/color_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/color_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/cubemap_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/cubemap_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/cubemap_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/cubemap_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/font_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/font_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/font_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/font_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/light_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/light_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/sun_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/sun_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/transform_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/transform_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Shader/transform_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/transform_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Source.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Source1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Source1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/StaticEntity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticEntity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Terrian.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Terrian.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/Liberty-GreenBronze-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Liberty-GreenBronze-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_back.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_back.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_down.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_down.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_front.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_front.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_left.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_left.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_right.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_right.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/cubemap/morning_up.tga" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/cubemap/morning_up.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/question.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/question.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Texture/white.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Texture/white.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/ThreadPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ThreadPool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Throwable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Throwable.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Verticies.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Verticies.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/Verticies.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Verticies.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/World.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/assimp-vc140-mt.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/assimp-vc140-mt.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/capsule0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/capsule0.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/desktop.ini" beforeDir="false" afterPath="$PROJECT_DIR$/src/desktop.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ARIALN.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ARIALN.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ARIALNB.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ARIALNB.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ARIALNBI.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ARIALNBI.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ARIALNI.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ARIALNI.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/arial.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/arial.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/arialbd.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/arialbd.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/arialbi.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/arialbi.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ariali.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ariali.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/fonts/ariblk.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fonts/ariblk.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/freetype271.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/freetype271.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/freetype271MT.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/freetype271MT.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/glew32.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/glew32.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/lua.exe" beforeDir="false" afterPath="$PROJECT_DIR$/src/lua.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/lua5.3.0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/lua5.3.0.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/luac.exe" beforeDir="false" afterPath="$PROJECT_DIR$/src/luac.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/properties.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/properties.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameEngine/vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelperScripts/Edit_MTL_Filepaths.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HelperScripts/Edit_MTL_Filepaths.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelperScripts/HelperScripts.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HelperScripts/HelperScripts.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelperScripts/HelperScripts.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HelperScripts/HelperScripts.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelperScripts/test.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HelperScripts/test.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Andromeda/Buckler.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Andromeda/Buckler.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Andromeda/Caltrop.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Andromeda/Caltrop.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Andromeda/Crossbow.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Andromeda/Crossbow.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Andromeda/Gladius.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Andromeda/Gladius.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Andromeda/Javelin.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Andromeda/Javelin.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Barrel.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Barrel.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Barrel.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Barrel.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/BarrelDiffuse.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/BarrelDiffuse.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/BarrelDiffuse.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/BarrelDiffuse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/BarrelNormal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/BarrelNormal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/BarrelSpecular.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/BarrelSpecular.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Buckler.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Buckler.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Buckler.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Buckler.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Caltrop.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Caltrop.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Caltrop.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Caltrop.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Crossbow.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Crossbow.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Crossbow.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Crossbow.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Gladius.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Gladius.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Gladius.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Gladius.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Javelin.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Javelin.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Javelin.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Javelin.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/LibertStatue.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/LibertStatue.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/LibertStatue.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/LibertStatue.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Liberty-DecorazioniMarmo-2.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Liberty-DecorazioniMarmo-2.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Liberty-GreenBronze-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Liberty-GreenBronze-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Liberty-MattoniBasamento-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Liberty-MattoniBasamento-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Liberty-Pavimentazione-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Liberty-Pavimentazione-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Liberty-PortaBronzo-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Liberty-PortaBronzo-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/bench.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/bench.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/bench.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/bench.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/capsule.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/capsule.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/capsule.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/capsule.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/capsule0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/capsule0.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/cube.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/cube.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/cube.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/default.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/default.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/default.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/default.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket2.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket2.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket2.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket3.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket3.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rocket3.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rocket3.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron1-alt2-Unreal-Engine/About these PBR files.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron1-alt2-Unreal-Engine/About these PBR files.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron1-alt2-Unreal-Engine/rustediron2_metallic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron1-alt2-Unreal-Engine/rustediron2_metallic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron1-alt2-Unreal-Engine/rustediron2_normal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron1-alt2-Unreal-Engine/rustediron2_normal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron1-alt2-Unreal-Engine/rustediron2_roughness.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron1-alt2-Unreal-Engine/rustediron2_roughness.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron2_basecolor-old.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron2_basecolor-old.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron2_basecolor.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron2_basecolor.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/rustediron2_basecolor_old.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/rustediron2_basecolor_old.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/sphere.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/sphere.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/sphere.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/sphere.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/spherepbr.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/spherepbr.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/spherepbr.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/spherepbr.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/textured.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/textured.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/textured.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/textured.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Setup Files/StartApp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Setup Files/StartApp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Setup Files/StartApp.h" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Setup Files/StartApp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/grayscale_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/grayscale_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/grayscale_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/grayscale_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/kernel_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/kernel_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/kernel_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/kernel_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/transform_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/transform_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/Framebuffer/transform_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/Framebuffer/transform_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/PBR/pbr_frag.glsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/PBR/pbr_frag.glsl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/PBR/pbr_vert.glsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/PBR/pbr_vert.glsl.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/bb_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/bb_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/bb_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/bb_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/chunk_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/chunk_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/chunk_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/chunk_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/color_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/color_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/color_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/color_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/cube_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/cube_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/cube_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Shader/cube_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/cubemap_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/cubemap_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/cubemap_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/cubemap_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/font_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/font_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/font_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/font_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/light_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/light_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/sun_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/sun_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/transform_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/transform_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shader/transform_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shader/transform_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/Liberty-GreenBronze-1.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/Liberty-GreenBronze-1.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_back.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_back.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_down.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_down.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_front.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_front.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_left.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_left.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_right.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_right.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/cubemap/morning_up.tga" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/cubemap/morning_up.tga" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/question.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/question.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Texture/white.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/Texture/white.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML/GameEngine Layout Simple.zargo" beforeDir="false" afterPath="$PROJECT_DIR$/resources/UML/GameEngine Layout Simple.zargo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ARIALN.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ARIALN.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ARIALNB.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ARIALNB.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ARIALNBI.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ARIALNBI.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ARIALNI.TTF" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ARIALNI.TTF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/arial.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/arial.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/arialbd.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/arialbd.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/arialbi.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/arialbi.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ariali.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ariali.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/ariblk.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/fonts/ariblk.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old/GameEngine.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old/GameEngine.h" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,9 +378,9 @@
           <entry key="Makefile" value="1" />
           <entry key="cbp" value="1" />
           <entry key="cmake" value="7" />
-          <entry key="cpp" value="66" />
+          <entry key="cpp" value="69" />
           <entry key="glsl" value="16" />
-          <entry key="h" value="156" />
+          <entry key="h" value="157" />
           <entry key="hpp" value="3" />
           <entry key="inl" value="6" />
           <entry key="istream" value="1" />
@@ -63,26 +396,26 @@
           <entry key="CMakeLists.txt" value="14" />
           <entry key="Disassembly" value="26" />
           <entry key="GLSL shader file" value="15" />
-          <entry key="ObjectiveC" value="235" />
+          <entry key="ObjectiveC" value="239" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3035" />
+          <entry key="cpp" value="3046" />
           <entry key="glsl" value="45" />
-          <entry key="h" value="2183" />
+          <entry key="h" value="2193" />
           <entry key="mm" value="4" />
-          <entry key="txt" value="3844" />
+          <entry key="txt" value="3882" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CMakeLists.txt" value="2489" />
+          <entry key="CMakeLists.txt" value="2498" />
           <entry key="Doxygen file" value="4" />
           <entry key="GLSL shader file" value="44" />
-          <entry key="ObjectiveC" value="5218" />
-          <entry key="PLAIN_TEXT" value="1356" />
+          <entry key="ObjectiveC" value="5239" />
+          <entry key="PLAIN_TEXT" value="1385" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.cidr.testingFrameworks.usages" />
@@ -91,44 +424,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="593">
-              <caret line="58" column="58" selection-start-line="58" selection-start-column="58" selection-end-line="58" selection-end-column="58" />
+            <state relative-caret-position="345">
+              <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+              <folding>
+                <element signature="e#126#145#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/Shader/chunk_frag.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/Shader/chunk_vert.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/ModelManager.h">
+        <entry file="file://$PROJECT_DIR$/src/ModelManager.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="645">
               <caret line="43" column="80" selection-start-line="43" selection-start-column="80" selection-end-line="43" selection-end-column="80" />
@@ -137,7 +446,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.cpp">
+        <entry file="file://$PROJECT_DIR$/src/OpenGlRenderer.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="116" column="75" selection-start-line="116" selection-start-column="75" selection-end-line="116" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameEngine.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2430">
               <caret line="162" column="9" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
@@ -146,7 +464,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.h">
+        <entry file="file://$PROJECT_DIR$/src/GameEngine.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1665">
               <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
@@ -155,10 +473,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameEngine/RandomEntity.h">
+        <entry file="file://$PROJECT_DIR$/src/RandomEntity.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
+            <state relative-caret-position="615">
               <caret line="42" column="110" selection-start-line="42" selection-start-column="110" selection-end-line="42" selection-end-column="110" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/StartApp.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="120" column="59" selection-start-line="120" selection-start-column="59" selection-end-line="120" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AssetManager.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3535">
+              <caret line="270" column="44" lean-forward="true" selection-start-line="270" selection-start-column="44" selection-end-line="270" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -185,8 +521,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GameEngine/Font.h" />
-        <option value="$PROJECT_DIR$/GameEngine/FrameBuffer.h" />
         <option value="$PROJECT_DIR$/GameEngine/AssetManager.h" />
         <option value="$PROJECT_DIR$/GameEngine/Camera.h" />
         <option value="$PROJECT_DIR$/GameEngine/Registry.h" />
@@ -235,6 +569,9 @@
         <option value="$PROJECT_DIR$/GameEngine/World.h" />
         <option value="$PROJECT_DIR$/GameEngine/PhysicsEngine.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/FileSystemManager.h" />
+        <option value="$PROJECT_DIR$/src/OpenGlRenderer.cpp" />
+        <option value="$PROJECT_DIR$/src/StartApp.cpp" />
       </list>
     </option>
   </component>
@@ -262,13 +599,18 @@
         <subPane>
           <expand>
             <path>
-              <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Andromeda" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="GameEngine" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Andromeda" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Andromeda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameEngine" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -282,11 +624,12 @@
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/GameEngine" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cmake-build-debug" />
+      <recent name="$PROJECT_DIR$/GameEngine" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources" />
       <recent name="$PROJECT_DIR$/GameEngine" />
     </key>
   </component>
@@ -303,12 +646,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.GameEngine">
+    <configuration name="Andromeda" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Andromeda" TARGET_NAME="Andromeda" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Andromeda" RUN_TARGET_NAME="Andromeda">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameEngine" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GameEngine" TARGET_NAME="GameEngine" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GameEngine" RUN_TARGET_NAME="GameEngine">
+    <configuration name="GameEngine" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Andromeda" TARGET_NAME="Andromeda" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Andromeda" RUN_TARGET_NAME="Andromeda">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -316,6 +664,7 @@
     <list>
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.GameEngine" />
+      <item itemvalue="Application.Andromeda" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -352,7 +701,7 @@
       <workItem from="1540251852949" duration="3207000" />
       <workItem from="1540407540923" duration="1124000" />
       <workItem from="1540410884769" duration="1331000" />
-      <workItem from="1540412227332" duration="310000" />
+      <workItem from="1540412227332" duration="1179000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed file path locations to UNIX standard. Need to replace glm, not compiling.">
       <created>1539798117892</created>
@@ -445,11 +794,18 @@
       <option name="project" value="LOCAL" />
       <updated>1540412447529</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added SDL to windows compile">
+      <created>1540412577122</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1540412577122</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59165000" />
+    <option name="totallyTimeSpent" value="60034000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -468,8 +824,8 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32932693" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32932693" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32932693" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39903846" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -479,7 +835,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="10" weight="0.3301282" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32051283" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32051283" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -509,18 +865,19 @@
     <MESSAGE value="Random OpenGL bug that prevented stuff from being displayed. Traced the bug to the camera which is not properly sending the view matrix." />
     <MESSAGE value="Got stuff to show up. Still need to fix the cameras view matrix. Might be a problem with glm::lookat function." />
     <MESSAGE value="Added windows libs to the target link libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added windows libs to the target link libraries" />
+    <MESSAGE value="Added SDL to windows compile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added SDL to windows compile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/GameEngine/PhysicalInstance.cpp</url>
+          <url>file://$PROJECT_DIR$/src/PhysicalInstance.cpp</url>
           <line>132</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp</url>
+          <url>file://$PROJECT_DIR$/src/OpenGlRenderer.cpp</url>
           <line>923</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -537,52 +894,52 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GameEngine/PerlinGenerator.h">
+    <entry file="file://$PROJECT_DIR$/src/PerlinGenerator.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/ResourceManager.h">
+    <entry file="file://$PROJECT_DIR$/src/ResourceManager.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Application.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Application.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Material.h">
+    <entry file="file://$PROJECT_DIR$/src/Material.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Object.h">
+    <entry file="file://$PROJECT_DIR$/src/Object.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="67" column="34" lean-forward="true" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Properties.h">
+    <entry file="file://$PROJECT_DIR$/src/Properties.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Properties.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Properties.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/RenderItem.h">
+    <entry file="file://$PROJECT_DIR$/src/RenderItem.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
@@ -603,56 +960,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/FileSystemManager.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/ResourceManager.cpp">
+    <entry file="file://$PROJECT_DIR$/src/ResourceManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1095">
           <caret line="73" selection-start-line="73" selection-end-line="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Registry.h">
+    <entry file="file://$PROJECT_DIR$/src/Registry.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/DynamicEntity.h">
+    <entry file="file://$PROJECT_DIR$/src/DynamicEntity.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Moveable.h">
+    <entry file="file://$PROJECT_DIR$/src/Moveable.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Entity.h">
+    <entry file="file://$PROJECT_DIR$/src/Entity.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="707">
           <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Model.h">
+    <entry file="file://$PROJECT_DIR$/src/Model.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/BoundingBox.h">
+    <entry file="file://$PROJECT_DIR$/src/BoundingBox.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="44" selection-start-line="44" selection-end-line="44" />
@@ -673,143 +1023,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicalInstance.h">
+    <entry file="file://$PROJECT_DIR$/src/PhysicalInstance.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Chunk.h">
+    <entry file="file://$PROJECT_DIR$/src/Chunk.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="56" column="59" lean-forward="true" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/StartApp.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="105" column="42" selection-start-line="105" selection-start-column="42" selection-end-line="105" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/chunk_frag.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/chunk_frag.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/chunk_vert.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/chunk_vert.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/AssetManager.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="286" column="27" selection-start-line="286" selection-start-column="27" selection-end-line="286" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/CubeMap.cpp">
+    <entry file="file://$PROJECT_DIR$/src/CubeMap.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/CubeMap.h">
+    <entry file="file://$PROJECT_DIR$/src/CubeMap.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="23" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicalInstance.cpp">
+    <entry file="file://$PROJECT_DIR$/src/PhysicalInstance.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/cubemap_vert.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/cubemap_vert.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/cubemap_frag.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/cubemap_frag.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Cube.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Cube.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Cube.h">
+    <entry file="file://$PROJECT_DIR$/src/Cube.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
           <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/cube_vert.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/cube_vert.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Shader/cube_frag.glsl">
+    <entry file="file://$PROJECT_DIR$/resources/Shader/cube_frag.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Camera.h">
+    <entry file="file://$PROJECT_DIR$/src/Camera.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.h">
+    <entry file="file://$PROJECT_DIR$/src/OpenGlRenderer.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-403">
           <caret line="44" column="34" lean-forward="true" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Camera.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Camera.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/World.h">
+    <entry file="file://$PROJECT_DIR$/src/World.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1485">
           <caret line="99" selection-start-line="99" selection-end-line="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/OpenGlRenderer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5550">
-          <caret line="370" column="112" selection-start-line="370" selection-start-column="112" selection-end-line="370" selection-end-column="112" />
         </state>
       </provider>
     </entry>
@@ -827,7 +1156,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.h">
+    <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-679">
           <caret line="15" column="64" lean-forward="true" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
@@ -836,57 +1165,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="58" column="58" selection-start-line="58" selection-start-column="58" selection-end-line="58" selection-end-column="58" />
+        <state relative-caret-position="255">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Shader/chunk_frag.glsl">
+    <entry file="file://$PROJECT_DIR$/src/Shader/chunk_frag.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/Shader/chunk_vert.glsl">
+    <entry file="file://$PROJECT_DIR$/src/Shader/chunk_vert.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/PhysicsEngine.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/ModelManager.h">
+    <entry file="file://$PROJECT_DIR$/src/ModelManager.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="43" column="80" selection-start-line="43" selection-start-column="80" selection-end-line="43" selection-end-column="80" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.cpp">
+    <entry file="file://$PROJECT_DIR$/src/GameEngine.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2430">
           <caret line="162" column="9" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/GameEngine.h">
+    <entry file="file://$PROJECT_DIR$/src/GameEngine.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1665">
           <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameEngine/RandomEntity.h">
+    <entry file="file://$PROJECT_DIR$/src/RandomEntity.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
+        <state relative-caret-position="615">
           <caret line="42" column="110" selection-start-line="42" selection-start-column="110" selection-end-line="42" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileSystemManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="27" column="25" lean-forward="true" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AssetManager.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3535">
+          <caret line="270" column="44" lean-forward="true" selection-start-line="270" selection-start-column="44" selection-end-line="270" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PhysicsEngine.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+          <folding>
+            <element signature="e#126#145#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OpenGlRenderer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="116" column="75" selection-start-line="116" selection-start-column="75" selection-end-line="116" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartApp.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="120" column="59" selection-start-line="120" selection-start-column="59" selection-end-line="120" selection-end-column="59" />
         </state>
       </provider>
     </entry>
