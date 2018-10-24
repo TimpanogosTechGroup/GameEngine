@@ -55,6 +55,8 @@ if (LINUX)
 elseif(WIN32)
     set(ENGINE_LIBRARIES ${OPENGL_LIBRARY}
             ${PROJECT_SOURCE_DIR}/lib/GLEW/glew32.lib
+            ${PROJECT_SOURCE_DIR}/lib/SDL/x86/SDL2.lib
+            ${PROJECT_SOURCE_DIR}/lib/SDL/x86/SDL2main.lib
             ${PROJECT_SOURCE_DIR}/lib/bullet/BulletCollision_Debug.lib
             ${PROJECT_SOURCE_DIR}/lib/bullet/BulletDynamics_Debug.lib
             ${PROJECT_SOURCE_DIR}/lib/bullet/BulletSoftBody_Debug.lib
