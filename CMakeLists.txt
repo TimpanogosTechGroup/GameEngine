@@ -20,9 +20,6 @@ else()
     message("Unkown compiler or OS")
 endif(LINUX)
 
-# this finds the SDL library, TODO replace with a more versatile option as not all computers have SDL installed
-#find_package(SDL2 REQUIRED ${PROJECT_SOURCE_DIR}/lib/SDL/linux)
-
 # this gets the opengl stuff, should be installed on all computers
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
@@ -51,6 +48,7 @@ if (LINUX)
             ${PROJECT_SOURCE_DIR}/lib/bullet3/linux/libLinearMath_gmake_x64_release.a
             ${PROJECT_SOURCE_DIR}/lib/bullet3/linux/libBulletSoftBody_gmake_x64_release.a
             ${PROJECT_SOURCE_DIR}/lib/assimp-4.0.1/linux/libassimp.so)
+    target_compile_options(Andromeda PRIVATE -Werror)
 
 elseif(WIN32)
     set(ENGINE_LIBRARIES ${OPENGL_LIBRARY}
@@ -67,4 +65,3 @@ elseif(WIN32)
 endif(LINUX)
 
 target_link_libraries(Andromeda ${ENGINE_LIBRARIES})
-target_compile_options(Andromeda PRIVATE -Werror)

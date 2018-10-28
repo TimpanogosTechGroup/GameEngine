@@ -520,14 +520,14 @@ void OpenGlRenderer::renderObject(Camera* camera, Object* object, model_pos& pos
 
     if (object->GetMaterial()->GetShader() != nullptr) {
         glUseProgram(object->GetMaterial()->GetShader()->GetID());
-        //glUseProgram(3);
-        //std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+
         SetUniformMat4(object->GetMaterial()->GetShader(), "projection", camera->GetProjectionMatrix());
-        SetUniformMat4(object->GetMaterial()->GetShader(), "view", glm::mat4(glm::mat3(camera->GetViewMatrix())));
+        SetUniformMat4(object->GetMaterial()->GetShader(), "view", camera->GetViewMatrix());
         btScalar trans[16]; // create a 4x4 array
 
-        glm::mat4 model = glm::translate(model, pos_model.position);
-        SetUniformMat4(object->GetMaterial()->GetShader(), "model", model); // set the models rotation, scaling and transfom with the matrix
+        glm::mat4 model = glm::mat4(1.0);
+        model = glm::translate(model, pos_model.position);
+        SetUniformMat4(object->GetMaterial()->GetShader(), "model", model);
     }
 
     glBindTexture(GL_TEXTURE_2D, object->GetMaterial()->GetTexture()->GetID());
@@ -541,28 +541,6 @@ void OpenGlRenderer::renderObject(Camera* camera, Object* object, model_pos& pos
     glDrawArrays(GL_TRIANGLES, 0, object->GetVerticies().Size() / 3);
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
-{
-
-	cube.SetPosition(camera.GetPosition());
-	glUseProgram(ResourceManager::getShader("cubemap")->GetID());
-	//glUseProgram(3);
-	//std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
-	SetUniformMat4(ResourceManager::getShader("cubemap"), "projection", camera.GetProjectionMatrix());
-	SetUniformMat4(ResourceManager::getShader("cubemap"), "view", glm::mat4(glm::mat3(camera.GetViewMatrix())));
-
-	glBindTexture(GL_TEXTURE_CUBE_MAP, cube.getTexture()->GetID());
-
-	glDepthMask(GL_FALSE);
-
-	glBindVertexArray(cube.GetObject(0)->GetID());
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-
-	glDepthMask(GL_TRUE);
 }
 
 #ifdef FONT_MANAGER_ENABLED
@@ -921,24 +899,38 @@ void OpenGlRenderer::compileCube(Cube *cube) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void OpenGlRenderer::renderCube(Camera *camera, Cube *cube) {
+void OpenGlRenderer::RenderCubeMap(Camera& camera, CubeMap & cube)
+{
 
-    cube->SetPosition(glm::vec3(0, 0, 0));
-    glUseProgram(ResourceManager::getShader("cube")->GetID());
+    cube.SetPosition(camera.GetPosition());
+    glUseProgram(ResourceManager::getShader("cubemap")->GetID());
     //glUseProgram(3);
     //std::cout << "Using Shader: " << object.GetMaterial()->GetShader()->GetID() << std::endl;
+    SetUniformMat4(ResourceManager::getShader("cubemap"), "projection", camera.GetProjectionMatrix());
+    SetUniformMat4(ResourceManager::getShader("cubemap"), "view", glm::mat4(glm::mat3(camera.GetViewMatrix())));
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cube.getTexture()->GetID());
+
+    glDepthMask(GL_FALSE);
+
+    glBindVertexArray(cube.GetObject(0)->GetID());
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+    glDepthMask(GL_TRUE);
+}
+
+void OpenGlRenderer::renderCube(Camera *camera, Cube *cube) {
+
+    cube->SetPosition(camera->GetPosition());
+    glUseProgram(ResourceManager::getShader("cube")->GetID());
+
+    glm::mat4 model = glm::mat4(1.0);
+    model = glm::translate(model, glm::vec3(10, 0, 0));
     SetUniformMat4(ResourceManager::getShader("cube"), "projection", camera->GetProjectionMatrix());
-    glm::mat4 view;
-//    glm::translate(view, camera->GetPosition());
-//    SetUniformMat4(ResourceManager::getShader("cube"), "view", view);
-    SetUniformMat4(ResourceManager::getShader("cube"), "view", glm::mat4(glm::mat3(camera->GetViewMatrix())));
-
-
-    glm::mat4 model = glm::translate(model, glm::vec3(0, 0, 10)); // convert to glm::mat4
-    glm::translate(model, camera->GetPosition());
-    SetUniformMat4(ResourceManager::getShader("cube"), "model", model); // set the models rotation, scaling and transfom with the matrix
-
-//    glBindTexture(GL_TEXTURE_CUBE_MAP, cube->getTexture()->GetID());
+    SetUniformMat4(ResourceManager::getShader("cube"), "view", camera->GetViewMatrix());
+    SetUniformMat4(ResourceManager::getShader("cube"), "model", model);
 
     glDepthMask(GL_FALSE);
 
